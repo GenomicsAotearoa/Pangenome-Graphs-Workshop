@@ -17,11 +17,14 @@ This study includes an anaysis of Neisseria Bacteria genome sequence data with 4
 
 
 # Working in the Nesi Environment 
+NeSI HPC environment is used for the analysis. Please make sure to have a NeSI account and you are able to login.
 
+### Setting up your project directories
 
 # Genome Data
 
 ### Genome Availability 
+
 ### Other Data Availability
 # Methods 
 ### 1.	Assembly Procedure 
