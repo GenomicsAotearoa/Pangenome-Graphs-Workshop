@@ -1,20 +1,25 @@
-# Pangenome Graphs Overview
-This repository contains material to construct pangenome graphs for a small bacteria dataset detailing every step in the Nesi environment. 
+# Pangenome Graphs Workshop
+This repository contains material to construct pangenome graphs for a small bacteria dataset detailing every step in the Nesi environment. This study includes an anaysis of Neisseria Bacteria genome sequence data with 4Sim data samples to construct pangenome graphs to identify genetic variation and structural variance.
+
+### Brief Overview of Pangenome Graphs
 
 A pangenome graph is a graphical representation of the collective genomic information of a set of related organisms. Unlike a traditional linear genome assembly, which represents a single consensus genome sequence, a pangenome graph captures the genetic variation and structural diversity within a population. Pangenome graphs are constructed by integrating multiple genome sequences into a single graph structure that represents the entire set of genetic elements present in the population. This graph structure allows for the identification and visualization of genomic variations, such as single nucleotide polymorphisms (SNPs), insertions, deletions, and structural variations, as well as the relationships between different genomic regions. Pangenome graphs have become an important tool in genomics research, especially in the study of bacterial and viral populations, where genetic diversity is often high.
 
+### Neisseria Genome Assembly
+
 Neisseria is a genus of Gram-negative bacteria that are typically found in the mucous membranes and epithelial tissues of humans and animals. There are various species of Neisseria bacteria, some of which are harmless commensals, while others can cause diseases. Two well-known pathogenic species are Neisseria meningitidis, which can cause meningitis and septicemia, and Neisseria gonorrhoeae, which is the causative agent of the sexually transmitted infection gonorrhea. Other species of Neisseria are generally considered harmless and reside as commensals in the oral and/or nasopharynx of humans.
+
+### PanGenome Graph Builder [(PGGB)](https://github.com/pangenome/pggb)
 
 To investigate and analyse Neisseria Bacteria the PanGenome Graph Builder has been used. PanGenome Graph Builder (PGGB) is a computational tool used in genomics research to construct pan-genome graphs from large sets of genomic data. A pan-genome is the collection of all the genes and non-coding sequences present in a species or a group of related organisms. PGGB constructs a pan-genome graph, which is a data structure that represents the entire set of genes and genetic variations in a population. This graph can be used to study genetic diversity, gene function, and evolution. PGGB is designed to be scalable and efficient, making it suitable for large-scale genomic analyses. It is an open-source tool that can be used freely by researchers in the field of genomics.
 
-This study includes an anaysis of Neisseria Bacteria genome sequence data with 4Sim data samples to construct pangenome graphs to identify genetic variation and structural variance.
+### PanGenome Graph Evaluator [(PGGE)](https://github.com/pangenome/pgge)
 
-### Learning Objectives
+## Learning Objectives
 1. Creating scripts in specific work directory in the Nesi environment.
 2. Downloading sequencing data (in fastq format). 
 3. Creating Pangenome graphs using [PGGB](https://github.com/pangenome/pggb) and [PGGE](https://github.com/pangenome/pgge) Tools.
 4. Identifying genetic variation and structural variance.
-
 
 # Working in the Nesi Environment 
 NeSI HPC environment is used for the analysis. Please make sure to have a NeSI account and you are able to login.
@@ -37,7 +42,7 @@ pwd
 
 ### Other Data Availability
 
-# Methods 
+# Procedure 
 ### 1. Downloading the Assembly Data file 4Sim.fa
 ```
 #Use wget to download the file from the URL
@@ -65,18 +70,18 @@ Sim3_5k 2249050 6859436 60      61
 ```
 
 ### 3. Executing `pggb` tool using Singularity container
-We can follow the procedure in https://github.com/pangenome/pggb#singularity to setup the Singularity instance.
+We can follow the procedure in https://github.com/pangenome/pggb#singularity to setup the Singularity image. This is already done and the image is in `/nesi/project/ga03793/software/pggb/` directory. 
 
 Following script can be used to run `pggb` on the downloaded sequence. 
 
 ```
 #export container to a variable for convenience
-wd=/nesi/nobackup/ga03793/pg_workshop
-container=${wd}/pggb_0.5.3.simg
-data=${wd}/Workshop/4Sim.fa
+WD=/nesi/nobackup/ga03793/pg_workshop #Working Directtory
+container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+data=${WD}/Workshop/4Sim.fa
 
 #Bind filesystem to container image 
-export SINGULARITY_BIND="${wd}/"
+export SINGULARITY_BIND="${wd}, /nesi/project/ga03793/"
 
 singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 8 -k 79 -t 2 -S -m -o 4Sim_pggb0.5.3_50K95_D
 ```
