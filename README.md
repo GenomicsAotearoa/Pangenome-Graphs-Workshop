@@ -120,7 +120,7 @@ _Note: To download the output folder from the Nesi environment you can first zip
 ---
 # Executing `pggb` as a [SLURM](https://github.com/SchedMD/slurm) Job
 
-Executing shell scripts in the Nesi environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previusely explained script as below to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
+Executing shell scripts in the Nesi environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previusely explained script as below ([pggb_slurm_1K95.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pggb_slurm_1K95.sh)) to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
 
 ```bash
 #!/usr/bin/bash
@@ -208,3 +208,5 @@ Job Wall-clock time: 00:08:25
 Memory Utilized: 147.44 MB
 Memory Efficiency: 3.60% of 4.00 GB
 ```
+
+Now we can try the same script by changing the `pggb` parameters `-s`, `-p` and `-k` and compare the results. 
