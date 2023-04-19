@@ -112,12 +112,99 @@ singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 4 -k 79 -t 2 -S -m 
 In `pggb` `-i` is for specifying the sequence file. `-s` specifies the segment length for mapping and `-p` specifies percent identity for mapping/alignment. `-n` is for number of haplotypes (or number of samples). `-k` for minimum matching length. `-t` says number of threads to be used for the execution. `-S` will generate the stats. `-m` will generate MultiQC report of graphs' statistics and visualizations. `-o` specifies the output directory name. `-V 'NC_neisseria:#'` will create a vcf file and it stats considering NC_neisseria as the reference sequence. 
 
 ---
-# [MultiQC Report](https://github.com/ewels/MultiQC)
-The script generated [output](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Output) directory consists of a compehensive and interactive MutltiQC Report which will decribe all. Open the file multiqc_report.html which is in the output folder from your browser.
+# MultiQC Report
+The script generated [output](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Output) directory consists of a compehensive and interactive [MutltiQC Report](https://multiqc.info/) which will decribe all. Open the file multiqc_report.html which is in the output folder from your browser.
 
 _Note: To download the output folder from the Nesi environment you can first zip it using the command `zip -r output.zip output`_
 
+---
+# Executing `pggb` as a [SLURM](https://github.com/SchedMD/slurm) Job
 
+Executing shell scripts in the Nesi environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previusely explained script as below to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
 
+```bash
+#!/usr/bin/bash
 
+#SBATCH --account       ga03793
+#SBATCH --job-name      4Sim_1K95
+#SBATCH --cpus-per-task 4 
+#SBATCH --mem           4G
+#SBATCH --time          1:00:00
 
+module purge
+module load Singularity
+
+#export container to a variable for convenience
+WD=/nesi/nobackup/ga03793/pg_workshop #Working Directory
+container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+data=${WD}/4Sim.fa
+
+#Bind filesystem to container image 
+export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
+
+singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 4 -k 79 -t 2 -S -m -o 4Sim_1K95 -V 'NC_neisseria:#' 
+```
+
+The job can be submitted using the `sbatch` command it will show a job id. In this case 34588496
+
+```bash
+sbatch pggb_slurm_1K95.sh 
+Submitted batch job 34588496
+```
+
+We can monitor the job status using `seff` and `squeue` specifying the job id. 
+
+```
+seff 34588496
+Job ID: 34588496
+Cluster: mahuika
+User/Group: ismnu81p/ismnu81p
+State: RUNNING
+Nodes: 1
+Cores per node: 4
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 00:04:56 core-walltime
+Job Wall-clock time: 00:01:14
+Memory Utilized: 0.00 MB (estimated maximum)
+Memory Efficiency: 0.00% of 4.00 GB (4.00 GB/node)
+WARNING: Efficiency statistics may be misleading for RUNNING jobs.
+```
+
+```
+squeue --job 34588496
+JOBID         USER     ACCOUNT   NAME        CPUS MIN_MEM PARTITI START_TIME     TIME_LEFT STATE    NODELIST(REASON)    
+34588496      ismnu81p ga03793   4Sim_1K95      4      4G large   2023-04-20T0       58:10 RUNNING  wbn182
+```
+
+SLURM will also create a output log file and we can monitor it realtime using  `tail -f`. 
+
+```
+tail -f slurm-34588496.out
+[smoothxg::(1-3)::prep] writing graph 4Sim_1K95/4Sim.fa.3541aba.c2fac19.seqwish.gfa.prep.0.gfa
+[smoothxg::(1-3)::main] building xg index
+[smoothxg::(1-3)::smoothable_blocks] computing blocks
+[smoothxg::(1-3)::smoothable_blocks] computing blocks for 36095 handles: 100.00% @ 7.21e+04/s elapsed: 00:00:00:00 remain: 00:00:00:00
+[smoothxg::(1-3)::break_and_split_blocks] cutting blocks that contain sequences longer than max-poa-length (1400) and depth >= 0
+[smoothxg::(1-3)::break_and_split_blocks] splitting 3459 blocks at identity 0.950 (WFA-based clustering) and at estimated-identity 0.950 (mash-based clustering)
+[smoothxg::(1-3)::break_and_split_blocks] cutting and splitting 3459 blocks: 100.00% @ 1.37e+04/s elapsed: 00:00:00:00 remain: 00:00:00:00
+[smoothxg::(1-3)::break_and_split_blocks] cut 0 blocks of which 0 had repeats
+[smoothxg::(1-3)::break_and_split_blocks] split 0 blocks
+[smoothxg::(1-3)::smooth_and_lace] applying local SPOA to 3459 blocks: 21.97% @ 2.91e+01/s elapsed: 00:00:00:26 remain: 00:00:01:32
+```
+
+When the job is completed the `seff` command will show a summary report with below details. The job has used 147.44 MB memory and taken 8 minuted and 25 seconds to complete. 
+
+```
+seff 34588496
+Job ID: 34588496
+Cluster: mahuika
+User/Group: ismnu81p/ismnu81p
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 4
+CPU Utilized: 00:15:20
+CPU Efficiency: 45.54% of 00:33:40 core-walltime
+Job Wall-clock time: 00:08:25
+Memory Utilized: 147.44 MB
+Memory Efficiency: 3.60% of 4.00 GB
+```
