@@ -79,12 +79,23 @@ Sim2_4k 2248965 4572979 60      61
 Sim3_5k 2249050 6859436 60      61
 ```
 
-### 3. Executing `pggb` tool using Singularity container
-We can follow the procedure in https://github.com/pangenome/pggb#singularity to setup the Singularity image. This is already done and the image is in `/nesi/project/ga03793/software/pggb/` directory. 
+As per the index this assembly consists of 4 samples described in the below table. 
 
-Following script can be used to run `pggb` on the downloaded sequence. 
+| Name | Length |
+|------|-------:|
+|NC_neisseria | 2,248,966 |
+|Sim1_3k | 2,249,014 |
+|Sim2_4k | 2,248,965 |
+|Sim3_5k | 2,249,050 |
+
+### 3. Executing `pggb` tool using Singularity container
+We can follow the procedure in https://github.com/pangenome/pggb#singularity to setup the Singularity image. This is already done and the image is in `/nesi/project/ga03793/software/pggb/` directory for version 0.5.3. 
+
+Following script ([pggb_test.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pggb_test.sh)) can be used to run `pggb` on the downloaded sequence. 
 
 ```sh
+#!/usr/bin/bash
+module load Singularity
 #export container to a variable for convenience
 WD=/nesi/nobackup/ga03793/pg_workshop #Working Directory
 container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
@@ -93,8 +104,11 @@ data=${WD}/4Sim.fa
 #Bind filesystem to container image 
 export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
 
-singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 8 -k 79 -t 2 -S -m -o 4Sim_pggb0.5.3_50K95_D
+singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 8 -k 79 -t 2 -S -m -o output 
 ```
+
+In `pggb` `-i` is for specifying the sequence file. `-s` specifies the segment length for mapping and `-p` specifies percent identity for mapping/alignment. `-n` is for number of haplotypes. `-k` for minimum matching length. `-t` says number of threads to be used for the execution. `-S` will generate the stats. `-m` will generate MultiQC report of graphs' statistics and visualizations. `-o` specifies the output directory name. 
+
 
 
 <!---
@@ -104,6 +118,4 @@ singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 8 -k 79 -t 2 -S -m 
 ### 5.	Other Analysis 
 --->
 
-# Scripts 
 
-# Dependencies 
