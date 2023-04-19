@@ -84,11 +84,11 @@ We can follow the procedure in https://github.com/pangenome/pggb#singularity to 
 
 Following script can be used to run `pggb` on the downloaded sequence. 
 
-```bash
+```sh
 #export container to a variable for convenience
 WD=/nesi/nobackup/ga03793/pg_workshop #Working Directory
 container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
-data=${WD}/Workshop/4Sim.fa
+data=${WD}/4Sim.fa
 
 #Bind filesystem to container image 
 export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
