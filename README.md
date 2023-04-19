@@ -106,10 +106,14 @@ data=${WD}/4Sim.fa
 #Bind filesystem to container image 
 export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
 
-singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 4 -k 79 -t 2 -S -m -o output 
+singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 4 -k 79 -t 2 -S -m -o output -V 'NC_neisseria:#'
 ```
 
-In `pggb` `-i` is for specifying the sequence file. `-s` specifies the segment length for mapping and `-p` specifies percent identity for mapping/alignment. `-n` is for number of haplotypes (or number of samples). `-k` for minimum matching length. `-t` says number of threads to be used for the execution. `-S` will generate the stats. `-m` will generate MultiQC report of graphs' statistics and visualizations. `-o` specifies the output directory name. 
+In `pggb` `-i` is for specifying the sequence file. `-s` specifies the segment length for mapping and `-p` specifies percent identity for mapping/alignment. `-n` is for number of haplotypes (or number of samples). `-k` for minimum matching length. `-t` says number of threads to be used for the execution. `-S` will generate the stats. `-m` will generate MultiQC report of graphs' statistics and visualizations. `-o` specifies the output directory name. `-V 'NC_neisseria:#'` will create a vcf file and it stats considering NC_neisseria as the reference sequence. 
+
+---
+# Results
+The script generated  [output](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Output) directory multiplr types of pangenome graphs, logs, [MultiQC Report](https://github.com/ewels/MultiQC), VCF file and stats etc... 
 
 <!---
 ### 2.	QC and Adapter Trimming
