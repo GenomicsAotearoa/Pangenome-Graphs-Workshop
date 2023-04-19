@@ -12,7 +12,7 @@ This study includes an anaysis of Neisseria Bacteria genome sequence data with 4
 ### Learning Objectives
 1. Creating scripts in specific work directory in the Nesi environment.
 2. Downloading sequencing data (in fastq format). 
-3. Creating Pangenome graphs using [PGGB](https://github.com/pangenome/pggb){:target="_blank"} and [PGGE](https://github.com/pangenome/pgge){:target="_blank"} Tools.
+3. Creating Pangenome graphs using [PGGB](https://github.com/pangenome/pggb) and [PGGE](https://github.com/pangenome/pgge) Tools.
 4. Identifying genetic variation and structural variance.
 
 
