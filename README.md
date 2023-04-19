@@ -22,7 +22,7 @@ NeSI HPC environment is used for the analysis. Please make sure to have a NeSI a
 ### Setting up your project directories
 
 ```
-# Create a directory to do the analysis, and change to that directory
+# Create a new directory in your home directory to do the analysis, and change to that directory
 mkdir Workshop
 cd Workshop
 ```
@@ -61,12 +61,17 @@ Sim2_4k 2248965 4572979 60      61
 Sim3_5k 2249050 6859436 60      61
 ```
 
+### 3. Executing `pggb` tool using Singularity container
+We can follow the procedure in https://github.com/pangenome/pggb#singularity to setup the Singularity instance.
 
+
+
+<!---
 ### 2.	QC and Adapter Trimming
 ### 3.	Alignment to Reference 
 ### 4.	Reference SNPs
 ### 5.	Other Analysis 
-
+--->
 
 # Scripts 
 
