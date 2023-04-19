@@ -21,7 +21,38 @@ NeSI HPC environment is used for the analysis. Please make sure to have a NeSI a
 
 ### Setting up your project directories
 
+```
+# Create a directory to do the analysis, and change to that directory
+mkdir Workshop
+cd Workshop
+```
+
 # Genome Data
+### Downloading the required sequence file. 
+```
+#Use wget to download the file from the URL
+wget https://github.com/ZoeYang2020/Pangenome-graph-for-bacterial-pathogens/raw/main/ESR_pangenome_pipeline_v2.0/4Sim.fa
+```
+
+### Creating an indexd for the seuqence file
+```
+#Use samtools to create the index file
+#In Nesi environment you will have to load the command first
+
+module load SAMtools
+
+samtools faidx 4Sim.fa 
+ls -ltrh
+total 8.8M
+-rw-rw-r-- 1 ismnu81p ismnu81p 8.8M Apr 19 16:09 4Sim.fa
+-rw-rw-r-- 1 ismnu81p ismnu81p  120 Apr 19 16:20 4Sim.fa.fai
+
+cat 4Sim.fa.fai
+NC_neisseria    2248966 14      60      61
+Sim1_3k 2249014 2286472 60      61
+Sim2_4k 2248965 4572979 60      61
+Sim3_5k 2249050 6859436 60      61
+```
 
 ### Genome Availability 
 
