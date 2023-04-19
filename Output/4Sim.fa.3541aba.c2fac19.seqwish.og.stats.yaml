@@ -1,0 +1,37 @@
+ERROR: ld.so: object '/opt/nesi/CS400_centos7_bdw/AlwaysIntelMKL/1.0/lib/libalways_intel_mkl.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+---
+length: 2362730
+nodes: 16461
+edges: 22122
+paths: 4
+steps: 43964
+num_weakly_connected_components: 1
+weakly_connected_components: 
+  - component:
+      id: 0
+      nodes: 16461
+      is_acyclic: 'no'
+num_nodes_self_loops:
+  total: 33
+  unique: 33
+A: 570947
+C: 599993
+G: 614937
+T: 576853
+file_size_in_bytes: 5139141
+mean_links_length:
+  - length:
+      path: all_paths
+      in_node_space: 2111.24
+      in_nucleotide_space: 319830
+      num_links_considered: 43960
+      num_gap_links_not_penalized: 0
+sum_of_path_node_distances:
+  - distance:
+      path: all_paths
+      in_node_space: 4222.83
+      in_nucleotide_space: 3126.97
+      nodes: 43964
+      nucleotides: 8995995
+      num_penalties: 7826
+      num_penalties_different_orientation: 0

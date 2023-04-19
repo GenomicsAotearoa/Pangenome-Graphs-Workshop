@@ -1,0 +1,2 @@
+Module	Section	Sample Name	Source
+Bcftools	stats	4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.NC_neisseria.vcf	/nesi/nobackup/ga03793/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.NC_neisseria.vcf.stats

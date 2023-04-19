@@ -1,0 +1,2 @@
+Sample	Bcftools Stats_mqc-generalstats-bcftools_stats-number_of_records	Bcftools Stats_mqc-generalstats-bcftools_stats-number_of_SNPs	Bcftools Stats_mqc-generalstats-bcftools_stats-number_of_indels	Bcftools Stats_mqc-generalstats-bcftools_stats-tstv	Bcftools Stats_mqc-generalstats-bcftools_stats-number_of_MNPs
+4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.NC_neisseria.vcf	9607.0	8663.0	593.0	1.17	380.0
