@@ -28,13 +28,20 @@ cd Workshop
 ```
 
 # Genome Data
-### Downloading the required sequence file. 
+
+### Genome Availability 
+----> Mention the data source <----
+
+### Other Data Availability
+
+# Methods 
+### 1. Downloading the Assembly Data file 4Sim.fa
 ```
 #Use wget to download the file from the URL
 wget https://github.com/ZoeYang2020/Pangenome-graph-for-bacterial-pathogens/raw/main/ESR_pangenome_pipeline_v2.0/4Sim.fa
 ```
 
-### Creating an index for the seuqence file and check
+### 2. Creating an index for the seuqence file and check
 ```
 #Use samtools to create the index file
 #In Nesi environment you will have to load the command first
@@ -54,11 +61,7 @@ Sim2_4k 2248965 4572979 60      61
 Sim3_5k 2249050 6859436 60      61
 ```
 
-### Genome Availability 
 
-### Other Data Availability
-# Methods 
-### 1.	Assembly Procedure 
 ### 2.	QC and Adapter Trimming
 ### 3.	Alignment to Reference 
 ### 4.	Reference SNPs
