@@ -8,4 +8,4 @@ data=${WD}/4Sim.fa
 #Bind filesystem to container image 
 export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
 
-singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 8 -k 79 -t 2 -S -m -o output 
+singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 4 -k 79 -t 2 -S -m -o output -V 'NC_neisseria:#' 
