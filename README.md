@@ -113,7 +113,7 @@ In `pggb` `-i` is for specifying the sequence file. `-s` specifies the segment l
 
 ---
 # [MultiQC Report](https://github.com/ewels/MultiQC)
-The script generated [output](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Output) directory consists of a compehensive MutltiQC Report which will decribe all. Open the file multiqc_report.html which is in the output folder from your browser.
+The script generated [output](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Output) directory consists of a compehensive and interactive MutltiQC Report which will decribe all. Open the file multiqc_report.html which is in the output folder from your browser.
 
 _Note: To download the output folder from the Nesi environment you can first zip it using the command `zip -r output.zip output`_
 
