@@ -19,12 +19,15 @@ This study includes an anaysis of Neisseria Bacteria genome sequence data with 4
 # Working in the Nesi Environment 
 NeSI HPC environment is used for the analysis. Please make sure to have a NeSI account and you are able to login.
 
-### Setting up your project directories
+### Setting up your project directory
 
 ```
-# Create a new directory in your home directory to do the analysis, and change to that directory
-mkdir Workshop
-cd Workshop
+# Create a new directory in somewhere and change to that directory
+mkdir pg_workshop
+cd pg_workshop
+# Keep a note of the absolute path of your directory
+pwd
+/nesi/nobackup/ga03793/pg_workshop
 ```
 
 # Genome Data
@@ -64,6 +67,19 @@ Sim3_5k 2249050 6859436 60      61
 ### 3. Executing `pggb` tool using Singularity container
 We can follow the procedure in https://github.com/pangenome/pggb#singularity to setup the Singularity instance.
 
+Following script can be used to run `pggb` on the downloaded sequence. 
+
+```
+#export container to a variable for convenience
+wd=/nesi/nobackup/ga03793/pg_workshop
+container=${wd}/pggb_0.5.3.simg
+data=${wd}/Workshop/4Sim.fa
+
+#Bind filesystem to container image 
+export SINGULARITY_BIND="${wd}/"
+
+singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 8 -k 79 -t 2 -S -m -o 4Sim_pggb0.5.3_50K95_D
+```
 
 
 <!---
