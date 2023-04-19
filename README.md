@@ -154,7 +154,7 @@ Submitted batch job 34588496
 
 We can monitor the job status using `seff` and `squeue` specifying the job id. 
 
-```
+```bash
 seff 34588496
 Job ID: 34588496
 Cluster: mahuika
@@ -170,7 +170,7 @@ Memory Efficiency: 0.00% of 4.00 GB (4.00 GB/node)
 WARNING: Efficiency statistics may be misleading for RUNNING jobs.
 ```
 
-```
+```bash
 squeue --job 34588496
 JOBID         USER     ACCOUNT   NAME        CPUS MIN_MEM PARTITI START_TIME     TIME_LEFT STATE    NODELIST(REASON)    
 34588496      ismnu81p ga03793   4Sim_1K95      4      4G large   2023-04-20T0       58:10 RUNNING  wbn182
@@ -178,7 +178,7 @@ JOBID         USER     ACCOUNT   NAME        CPUS MIN_MEM PARTITI START_TIME    
 
 SLURM will also create a output log file and we can monitor it realtime using  `tail -f`. 
 
-```
+```bash
 tail -f slurm-34588496.out
 [smoothxg::(1-3)::prep] writing graph 4Sim_1K95/4Sim.fa.3541aba.c2fac19.seqwish.gfa.prep.0.gfa
 [smoothxg::(1-3)::main] building xg index
@@ -194,7 +194,7 @@ tail -f slurm-34588496.out
 
 When the job is completed the `seff` command will show a summary report with below details. The job has used 147.44 MB memory and taken 8 minuted and 25 seconds to complete. 
 
-```
+```bash
 seff 34588496
 Job ID: 34588496
 Cluster: mahuika
