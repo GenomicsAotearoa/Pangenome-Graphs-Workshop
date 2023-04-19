@@ -49,7 +49,9 @@ pwd
 ----> Mention the data source <----
 
 ### Other Data Availability
+----> Mention other data source <----
 
+---
 # Procedure 
 ### 1. Downloading the Assembly Data file 4Sim.fa
 
