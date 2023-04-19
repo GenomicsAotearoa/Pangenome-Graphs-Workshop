@@ -113,7 +113,7 @@ In `pggb` `-i` is for specifying the sequence file. `-s` specifies the segment l
 
 ---
 # Results
-The script generated  [output](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Output) directory multiplr types of pangenome graphs, logs, [MultiQC Report](https://github.com/ewels/MultiQC), VCF file and stats etc... 
+The script generated  [output](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Output) directory multiple types of pangenome graphs, logs, [MultiQC Report](https://github.com/ewels/MultiQC), VCF file and stats etc... 
 
 <!---
 ### 2.	QC and Adapter Trimming
