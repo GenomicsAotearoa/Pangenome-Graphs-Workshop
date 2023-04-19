@@ -12,7 +12,7 @@ This study includes an anaysis of Neisseria Bacteria genome sequence data with 4
 ### Learning Objectives
 1. Creating scripts in specific work directory in the Nesi environment.
 2. Downloading sequencing data (in fastq format). 
-3. Creating Pangenome graphs using PGGB and PGGE Tools.
+3. Creating Pangenome graphs using [PGGB](https://github.com/pangenome/pggb){:target="_blank"} and [PGGE](https://github.com/pangenome/pgge){:target="_blank"} Tools.
 4. Identifying genetic variation and structural variance.
 
 
@@ -34,7 +34,7 @@ cd Workshop
 wget https://github.com/ZoeYang2020/Pangenome-graph-for-bacterial-pathogens/raw/main/ESR_pangenome_pipeline_v2.0/4Sim.fa
 ```
 
-### Creating an indexd for the seuqence file
+### Creating an index for the seuqence file and check
 ```
 #Use samtools to create the index file
 #In Nesi environment you will have to load the command first
