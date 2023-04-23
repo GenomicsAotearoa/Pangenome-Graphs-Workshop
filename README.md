@@ -211,10 +211,10 @@ The script generated [output](https://github.com/nuzla/Pangenome-Graphs-Workshop
 
 _Note: To download the output folder from the Nesi environment you can first zip it using the command `zip -r output.zip output`_
 
-# Sample Wise SNP Analysis (`-s 1000`)
-### Identity 90%
+# SNP Analysis (`-s 1000`)
+
 |Identity| Ground Truth SNP | Graph SNP | False Negative (FN) | False Positive (FP) | Sensitivity | Specifisity|
-|:-------|-----------------:|----------:|--------------------:|--------------------:|------------:|-----------:|
+|-------:|-----------------:|----------:|--------------------:|--------------------:|------------:|-----------:|
 |90%     |                  |      8,606|                     |                     |             |            |
 |95%     |                  |      8,678|                     |                     |             |            |
 |98%     |                  |      8,617|                     |                     |             |            |
