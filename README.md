@@ -112,12 +112,6 @@ singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 4 -k 79 -t 2 -S -m 
 In `pggb` `-i` is for specifying the sequence file. `-s` specifies the segment length for mapping and `-p` specifies percent identity for mapping/alignment. `-n` is for number of haplotypes (or number of samples). `-k` for minimum matching length. `-t` says number of threads to be used for the execution. `-S` will generate the stats. `-m` will generate MultiQC report of graphs' statistics and visualizations. `-o` specifies the output directory name. `-V 'NC_neisseria:#'` will create a vcf file and it stats considering NC_neisseria as the reference sequence. 
 
 ---
-# MultiQC Report
-The script generated [output](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Output) directory consists of a compehensive and interactive [MutltiQC Report](https://multiqc.info/) which will decribe all. Open the file multiqc_report.html which is in the output folder from your browser.
-
-_Note: To download the output folder from the Nesi environment you can first zip it using the command `zip -r output.zip output`_
-
----
 # Executing `pggb` as a [SLURM](https://github.com/SchedMD/slurm) Job
 
 Executing shell scripts in the Nesi environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previusely explained script as below ([pggb_slurm_1K95.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pggb_slurm_1K95.sh)) to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
@@ -210,3 +204,18 @@ Memory Efficiency: 3.60% of 4.00 GB
 ```
 
 Now we can try the same script by changing the `pggb` parameters `-s`, `-p` and `-k` and compare the results. 
+
+---
+# MultiQC Report
+The script generated [output](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Output) directory consists of a compehensive and interactive [MutltiQC Report](https://multiqc.info/) which will decribe all. Open the file multiqc_report.html which is in the output folder from your browser.
+
+_Note: To download the output folder from the Nesi environment you can first zip it using the command `zip -r output.zip output`_
+
+# Sample Wise SNP Analysis (`-s 1000`)
+### Identity 90%
+|Identity| Ground Truth SNP | Graph SNP | False Negative (FN) | False Positive (FP) | Sensitivity | Specifisity|
+|:-------|-----------------:|----------:|--------------------:|--------------------:|------------:|-----------:|
+|90%     |                  |      8,606|                     |                     |             |            |
+|95%     |                  |      8,678|                     |                     |             |            |
+|98%     |                  |      8,617|                     |                     |             |            |
+
