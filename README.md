@@ -211,11 +211,50 @@ The script generated [output](https://github.com/nuzla/Pangenome-Graphs-Workshop
 
 _Note: To download the output folder from the Nesi environment you can first zip it using the command `zip -r output.zip output`_
 
-# SNP Analysis (`-s 1000`)
+## Graph Viszualization Details (`-s 1000`, `-p 95`)
+
+### ODGI Compressed 1D visualization
+![ODGI Compressed 1D visualization](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.viz_O_multiqc.png?raw=true)
+
+### ODGI 1D visualization
+![ODGI 1D visualization](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.viz_multiqc.png?raw=true)
+
+### ODGI 1D visualization by path position
+![ODGI 1D visualization by path position](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.viz_pos_multiqc.png?raw=true)
+
+### ODGI 1D visualization by path orientation
+![ODGI 1D visualization by path orientation](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.viz_inv_multiqc.png?raw=true)
+
+### ODGI 1D visualization by node depth
+![ODGI 1D visualization by node depth](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.viz_depth_multiqc.png?raw=true)
+
+### ODGI 1D visualization by uncalled bases
+![ODGI 1D visualization by uncalled bases](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.viz_uncalled_multiqc.png?raw=true)
+
+### ODGI 2D drawing
+![ODGI 2D drawing](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.lay.draw.png?raw=true)
+
+# SNP Analysis using the VCF file (`-s 1000`)
+
+### How `pggb` creates VCF file?
+As explained in a previuse section we sepcified the option `-V 'NC_neisseria:#'`. That will execute the command,
+```
+vg deconstruct -P NC_neisseria -H # -e -a -t 2 output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa
+```
+You can see it in the [Log File](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.04-20-2023_02_56_38.log) line 296. 
+
+### How to create the Group Truth VCF?
+This procedure is exaplned in [this page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/ground_truth_data.md).
+
+### Finding stats of the VCF file
+`bcftools stats <file.vcf>` command will display the all the stats related to the VCF file. 
+
+### SNP Comaprison
 
 |Identity| Ground Truth SNP | Graph SNP | False Negative (FN) | False Positive (FP) | Sensitivity | Specifisity|
 |-------:|-----------------:|----------:|--------------------:|--------------------:|------------:|-----------:|
 |90%     |                  |      8,606|                     |                     |             |            |
 |95%     |                  |      8,678|                     |                     |             |            |
 |98%     |                  |      8,617|                     |                     |             |            |
+
 
