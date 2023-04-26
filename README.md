@@ -257,4 +257,6 @@ This procedure is exaplned in [this page](https://github.com/nuzla/Pangenome-Gra
 |95%     |                  |      8,678|                     |                     |             |            |
 |98%     |                  |      8,617|                     |                     |             |            |
 
+# PanGenome Graph Evaluator
+---
 
