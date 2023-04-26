@@ -1,11 +1,14 @@
 # Script for finding Ground Truth SNP count
 
 ```bash
-module load SAMtools
-module load BCFtools
-module load BWA
+#Load required module with specific version
+module purge
+module load BCFtools/1.9-GCC-7.4.0
+module load SAMtools/1.9-GCC-7.4.0
+module load BWA/0.7.17-GCC-9.2.0
 
 mkdir SNP
+
 #Splitting the 4Sim.fa dataset into four files
 samtools faidx 4Sim.fa NC_neisseria > ./SNP/NC_neisseria.fa
 samtools faidx 4Sim.fa Sim1_3k > ./SNP/Sim1_3k.fa
