@@ -1,7 +1,7 @@
 # Script for finding Ground Truth SNP count
 
 ```bash
-#Load required module with specific version
+#Load required modules with specific versions
 module purge
 module load BCFtools/1.9-GCC-7.4.0
 module load SAMtools/1.9-GCC-7.4.0
