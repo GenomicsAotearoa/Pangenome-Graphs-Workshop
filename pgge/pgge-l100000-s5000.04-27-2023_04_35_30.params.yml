@@ -1,0 +1,14 @@
+evaluation:
+  input-gfa:          /nesi/nobackup/ga03793/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa
+  input-fasta:        /nesi/nobackup/ga03793/pg_workshop/4Sim.fa
+  output-dir:         pgge
+  beehave-r:          /nesi/nobackup/ga03793/pg_workshop/beehave.R
+  peanut-bed:         true
+  input-graph-names:  false
+splitfa:
+  seq-length:         100000
+  step:               5000
+evaluation-gaf-mode:
+  input-gaf:          false
+general:
+  threads:            16
