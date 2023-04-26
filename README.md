@@ -259,4 +259,32 @@ This procedure is exaplned in [this page](https://github.com/nuzla/Pangenome-Gra
 
 # PanGenome Graph Evaluator
 ---
+## Executing pgge tool using Singularity container
+First we need to download a .R file to the working directory. 
+```
+wget https://raw.githubusercontent.com/pangenome/pgge/master/scripts/beehave.R
+```
+Now execute the script [pgge_test.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pgge_test.sh)
 
+```bash
+#!/usr/bin/bash
+module load Singularity
+#export container to a variable for convenience
+WD=/nesi/nobackup/ga03793/pg_workshop #Working Directory
+container=/nesi/project/ga03793/software/pgge/pgge_032023.simg
+data=${WD}/4Sim.fa
+
+#Bind filesystem to container image 
+export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
+
+singularity exec ${container} pgge -g ${WD}/output/*.gfa -f $data -o pgge -r ${WD}/beehave.R -b pgge/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
+```
+---> Please explain the options <----
+
+You can find the result out pgge folder [here](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/pgge)
+
+You can also run this task as a SLURM job using the script [pgge_slurm.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pgge_slurm.sh)
+
+The output graph from `pgge` is shown below. 
+
+![pgge-l100000-s5000.pgge.tsv.png](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/pgge/pgge-l100000-s5000.pgge.tsv.png?raw=true)
