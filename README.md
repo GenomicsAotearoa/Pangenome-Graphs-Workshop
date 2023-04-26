@@ -250,7 +250,7 @@ This procedure is exaplned in [this page](https://github.com/nuzla/Pangenome-Gra
 `bcftools stats <file.vcf>` command will display the all the stats related to the VCF file. 
 
 ### SNP Comaprison
-
+---> Need to complete this task when ground truth stats are correct <---
 |Identity| Ground Truth SNP | Graph SNP | False Negative (FN) | False Positive (FP) | Sensitivity | Specifisity|
 |-------:|-----------------:|----------:|--------------------:|--------------------:|------------:|-----------:|
 |90%     |                  |      8,606|                     |                     |             |            |
