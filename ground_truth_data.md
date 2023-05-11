@@ -1,4 +1,4 @@
-# Script for finding Ground Truth SNP count
+# Script for finding Ground Truth SNP count (Linear Reference)
 
 ```bash
 #Load required modules with specific versions
