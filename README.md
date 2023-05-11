@@ -253,6 +253,31 @@ This procedure is exaplned in [this page](https://github.com/nuzla/Pangenome-Gra
 
 #### 1. Using ground truth count from a linear reference. Refer the procedure [here](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/ground_truth_data.md)  
 
+In order to find the False Negative and False positive we need to compare the 2 VCF files. `bcftools isec` can be used for that. 
+e.g. :
+```
+bcftools isec -p output_dir 4Sim_ref.vcf.gz 4Sim_1K98.vcf.gz 
+cd output_dir/
+cat README.txt 
+This file was produced by vcfisec.
+The command line was:	bcftools isec  -p output_dir 4Sim_ref.vcf.gz 4Sim_1K98.vcf.gz
+
+Using the following file names:
+output_dir/0000.vcf	for records private to	4Sim_ref.vcf.gz
+output_dir/0001.vcf	for records private to	4Sim_1K98.vcf.gz
+output_dir/0002.vcf	for records from 4Sim_ref.vcf.gz shared by both	4Sim_ref.vcf.gz 4Sim_1K98.vcf.gz
+output_dir/0003.vcf	for records from 4Sim_1K98.vcf.gz shared by both	4Sim_ref.vcf.gz 4Sim_1K98.vcf.gz
+```
+As usual we can apply `bcftools stats <file.vcf>` to get the stats form each file. We can illustrate it with the below Venn diagram.
+
+![venn_1k98](https://github.com/nuzla/Pangenome-Graphs-Workshop/assets/8539123/e9cfe33b-e473-4a25-a190-7af2e603b654)
+
+For this case False Negative (Undetected) count is 1,488 and False Postive (Wrongly Detected) count is 64. 
+
+Sensitivity  = TP/(TP+FN) = 8553/(8553+1488) = 85%
+Specificity  = TN/(TN+FP) = 
+
+
 |Identity| Ground Truth SNP | Graph SNP | False Negative (FN) | False Positive (FP) | Sensitivity | Specifisity|
 |-------:|-----------------:|----------:|--------------------:|--------------------:|------------:|-----------:|
 |90%     |         10,041   |      8,606|                     |                     |             |            |
