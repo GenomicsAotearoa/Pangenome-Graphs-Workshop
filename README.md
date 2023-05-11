@@ -250,12 +250,14 @@ This procedure is exaplned in [this page](https://github.com/nuzla/Pangenome-Gra
 `bcftools stats <file.vcf>` command will display the all the stats related to the VCF file. 
 
 ### SNP Comaprison
----> Need to complete this task when ground truth stats are correct <---
+
+#### 1. Using ground truth count from a linear reference. Refer the procedure [here](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/ground_truth_data.md)  
+
 |Identity| Ground Truth SNP | Graph SNP | False Negative (FN) | False Positive (FP) | Sensitivity | Specifisity|
 |-------:|-----------------:|----------:|--------------------:|--------------------:|------------:|-----------:|
-|90%     |                  |      8,606|                     |                     |             |            |
-|95%     |                  |      8,678|                     |                     |             |            |
-|98%     |                  |      8,617|                     |                     |             |            |
+|90%     |         10,041   |      8,606|                     |                     |             |            |
+|95%     |         10,041   |      8,678|                     |                     |             |            |
+|98%     |         10,041   |      8,617|                     |                     |             |            |
 
 # PanGenome Graph Evaluator
 ---
