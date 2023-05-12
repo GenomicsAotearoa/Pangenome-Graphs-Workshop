@@ -272,17 +272,21 @@ As usual we can apply `bcftools stats <file.vcf>` to get the stats form each fil
 
 ![venn_1k98](https://github.com/nuzla/Pangenome-Graphs-Workshop/assets/8539123/e9cfe33b-e473-4a25-a190-7af2e603b654)
 
-For this case False Negative (Undetected) count is 1,488 and False Postive (Wrongly Detected) count is 64. 
+For this case False Negative (Undetected in Graph) count is 1,488 and False Postive (Wrongly Detected in Graph) count is 64. 
 
-Sensitivity  = TP/(TP+FN) = 8553/(8553+1488) = 85%
-Specificity  = TN/(TN+FP) = 
+Sensitivity  = TP/(TP+FN) = 8553/(8553+1488) = 85.18%
 
+Specificity  = TN/(TN+FP) = 496/(496+64) = 88.57%
 
-|Identity| Ground Truth SNP | Graph SNP | False Negative (FN) | False Positive (FP) | Sensitivity | Specifisity|
-|-------:|-----------------:|----------:|--------------------:|--------------------:|------------:|-----------:|
-|90%     |         10,041   |      8,606|                     |                     |             |            |
-|95%     |         10,041   |      8,678|                     |                     |             |            |
-|98%     |         10,041   |      8,617|                     |                     |             |            |
+TN considered as (number of records - number of SNPs) of record from reference and shared by both. 
+
+Now repeat the procedure for Identity 90% and 95%. 
+
+|Identity| Ground Truth SNP | Graph SNP | True Positive (TP) | False Positive (FP) | True Negative (TN) | False Negative (FN) | Sensitivity | Specifisity|
+|-------:|-----------------:|----------:|-------------------:|--------------------:|-------------------:|--------------------:|------------:|-----------:|
+|90%     |         10,041   |      8,606|                    |                     |                    |                     |             |            |
+|95%     |         10,041   |      8,678|                    |                     |                    |                     |             |            |
+|98%     |         10,041   |      8,617|               8,553|                  64 |                 496|                1,488|       85.18%|      88.57%|
 
 # PanGenome Graph Evaluator
 ---
