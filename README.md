@@ -253,7 +253,7 @@ This procedure is exaplned in [this page](https://github.com/nuzla/Pangenome-Gra
 
 #### 1. Using ground truth count from a linear reference.
 
-In order to find the False Negative and False positive we need to compare the 2 VCF files. `bcftools isec` can be used for that. 
+In order to find the True Positive (TP), True Negative (TN), False Positive (FP) and False Negative (FN) we need to compare the 2 VCF files. `bcftools isec` can be used for that. 
 e.g. :
 ```
 bcftools isec -p output_dir 4Sim_ref.vcf.gz 4Sim_1K98.vcf.gz 
