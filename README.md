@@ -243,7 +243,7 @@ vg deconstruct -P NC_neisseria -H # -e -a -t 2 output/4Sim.fa.3541aba.c2fac19.9d
 ```
 You can see it in the [Log File](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.04-20-2023_02_56_38.log) line 296. 
 
-### How to create the Group Truth VCF?
+### How to create the Ground Truth VCF?
 This procedure is exaplned in [this page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/ground_truth_data.md).
 
 ### Finding stats of the VCF file
@@ -251,7 +251,7 @@ This procedure is exaplned in [this page](https://github.com/nuzla/Pangenome-Gra
 
 ### SNP Comaprison
 
-#### 1. Using ground truth count from a linear reference. Refer the procedure [here](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/ground_truth_data.md)  
+#### 1. Using ground truth count from a linear reference.
 
 In order to find the False Negative and False positive we need to compare the 2 VCF files. `bcftools isec` can be used for that. 
 e.g. :
@@ -274,9 +274,16 @@ As usual we can apply `bcftools stats <file.vcf>` to get the stats form each fil
 
 For this case False Negative (Undetected in Graph) count is 1,488 and False Postive (Wrongly Detected in Graph) count is 64. 
 
-Sensitivity  = TP/(TP+FN) = 8553/(8553+1488) = 85.18%
-
-Specificity  = TN/(TN+FP) = 496/(496+64) = 88.57%
+```math
+\begin{aligned}
+Sensitivity  & = \frac{TP}{TP+FN} \\
+              &  = \frac{8553}{8553+1488} \\
+              & = 85.18\% \\ \\
+Specificity & = \frac{TN}{TN+FP} \\
+            & = \frac{496}{496+64} \\
+            & = 88.57\%
+\end{aligned}
+```
 
 TN considered as (number of records - number of SNPs) of record from reference and shared by both. 
 
