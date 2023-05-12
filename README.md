@@ -270,7 +270,7 @@ output_dir/0003.vcf	for records from 4Sim_1K98.vcf.gz shared by both	4Sim_ref.vc
 ```
 As usual we can apply `bcftools stats <file.vcf>` to get the stats form each file. We can illustrate it with the below Venn diagram.
 
-![venn_1k98](https://github.com/nuzla/Pangenome-Graphs-Workshop/assets/8539123/e9cfe33b-e473-4a25-a190-7af2e603b654)
+<img src="https://github.com/nuzla/Pangenome-Graphs-Workshop/assets/8539123/e9cfe33b-e473-4a25-a190-7af2e603b654" width="600">
 
 For this case False Negative (Undetected in Graph) count is 1,488 and False Postive (Wrongly Detected in Graph) count is 64. 
 
