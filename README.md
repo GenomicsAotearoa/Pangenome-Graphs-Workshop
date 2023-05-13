@@ -244,14 +244,14 @@ vg deconstruct -P NC_neisseria -H # -e -a -t 2 output/4Sim.fa.3541aba.c2fac19.9d
 You can see it in the [Log File](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.04-20-2023_02_56_38.log) line 296. 
 
 ### How to create the Ground Truth VCF?
-This procedure is exaplned in [this page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/ground_truth_data.md).
+This procedure is exaplned in [this page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/ground_truth_data.md) using a linear reference.
 
 ### Finding stats of the VCF file
 `bcftools stats <file.vcf>` command will display the all the stats related to the VCF file. 
 
 ### SNP Comaprison
 
-#### 1. Using ground truth count from a linear reference.
+#### 1. Using ground truth stats from a linear reference.
 
 In order to find the True Positive (TP), True Negative (TN), False Positive (FP) and False Negative (FN) we need to compare the 2 VCF files. `bcftools isec` can be used for that. 
 e.g. :
