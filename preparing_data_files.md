@@ -11,5 +11,5 @@ perl vcf2model.pl -h
 ```
 
 ### 2. Data Source
-You can download the reference sequence (Neisseria gonorrhoeae FA 1090 genome assembly) from the site [Genome assembly ASM684v1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000006845.1/) and get the file \ncbi_dataset\data\GCA_000006845.1\GCA_000006845.1_ASM684v1_genomic.fna from he zip file ncbi_dataset.zip. Rename it as "ref.fa" to refere easily in next steps. 
+You can download the reference sequence (Neisseria gonorrhoeae FA 1090 genome assembly) from the site [Genome assembly ASM684v1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000006845.1/) and get the file _\ncbi_dataset\data\GCA_000006845.1\GCA_000006845.1_ASM684v1_genomic.fna_ from he zip file ncbi_dataset.zip. Rename it as "ref.fa" to refere easily in next steps. 
 
