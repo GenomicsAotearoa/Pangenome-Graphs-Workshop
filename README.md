@@ -252,7 +252,7 @@ You can see it in the [Log File](https://github.com/nuzla/Pangenome-Graphs-Works
 
 #### 1. Linear Reference VCF vs PGGB Graph VCF.
 
-The procedure described in [this page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/ground_truth_data.md) can be used to find linear reference based stats and `bcftools isec` can be used to compare VCF files. 
+The procedure described in [this page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/linear_reference_vc.md) can be used to find linear reference based stats and `bcftools isec` can be used to compare VCF files. 
 
 e.g. :
 ```
