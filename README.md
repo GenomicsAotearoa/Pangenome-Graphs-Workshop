@@ -244,14 +244,14 @@ vg deconstruct -P NC_neisseria -H # -e -a -t 2 output/4Sim.fa.3541aba.c2fac19.9d
 You can see it in the [Log File](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.04-20-2023_02_56_38.log) line 296. 
 
 ### How to create the Ground Truth VCF?
-This procedure is exaplned in [this page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/ground_truth_data.md) using a linear reference.
+This procedure is exaplned in [this page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/ground_truth_data.md).
 
 ### Finding stats of the VCF file
 `bcftools stats <file.vcf>` command will display the all the stats related to the VCF file. 
 
 ### SNP Comaprison
 
-#### 1. Using ground truth stats from a linear reference.
+#### 1. Ground truth VCF vs PGGB VCF.
 
 In order to find the True Positive (TP), True Negative (TN), False Positive (FP) and False Negative (FN) we need to compare the 2 VCF files. `bcftools isec` can be used for that. 
 e.g. :
@@ -289,11 +289,11 @@ TN considered as (number of records - number of SNPs) of record from reference a
 
 Now repeat the procedure for Identity 90% and 95%. 
 
-|Identity| Ground Truth SNP | Graph SNP | True Positive (TP) | False Positive (FP) | True Negative (TN) | False Negative (FN) | Sensitivity | Specifisity|
-|-------:|-----------------:|----------:|-------------------:|--------------------:|-------------------:|--------------------:|------------:|-----------:|
-|90%     |         10,041   |      8,606|               8,546|                   60|                 512|                1,495|       85.11%|      89.51%|
-|95%     |         10,041   |      8,678|               8,617|                   61|                 498|                1,424|       85.81%|      89.08%|
-|98%     |         10,041   |      8,617|               8,553|                   64|                 496|                1,488|       85.18%|      88.57%|
+|Identity| Ground Truth SNP | PGGB Graph SNP | True Positive (TP) | False Positive (FP) | True Negative (TN) | False Negative (FN) | Sensitivity | Specifisity|
+|-------:|-----------------:|---------------:|-------------------:|--------------------:|-------------------:|--------------------:|------------:|-----------:|
+|90%     |         10,041   |           8,606|               8,546|                   60|                 512|                1,495|       85.11%|      89.51%|
+|95%     |         10,041   |           8,678|               8,617|                   61|                 498|                1,424|       85.81%|      89.08%|
+|98%     |         10,041   |           8,617|               8,553|                   64|                 496|                1,488|       85.18%|      88.57%|
 
 # PanGenome Graph Evaluator
 ---
