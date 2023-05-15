@@ -121,7 +121,7 @@ $ sed -i '/>/ s/.*/>sim5k/g' sim5k.simseq.genome.fa
 ```
 
 ### 5. Concatenate all file and make an index
-We'll concatenate these files into one and make a index too
+We'll concatenate these files into one and make an index too
 ```bash
 $ cat ref.fa sim3k.simseq.genome.fa sim4k.simseq.genome.fa sim5k.simseq.genome.fa > 4Sim.fa
 $ module load SAMtools
