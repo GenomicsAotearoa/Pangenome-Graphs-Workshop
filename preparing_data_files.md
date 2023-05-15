@@ -1,5 +1,5 @@
 # Preparing required data files with simuG tool
-[simuG](https://github.com/yjx1217/simuG) is a light-weighted tool which can be used to simulate sequences with pre-defined number of random genomic variants against a reference sequence (Please refer the [Git Page](https://github.com/yjx1217/simuG) for more details). 
+[simuG](https://github.com/yjx1217/simuG) is a light-weighted tool which can be used to simulate sequences with pre-defined number of random genomic variants against a reference sequence (Please refer the [Git Page](https://github.com/yjx1217/simuG) for more details). The following example demostrates generating three new sequence using known SNP and INDEL counts.
 
 ### 1. Setting up the tool 
 Please refer the installation instruction in the [Git Page](https://github.com/yjx1217/simuG).
