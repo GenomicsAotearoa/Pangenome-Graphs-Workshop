@@ -1,4 +1,4 @@
-# Preparing required data files for the exersice with simuG
+# Preparing required data files with simuG tool
 [simuG](https://github.com/yjx1217/simuG) is a light-weighted tool which can be used to simulate sequences with pre-defined number of random genomic variants against a reference sequence (Please refer the [Git Page](https://github.com/yjx1217/simuG) for more details). 
 
 ### 1. Setting up the tool 
