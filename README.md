@@ -25,7 +25,7 @@ To investigate and analyse Neisseria Bacteria the PanGenome Graph Builder has be
 # Learning Objectives
 
 1. Creating scripts in specific work directory in the Nesi environment.
-2. Downloading sequencing data (in fastq format). 
+2. Downloading and preparing sequencing data (in fasta format). 
 3. Creating Pangenome graphs using [PGGB](https://github.com/pangenome/pggb) and [PGGE](https://github.com/pangenome/pgge) Tools.
 4. Identifying genetic variation and structural variance.
 
@@ -46,19 +46,13 @@ pwd
 # Genome Data
 
 ### Genome Availability 
-----> Mention the data source <----
-
-### Other Data Availability
-----> Mention other data source <----
+The National Library of Medicine is the largest library focused on biomedicine worldwide, serving as the central hub for biomedical informatics and computational biology. It has many genome assembly data and [ASM684v1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000006845.1/) will be used for this workshop. 
 
 ---
 # Procedure 
-### 1. Downloading the Assembly Data file 4Sim.fa
+### 1. Downloading and preparng assembly data file 4Sim.fa
 
-```bash
-#Use wget to download the file from the URL
-wget https://github.com/ZoeYang2020/Pangenome-graph-for-bacterial-pathogens/raw/main/ESR_pangenome_pipeline_v2.0/4Sim.fa
-```
+Please follow the proedure described in this [page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/preparing_data_files.md)
 
 ### 2. Creating an index for the seuqence file and check
 
@@ -66,29 +60,25 @@ wget https://github.com/ZoeYang2020/Pangenome-graph-for-bacterial-pathogens/raw/
 #Use samtools to create the index file
 #In Nesi environment you will have to load the command first
 
-module load SAMtools
+$ module load SAMtools
 
-samtools faidx 4Sim.fa 
-ls -ltrh
-total 8.8M
--rw-rw-r-- 1 ismnu81p ismnu81p 8.8M Apr 19 16:09 4Sim.fa
--rw-rw-r-- 1 ismnu81p ismnu81p  120 Apr 19 16:20 4Sim.fa.fai
+$ samtools faidx 4Sim.fa 
 
-cat 4Sim.fa.fai
-NC_neisseria    2248966 14      60      61
-Sim1_3k 2249014 2286472 60      61
-Sim2_4k 2248965 4572979 60      61
-Sim3_5k 2249050 6859436 60      61
+$ cat 4Sim.fa.fai 
+ref     2153922 5       80      81
+sim3k   2153907 2180859 2153907 2153908
+sim4k   2153912 4334774 2153912 2153913
+sim5k   2153883 6488694 2153883 2153884
 ```
 
 As per the index this assembly consists of 4 samples described in the below table. 
 
-| Name | Length |
-|------|-------:|
-|NC_neisseria | 2,248,966 |
-|Sim1_3k | 2,249,014 |
-|Sim2_4k | 2,248,965 |
-|Sim3_5k | 2,249,050 |
+| Name | Length    | SNPs   | INDELs |
+|:-----|----------:|-------:|-------:|
+|ref   | 2,153,922 |     N/A|     N/A|
+|sim3k | 2,153,907 |   3,000|     300|
+|sim4k | 2,153,912 |   4,000|     400|
+|sim5k | 2,153,883 |   5,000|     500|
 
 ### 3. Executing `pggb` tool using Singularity container
 We can follow the procedure in https://github.com/pangenome/pggb#singularity to setup the Singularity image. This is already done and the image is in `/nesi/project/ga03793/software/pggb/` directory for version 0.5.3. 
