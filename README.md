@@ -19,10 +19,11 @@ To investigate and analyse Neisseria Bacteria the PanGenome Graph Builder has be
 </p>
 
 ### PanGenome Graph Evaluator [(PGGE)](https://github.com/pangenome/pgge)
-----> Brief Description <----
+<p align="justify">
+The pangenome graph evaluation is a pipeline in the pangenome graphs, which measures the reconstruction accuracy of the graph. It helps find the best pangenome graph using input data and tasks.
+</p>
 
----
-# Learning Objectives
+#### Learning Objectives
 
 1. Creating scripts in specific work directory in the Nesi environment.
 2. Downloading and preparing sequencing data (in fasta format). 
