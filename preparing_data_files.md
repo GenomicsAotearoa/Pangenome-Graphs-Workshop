@@ -11,47 +11,47 @@ perl vcf2model.pl -h
 ```
 
 ### 2. Data source
-You can download the reference sequence (Neisseria gonorrhoeae FA 1090 genome assembly) from the site [Genome assembly ASM684v1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000006845.1/) and get the file _\ncbi_dataset\data\GCA_000006845.1\GCA_000006845.1_ASM684v1_genomic.fna_ from he zip file ncbi_dataset.zip. Rename it as "ref.fa" to refere easily in next steps. 
+You can download the reference sequence (Neisseria gonorrhoeae FA 1090 genome assembly) from the site [Genome assembly ASM19152v1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000191525.1/) and get the file _ncbi_dataset/data/GCF_000191525.1/GCF_000191525.1_ASM19152v1_genomic.fna_ from he zip file GCF_000191525.1.zip. Rename it as "ref.fa" to refere easily in next steps. 
 
 In Unix environment you can use `curl`. 
 
 ```bash
-$ curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000006845.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000006845.1.zip" -H "Accept: application/zip"
+$ curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000191525.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000191525.1.zip" -H "Accept: application/zip"
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100 1807k    0 1807k    0     0   294k      0 --:--:--  0:00:06 --:--:--  421k
 
 $ ls
-GCF_000006845.1.zip
+GCF_000191525.1.zip
 
-$ unzip GCF_000006845.1.zip 
-Archive:  GCF_000006845.1.zip
+$ unzip GCF_000191525.1.zip 
+Archive:  GCF_000191525.1.zip
   inflating: README.md               
   inflating: ncbi_dataset/data/assembly_data_report.jsonl  
-  inflating: ncbi_dataset/data/GCF_000006845.1/GCF_000006845.1_ASM684v1_genomic.fna  
-  inflating: ncbi_dataset/data/GCF_000006845.1/genomic.gff  
-  inflating: ncbi_dataset/data/GCF_000006845.1/cds_from_genomic.fna  
-  inflating: ncbi_dataset/data/GCF_000006845.1/protein.faa  
-  inflating: ncbi_dataset/data/GCF_000006845.1/sequence_report.jsonl  
+  inflating: ncbi_dataset/data/GCF_000191525.1/GCF_000191525.1_ASM19152v1_genomic.fna  
+  inflating: ncbi_dataset/data/GCF_000191525.1/genomic.gff  
+  inflating: ncbi_dataset/data/GCF_000191525.1/cds_from_genomic.fna  
+  inflating: ncbi_dataset/data/GCF_000191525.1/protein.faa  
+  inflating: ncbi_dataset/data/GCF_000191525.1/sequence_report.jsonl  
   inflating: ncbi_dataset/data/dataset_catalog.json  
 
-$ cp ncbi_dataset/data/GCF_000006845.1/GCF_000006845.1_ASM684v1_genomic.fna ref.fa
+$ cp ncbi_dataset/data/GCF_000191525.1/GCF_000191525.1_ASM19152v1_genomic.fna ./
 
-$ head ref.fa 
->NC_002946.2 Neisseria gonorrhoeae FA 1090, complete sequence
-ATAAATTTTTGCACGGGTTGTGGATAAAATATCGGCGAGTCGGTATAATCGGTTCGCTGCGTTTTGAACCGACGCGTATT
-CAACAGATTTGTTTTCTTTTTGAAAATATTATATTTTCTTTGTTTTCGATTTCATTTTTACCGATTCGAGCCTATCGCAT
-GACATTAGCAGAGTTTTGGCCGCTGTGCCTCCGCCGTCTTCACGATATGTTGCCTCACGGGCAGTTTGCGCAATGGATTG
-CGCCCCTTACGGTTGGTGAGGAGGGTGGCGTATGGGTGGTGTACGGCAAGAACCAGTTTGCCTGCAATATGCTCAAGAGC
-CAGTTTGCCGGAAAAATAGAAGCGGTAAGGGAAGAGTTGGCTGCCGGCCGTCCCGCCTTTGTATTCAAACCGGGAGAAGG
-CGTGCGTTATGAGATGGCGGCGGTTGAAGGTGCTGTCGAACCTGCCGAGCCGTCCTTGCACGCGGGGTCGGAGGAGATGC
-CCGTGCAGGAGGTTCTGTTGGACGAGCTGCCGTCTGAAAAGCCTGTCAAACCCGCTGCGTCGAAAACGGCGGCGGATATT
-TTGGCGGAACGTATGAAAAACCTGCCGCACGAGCCGCGTCAGGCTGCCGGGCCTGCTTCCCGGCCGGAATCGGCGGCAGT
-TGCCAAAGCGCGGACGGATGCGCAGCGTGATGCGGAAGAAGCGCGTTACGAACAAACCAACCTGTCTCCGGATTACACGT
+$ head GCF_000191525.1_ASM19152v1_genomic.fna 
+>NC_017518.1 Neisseria meningitidis NZ-05/33, complete sequence
+TTCGGCTTAAACCTTATCCATATCCAAACGCATAACCGTAACCCATTCACCGTTATGGAAATGTCGCCCGACAACCGCCC
+AGCCGAATGATTCATAAAATATTTGCACATCAGGCGTATAAAGATACAAGAACTTTATCCCCAGCGAACGCGCTGCGCCT
+ATGCAGTGGGCGACCAGCCTCCTGCCAATGCCTTTTCCGCGATATTCAGGTAAAACAAAGACATCACCCAACCAATATTC
+ATACTGTGGAAAACTTTCCATATCATGCCGCTTGACCGTAGCCGAACCCAACAGGGTTCCGGAATCATCCACAGCCGCAA
+AAGCCAGCGGCAGTTCGTCATCCTTCAAACACCTGCCGTAATAGGCATGAATCTTATCCACAGAAGACCACGGTTCAAAT
+CCGTGCCACTCCTCAAACAACGCCTGAACCAACCTGCCGATATGCCCGGCTTTCAGCCGTGTAATGAAAACAGTATTGTC
+CACAAAGAGGGAATTCATCGGTCAATTCCCCGACGCTTTCGTTCCCCCTGCGCCGTAAACCGCATTCCAAGCATAGTCCA
+AACGCACTCCGATTTGCCTCAGCTCTTCAGCCTGCCGGGCTTTTTGCGCCATTGCTGCAGGAATTTCCGCTTCCAAACGG
+GCGATGTCTGCCTGAGCCGTCTGCAAACGCCGGCGCGCATCTTCCAAATCCGACTGCATCCCGATGATTTTTCCGTCCAG
 ```
 
-### 3. Simulating sequences with Known SNPs and INDELs counts using simuG
-#### i. SNP=3000 and INDEL=300
+### 3. Simulating sequences with known genetics variants counts using simuG
+#### i. SNP=3000 
 ```
 $ perl simuG.pl -refseq ref.fa -snp_count 3000 -indel_count 300 -prefix sim3k -seed 123456789000
 
