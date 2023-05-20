@@ -229,7 +229,7 @@ _Note: To download the output folder from the Nesi environment you can first zip
 ### ODGI 2D drawing
 ![ODGI 2D drawing](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.lay.draw.png?raw=true)
 
-# SNP Analysis using the VCF file (`-s 1000`)
+# Variant Call Analysis using the VCF file (`-s 1000`)
 
 ### How `pggb` creates VCF file?
 As explained in a previouse section we sepcified the option `-V 'NC_017518.1:#'`. That will execute the command,
@@ -238,15 +238,13 @@ vg deconstruct -P NC_017518.1 -H # -e -a -t 2 output/ASM19152v1_pgsim.fa.2ab4142
 ```
 You can see it in the [Log File](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.05-21-2023_04_21_52.log) line 279. 
 
-
-
 ### Finding stats of the VCF file
 `bcftools stats <file.vcf>` command will display the all the stats related to the VCF file. 
 
 ### Variant Call Comaprison
 
 #### 1. Ground truth vs linear reference
-
+The procedure described in [this page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/linear_reference_vc.md) can be used to find linear reference based stats. 
 
 
 #### 1. Linear Reference VCF vs PGGB Graph VCF.
