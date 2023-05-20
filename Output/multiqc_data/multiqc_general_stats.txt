@@ -1,0 +1,2 @@
+Sample	Bcftools Stats_mqc-generalstats-bcftools_stats-number_of_records	Bcftools Stats_mqc-generalstats-bcftools_stats-number_of_SNPs	Bcftools Stats_mqc-generalstats-bcftools_stats-number_of_indels	Bcftools Stats_mqc-generalstats-bcftools_stats-tstv	Bcftools Stats_mqc-generalstats-bcftools_stats-number_of_MNPs
+ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf	17688.0	8850.0	8811.0	0.51	78.0

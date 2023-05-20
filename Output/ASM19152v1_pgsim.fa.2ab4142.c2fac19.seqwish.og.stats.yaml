@@ -1,0 +1,36 @@
+---
+length: 2637274
+nodes: 37585
+edges: 52134
+paths: 6
+steps: 155221
+num_weakly_connected_components: 1
+weakly_connected_components: 
+  - component:
+      id: 0
+      nodes: 37585
+      is_acyclic: 'no'
+num_nodes_self_loops:
+  total: 15
+  unique: 15
+A: 640206
+C: 667390
+G: 683868
+T: 645810
+file_size_in_bytes: 9018898
+mean_links_length:
+  - length:
+      path: all_paths
+      in_node_space: 4985.43
+      in_nucleotide_space: 294911
+      num_links_considered: 155215
+      num_gap_links_not_penalized: 0
+sum_of_path_node_distances:
+  - distance:
+      path: all_paths
+      in_node_space: 9970.94
+      in_nucleotide_space: 6709.33
+      nodes: 155221
+      nucleotides: 13646772
+      num_penalties: 22872
+      num_penalties_different_orientation: 0

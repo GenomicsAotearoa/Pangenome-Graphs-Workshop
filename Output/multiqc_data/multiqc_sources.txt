@@ -1,0 +1,4 @@
+Module	Section	Sample Name	Source
+Bcftools	stats	ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf	/nesi/nobackup/ga03793/pg_workshop/output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf.stats
+ODGI	all_sections	seqwish	/nesi/nobackup/ga03793/pg_workshop/output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.seqwish.og.stats.yaml
+ODGI	all_sections	smooth	/nesi/nobackup/ga03793/pg_workshop/output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.stats.yaml

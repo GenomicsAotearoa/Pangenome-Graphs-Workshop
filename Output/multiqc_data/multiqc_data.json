@@ -1,0 +1,959 @@
+{
+    "report_data_sources": {
+        "Bcftools": {
+            "stats": {
+                "ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf": "/nesi/nobackup/ga03793/pg_workshop/output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf.stats"
+            }
+        },
+        "ODGI": {
+            "all_sections": {
+                "seqwish": "/nesi/nobackup/ga03793/pg_workshop/output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.seqwish.og.stats.yaml",
+                "smooth": "/nesi/nobackup/ga03793/pg_workshop/output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.stats.yaml"
+            }
+        }
+    },
+    "report_general_stats_data": [
+        {
+            "ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf": {
+                "number_of_samples": 0.0,
+                "number_of_records": 17688.0,
+                "number_of_no-ALTs": 0.0,
+                "number_of_SNPs": 8850.0,
+                "number_of_MNPs": 78.0,
+                "number_of_indels": 8811.0,
+                "number_of_others": 89.0,
+                "number_of_multiallelic_sites": 204.0,
+                "number_of_multiallelic_SNP_sites": 26.0,
+                "ts": 2945.0,
+                "tv": 5791.0,
+                "tstv": 0.51,
+                "ts_1st_ALT": 2935.0,
+                "tv_1st_ALT": 5785.0,
+                "tstv_1st_ALT": 0.51,
+                "substitution_type_A>C": 708.0,
+                "substitution_type_A>G": 714.0,
+                "substitution_type_A>T": 722.0,
+                "substitution_type_C>A": 732.0,
+                "substitution_type_C>G": 771.0,
+                "substitution_type_C>T": 716.0,
+                "substitution_type_G>A": 771.0,
+                "substitution_type_G>C": 748.0,
+                "substitution_type_G>T": 707.0,
+                "substitution_type_T>A": 691.0,
+                "substitution_type_T>C": 744.0,
+                "substitution_type_T>G": 712.0
+            }
+        }
+    ],
+    "report_general_stats_headers": [
+        {
+            "number_of_records": {
+                "title": "Vars",
+                "description": "Variations total",
+                "min": 0,
+                "format": "{:,.0f}",
+                "namespace": "Bcftools Stats",
+                "rid": "mqc-generalstats-bcftools_stats-number_of_records",
+                "scale": "GnBu",
+                "colour": "55,126,184",
+                "hidden": null,
+                "max": null,
+                "ceiling": null,
+                "floor": null,
+                "minRange": null,
+                "shared_key": null,
+                "modify": null,
+                "placement": 1000.0,
+                "dmax": 17688.0,
+                "dmin": 0.0
+            },
+            "number_of_SNPs": {
+                "title": "SNP",
+                "description": "Variation SNPs",
+                "min": 0,
+                "format": "{:,.0f}",
+                "namespace": "Bcftools Stats",
+                "rid": "mqc-generalstats-bcftools_stats-number_of_SNPs",
+                "scale": "GnBu",
+                "colour": "55,126,184",
+                "hidden": null,
+                "max": null,
+                "ceiling": null,
+                "floor": null,
+                "minRange": null,
+                "shared_key": null,
+                "modify": null,
+                "placement": 1000.0,
+                "dmax": 8850.0,
+                "dmin": 0.0
+            },
+            "number_of_indels": {
+                "title": "Indel",
+                "description": "Variation Insertions/Deletions",
+                "min": 0,
+                "format": "{:,.0f}",
+                "namespace": "Bcftools Stats",
+                "rid": "mqc-generalstats-bcftools_stats-number_of_indels",
+                "scale": "GnBu",
+                "colour": "55,126,184",
+                "hidden": null,
+                "max": null,
+                "ceiling": null,
+                "floor": null,
+                "minRange": null,
+                "shared_key": null,
+                "modify": null,
+                "placement": 1000.0,
+                "dmax": 8811.0,
+                "dmin": 0.0
+            },
+            "tstv": {
+                "title": "Ts/Tv",
+                "description": "Variant SNP transition / transversion ratio",
+                "min": 0,
+                "format": "{:,.2f}",
+                "namespace": "Bcftools Stats",
+                "rid": "mqc-generalstats-bcftools_stats-tstv",
+                "scale": "GnBu",
+                "colour": "55,126,184",
+                "hidden": null,
+                "max": null,
+                "ceiling": null,
+                "floor": null,
+                "minRange": null,
+                "shared_key": null,
+                "modify": null,
+                "placement": 1000.0,
+                "dmax": 0.51,
+                "dmin": 0.0
+            },
+            "number_of_MNPs": {
+                "title": "MNP",
+                "description": "Variation multinucleotide polymorphisms",
+                "min": 0,
+                "format": "{:,.0f}",
+                "hidden": true,
+                "namespace": "Bcftools Stats",
+                "rid": "mqc-generalstats-bcftools_stats-number_of_MNPs",
+                "scale": "GnBu",
+                "colour": "55,126,184",
+                "max": null,
+                "ceiling": null,
+                "floor": null,
+                "minRange": null,
+                "shared_key": null,
+                "modify": null,
+                "placement": 1000.0,
+                "dmax": 78.0,
+                "dmin": 0.0
+            }
+        }
+    ],
+    "report_multiqc_command": "/usr/local/bin/multiqc output -s -o output -c output/multiqc_config.yaml",
+    "report_plot_data": {
+        "bcftools-stats-subtypes": {
+            "plot_type": "bar_graph",
+            "samples": [
+                [
+                    "ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf"
+                ]
+            ],
+            "datasets": [
+                [
+                    {
+                        "name": "A>C",
+                        "data": [
+                            708.0
+                        ]
+                    },
+                    {
+                        "name": "A>G",
+                        "data": [
+                            714.0
+                        ]
+                    },
+                    {
+                        "name": "A>T",
+                        "data": [
+                            722.0
+                        ]
+                    },
+                    {
+                        "name": "C>A",
+                        "data": [
+                            732.0
+                        ]
+                    },
+                    {
+                        "name": "C>G",
+                        "data": [
+                            771.0
+                        ]
+                    },
+                    {
+                        "name": "C>T",
+                        "data": [
+                            716.0
+                        ]
+                    },
+                    {
+                        "name": "G>A",
+                        "data": [
+                            771.0
+                        ]
+                    },
+                    {
+                        "name": "G>C",
+                        "data": [
+                            748.0
+                        ]
+                    },
+                    {
+                        "name": "G>T",
+                        "data": [
+                            707.0
+                        ]
+                    },
+                    {
+                        "name": "T>A",
+                        "data": [
+                            691.0
+                        ]
+                    },
+                    {
+                        "name": "T>C",
+                        "data": [
+                            744.0
+                        ]
+                    },
+                    {
+                        "name": "T>G",
+                        "data": [
+                            712.0
+                        ]
+                    }
+                ]
+            ],
+            "config": {
+                "id": "bcftools-stats-subtypes",
+                "title": "Bcftools Stats: Substitutions",
+                "ylab": "# Substitutions",
+                "cpswitch_counts_label": "Number of Substitutions"
+            }
+        },
+        "bcftools_stats_vqc": {
+            "plot_type": "xy_line",
+            "datasets": [
+                [
+                    {
+                        "name": "ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf",
+                        "data": [
+                            [
+                                60.0,
+                                8850.0
+                            ]
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "name": "ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf",
+                        "data": [
+                            [
+                                60.0,
+                                2935.0
+                            ]
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "name": "ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf",
+                        "data": [
+                            [
+                                60.0,
+                                5785.0
+                            ]
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "name": "ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf",
+                        "data": [
+                            [
+                                60.0,
+                                8811.0
+                            ]
+                        ]
+                    }
+                ]
+            ],
+            "config": {
+                "id": "bcftools_stats_vqc",
+                "title": "Bcftools Stats: Variant Quality Count",
+                "ylab": "Count",
+                "xlab": "Quality",
+                "xDecimals": false,
+                "ymin": 0,
+                "smooth_points": 600,
+                "data_labels": [
+                    {
+                        "name": "Count SNP",
+                        "ylab": "Quality"
+                    },
+                    {
+                        "name": "Count Transitions",
+                        "ylab": "Quality"
+                    },
+                    {
+                        "name": "Count Transversions",
+                        "ylab": "Quality"
+                    },
+                    {
+                        "name": "Count Indels",
+                        "ylab": "Quality"
+                    }
+                ]
+            }
+        },
+        "bcftools_stats_indel-lengths": {
+            "plot_type": "xy_line",
+            "datasets": [
+                [
+                    {
+                        "name": "ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf",
+                        "data": [
+                            [
+                                -60.0,
+                                1.0
+                            ],
+                            [
+                                -59.0,
+                                1.0
+                            ],
+                            [
+                                -53.0,
+                                1.0
+                            ],
+                            [
+                                -50.0,
+                                5.0
+                            ],
+                            [
+                                -49.0,
+                                3.0
+                            ],
+                            [
+                                -48.0,
+                                1.0
+                            ],
+                            [
+                                -46.0,
+                                2.0
+                            ],
+                            [
+                                -45.0,
+                                2.0
+                            ],
+                            [
+                                -44.0,
+                                4.0
+                            ],
+                            [
+                                -43.0,
+                                2.0
+                            ],
+                            [
+                                -42.0,
+                                1.0
+                            ],
+                            [
+                                -41.0,
+                                3.0
+                            ],
+                            [
+                                -40.0,
+                                2.0
+                            ],
+                            [
+                                -39.0,
+                                1.0
+                            ],
+                            [
+                                -38.0,
+                                5.0
+                            ],
+                            [
+                                -37.0,
+                                4.0
+                            ],
+                            [
+                                -36.0,
+                                2.0
+                            ],
+                            [
+                                -35.0,
+                                2.0
+                            ],
+                            [
+                                -34.0,
+                                3.0
+                            ],
+                            [
+                                -32.0,
+                                2.0
+                            ],
+                            [
+                                -31.0,
+                                6.0
+                            ],
+                            [
+                                -30.0,
+                                2.0
+                            ],
+                            [
+                                -29.0,
+                                4.0
+                            ],
+                            [
+                                -28.0,
+                                5.0
+                            ],
+                            [
+                                -27.0,
+                                7.0
+                            ],
+                            [
+                                -26.0,
+                                4.0
+                            ],
+                            [
+                                -25.0,
+                                2.0
+                            ],
+                            [
+                                -24.0,
+                                5.0
+                            ],
+                            [
+                                -23.0,
+                                6.0
+                            ],
+                            [
+                                -22.0,
+                                8.0
+                            ],
+                            [
+                                -21.0,
+                                6.0
+                            ],
+                            [
+                                -20.0,
+                                4.0
+                            ],
+                            [
+                                -19.0,
+                                16.0
+                            ],
+                            [
+                                -18.0,
+                                15.0
+                            ],
+                            [
+                                -17.0,
+                                12.0
+                            ],
+                            [
+                                -16.0,
+                                13.0
+                            ],
+                            [
+                                -15.0,
+                                11.0
+                            ],
+                            [
+                                -14.0,
+                                11.0
+                            ],
+                            [
+                                -13.0,
+                                25.0
+                            ],
+                            [
+                                -12.0,
+                                11.0
+                            ],
+                            [
+                                -11.0,
+                                41.0
+                            ],
+                            [
+                                -10.0,
+                                30.0
+                            ],
+                            [
+                                -9.0,
+                                33.0
+                            ],
+                            [
+                                -8.0,
+                                43.0
+                            ],
+                            [
+                                -7.0,
+                                60.0
+                            ],
+                            [
+                                -6.0,
+                                74.0
+                            ],
+                            [
+                                -5.0,
+                                108.0
+                            ],
+                            [
+                                -4.0,
+                                178.0
+                            ],
+                            [
+                                -3.0,
+                                296.0
+                            ],
+                            [
+                                -2.0,
+                                696.0
+                            ],
+                            [
+                                -1.0,
+                                3831.0
+                            ],
+                            [
+                                0,
+                                null
+                            ],
+                            [
+                                1.0,
+                                2205.0
+                            ],
+                            [
+                                2.0,
+                                421.0
+                            ],
+                            [
+                                3.0,
+                                170.0
+                            ],
+                            [
+                                4.0,
+                                102.0
+                            ],
+                            [
+                                5.0,
+                                67.0
+                            ],
+                            [
+                                6.0,
+                                56.0
+                            ],
+                            [
+                                7.0,
+                                32.0
+                            ],
+                            [
+                                8.0,
+                                23.0
+                            ],
+                            [
+                                9.0,
+                                12.0
+                            ],
+                            [
+                                10.0,
+                                13.0
+                            ],
+                            [
+                                11.0,
+                                13.0
+                            ],
+                            [
+                                12.0,
+                                13.0
+                            ],
+                            [
+                                13.0,
+                                10.0
+                            ],
+                            [
+                                14.0,
+                                9.0
+                            ],
+                            [
+                                15.0,
+                                5.0
+                            ],
+                            [
+                                16.0,
+                                5.0
+                            ],
+                            [
+                                17.0,
+                                8.0
+                            ],
+                            [
+                                18.0,
+                                4.0
+                            ],
+                            [
+                                19.0,
+                                2.0
+                            ],
+                            [
+                                20.0,
+                                10.0
+                            ],
+                            [
+                                22.0,
+                                5.0
+                            ],
+                            [
+                                23.0,
+                                4.0
+                            ],
+                            [
+                                24.0,
+                                5.0
+                            ],
+                            [
+                                25.0,
+                                3.0
+                            ],
+                            [
+                                26.0,
+                                5.0
+                            ],
+                            [
+                                27.0,
+                                1.0
+                            ],
+                            [
+                                29.0,
+                                6.0
+                            ],
+                            [
+                                30.0,
+                                4.0
+                            ],
+                            [
+                                31.0,
+                                2.0
+                            ],
+                            [
+                                32.0,
+                                5.0
+                            ],
+                            [
+                                35.0,
+                                1.0
+                            ],
+                            [
+                                36.0,
+                                3.0
+                            ],
+                            [
+                                37.0,
+                                2.0
+                            ],
+                            [
+                                38.0,
+                                1.0
+                            ],
+                            [
+                                39.0,
+                                1.0
+                            ],
+                            [
+                                41.0,
+                                3.0
+                            ],
+                            [
+                                42.0,
+                                2.0
+                            ],
+                            [
+                                43.0,
+                                1.0
+                            ],
+                            [
+                                48.0,
+                                2.0
+                            ],
+                            [
+                                49.0,
+                                2.0
+                            ],
+                            [
+                                52.0,
+                                1.0
+                            ],
+                            [
+                                60.0,
+                                5.0
+                            ]
+                        ]
+                    }
+                ]
+            ],
+            "config": {
+                "id": "bcftools_stats_indel-lengths",
+                "title": "Bcftools Stats: Indel Distribution",
+                "ylab": "Count",
+                "xlab": "InDel Length (bp)",
+                "xDecimals": false,
+                "ymin": 0
+            }
+        },
+        "bcftools_stats_depth": {
+            "plot_type": "xy_line",
+            "datasets": [
+                [
+                    {
+                        "name": "ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf",
+                        "data": []
+                    }
+                ]
+            ],
+            "config": {
+                "id": "bcftools_stats_depth",
+                "title": "Bcftools Stats: Variant depths",
+                "ylab": "Fraction of sites (%)",
+                "xlab": "Variant depth",
+                "ymin": 0,
+                "ymax": 100,
+                "categories": []
+            }
+        },
+        "odgi_sum_of_path_nodes_distances_plot": {
+            "plot_type": "bar_graph",
+            "samples": [
+                [
+                    "seqwish",
+                    "smooth"
+                ],
+                [
+                    "seqwish",
+                    "smooth"
+                ]
+            ],
+            "datasets": [
+                [
+                    {
+                        "name": "Sum of distances: node space",
+                        "data": [
+                            9970.94,
+                            4.0621
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "name": "Sum of distances: nucleotide space",
+                        "data": [
+                            6709.33,
+                            2.9789
+                        ]
+                    }
+                ]
+            ],
+            "config": {
+                "id": "odgi_sum_of_path_nodes_distances_plot",
+                "title": "ODGI: Sum of path node distances",
+                "ylab": "Distance",
+                "yDecimals": false,
+                "cpswitch": false,
+                "logswitch": true,
+                "logswitch_active": true,
+                "data_labels": [
+                    {
+                        "name": "Node space",
+                        "ylab": "Distance"
+                    },
+                    {
+                        "name": "Nucleotide space",
+                        "ylab": "Distance"
+                    }
+                ],
+                "reversedStacks": true
+            }
+        },
+        "odgi_mean_links_length_plot": {
+            "plot_type": "bar_graph",
+            "samples": [
+                [
+                    "seqwish",
+                    "smooth"
+                ],
+                [
+                    "seqwish",
+                    "smooth"
+                ]
+            ],
+            "datasets": [
+                [
+                    {
+                        "name": "Mean links length: node space",
+                        "data": [
+                            4985.43,
+                            1.74909
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "name": "Mean links length: nucleotide space",
+                        "data": [
+                            294911.0,
+                            76.6286
+                        ]
+                    }
+                ]
+            ],
+            "config": {
+                "id": "odgi_mean_links_length_plot",
+                "title": "ODGI: Mean links length",
+                "ylab": "Distance",
+                "yDecimals": false,
+                "cpswitch": false,
+                "logswitch": true,
+                "logswitch_active": true,
+                "data_labels": [
+                    {
+                        "name": "Node space",
+                        "ylab": "Distance"
+                    },
+                    {
+                        "name": "Nucleotide space",
+                        "ylab": "Distance"
+                    }
+                ],
+                "reversedStacks": true
+            }
+        }
+    },
+    "report_saved_raw_data": {
+        "multiqc_bcftools_stats": {
+            "ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf": {
+                "number_of_samples": 0.0,
+                "number_of_records": 17688.0,
+                "number_of_no-ALTs": 0.0,
+                "number_of_SNPs": 8850.0,
+                "number_of_MNPs": 78.0,
+                "number_of_indels": 8811.0,
+                "number_of_others": 89.0,
+                "number_of_multiallelic_sites": 204.0,
+                "number_of_multiallelic_SNP_sites": 26.0,
+                "ts": 2945.0,
+                "tv": 5791.0,
+                "tstv": 0.51,
+                "ts_1st_ALT": 2935.0,
+                "tv_1st_ALT": 5785.0,
+                "tstv_1st_ALT": 0.51,
+                "substitution_type_A>C": 708.0,
+                "substitution_type_A>G": 714.0,
+                "substitution_type_A>T": 722.0,
+                "substitution_type_C>A": 732.0,
+                "substitution_type_C>G": 771.0,
+                "substitution_type_C>T": 716.0,
+                "substitution_type_G>A": 771.0,
+                "substitution_type_G>C": 748.0,
+                "substitution_type_G>T": 707.0,
+                "substitution_type_T>A": 691.0,
+                "substitution_type_T>C": 744.0,
+                "substitution_type_T>G": 712.0
+            }
+        },
+        "multiqc_odgi_stats": {
+            "seqwish": {
+                "length": 2637274.0,
+                "nodes": 37585.0,
+                "edges": 52134.0,
+                "paths": 6.0,
+                "components": 1.0,
+                "A": 640206.0,
+                "C": 667390.0,
+                "T": 645810.0,
+                "G": 683868.0,
+                "N": 0.0,
+                "total": 15.0,
+                "unique": 15.0,
+                "mean_links_length_path": "all_paths",
+                "mean_links_length_in_node_space": 4985.43,
+                "mean_links_length_in_nucleotide_space": 294911,
+                "mean_links_length_num_links_considered": 155215,
+                "mean_links_length_num_gap_links_not_penalized": 0,
+                "sum_of_path_nodes_distances_path": "all_paths",
+                "sum_of_path_nodes_distances_in_node_space": 9970.94,
+                "sum_of_path_nodes_distances_in_nucleotide_space": 6709.33,
+                "sum_of_path_nodes_distances_nodes": 155221,
+                "sum_of_path_nodes_distances_nucleotides": 13646772,
+                "sum_of_path_nodes_distances_num_penalties": 22872,
+                "sum_of_path_nodes_distances_num_penalties_different_orientation": 0,
+                "pct_gc": 51.2369211541918,
+                "pct_n": 0.0
+            },
+            "smooth": {
+                "length": 2510264.0,
+                "nodes": 44674.0,
+                "edges": 62614.0,
+                "paths": 6.0,
+                "components": 1.0,
+                "A": 607655.0,
+                "C": 629939.0,
+                "T": 616789.0,
+                "G": 655881.0,
+                "N": 0.0,
+                "total": 0.0,
+                "unique": 0.0,
+                "mean_links_length_path": "all_paths",
+                "mean_links_length_in_node_space": 1.74909,
+                "mean_links_length_in_nucleotide_space": 76.6286,
+                "mean_links_length_num_links_considered": 189155,
+                "mean_links_length_num_gap_links_not_penalized": 0,
+                "sum_of_path_nodes_distances_path": "all_paths",
+                "sum_of_path_nodes_distances_in_node_space": 4.0621,
+                "sum_of_path_nodes_distances_in_nucleotide_space": 2.9789,
+                "sum_of_path_nodes_distances_nodes": 189161,
+                "sum_of_path_nodes_distances_nucleotides": 13646772,
+                "sum_of_path_nodes_distances_num_penalties": 17987,
+                "sum_of_path_nodes_distances_num_penalties_different_orientation": 0,
+                "pct_gc": 51.222500900303714,
+                "pct_n": 0.0
+            }
+        },
+        "multiqc_general_stats": {
+            "ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf": {
+                "Bcftools Stats_mqc-generalstats-bcftools_stats-number_of_records": 17688.0,
+                "Bcftools Stats_mqc-generalstats-bcftools_stats-number_of_SNPs": 8850.0,
+                "Bcftools Stats_mqc-generalstats-bcftools_stats-number_of_indels": 8811.0,
+                "Bcftools Stats_mqc-generalstats-bcftools_stats-tstv": 0.51,
+                "Bcftools Stats_mqc-generalstats-bcftools_stats-number_of_MNPs": 78.0
+            }
+        }
+    },
+    "config_analysis_dir_abs": [
+        "/nesi/nobackup/ga03793/pg_workshop/output"
+    ],
+    "config_analysis_dir": [
+        "output"
+    ],
+    "config_creation_date": "2023-05-21, 04:37 NZST",
+    "config_git_hash": null,
+    "config_intro_text": null,
+    "config_report_comment": null,
+    "config_report_header_info": null,
+    "config_script_path": "/usr/local/lib/python3.9/dist-packages/multiqc/utils",
+    "config_short_version": "1.13",
+    "config_subtitle": null,
+    "config_title": null,
+    "config_version": "1.13"
+}
