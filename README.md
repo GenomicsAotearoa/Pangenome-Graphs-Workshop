@@ -47,7 +47,7 @@ pwd
 # Genome Data
 
 ### Genome Availability 
-The National Library of Medicine is the largest library focused on biomedicine worldwide, serving as the central hub for biomedical informatics and computational biology. It has many genome assembly data and [ASM684v1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000006845.1/) will be used for this workshop. 
+The National Library of Medicine is the largest library focused on biomedicine worldwide, serving as the central hub for biomedical informatics and computational biology. It has many genome assembly data and [Genome assembly ASM19152v1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000191525.1/) will be used for this workshop. 
 
 ---
 # Procedure 
@@ -63,44 +63,48 @@ Please follow the proedure described in this [page](https://github.com/nuzla/Pan
 
 $ module load SAMtools
 
-$ samtools faidx 4Sim.fa 
+$ samtools faidx ASM19152v1_pgsim.fa 
 
-$ cat 4Sim.fa.fai 
-ref     2153922 5       80      81
-sim3k   2153907 2180859 2153907 2153908
-sim4k   2153912 4334774 2153912 2153913
-sim5k   2153883 6488694 2153883 2153884
+$ $ cat ASM19152v1_pgsim.fa.fai 
+NC_017518.1     2248966 64      80      81
+NC_017518.1_SNP_5000    2248966 2277165 2248966 2248967
+NC_017518.1_INDEL_5000  2249048 4526156 2249048 2249049
+NC_017518.1_SNP_4000_INDEL_4000 2242147 6775238 2242147 2242148
+NC_017518.1_SNP_4000_INDEL_4000_INV_4   2242147 9017425 2242147 2242148
+NC_017518.1_SNP_4000_INDEL_4000_CNV_4   2415498 11259612        2415498 2415499
 ```
 
-As per the index this assembly consists of 4 samples described in the below table. 
+As per the index this assembly consists of 6 samples described in the below table. 
 
-| Name | Length    | SNPs   | INDELs |
-|:-----|----------:|-------:|-------:|
-|ref   | 2,153,922 |     N/A|     N/A|
-|sim3k | 2,153,907 |   3,000|     300|
-|sim4k | 2,153,912 |   4,000|     400|
-|sim5k | 2,153,883 |   5,000|     500|
+| Name                                | Length    | SNPs   | INDELs | INV | CNV |
+|:-----                               |----------:|-------:|-------:|----:|----:|
+|NC_017518.1 (Reference)              | 2,248,966 |     N/A|     N/A| N/A |  N/A|
+|NC_017518.1_SNP_5000                | 2,248,966 |   5,000|       0|   0 |   0 |
+|NC_017518.1_INDEL_5000               | 2,249,048 |       0|   5,000|   0 |   0 |
+|NC_017518.1_SNP_4000_INDEL_4000      | 2,153,883 |   4,000|   4,000|   0 |   0 |
+|NC_017518.1_SNP_4000_INDEL_4000_INV_4| 2,242,147 |   4,000|   4,000|   4 |   0 |
+|NC_017518.1_SNP_4000_INDEL_4000_CNV_4| 2,415,498 |   4,000|   4,000|   0 |   4 |
 
 ### 3. Executing `pggb` tool using Singularity container
 We can follow the procedure in https://github.com/pangenome/pggb#singularity to setup the Singularity image. This is already done and the image is in `/nesi/project/ga03793/software/pggb/` directory for version 0.5.3. 
 
 Following script ([pggb_test.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pggb_test.sh)) can be used to run `pggb` on the downloaded sequence. 
 
-```sh
+```bash
 #!/usr/bin/bash
 module load Singularity
 #export container to a variable for convenience
 WD=/nesi/nobackup/ga03793/pg_workshop #Working Directory
 container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
-data=${WD}/4Sim.fa
+data=${WD}/ASM19152v1_pgsim.fa
 
 #Bind filesystem to container image 
 export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
 
-singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 4 -k 79 -t 2 -S -m -o output -V 'NC_neisseria:#'
+singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 2 -S -m -o output -V 'NC_017518.1:#' 
 ```
 
-In `pggb` `-i` is for specifying the sequence file. `-s` specifies the segment length for mapping and `-p` specifies percent identity for mapping/alignment. `-n` is for number of haplotypes (or number of samples). `-k` for minimum matching length. `-t` says number of threads to be used for the execution. `-S` will generate the stats. `-m` will generate MultiQC report of graphs' statistics and visualizations. `-o` specifies the output directory name. `-V 'NC_neisseria:#'` will create a vcf file and it stats considering NC_neisseria as the reference sequence. 
+In `pggb` `-i` is for specifying the sequence file. `-s` specifies the segment length for mapping and `-p` specifies percent identity for mapping/alignment. `-n` is for number of haplotypes (or number of samples). `-k` for minimum matching length. `-t` says number of threads to be used for the execution. `-S` will generate the stats. `-m` will generate MultiQC report of graphs' statistics and visualizations. `-o` specifies the output directory name. `-V 'NC_017518.1:#'` will create a vcf file and its stats considering NC_017518.1 as the reference sequence. 
 
 ---
 # Executing `pggb` as a [SLURM](https://github.com/SchedMD/slurm) Job
@@ -111,8 +115,8 @@ Executing shell scripts in the Nesi environment might not be the best way to han
 #!/usr/bin/bash
 
 #SBATCH --account       ga03793
-#SBATCH --job-name      4Sim_1K95
-#SBATCH --cpus-per-task 4 
+#SBATCH --job-name      NC_017518.1_1K95
+#SBATCH --cpus-per-task 8 
 #SBATCH --mem           4G
 #SBATCH --time          1:00:00
 
@@ -122,79 +126,79 @@ module load Singularity
 #export container to a variable for convenience
 WD=/nesi/nobackup/ga03793/pg_workshop #Working Directory
 container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
-data=${WD}/4Sim.fa
+data=${WD}/ASM19152v1_pgsim.fa
 
 #Bind filesystem to container image 
 export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
 
-singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 4 -k 79 -t 2 -S -m -o 4Sim_1K95 -V 'NC_neisseria:#' 
+singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 24 -S -m -o output_1K95 -V 'NC_017518.1:#'  
 ```
 
-The job can be submitted using the `sbatch` command it will show a job id. In this case 34588496
+The job can be submitted using the `sbatch` command it will show a job id. In this case 35887085
 
-```bash
-sbatch pggb_slurm_1K95.sh 
-Submitted batch job 34588496
+```
+$ sbatch pggb_slurm_1K95.sh
+Submitted batch job 35887085
 ```
 
 We can monitor the job status using `seff` and `squeue` specifying the job id. 
 
-```bash
-seff 34588496
-Job ID: 34588496
+```
+seff 35887085
+Job ID: 35887085
 Cluster: mahuika
 User/Group: ismnu81p/ismnu81p
 State: RUNNING
 Nodes: 1
-Cores per node: 4
+Cores per node: 8
 CPU Utilized: 00:00:00
-CPU Efficiency: 0.00% of 00:04:56 core-walltime
-Job Wall-clock time: 00:01:14
+CPU Efficiency: 0.00% of 00:04:16 core-walltime
+Job Wall-clock time: 00:00:32
 Memory Utilized: 0.00 MB (estimated maximum)
 Memory Efficiency: 0.00% of 4.00 GB (4.00 GB/node)
 WARNING: Efficiency statistics may be misleading for RUNNING jobs.
 ```
 
-```bash
-squeue --job 34588496
+```
+$ squeue --job 35887085
 JOBID         USER     ACCOUNT   NAME        CPUS MIN_MEM PARTITI START_TIME     TIME_LEFT STATE    NODELIST(REASON)    
-34588496      ismnu81p ga03793   4Sim_1K95      4      4G large   2023-04-20T0       58:10 RUNNING  wbn182
+35887085      ismnu81p ga03793   NC_017518.1_   8      4G large   2023-05-21T0       58:35 RUNNING  wbn063 
 ```
 
 SLURM will also create a output log file and we can monitor it realtime using  `tail -f`. 
 
 ```bash
-tail -f slurm-34588496.out
-[smoothxg::(1-3)::prep] writing graph 4Sim_1K95/4Sim.fa.3541aba.c2fac19.seqwish.gfa.prep.0.gfa
+$ tail -f slurm-35887085.out 
+[smoothxg::(1-3)::prep] writing graph output_1K95/ASM19152v1_pgsim.fa.2ab4142.c2fac19.seqwish.gfa.prep.0.gfa
 [smoothxg::(1-3)::main] building xg index
 [smoothxg::(1-3)::smoothable_blocks] computing blocks
-[smoothxg::(1-3)::smoothable_blocks] computing blocks for 36095 handles: 100.00% @ 7.21e+04/s elapsed: 00:00:00:00 remain: 00:00:00:00
+[smoothxg::(1-3)::smoothable_blocks] computing blocks for 54747 handles: 100.00% @ 5.47e+04/s elapsed: 00:00:00:01 remain: 00:00:00:00
 [smoothxg::(1-3)::break_and_split_blocks] cutting blocks that contain sequences longer than max-poa-length (1400) and depth >= 0
-[smoothxg::(1-3)::break_and_split_blocks] splitting 3459 blocks at identity 0.950 (WFA-based clustering) and at estimated-identity 0.950 (mash-based clustering)
-[smoothxg::(1-3)::break_and_split_blocks] cutting and splitting 3459 blocks: 100.00% @ 1.37e+04/s elapsed: 00:00:00:00 remain: 00:00:00:00
+[smoothxg::(1-3)::break_and_split_blocks] splitting 3862 blocks at identity 0.950 (WFA-based clustering) and at estimated-identity 0.950 (mash-based clustering)
+[smoothxg::(1-3)::break_and_split_blocks] cutting and splitting 3862 blocks: 100.00% @ 1.49e+04/s elapsed: 00:00:00:00 remain: 00:00:00:00
 [smoothxg::(1-3)::break_and_split_blocks] cut 0 blocks of which 0 had repeats
 [smoothxg::(1-3)::break_and_split_blocks] split 0 blocks
-[smoothxg::(1-3)::smooth_and_lace] applying local SPOA to 3459 blocks: 21.97% @ 2.91e+01/s elapsed: 00:00:00:26 remain: 00:00:01:32
+[smoothxg::(1-3)::smooth_and_lace] applying local SPOA to 3862 blocks: 78.40% @ 5.77e+01/s elapsed: 00:00:00:52 remain: 00:00:00:14
 ```
 
-When the job is completed the `seff` command will show a summary report with below details. The job has used 147.44 MB memory and taken 8 minuted and 25 seconds to complete. 
+When the job is completed the `seff` command will show a summary report with below details. The job has used 785.61 MB memory and taken 7 minuted and 50 seconds to complete. 
 
-```bash
-seff 34588496
-Job ID: 34588496
+```
+$ seff 35887085
+Job ID: 35887085
 Cluster: mahuika
 User/Group: ismnu81p/ismnu81p
 State: COMPLETED (exit code 0)
 Nodes: 1
-Cores per node: 4
-CPU Utilized: 00:15:20
-CPU Efficiency: 45.54% of 00:33:40 core-walltime
-Job Wall-clock time: 00:08:25
-Memory Utilized: 147.44 MB
-Memory Efficiency: 3.60% of 4.00 GB
+Cores per node: 8
+CPU Utilized: 00:41:23
+CPU Efficiency: 66.04% of 01:02:40 core-walltime
+Job Wall-clock time: 00:07:50
+Memory Utilized: 785.61 MB
+Memory Efficiency: 19.18% of 4.00 GB
 ```
 
-Now we can try the same script by changing the `pggb` parameters `-s`, `-p` and `-k` and compare the results. 
+Now we can try the same script by changing the `pggb` parameters `-s`, `-p` and `-k` and compare the results. Please refer [script folder](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Scripts) for scripts. 
 
 ---
 # MultiQC Report
@@ -205,41 +209,45 @@ _Note: To download the output folder from the Nesi environment you can first zip
 ## Graph Viszualization Details (`-s 1000`, `-p 95`)
 
 ### ODGI Compressed 1D visualization
-![ODGI Compressed 1D visualization](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.viz_O_multiqc.png?raw=true)
+![ODGI Compressed 1D visualization](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/OutputASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_O_multiqc.png?raw=true)
 
 ### ODGI 1D visualization
-![ODGI 1D visualization](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.viz_multiqc.png?raw=true)
+![ODGI 1D visualization](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_multiqc.png?raw=true)
 
 ### ODGI 1D visualization by path position
 ![ODGI 1D visualization by path position](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.viz_pos_multiqc.png?raw=true)
 
 ### ODGI 1D visualization by path orientation
-![ODGI 1D visualization by path orientation](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.viz_inv_multiqc.png?raw=true)
+![ODGI 1D visualization by path orientation](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_inv_multiqc.png?raw=true)
 
 ### ODGI 1D visualization by node depth
-![ODGI 1D visualization by node depth](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.viz_depth_multiqc.png?raw=true)
+![ODGI 1D visualization by node depth](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_depth_multiqc.png?raw=true)
 
 ### ODGI 1D visualization by uncalled bases
-![ODGI 1D visualization by uncalled bases](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.viz_uncalled_multiqc.png?raw=true)
+![ODGI 1D visualization by uncalled bases](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_uncalled_multiqc.png?raw=true)
 
 ### ODGI 2D drawing
-![ODGI 2D drawing](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.lay.draw.png?raw=true)
+![ODGI 2D drawing](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.lay.draw.png?raw=true)
 
 # SNP Analysis using the VCF file (`-s 1000`)
 
 ### How `pggb` creates VCF file?
-As explained in a previuse section we sepcified the option `-V 'NC_neisseria:#'`. That will execute the command,
+As explained in a previouse section we sepcified the option `-V 'NC_017518.1:#'`. That will execute the command,
 ```
-vg deconstruct -P NC_neisseria -H # -e -a -t 2 output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa
+vg deconstruct -P NC_017518.1 -H # -e -a -t 2 output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.gfa
 ```
-You can see it in the [Log File](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.04-20-2023_02_56_38.log) line 296. 
+You can see it in the [Log File](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.05-21-2023_04_21_52.log) line 279. 
 
 
 
 ### Finding stats of the VCF file
 `bcftools stats <file.vcf>` command will display the all the stats related to the VCF file. 
 
-### SNP Comaprison
+### Variant Call Comaprison
+
+#### 1. Ground truth vs linear reference
+
+
 
 #### 1. Linear Reference VCF vs PGGB Graph VCF.
 
