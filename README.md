@@ -209,13 +209,13 @@ _Note: To download the output folder from the Nesi environment you can first zip
 ## Graph Viszualization Details (`-s 1000`, `-p 95`)
 
 ### ODGI Compressed 1D visualization
-![ODGI Compressed 1D visualization](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/OutputASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_O_multiqc.png?raw=true)
+![ODGI Compressed 1D visualization](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_O_multiqc.png?raw=true)
 
 ### ODGI 1D visualization
 ![ODGI 1D visualization](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_multiqc.png?raw=true)
 
 ### ODGI 1D visualization by path position
-![ODGI 1D visualization by path position](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.og.viz_pos_multiqc.png?raw=true)
+![ODGI 1D visualization by path position](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_pos_multiqc.png?raw=true)
 
 ### ODGI 1D visualization by path orientation
 ![ODGI 1D visualization by path orientation](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_inv_multiqc.png?raw=true)
