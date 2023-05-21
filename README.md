@@ -288,7 +288,7 @@ Now repeat the procedure for Identity 90% and 95%.
 |90%     |         10,041   |           8,606|               8,546|                   60|                    |                1,495|       85.11%|            |
 |95%     |         10,041   |           8,678|               8,617|                   61|                    |                1,424|       85.81%|            |
 |98%     |         10,041   |           8,617|               8,553|                   64|                    |                1,488|       85.18%|            |
---!>
+-->
 # PanGenome Graph Evaluator
 ---
 ## Executing pgge tool using Singularity container
