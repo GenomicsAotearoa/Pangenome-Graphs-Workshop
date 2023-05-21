@@ -231,20 +231,73 @@ _Note: To download the output folder from the Nesi environment you can first zip
 
 # Variant Call Analysis using the VCF file (`-s 1000`)
 
-### How `pggb` creates VCF file?
-As explained in a previouse section we sepcified the option `-V 'NC_017518.1:#'`. That will execute the command,
-```
-vg deconstruct -P NC_017518.1 -H # -e -a -t 2 output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.gfa
-```
-You can see it in the [Log File](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.05-21-2023_04_21_52.log) line 279. 
-
 ### Finding stats of the VCF file
 `bcftools stats <file.vcf>` command will display the all the stats related to the VCF file. 
 
 ### Variant Call Comaprison
 
-#### 1. Ground truth vs linear reference
+#### 1. Creating VCF file using linear method
 The procedure described in [this page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/linear_reference_vc.md) can be used to find linear reference based stats. 
+
+#### 2. Creating VCF file using graph method
+_**This section work in progress**_
+
+As explained in a previouse section we sepcified the option `-V 'NC_017518.1:#'`. That will execute the command,
+```
+vg deconstruct -P NC_017518.1 -H # -e -a -t 2 output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.gfa
+```
+You can see it in the [Log File](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.05-21-2023_04_21_52.log) line 279.
+
+### Sample wise stats
+
+_**This section work in progress**_
+
+#### 1. NC_017518.1_SNP_5000 (2,248,966)
+
+|Type	        |    SNP	    |  INDEL	 |    INV	  |    CNV	 |   Total	  |    TP	   |    TN	   |    FP	   |     FN	   |  Sensitivity	| Specificity |
+|---------:   |---------:  |--------:|---------:|--------:|---------: |---------:|---------:| --------:|--------:  |---------:    |--------:    |
+|Ground Truth |    5,000	  |  0    	 |    0  	  |    0  	 |   5,000	  |      	   |      	   |      	   |      	    |   	          |             |
+|Linear Method|    5,000	  |  0    	 |    0  	  |    0  	 |   5,000	  |      	   |      	   |      	   |      	    |   	          |             |
+|pggb (95%)   |         	  |       	 |       	  |       	 |           |      	   |      	   |      	   |      	    |   	          |             |
+|pggb (98%)   |         	  |       	 |       	  |       	 |           |      	   |      	   |      	   |      	    |   	          |             |
+
+#### 2. NC_017518.1_INDEL_5000	(2,249,048)
+
+
+|Type	        |    SNP	    |  INDEL	 |    INV	  |    CNV	 |   Total	  |    TP	   |    TN	   |    FP	   |     FN	   |  Sensitivity	| Specificity |
+|---------:   |---------:  |--------:|---------:|--------:|---------: |---------:|---------:| --------:|--------:  |---------:    |--------:    |
+|Ground Truth |       0 	  |  5,000	 |    0  	  |    0  	 |   5,000	  |      	   |      	   |      	   |      	    |   	          |             |
+|Linear Method|    329  	  |  3,977 	|    0  	  |    0  	 |   4,306	  |      	   |      	   |      	   |      	    |   	          |             |
+|pggb (95%)   |         	  |       	 |       	  |       	 |           |      	   |      	   |      	   |      	    |   	          |             |
+|pggb (98%)   |         	  |       	 |       	  |       	 |           |      	   |      	   |      	   |      	    |   	          |             |
+
+#### 3. NC_017518.1_SNP_4000_INDEL_4000 (2,153,883)
+
+|Type	        |    SNP	    |  INDEL	 |    INV	  |    CNV	 |   Total	  |    TP	   |    TN	   |    FP	   |     FN	   |  Sensitivity	| Specificity |
+|---------:   |---------:  |--------:|---------:|--------:|---------: |---------:|---------:| --------:|--------:  |---------:    |--------:    |
+|Ground Truth |    4,000	  |  4,000  |    0  	  |    0  	 |   8,000	  |      	   |      	   |      	   |      	    |   	          |             |
+|Linear Method|    4,022	  |  3,282  |    0  	  |    0  	 |   7,304	  |      	   |      	   |      	   |      	    |   	          |             |
+|pggb (95%)   |         	  |       	 |       	  |       	 |           |      	   |      	   |      	   |      	    |   	          |             |
+|pggb (98%)   |         	  |       	 |       	  |       	 |           |      	   |      	   |      	   |      	    |   	          |             |
+
+#### 4. NC_017518.1_SNP_4000_INDEL_4000_INV_4	(2,242,147)
+
+|Type	        |    SNP	    |  INDEL	 |    INV	  |    CNV	 |   Total	  |    TP	   |    TN	   |    FP	   |     FN	   |  Sensitivity	| Specificity |
+|---------:   |---------:  |--------:|---------:|--------:|---------: |---------:|---------:| --------:|--------:  |---------:    |--------:    |
+|Ground Truth |    4,000	  |  4,000  |    4  	  |    0  	 |   8,000	  |      	   |      	   |      	   |      	    |   	          |             |
+|Linear Method|    4,021	  |  3,282  |    0  	  |    0  	 |   7,303	  |      	   |      	   |      	   |      	    |   	          |             |
+|pggb (95%)   |         	  |       	 |       	  |       	 |           |      	   |      	   |      	   |      	    |   	          |             |
+|pggb (98%)   |         	  |       	 |       	  |       	 |           |      	   |      	   |      	   |      	    |   	          |             |
+
+#### 5. NC_017518.1_SNP_4000_INDEL_4000_CNV_4	(2,415,498)
+
+|Type	        |    SNP	    |  INDEL	 |    INV	  |    CNV	 |   Total	  |    TP	   |    TN	   |    FP	   |     FN	   |  Sensitivity	| Specificity |
+|---------:   |---------:  |--------:|---------:|--------:|---------: |---------:|---------:| --------:|--------:  |---------:    |--------:    |
+|Ground Truth |    4,000	  |  4,000  |    0  	  |    4  	 |   8,000	  |      	   |      	   |      	   |      	    |   	          |             |
+|Linear Method|    4,111   |  3,247  |    0  	  |    0  	 |   7,358	  |      	   |      	   |      	   |      	    |   	          |             |
+|pggb (95%)   |         	  |       	 |       	  |       	 |           |      	   |      	   |      	   |      	    |   	          |             |
+|pggb (98%)   |         	  |       	 |       	  |       	 |           |      	   |      	   |      	   |      	    |   	          |             |
+
 
 <!---
 #### 1. Linear Reference VCF vs PGGB Graph VCF.
