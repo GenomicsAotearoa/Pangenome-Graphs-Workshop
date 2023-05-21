@@ -7,38 +7,47 @@ module load BCFtools/1.9-GCC-7.4.0
 module load SAMtools/1.9-GCC-7.4.0
 module load BWA/0.7.17-GCC-9.2.0
 
-mkdir SNP
+mkdir VC_compare
+cd VC_compare
 
-#Splitting the 4Sim.fa dataset into four files
-samtools faidx 4Sim.fa NC_neisseria > ./SNP/NC_neisseria.fa
-samtools faidx 4Sim.fa Sim1_3k > ./SNP/Sim1_3k.fa
-samtools faidx 4Sim.fa Sim2_4k > ./SNP/Sim2_4k.fa
-samtools faidx 4Sim.fa Sim3_5k > ./SNP/Sim3_5k.fa
-cd SNP/
+#Copy the below files into the folder
+$ ls -1trhs
+total 14M
+2.3M GCF_000191525.1_ASM19152v1_genomic.fna
+2.3M Simulation_INDEL_5000.simseq.genome.fa
+2.5M Simulation_SNP_4000_INDEL_4000_CNV_4.simseq.genome.fa
+2.3M Simulation_SNP_4000_INDEL_4000_INV_4.simseq.genome.fa
+2.3M Simulation_SNP_4000_INDEL_4000.simseq.genome.fa
+2.3M Simulation_SNP_5000.simseq.genome.fa
 
 #indexing the reference sample
-bwa index NC_neisseria.fa 
+bwa index GCF_000191525.1_ASM19152v1_genomic.fna 
 
-#creating VCF files for each sample file considering NC_neisseria.fa as reference
-bwa mem -R "@RG\tID:Sim1_3k\tSM:Sim1_3k\tLB:L1" NC_neisseria.fa Sim1_3k.fa > Sim1_3k.sam
-samtools view -bS Sim1_3k.sam | samtools sort - > Sim1_3k.bam
-bcftools mpileup -Ou -f NC_neisseria.fa Sim1_3k.bam | bcftools call -vmO z -o Sim1_3k.vcf.gz
-bcftools index Sim1_3k.vcf.gz 
+#creating VCF files for each sample file considering GCF_000191525.1_ASM19152v1_genomic.fna as reference
+#export OMP_NUM_THREADS=1
+bwa mem -R "@RG\tID:Simulation_SNP_5000\tSM:Simulation_SNP_5000\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_5000.simseq.genome.fa > Simulation_SNP_5000.sam
+samtools view -bS Simulation_SNP_5000.sam | samtools sort - > Simulation_SNP_5000.bam
+bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_5000.bam | bcftools call -vmO z -o Simulation_SNP_5000.vcf.gz
+bcftools index Simulation_SNP_5000.vcf.gz 
 
-bwa mem -R "@RG\tID:Sim2_4k\tSM:Sim2_4k\tLB:L1" NC_neisseria.fa Sim2_4k.fa > Sim2_4k.sam
-samtools view -bS Sim2_4k.sam | samtools sort - > Sim2_4k.bam
-bcftools mpileup -Ou -f NC_neisseria.fa Sim2_4k.bam | bcftools call -vmO z -o Sim2_4k.vcf.gz
-bcftools index Sim2_4k.vcf.gz 
+bwa mem -R "@RG\tID:Simulation_INDEL_5000\tSM:Simulation_INDEL_5000\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_INDEL_5000.simseq.genome.fa > Simulation_INDEL_5000.sam
+samtools view -bS Simulation_INDEL_5000.sam | samtools sort - > Simulation_INDEL_5000.bam
+bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_INDEL_5000.bam | bcftools call -vmO z -o Simulation_INDEL_5000.vcf.gz
+bcftools index Simulation_INDEL_5000.vcf.gz 
 
-bwa mem -R "@RG\tID:Sim3_5k\tSM:Sim3_5k\tLB:L1" NC_neisseria.fa Sim3_5k.fa > Sim3_5k.sam
-samtools view -bS Sim3_5k.sam | samtools sort - > Sim3_5k.bam
-bcftools mpileup -Ou -f NC_neisseria.fa Sim3_5k.bam | bcftools call -vmO z -o Sim3_5k.vcf.gz
-bcftools index Sim3_5k.vcf.gz 
+bwa mem -R "@RG\tID:Simulation_SNP_4000_INDEL_4000\tSM:Simulation_SNP_4000_INDEL_4000\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000.simseq.genome.fa > Simulation_SNP_4000_INDEL_4000.sam
+samtools view -bS Simulation_SNP_4000_INDEL_4000.sam | samtools sort - > Simulation_SNP_4000_INDEL_4000.bam
+bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000.bam | bcftools call -vmO z -o Simulation_SNP_4000_INDEL_4000.vcf.gz
+bcftools index Simulation_SNP_4000_INDEL_4000.vcf.gz
 
-#merging the sample three VCF outputs one VCF file
-bcftools merge -O v -o 4Sim.vcf Sim1_3k.vcf.gz Sim2_4k.vcf.gz Sim3_5k.vcf.gz
+bwa mem -R "@RG\tID:Simulation_SNP_4000_INDEL_4000_INV_4\tSM:Simulation_SNP_4000_INDEL_4000_INV_4\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000_INV_4.simseq.genome.fa > Simulation_SNP_4000_INDEL_4000_INV_4.sam
+samtools view -bS Simulation_SNP_4000_INDEL_4000_INV_4.sam | samtools sort - > Simulation_SNP_4000_INDEL_4000_INV_4.bam
+bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000_INV_4.bam | bcftools call -vmO z -o Simulation_SNP_4000_INDEL_4000_INV_4.vcf.gz
+bcftools index Simulation_SNP_4000_INDEL_4000_INV_4.vcf.gz
 
-#Find the variants stats
-bcftools stats 4Sim.vcf > 4Sim.vcf.stats
+bwa mem -R "@RG\tID:Simulation_SNP_4000_INDEL_4000_CNV_4\tSM:Simulation_SNP_4000_INDEL_4000_CNV_4\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000_CNV_4.simseq.genome.fa > Simulation_SNP_4000_INDEL_4000_CNV_4.sam
+samtools view -bS Simulation_SNP_4000_INDEL_4000_CNV_4.sam | samtools sort - > Simulation_SNP_4000_INDEL_4000_CNV_4.bam
+bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000_CNV_4.bam | bcftools call -vmO z -o Simulation_SNP_4000_INDEL_4000_CNV_4.vcf.gz
+bcftools index Simulation_SNP_4000_INDEL_4000_CNV_4.vcf.gz
 
 ```
