@@ -280,7 +280,6 @@ Specificity & = \frac{TN}{TN+FP} \\
 
 \end{aligned}
 ```
----> True Negative Should be calculated <---
 Now repeat the procedure for Identity 90% and 95%. 
 
 |Identity| Linear Ref SNP   | PGGB Graph SNP | True Positive (TP) | False Positive (FP) | True Negative (TN) | False Negative (FN) | Sensitivity | Specifisity|
