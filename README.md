@@ -246,7 +246,7 @@ You can see it in the [Log File](https://github.com/nuzla/Pangenome-Graphs-Works
 #### 1. Ground truth vs linear reference
 The procedure described in [this page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/linear_reference_vc.md) can be used to find linear reference based stats. 
 
-
+<!---
 #### 1. Linear Reference VCF vs PGGB Graph VCF.
 
 The procedure described in [this page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/linear_reference_vc.md) can be used to find linear reference based stats and `bcftools isec` can be used to compare VCF files. 
@@ -288,7 +288,7 @@ Now repeat the procedure for Identity 90% and 95%.
 |90%     |         10,041   |           8,606|               8,546|                   60|                    |                1,495|       85.11%|            |
 |95%     |         10,041   |           8,678|               8,617|                   61|                    |                1,424|       85.81%|            |
 |98%     |         10,041   |           8,617|               8,553|                   64|                    |                1,488|       85.18%|            |
-
+--!>
 # PanGenome Graph Evaluator
 ---
 ## Executing pgge tool using Singularity container
