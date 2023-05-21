@@ -52,7 +52,7 @@ bcftools index Simulation_SNP_4000_INDEL_4000_CNV_4.vcf.gz
 
 ```
 
-Now we can find the varient call stats using `bcftools stats`. 
+Now we can find the variant call stats using `bcftools stats`. 
 
 ```
 $ bcftools stats Simulation_SNP_5000.vcf.gz | head -30
