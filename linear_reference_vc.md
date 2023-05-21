@@ -54,7 +54,7 @@ bcftools index Simulation_SNP_4000_INDEL_4000_CNV_4.vcf.gz
 
 Now we can find the varient call stats using `bcftools stats`. 
 
-```bash
+```
 $ bcftools stats Simulation_SNP_5000.vcf.gz | head -30
 # This file was produced by bcftools stats (1.9+htslib-1.9) and can be plotted using plot-vcfstats.
 # The command line was: bcftools stats  Simulation_SNP_5000.vcf.gz
