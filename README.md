@@ -357,10 +357,8 @@ _This section work in progress_
 ```math
 \begin{aligned}
 Sensitivity  & = \frac{TP}{TP+FN} \\
-              &  = \frac{8553}{8553+1488} \\
-              & = 85.18\% \\ \\
+ \\
 Specificity & = \frac{TN}{TN+FP} \\
-
 \end{aligned}
 ```
 
