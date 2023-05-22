@@ -240,8 +240,6 @@ _Note: To download the output folder from the Nesi environment you can first zip
 The procedure described in [this page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/linear_reference_vc.md) can be used to find linear reference based stats. 
 
 #### 2. Creating VCF file using graph method
-_**This section work in progress**_
-
 As explained in a previouse section we sepcified the option `-V 'NC_017518.1:#'`. That will execute the command,
 ```
 vg deconstruct -P NC_017518.1 -H # -e -a -t 2 output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.gfa
