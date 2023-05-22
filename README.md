@@ -307,7 +307,7 @@ NC_017518.1     814     >11>14  A       T       60      .       AC=3;AF=0.6;AN=5
 NC_017518.1     872     >14>16  AG      A       60      .       AC=3;AF=0.6;AN=5;AT=>14>15>16,>14>16;NS=5;LV=0  GT      0       1       1       1       0
 NC_017518.1     965     >16>19  A       C       60      .       AC=1;AF=0.2;AN=5;AT=>16>17>19,>16>18>19;NS=5;LV=0       GT      0       0       0       0       1
 ```
-For viewing stats belongs to each path or sample we have to use some sample filter and non-variant row filter using the option `--min-ac=1`. To get the stats about the sample NC_017518.1_INDEL_5000 only we have use the below syntax.
+For viewing stats belongs to each path or sample we have to use some sample filter and non-variant row filter using the option `--min-ac=1`. To get the stats about the sample NC_017518.1_SNP_5000 only we have use the below syntax.
 
 ```
 $ bcftools view -s NC_017518.1_SNP_5000 --min-ac=1 ASM19152v1_pgsim.fa.smooth.final.NC_017518.1.vcf | bcftools stats - | less 
@@ -352,7 +352,17 @@ SiS     0       1       4859    1614    3245    0       0       0       0
 
 ### Sample wise stats
 
-_**This section work in progress**_
+_This section work in progress_
+
+```math
+\begin{aligned}
+Sensitivity  & = \frac{TP}{TP+FN} \\
+              &  = \frac{8553}{8553+1488} \\
+              & = 85.18\% \\ \\
+Specificity & = \frac{TN}{TN+FP} \\
+
+\end{aligned}
+```
 
 #### 1. NC_017518.1_SNP_5000 (2,248,966)
 
