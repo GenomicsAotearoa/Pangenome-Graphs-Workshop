@@ -248,6 +248,108 @@ vg deconstruct -P NC_017518.1 -H # -e -a -t 2 output/ASM19152v1_pgsim.fa.2ab4142
 ```
 You can see it in the [Log File](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.05-21-2023_04_21_52.log) line 279.
 
+The generated VCF file is availble in the output folder. 
+
+```
+$ ls -1sh output/*.vcf
+5.3M output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf
+
+$ less output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf
+##fileformat=VCFv4.2
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##INFO=<ID=AC,Number=A,Type=Integer,Description="Total number of alternate alleles in called genotypes">
+##INFO=<ID=AF,Number=A,Type=Float,Description="Estimated allele frequency in the range (0,1]">
+##INFO=<ID=NS,Number=1,Type=Integer,Description="Number of samples with data">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+##INFO=<ID=LV,Number=1,Type=Integer,Description="Level in the snarl tree (0=top level)">
+##INFO=<ID=PS,Number=1,Type=String,Description="ID of variant corresponding to parent snarl">
+##INFO=<ID=AT,Number=R,Type=String,Description="Allele Traversal as path in graph">
+##contig=<ID=NC_017518.1_INDEL_5000,length=2249048>
+##contig=<ID=NC_017518.1_SNP_4000_INDEL_4000_INV_4,length=2242147>
+##contig=<ID=NC_017518.1,length=2248966>
+##contig=<ID=NC_017518.1_SNP_4000_INDEL_4000_CNV_4,length=2415498>
+##contig=<ID=NC_017518.1_SNP_5000,length=2248966>
+##contig=<ID=NC_017518.1_SNP_4000_INDEL_4000,length=2242147>
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT
+NC_017518.1     195     >1>4    T       G       60      .       AC=0;AF=0;AN=0;AT=>1>3>4,>1>2>4;NS=0;LV=0       GT
+NC_017518.1     295     >4>6    G       GATCTACCCTGCTA  60      .       AC=0;AF=0;AN=0;AT=>4>6,>4>5>6;NS=0;LV=0 GT
+NC_017518.1     315     >6>9    C       A       60      .       AC=0;AF=0;AN=0;AT=>6>8>9,>6>7>9;NS=0;LV=0       GT
+NC_017518.1     737     >9>11   A       AG      60      .       AC=0;AF=0;AN=0;AT=>9>11,>9>10>11;NS=0;LV=0      GT
+NC_017518.1     814     >11>14  A       T       60      .       AC=0;AF=0;AN=0;AT=>11>13>14,>11>12>14;NS=0;LV=0 GT
+NC_017518.1     872     >14>16  AG      A       60      .       AC=0;AF=0;AN=0;AT=>14>15>16,>14>16;NS=0;LV=0    GT
+NC_017518.1     965     >16>19  A       C       60      .       AC=0;AF=0;AN=0;AT=>16>17>19,>16>18>19;NS=0;LV=0 GT
+NC_017518.1     981     >19>21  TGG     T       60      .       AC=0;AF=0;AN=0;AT=>19>20>21,>19>21;NS=0;LV=0    GT
+NC_017518.1     1485    >21>24  C       T       60      .       AC=0;AF=0;AN=0;AT=>21>23>24,>21>22>24;NS=0;LV=0 GT
+```
+
+But for our analysis we need path wise information belong to each sample. So we will rerun the `vg deconstruct` with some different parameters. 
+
+```
+$ vg deconstruct -p NC_017518.1 -a -e -K output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.gfa > ASM19152v1_pgsim.fa.smooth.final.NC_017518.1.vcf
+
+$ less ASM19152v1_pgsim.fa.smooth.final.NC_017518.1.vcf
+##fileformat=VCFv4.2
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##INFO=<ID=AC,Number=A,Type=Integer,Description="Total number of alternate alleles in called genotypes">
+##INFO=<ID=AF,Number=A,Type=Float,Description="Estimated allele frequency in the range (0,1]">
+##INFO=<ID=NS,Number=1,Type=Integer,Description="Number of samples with data">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+##INFO=<ID=LV,Number=1,Type=Integer,Description="Level in the snarl tree (0=top level)">
+##INFO=<ID=PS,Number=1,Type=String,Description="ID of variant corresponding to parent snarl">
+##INFO=<ID=AT,Number=R,Type=String,Description="Allele Traversal as path in graph">
+##contig=<ID=NC_017518.1,length=2248966>
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  NC_017518.1_INDEL_5000  NC_017518.1_SNP_4000_INDEL_4000 NC_017518.1_SNP_4000_INDEL_4000_CNV_4   NC_017518.1_SNP_4000_INDEL_4000_INV_4   NC_017518.1_SNP_5000
+NC_017518.1     195     >1>4    T       G       60      .       AC=3;AF=0.6;AN=5;AT=>1>3>4,>1>2>4;NS=5;LV=0     GT      0       1       1       1       0
+NC_017518.1     295     >4>6    G       GATCTACCCTGCTA  60      .       AC=1;AF=0.2;AN=5;AT=>4>6,>4>5>6;NS=5;LV=0       GT      1       0       0       0       0
+NC_017518.1     315     >6>9    C       A       60      .       AC=1;AF=0.2;AN=5;AT=>6>8>9,>6>7>9;NS=5;LV=0     GT      0       0       0       0       1
+NC_017518.1     737     >9>11   A       AG      60      .       AC=1;AF=0.2;AN=5;AT=>9>11,>9>10>11;NS=5;LV=0    GT      1       0       0       0       0
+NC_017518.1     814     >11>14  A       T       60      .       AC=3;AF=0.6;AN=5;AT=>11>13>14,>11>12>14;NS=5;LV=0       GT      0       1       1       1       0
+NC_017518.1     872     >14>16  AG      A       60      .       AC=3;AF=0.6;AN=5;AT=>14>15>16,>14>16;NS=5;LV=0  GT      0       1       1       1       0
+NC_017518.1     965     >16>19  A       C       60      .       AC=1;AF=0.2;AN=5;AT=>16>17>19,>16>18>19;NS=5;LV=0       GT      0       0       0       0       1
+```
+For viewing stats belongs to each path or sample we have to use some sample filter and non-variant row filter using the option `--min-ac=1`. To get the stats about the sample NC_017518.1_INDEL_5000 only we have use the below syntax.
+
+```
+$ bcftools view -s NC_017518.1_SNP_5000 --min-ac=1 ASM19152v1_pgsim.fa.smooth.final.NC_017518.1.vcf | bcftools stats - | less 
+# This file was produced by bcftools stats (1.9+htslib-1.9) and can be plotted using plot-vcfstats.
+# The command line was: bcftools stats  -
+#
+# Definition of sets:
+# ID    [2]id   [3]tab-separated file names
+ID      0       <STDIN>
+# SN, Summary numbers:
+#   number of records   .. number of data rows in the VCF
+#   number of no-ALTs   .. reference-only sites, ALT is either "." or identical to REF
+#   number of SNPs      .. number of rows with a SNP
+#   number of MNPs      .. number of rows with a MNP, such as CC>TT
+#   number of indels    .. number of rows with an indel
+#   number of others    .. number of rows with other type, for example a symbolic allele or
+#                          a complex substitution, such as ACT>TCGA
+#   number of multiallelic sites     .. number of rows with multiple alternate alleles
+#   number of multiallelic SNP sites .. number of rows with multiple alternate alleles, all SNPs
+# 
+#   Note that rows containing multiple types will be counted multiple times, in each
+#   counter. For example, a row with a SNP and an indel increments both the SNP and
+#   the indel counter.
+# 
+# SN    [2]id   [3]key  [4]value
+SN      0       number of samples:      1
+SN      0       number of records:      4991
+SN      0       number of no-ALTs:      0
+SN      0       number of SNPs: 4950
+SN      0       number of MNPs: 46
+SN      0       number of indels:       80
+SN      0       number of others:       12
+SN      0       number of multiallelic sites:   121
+SN      0       number of multiallelic SNP sites:       26
+# TSTV, transitions/transversions:
+# TSTV  [2]id   [3]ts   [4]tv   [5]ts/tv        [6]ts (1st ALT) [7]tv (1st ALT) [8]ts/tv (1st ALT)
+TSTV    0       1618    3255    0.50    1608    3249    0.49
+# SiS, Singleton stats:
+# SiS   [2]id   [3]allele count [4]number of SNPs       [5]number of transitions        [6]number of transversions      [7]number of indels     [8]repeat-consistent    [9]repeat-inconsistent  [10]not applicable
+SiS     0       1       4859    1614    3245    0       0       0       0
+```
+
 ### Sample wise stats
 
 _**This section work in progress**_
