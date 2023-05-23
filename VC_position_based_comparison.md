@@ -37,7 +37,7 @@ output_SNP_5000_linear/0002.vcf for records from Simulation_SNP_5000.refseq2sims
 output_SNP_5000_linear/0003.vcf for records from Simulation_SNP_5000.linear.vcf.gz shared by both       Simulation_SNP_5000.refseq2simseq.SNP.vcf.gz Simulation_SNP_5000.linear.vcf.gz
 ```
 
-As per this 0002.vcf file should have the True Positive (TP) stats. 
+As per this explnation, 0002.vcf file should have the True Positive (TP) stats. 
 
 ```
 $ bcftools stats output_SNP_5000_linear/0002.vcf | less
@@ -79,4 +79,93 @@ TSTV    0       1658    3342    0.50    1658    3342    0.50
 # SiS   [2]id   [3]allele count [4]number of SNPs       [5]number of transitions        [6]number of transversions      [7]number of indels     [8]repeat-consistent    [9]repeat-inconsistent  [10]not applicable
 SiS     0       1       5000    1658    3342    0       0       0       0
 ```
+
+As explain in the main page we have apply some filtering to exatract the VCF related to one sample and  then compare. 
+
+```bash
+#for 95
+bcftools view -s NC_017518.1_SNP_5000 --min-ac=1 pggb_1k95_NC_017518.1.vcf  >  Simulation_SNP_5000.graph95.vcf 
+bgzip Simulation_SNP_5000.graph95.vcf
+bcftools index Simulation_SNP_5000.graph95.vcf
+bcftools index Simulation_SNP_5000.graph95.vcf.gz 
+bcftools isec -c none -p output_SNP_5000_graph95 Simulation_SNP_5000.refseq2simseq.SNP.vcf.gz Simulation_SNP_5000.graph95.vcf.gz
+
+#for 98
+bcftools view -s NC_017518.1_SNP_5000 --min-ac=1 pggb_1k98_NC_017518.1.vcf  >  Simulation_SNP_5000.graph98.vcf
+bgzip Simulation_SNP_5000.graph98.vcf
+bcftools index Simulation_SNP_5000.graph98.vcf
+bcftools index Simulation_SNP_5000.graph98.vcf.gz 
+bcftools isec -c none -p output_SNP_5000_graph98 Simulation_SNP_5000.refseq2simseq.SNP.vcf.gz Simulation_SNP_5000.graph98.vcf.gz
+```
+
+When simulating multiple types of variants using simuG tool it creates multiple VCF files as well. We need to merge them and create one VCF file before comapring. For an example for the simulated sample NC_017518.1_SNP_4000_INDEL_4000, 
+
+```
+$ ls -1hs Simulation_SNP_4000_INDEL_4000.*
+768K Simulation_SNP_4000_INDEL_4000.refseq2simseq.INDEL.vcf
+768K Simulation_SNP_4000_INDEL_4000.refseq2simseq.map.txt
+768K Simulation_SNP_4000_INDEL_4000.refseq2simseq.SNP.vcf
+2.3M Simulation_SNP_4000_INDEL_4000.simseq.genome.fa
+```
+
+zip the files and making indexes. 
+
+```
+$ bgzip Simulation_SNP_4000_INDEL_4000.refseq2simseq.INDEL.vcf
+$ bgzip Simulation_SNP_4000_INDEL_4000.refseq2simseq.SNP.vcf
+$ bcftools index Simulation_SNP_4000_INDEL_4000.refseq2simseq.SNP.vcf.gz
+$ bcftools index Simulation_SNP_4000_INDEL_4000.refseq2simseq.INDEL.vcf.gz
+```
+
+Merge 2 vcf files usnimng `bcftools`
+
+```
+bcftools merge Simulation_SNP_4000_INDEL_4000.refseq2simseq.SNP.vcf.gz Simulation_SNP_4000_INDEL_4000.refseq2simseq.INDEL.vcf.gz -O z -o Simulation_SNP_4000_INDEL_4000.vcf.gz
+```
+
+Stats of the merged vcf file should show 4000 SNPs and 4000 INDELs.
+
+```
+$ bcftools stats Simulation_SNP_4000_INDEL_4000.vcf.gz | less
+# This file was produced by bcftools stats (1.9+htslib-1.9) and can be plotted using plot-vcfstats.
+# The command line was: bcftools stats  Simulation_SNP_4000_INDEL_4000.vcf.gz
+#
+# Definition of sets:
+# ID    [2]id   [3]tab-separated file names
+ID      0       Simulation_SNP_4000_INDEL_4000.vcf.gz
+# SN, Summary numbers:
+#   number of records   .. number of data rows in the VCF
+#   number of no-ALTs   .. reference-only sites, ALT is either "." or identical to REF
+#   number of SNPs      .. number of rows with a SNP
+#   number of MNPs      .. number of rows with a MNP, such as CC>TT
+#   number of indels    .. number of rows with an indel
+#   number of others    .. number of rows with other type, for example a symbolic allele or
+#                          a complex substitution, such as ACT>TCGA
+#   number of multiallelic sites     .. number of rows with multiple alternate alleles
+#   number of multiallelic SNP sites .. number of rows with multiple alternate alleles, all SNPs
+# 
+#   Note that rows containing multiple types will be counted multiple times, in each
+#   counter. For example, a row with a SNP and an indel increments both the SNP and
+#   the indel counter.
+# 
+# SN    [2]id   [3]key  [4]value
+SN      0       number of samples:      0
+SN      0       number of records:      8000
+SN      0       number of no-ALTs:      0
+SN      0       number of SNPs: 4000
+SN      0       number of MNPs: 0
+SN      0       number of indels:       4000
+SN      0       number of others:       0
+SN      0       number of multiallelic sites:   0
+SN      0       number of multiallelic SNP sites:       0
+# TSTV, transitions/transversions:
+# TSTV  [2]id   [3]ts   [4]tv   [5]ts/tv        [6]ts (1st ALT) [7]tv (1st ALT) [8]ts/tv (1st ALT)
+TSTV    0       1372    2628    0.52    1372    2628    0.52
+# SiS, Singleton stats:
+# SiS   [2]id   [3]allele count [4]number of SNPs       [5]number of transitions        [6]number of transversions      [7]number of indels     [8]repeat-consistent    [9]repeat-inconsistent  [10]not applicable
+SiS     0       1       4000    1372    2628    4000    0       0       4000
+```
+
+Now  we can apply the same procedure for comparision using `bcftools isec`.
+
 
