@@ -93,7 +93,6 @@ bcftools isec -c none -p output_SNP_5000_graph95 Simulation_SNP_5000.refseq2sims
 #for 98
 bcftools view -s NC_017518.1_SNP_5000 --min-ac=1 pggb_1k98_NC_017518.1.vcf  >  Simulation_SNP_5000.graph98.vcf
 bgzip Simulation_SNP_5000.graph98.vcf
-bcftools index Simulation_SNP_5000.graph98.vcf
 bcftools index Simulation_SNP_5000.graph98.vcf.gz 
 bcftools isec -c none -p output_SNP_5000_graph98 Simulation_SNP_5000.refseq2simseq.SNP.vcf.gz Simulation_SNP_5000.graph98.vcf.gz
 ```
