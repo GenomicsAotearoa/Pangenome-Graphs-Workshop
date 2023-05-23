@@ -1,1 +1,2 @@
 # How to compare 2 VCF files based on the exact varient position?
+When simulating the new sequences in previous procedure [Preparing required data files with simuG tool](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/preparing_data_files.md) related VCF files were also generated (e.g. Simulation_SNP_5000.refseq2simseq.SNP.vcf). We can compare that VCF file with linear refernce based VCF file and the graph based vcf files to coma
