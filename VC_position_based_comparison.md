@@ -181,19 +181,88 @@ bgzip Simulation_SNP_5000.graph98.vcf
 bcftools index Simulation_SNP_5000.graph98.vcf.gz 
 bcftools isec -c none -p output_SNP_5000_graph98 Simulation_SNP_5000.refseq2simseq.SNP.vcf.gz Simulation_SNP_5000.graph98.vcf.gz
 
+$ cd output_SNP_5000_graph98
+$ ls -1hs
+total 5.1M
+256K 0000.vcf
+3.3M 0001.vcf
+768K 0002.vcf
+768K 0003.vcf
+ 512 README.txt
 
+$ cat README.txt 
+This file was produced by vcfisec.
+The command line was:   bcftools isec  -c none -p output_SNP_5000_graph98 Simulation_SNP_5000.refseq2simseq.SNP.vcf.gz Simulation_SNP_5000.graph98.vcf.gz
+
+Using the following file names:
+output_SNP_5000_graph98/0000.vcf        for records private to  Simulation_SNP_5000.refseq2simseq.SNP.vcf.gz
+output_SNP_5000_graph98/0001.vcf        for records private to  Simulation_SNP_5000.graph98.vcf.gz
+output_SNP_5000_graph98/0002.vcf        for records from Simulation_SNP_5000.refseq2simseq.SNP.vcf.gz shared by both    Simulation_SNP_5000.refseq2simseq.SNP.vcf.gz Simulation_SNP_5000.graph98.vcf.gz
+output_SNP_5000_graph98/0003.vcf        for records from Simulation_SNP_5000.graph98.vcf.gz shared by both      Simulation_SNP_5000.refseq2simseq.SNP.vcf.gz Simulation_SNP_5000.graph98.vcf.gz
+
+$ bcftools stats 0002.vcf 
+# This file was produced by bcftools stats (1.9+htslib-1.9) and can be plotted using plot-vcfstats.
+# The command line was: bcftools stats  0002.vcf
+#
+# Definition of sets:
+# ID    [2]id   [3]tab-separated file names
+ID      0       0002.vcf
+# SN, Summary numbers:
+#   number of records   .. number of data rows in the VCF
+#   number of no-ALTs   .. reference-only sites, ALT is either "." or identical to REF
+#   number of SNPs      .. number of rows with a SNP
+#   number of MNPs      .. number of rows with a MNP, such as CC>TT
+#   number of indels    .. number of rows with an indel
+#   number of others    .. number of rows with other type, for example a symbolic allele or
+#                          a complex substitution, such as ACT>TCGA
+#   number of multiallelic sites     .. number of rows with multiple alternate alleles
+#   number of multiallelic SNP sites .. number of rows with multiple alternate alleles, all SNPs
+# 
+#   Note that rows containing multiple types will be counted multiple times, in each
+#   counter. For example, a row with a SNP and an indel increments both the SNP and
+#   the indel counter.
+# 
+# SN    [2]id   [3]key  [4]value
+SN      0       number of samples:      0
+SN      0       number of records:      4843
+SN      0       number of no-ALTs:      0
+SN      0       number of SNPs: 4843
+SN      0       number of MNPs: 0
+SN      0       number of indels:       0
+SN      0       number of others:       0
+SN      0       number of multiallelic sites:   0
+SN      0       number of multiallelic SNP sites:       0
+# TSTV, transitions/transversions:
+# TSTV  [2]id   [3]ts   [4]tv   [5]ts/tv        [6]ts (1st ALT) [7]tv (1st ALT) [8]ts/tv (1st ALT)
+TSTV    0       1602    3241    0.49    1602    3241    0.49
+# SiS, Singleton stats:
+# SiS   [2]id   [3]allele count [4]number of SNPs       [5]number of transitions        [6]number of transversions      [7]number of indels     [8]repeat-consistent    [9]repeat-inconsistent  [10]not applicable
+SiS     0       1       4843    1602    3241    0       0       0       0
+# AF, Stats by non-reference allele frequency:
+# AF    [2]id   [3]allele frequency     [4]number of SNPs       [5]number of transitions        [6]number of transversions      [7]number of indels     [8]repeat-consistent    [9]repeat-inconsistent  [10]not applicable
+AF      0       0.000000        4843    1602    3241    0       0       0       0
+# QUAL, Stats by quality:
+# QUAL  [2]id   [3]Quality      [4]number of SNPs       [5]number of transitions (1st ALT)      [6]number of transversions (1st ALT)    [7]number of indels
+QUAL    0       998     4843    1602    3241    0
+# IDD, InDel distribution:
+# IDD   [2]id   [3]length (deletions negative)  [4]count
+# ST, Substitution types:
+# ST    [2]id   [3]type [4]count
+ST      0       A>C     392
+ST      0       A>G     406
+ST      0       A>T     419
+ST      0       C>A     412
+ST      0       C>G     429
+ST      0       C>T     398
+ST      0       G>A     381
+ST      0       G>C     411
+ST      0       G>T     391
+ST      0       T>A     392
+ST      0       T>C     417
+ST      0       T>G     395
+# DP, Depth distribution
+# DP    [2]id   [3]bin  [4]number of genotypes  [5]fraction of genotypes (%)    [6]number of sites      [7]fraction of sites (%)
 ```
-
-
-
-
-
-
-
-
-
-
-
 
 When simulating multiple types of variants using simuG tool it creates multiple VCF files as well. We need to merge them and create one VCF file before comapring. For an example for the simulated sample NC_017518.1_SNP_4000_INDEL_4000, 
 
