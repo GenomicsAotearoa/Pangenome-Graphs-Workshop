@@ -86,7 +86,6 @@ As explain in the main page we have apply some filtering to exatract the VCF rel
 #for 95
 bcftools view -s NC_017518.1_SNP_5000 --min-ac=1 pggb_1k95_NC_017518.1.vcf  >  Simulation_SNP_5000.graph95.vcf 
 bgzip Simulation_SNP_5000.graph95.vcf
-bcftools index Simulation_SNP_5000.graph95.vcf
 bcftools index Simulation_SNP_5000.graph95.vcf.gz 
 bcftools isec -c none -p output_SNP_5000_graph95 Simulation_SNP_5000.refseq2simseq.SNP.vcf.gz Simulation_SNP_5000.graph95.vcf.gz
 
