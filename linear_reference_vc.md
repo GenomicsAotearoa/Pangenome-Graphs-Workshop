@@ -1,5 +1,5 @@
 # Script for finding Linear Reference Based Variant Calls
-#### _folder : /nesi/nobackup/ga03793/pg_workshop/vc_exact_compare/_
+_Note: folder : /nesi/nobackup/ga03793/pg_workshop/vc_exact_compare/_
 ```bash
 #Load required modules with specific versions
 module purge
@@ -60,7 +60,7 @@ bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_40
 bcftools index Simulation_SNP_4000_INDEL_4000_CNV_4.bwa.30x.100R.vcf.gz
 ```
 
-(You can find above script as a SLURM job script here [vc_bwa_compare.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/vc_bwa_compare.sh)
+(You can find above script as a SLURM job script here [vc_bwa_compare.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/vc_bwa_compare.sh))
 
 Now we can find the variant call stats using `bcftools stats`. 
 
