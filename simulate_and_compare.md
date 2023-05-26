@@ -1,4 +1,4 @@
-### A script for simulate and compare variant calls using linear method
+### A script to simulate and compare variant calls generated using linear method (`bwa mem`)
 
 This script peform the below tasks
 1. Simulate new sequence with predefined SNPs and INDELs count usnig [simuG](https://github.com/yjx1217/simuG) and create ground truth VCF file (call it as `groud_truth.vcf`)
