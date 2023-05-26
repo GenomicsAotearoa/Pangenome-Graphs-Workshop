@@ -1,6 +1,6 @@
 ### A script to simulate and compare variant calls generated using linear method (`bwa mem`)
-
-This script peform the below tasks
+_Note Nesi folder : /nesi/nobackup/ga03793/pg_workshop/vc_compare_script/_
+This script peforms the below tasks; 
 1. Simulate new sequence with predefined SNPs and INDELs count usnig [simuG](https://github.com/yjx1217/simuG) and create ground truth VCF file (call it as `groud_truth.vcf`)
 2. Simulate reads from the new sequence with with specific coverage depth and read length using `wgsim`
 3. Map the reads with the reference using `bwa mem` and generate VCF file (call it as `simulated.vcf`)
