@@ -56,4 +56,16 @@ Script will produce the below final report.
 2. False Positive (FP) = SNPs+INDELs which can be found in `simulated.vcf` but not found in `groud_truth.vcf` (FP=1,871+1,098=2,969)
 3. True Negative (TN) = Length of Reference the Sequence - Ground Truth SNPs - Ground Truth INDELs - False Positive. (TN=2,248,966-5,000-1,000-2,969=2,239,997)
 4. False Negative (FN) = Ground Truth SNPs+Ground Truth INDELs - True Positive. (FN=5,000+1,000-5,345=655)
+5. Sensitivity and Specificity will be, 
+
+```math
+\begin{aligned}
+Sensitivity  & = \frac{TP}{TP+FN} \\
+              &  = \frac{5345}{5345+655} \\
+              & = 89.0833\% \\ \\
+Specificity & = \frac{TN}{TN+FP} \\
+            &  = \frac{2239997}{2239997+2969} \\
+            & = 99.8676\% \\
+\end{aligned}
+```
 
