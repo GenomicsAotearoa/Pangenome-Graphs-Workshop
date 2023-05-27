@@ -59,7 +59,7 @@ Script will produce the below report for `bwa mem`.
 2. False Positive (FP) = SNPs+INDELs private to `simulated.vcf` and not found in `groud_truth.vcf` (FP=1,831+1,153=2,984)
 3. True Negative (TN) = Length of Reference the Sequence - Ground Truth SNPs - Ground Truth INDELs - False Positive. (TN=2,248,966-5,000-1,000-2,984=2,239,982)
 4. False Negative (FN) = Ground Truth SNPs+Ground Truth INDELs - True Positive. (FN=5,000+1,000-5,328=672)
-5. Sensitivity and Specificity will be, 
+5. Sensitivity, Specificity, and F1 Score will be, 
 
 ```math
 \begin{aligned}
