@@ -111,7 +111,7 @@ Script will also produce the below report for `vg giraffe` and the final compari
 ```
 
 #### _Reference_
-[Alignment of High-Throughput Sequencing Data using BWA](https://ucdavis-bioinformatics-training.github.io/2017-August-Variant-Analysis-Workshop/wednesday/alignment.html)
-[Mapping short reads with Giraffe](https://github.com/vgteam/vg/wiki/Mapping-short-reads-with-Giraffe)
+1. [Alignment of High-Throughput Sequencing Data using BWA](https://ucdavis-bioinformatics-training.github.io/2017-August-Variant-Analysis-Workshop/wednesday/alignment.html)
+2. [Mapping short reads with Giraffe](https://github.com/vgteam/vg/wiki/Mapping-short-reads-with-Giraffe)
 
 
