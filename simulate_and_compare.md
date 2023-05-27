@@ -69,8 +69,8 @@ Sensitivity  & = \frac{TP}{TP+FN} \\
 Specificity & = \frac{TN}{TN+FP} \\
             &  = \frac{2,239,982}{2,239,982+2,984} \\
             & = 99.8669\% \\
-F1 Score & = \frac{TP}{TP+\frac{1}{2}(FP+FN)} \\
-            &  = \frac{5,328}{5,328+0.5(2984+672)} \\ \\
+F1\:Score & = \frac{TP}{TP+\frac{1}{2}(FP+FN)} \\
+            &  = \frac{5,328}{5,328+0.5\times(2984+672)} \\ \\
             & = 74.4550\% \\
 \end{aligned}
 ```
