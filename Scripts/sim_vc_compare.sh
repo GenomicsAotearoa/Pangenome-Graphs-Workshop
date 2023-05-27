@@ -68,6 +68,7 @@ echo ">>> Loading required modules ...";
    module load SAMtools/1.9-GCC-7.4.0
    module load BWA/0.7.17-GCC-9.2.0
    module load wgsim/20111017-GCC-11.3.0
+   module load vg/1.46.0
 fi;
 
 echo ">>> Checking for reference file..."
@@ -191,48 +192,119 @@ bcftools index "${simprefix}.bwa.vcf.gz"
 
 sleep 5;
 
-echo ">>> Comparing the ground truth vcf and simulated vcf using bcftools isec ..."
-bcftools isec -c none -p compare "${simprefix}.gt.vcf.gz" "${simprefix}.bwa.vcf.gz"
+echo ""
+echo ">>> Comparing the ground truth vcf and bwa mem aligned vcf using bcftools isec ..."
+bcftools isec -c none -p bwa_compare "${simprefix}.gt.vcf.gz" "${simprefix}.bwa.vcf.gz"
 
 sleep 5;
 
 echo "";
 bold=$(tput bold)
 normal=$(tput sgr0)
-echo "${bold}>>> Generating stats ...${normal}";
-sim_snp=$(bcftools stats "${simprefix}.bwa.vcf.gz" | grep "number of SNPs:" | cut -f 4)
-sim_indel=$(bcftools stats "${simprefix}.bwa.vcf.gz" | grep "number of indels:" | cut -f 4)
-sim_u_snp=$(bcftools stats compare/0001.vcf | grep "number of SNPs:" | cut -f 4)
-sim_u_indel=$(bcftools stats compare/0001.vcf | grep "number of indels:" | cut -f 4)
-sim_c_snp=$(bcftools stats compare/0002.vcf | grep "number of SNPs:" | cut -f 4)
-sim_c_indel=$(bcftools stats compare/0002.vcf | grep "number of indels:" | cut -f 4)
+echo "${bold}>>> Generating stats bwa mem ...${normal}";
+bwa_snp=$(bcftools stats "${simprefix}.bwa.vcf.gz" | grep "number of SNPs:" | cut -f 4)
+bwa_indel=$(bcftools stats "${simprefix}.bwa.vcf.gz" | grep "number of indels:" | cut -f 4)
+bwa_p_snp=$(bcftools stats bwa_compare/0001.vcf | grep "number of SNPs:" | cut -f 4)
+bwa_p_indel=$(bcftools stats bwa_compare/0001.vcf | grep "number of indels:" | cut -f 4)
+bwa_m_snp=$(bcftools stats bwa_compare/0002.vcf | grep "number of SNPs:" | cut -f 4)
+bwa_m_indel=$(bcftools stats bwa_compare/0002.vcf | grep "number of indels:" | cut -f 4)
 
 sleep 1;
 
-tp=$(($sim_c_snp+$sim_c_indel))
-fp=$(($sim_u_snp+$sim_u_indel))
-tn=$(($reflen-$snp-$indel-$sim_u_snp-$sim_u_indel))
-fn=$(($snp+$indel-$tp))
-sensityvity=$(bc <<< "scale=4; (${tp}*100/(${tp}+${fn}));")
-specificity=$(bc <<< "scale=4; (${tn}*100/(${tn}+${fp}));")
-echo   "--------------------------------------------------"
-echo   "|  ${bold}REPORT${normal}                                        |"
-echo   "--------------------------------------------------"
+bwa_tp=$(($bwa_m_snp+$bwa_m_indel))
+bwa_fp=$(($bwa_p_snp+$bwa_p_indel))
+bwa_tn=$(($reflen-$snp-$indel-$bwa_p_snp-$bwa_p_indel))
+bwa_fn=$(($snp+$indel-$bwa_tp))
+bwa_sensityvity=$(bc <<< "scale=4; (${bwa_tp}*100/(${bwa_tp}+${bwa_fn}));")
+bwa_specificity=$(bc <<< "scale=4; (${bwa_tn}*100/(${bwa_tn}+${bwa_fp}));")
+bwa_f1=$(bc <<< "scale=4; (${bwa_tp}*100/(${bwa_tp}+(0.5*(${bwa_fn}+${bwa_fp}))));")
+echo   "+------------------------------------------------+"
+echo   "|  ${bold}REPORT (BWA MEM)${normal}                              |"
+echo   "+------------------------------------------------+"
 printf "|  Ground Truth SNPs                = %'10d |\n" ${snp}                  
 printf "|  Ground Truth INDELs              = %'10d |\n" ${indel}                
-printf "|  Identified SNPs in Simulation    = %'10d |\n" ${sim_snp}              
-printf "|  Identified INDELs in Simulation  = %'10d |\n" ${sim_indel}            
-printf "|  SNPs Private to Simulation       = %'10d |\n" ${sim_u_snp}            
-printf "|  INDELs Private to Simulation     = %'10d |\n" ${sim_u_indel}          
-printf "|  Exact Matched SNPs               = %'10d |\n" ${sim_c_snp}            
-printf "|  Exact Matched INDELs             = %'10d |\n" ${sim_c_indel}            
-printf "|  True Positive (TP)               = %'10d |\n" ${tp}
-printf "|  False Positive (FP)              = %'10d |\n" ${fp}
-printf "|  True Negative (TN)               = %'10d |\n" ${tn}
-printf "|  False Negative (FN)              = %'10d |\n" ${fn}
-echo   "|------------------------------------------------"
-printf "|  ${bold}Sensitivity                      = %'9.4f%%${normal} |\n" ${sensityvity} 
-printf "|  ${bold}Specificity                      = %'9.4f%%${normal} |\n" ${specificity} 
-echo "--------------------------------------------------"
+printf "|  Identified SNPs in Simulation    = %'10d |\n" ${bwa_snp}              
+printf "|  Identified INDELs in Simulation  = %'10d |\n" ${bwa_indel}            
+printf "|  SNPs Private to Simulation       = %'10d |\n" ${bwa_p_snp}            
+printf "|  INDELs Private to Simulation     = %'10d |\n" ${bwa_p_indel}          
+printf "|  Exact Matched SNPs               = %'10d |\n" ${bwa_m_snp}            
+printf "|  Exact Matched INDELs             = %'10d |\n" ${bwa_m_indel}            
+printf "|  True Positive (TP)               = %'10d |\n" ${bwa_tp}
+printf "|  False Positive (FP)              = %'10d |\n" ${bwa_fp}
+printf "|  True Negative (TN)               = %'10d |\n" ${bwa_tn}
+printf "|  False Negative (FN)              = %'10d |\n" ${bwa_fn}
+echo   "+------------------------------------------------+"
+printf "|  ${bold}Sensitivity                      = %'9.4f%%${normal} |\n" ${bwa_sensityvity} 
+printf "|  ${bold}Specificity                      = %'9.4f%%${normal} |\n" ${bwa_specificity}
+printf "|  ${bold}F1 Score                         = %'9.4f%%${normal} |\n" ${bwa_f1} 
+echo "+------------------------------------------------+"
+
+echo ""
+echo ">>> Aligning reads to the reference \"${ref}\" and generating the VCF file using vg giraffe ..."
+gsimprefix="${simprefix}.giraffe"
+tabix -f "${simprefix}.gt.vcf.gz"
+vg autoindex --workflow giraffe -r "../${ref}" -v "${simprefix}.gt.vcf.gz"  -p $gsimprefix
+vg giraffe -Z "${gsimprefix}.giraffe.gbz" -f "${simprefix}.read1.fq" -f  "${simprefix}.read2.fq" -o SAM > "${gsimprefix}.sam"
+samtools view -bS "${gsimprefix}.sam" | samtools sort - > "${gsimprefix}.bam"
+bcftools mpileup -Ou -f "../${ref}" "${gsimprefix}.bam" | bcftools call -vmO z -o "${gsimprefix}.vcf.gz"
+bcftools index "${gsimprefix}.vcf.gz" 
+
+sleep 5;
+
+echo ""
+echo ">>> Comparing the ground truth vcf and vg giraffe aligned vcf using bcftools isec ..."
+bcftools isec -c none -p giraffe_compare "${simprefix}.gt.vcf.gz" "${gsimprefix}.vcf.gz"
+
+sleep 5;
+
+echo ""
+echo "${bold}>>> Generating stats for vg giraffe ...${normal}";
+giraffe_snp=$(bcftools stats "${gsimprefix}.vcf.gz" | grep "number of SNPs:" | cut -f 4)
+giraffe_indel=$(bcftools stats "${gsimprefix}.vcf.gz" | grep "number of indels:" | cut -f 4)
+giraffe_p_snp=$(bcftools stats giraffe_compare/0001.vcf | grep "number of SNPs:" | cut -f 4)
+giraffe_p_indel=$(bcftools stats giraffe_compare/0001.vcf | grep "number of indels:" | cut -f 4)
+giraffe_m_snp=$(bcftools stats giraffe_compare/0002.vcf | grep "number of SNPs:" | cut -f 4)
+giraffe_m_indel=$(bcftools stats giraffe_compare/0002.vcf | grep "number of indels:" | cut -f 4)
+
+sleep 1;
+
+giraffe_tp=$(($giraffe_m_snp+$giraffe_m_indel))
+giraffe_fp=$(($giraffe_p_snp+$giraffe_p_indel))
+giraffe_tn=$(($reflen-$snp-$indel-$giraffe_p_snp-$giraffe_p_indel))
+giraffe_fn=$(($snp+$indel-$giraffe_tp))
+giraffe_sensityvity=$(bc <<< "scale=4; (${giraffe_tp}*100/(${giraffe_tp}+${giraffe_fn}));")
+giraffe_specificity=$(bc <<< "scale=4; (${giraffe_tn}*100/(${giraffe_tn}+${giraffe_fp}));")
+giraffe_f1=$(bc <<< "scale=4; (${giraffe_tp}*100/(${giraffe_tp}+(0.5*(${giraffe_fn}+${giraffe_fp}))));")
+echo   "+------------------------------------------------+"
+echo   "|  ${bold}REPORT (VG GIRAFFE)${normal}                           |"
+echo   "+------------------------------------------------+"
+printf "|  Ground Truth SNPs                = %'10d |\n" ${snp}
+printf "|  Ground Truth INDELs              = %'10d |\n" ${indel}
+printf "|  Identified SNPs in Simulation    = %'10d |\n" ${giraffe_snp}
+printf "|  Identified INDELs in Simulation  = %'10d |\n" ${giraffe_indel}
+printf "|  SNPs Private to Simulation       = %'10d |\n" ${giraffe_p_snp}
+printf "|  INDELs Private to Simulation     = %'10d |\n" ${giraffe_p_indel}
+printf "|  Exact Matched SNPs               = %'10d |\n" ${giraffe_m_snp}
+printf "|  Exact Matched INDELs             = %'10d |\n" ${giraffe_m_indel}
+printf "|  True Positive (TP)               = %'10d |\n" ${giraffe_tp}
+printf "|  False Positive (FP)              = %'10d |\n" ${giraffe_fp}
+printf "|  True Negative (TN)               = %'10d |\n" ${giraffe_tn}
+printf "|  False Negative (FN)              = %'10d |\n" ${giraffe_fn}
+echo   "+------------------------------------------------+"
+printf "|  ${bold}Sensitivity                      = %'9.4f%%${normal} |\n" ${giraffe_sensityvity}
+printf "|  ${bold}Specificity                      = %'9.4f%%${normal} |\n" ${giraffe_specificity}
+printf "|  ${bold}F1 Score                         = %'9.4f%%${normal} |\n" ${giraffe_f1}
+echo "+------------------------------------------------+"
+
+echo ""
+echo "${bold}>>> Generating comparison resport ...${normal}";
+printf "${bold}+-------------------------------------------------------------------------------------------------------------------------+${normal}\n"
+printf "${bold}|  Method        |     TP       |     TN       |     FP       |     FN       |  Sensitivity |  Specificity |   F1 Score   |${normal}\n"
+printf "${bold}+-------------------------------------------------------------------------------------------------------------------------+${normal}\n"
+printf "|  bwa mem       |  %'10d  |  %'10d  |  %'10d  |  %'10d  |    %'4.4f%%  |    %'4.4f%%  |    %'4.4f%%  |\n" $bwa_tp $bwa_tn $bwa_fp $bwa_fn $bwa_sensityvity $bwa_specificity $bwa_f1
+printf "+-------------------------------------------------------------------------------------------------------------------------+\n"
+printf "|  vg giraffe    |  %'10d  |  %'10d  |  %'10d  |  %'10d  |    %'4.4f%%  |    %'4.4f%%  |    %'4.4f%%  |\n" $giraffe_tp $giraffe_tn $giraffe_fp $giraffe_fn $giraffe_sensityvity $giraffe_specificity $giraffe_f1
+printf "${bold}+-------------------------------------------------------------------------------------------------------------------------+${normal}\n"
+echo ""
 echo "End of the program !"
  
