@@ -117,4 +117,6 @@ Script will also produce the below report for `vg giraffe` and the final compari
 3. _Paired-End vs. Single-Read Sequencing Technology. (n.d.). https://www.illumina.com/science/technology/next-generation-sequencing/plan-experiments/paired-end-vs-single-read.html_
 4. _Buffalo, V. (2015). Bioinformatics Data Skills: Reproducible and Robust Research with Open Source Tools. “O’Reilly Media, Inc.”_
 5. _Dudley, J. T., & Karczewski, K. J. (2013). Exploring Personal Genomics. OUP Oxford._
+6. _Samtools - Documentation. (n.d.). https://www.htslib.org/doc/_
+7. Bash Reference Manual. (n.d.). https://www.gnu.org/software/bash/manual/bash.html
 
