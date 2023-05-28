@@ -111,10 +111,10 @@ Script will also produce the below report for `vg giraffe` and the final compari
 +-------------------------------------------------------------------------------------------------------------------------+
 ```
 
-#### _References_
-1. Alignment of high-throughput sequencing data using BWA. UC Davis Bioinformatics Core 2017 Variant Analysis Workshop. (n.d.). https://ucdavis-bioinformatics-training.github.io/2017-August-Variant-Analysis-Workshop/wednesday/alignment.html 
-2. Vgteam. (n.d.). Mapping short reads with giraffe. GitHub. https://github.com/vgteam/vg/wiki/Mapping-short-reads-with-Giraffe 
-3. Buffalo, V. (2015). Bioinformatics Data Skills: Reproducible and Robust Research with Open Source Tools. “O’Reilly Media, Inc.”
-4. Dudley, J. T., & Karczewski, K. J. (2013). Exploring Personal Genomics. OUP Oxford.
+#### _References
+_1. Alignment of high-throughput sequencing data using BWA. UC Davis Bioinformatics Core 2017 Variant Analysis Workshop. (n.d.). https://ucdavis-bioinformatics-training.github.io/2017-August-Variant-Analysis-Workshop/wednesday/alignment.html 
+_2. Vgteam. (n.d.). Mapping short reads with giraffe. GitHub. https://github.com/vgteam/vg/wiki/Mapping-short-reads-with-Giraffe 
+_3. Buffalo, V. (2015). Bioinformatics Data Skills: Reproducible and Robust Research with Open Source Tools. “O’Reilly Media, Inc.”
+_4. Dudley, J. T., & Karczewski, K. J. (2013). Exploring Personal Genomics. OUP Oxford.
 
 
