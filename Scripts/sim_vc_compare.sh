@@ -31,18 +31,18 @@ do
       output="$2"
       shift 2
       ;;
-    -h | --help)
+    -h | --help )
       echo "Program : sim_vc_compare"
       echo "Version : 1.0"
       echo "Contact : fathima.nuzla.ismail@gmail.com"
       echo "Usage   : sim_vc_compare.sh [options]"
       echo "Options :"
       echo "-r | --ref STR reference sequence file"
-      echo "-s | --snp INT Number of SNPs to simulate"
-      echo "-i | --indel INT Number of INDELs to simulate"
-      echo "-d | --depth INT Cover depth of the reads"
-      echo "-l | --length INT of a read"
-      echo "-o | --output STR Output folder name"
+      echo "-s | --snp INT Number of SNPs to simulate (Default 0)"
+      echo "-i | --indel INT Number of INDELs to simulate (Default 0)"
+      echo "-d | --depth INT Cover depth of the reads (Default 30)"
+      echo "-l | --length INT of a read (Default 100)"
+      echo "-o | --output STR Output folder name (Default 'output')"
       echo "-h | --help Display this help message" 
       exit 2
       ;;
@@ -59,21 +59,17 @@ done
 # exit when any command fails
 set -e
 
-if command -v module &> /dev/null
-then
-echo ">>> Loading required modules ...";
-#Load required modules with specific versions
-   module purge
-   module load BCFtools/1.9-GCC-7.4.0
-   module load SAMtools/1.9-GCC-7.4.0
-   module load BWA/0.7.17-GCC-9.2.0
-   module load wgsim/20111017-GCC-11.3.0
-   module load vg/1.46.0
-fi;
-
 echo ">>> Checking for reference file..."
 if [ -z "$ref" ] || [ ! -f "$ref" ]; then
     echo "Reference file ${ref} does not exists or not specifies by --ref <filename> !"
+    echo "Usage   : sim_vc_compare.sh [options]"
+    echo "Options :"
+    echo "-r | --ref STR reference sequence file"
+    echo "-s | --snp INT Number of SNPs to simulate (Default 0)"
+    echo "-i | --indel INT Number of INDELs to simulate (Default 0)"
+    echo "-d | --depth INT Cover depth of the reads (Default 30)"
+    echo "-l | --length INT of a read (Default 100)"
+    echo "-o | --output STR Output folder name (Default 'output')"
     exit 1;
 fi
 
@@ -91,6 +87,20 @@ else
     echo ">>> Downloading it from git ..."
     wget https://raw.githubusercontent.com/yjx1217/simuG/master/simuG.pl;
 fi
+
+sleep 2;
+
+if command -v module &> /dev/null
+then
+echo ">>> Loading required modules ...";
+#Load required modules with specific versions
+   module purge
+   module load BCFtools/1.9-GCC-7.4.0
+   module load SAMtools/1.9-GCC-7.4.0
+   module load BWA/0.7.17-GCC-9.2.0
+   module load wgsim/20111017-GCC-11.3.0
+   module load vg/1.46.0
+fi;
 
 sleep 2;
 
