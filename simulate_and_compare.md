@@ -118,5 +118,9 @@ Script will also produce the below report for `vg giraffe` and the final compari
 4. _Buffalo, V. (2015). Bioinformatics Data Skills: Reproducible and Robust Research with Open Source Tools. “O’Reilly Media, Inc.”_
 5. _Dudley, J. T., & Karczewski, K. J. (2013). Exploring Personal Genomics. OUP Oxford._
 6. _Samtools - Documentation. (n.d.). https://www.htslib.org/doc/_
-7. Bash Reference Manual. (n.d.). https://www.gnu.org/software/bash/manual/bash.html
+7. _Bash Reference Manual. (n.d.). https://www.gnu.org/software/bash/manual/bash.html_
+8. _Yjx. (n.d.). GitHub - yjx1217/simuG: simuG: a general-purpose genome simulator. GitHub. https://github.com/yjx1217/simuG_
+9. _The Sequencing Center. (2022, September 26). What is de novo assembly? - The Sequencing Center. https://thesequencingcenter.com/knowledge-base/de-novo-assembly/_
+10. _Lh. (n.d.). GitHub - lh3/wgsim: Reads simulator. GitHub. https://github.com/lh3/wgsim_
+11. _Wikipedia contributors. (2023). Sensitivity and specificity. Wikipedia. https://en.wikipedia.org/wiki/Sensitivity_and_specificity_
 
