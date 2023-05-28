@@ -11,17 +11,18 @@ This script [sim_vc_compare.sh](https://github.com/nuzla/Pangenome-Graphs-Worksh
 The script accepts following options. 
 
 ````
-$ ./sim_vc_compare.sh -h
+$ ./sim_vc_compare.sh --help
 Program : sim_vc_compare
 Version : 1.0
+Contact : fathima.nuzla.ismail@gmail.com
 Usage   : sim_vc_compare.sh [options]
 Options :
 -r | --ref STR reference sequence file
--s | --snp INT Number of SNPs to simulate
--i | --indel INT Number of INDELs to simulate
--d | --depth INT Cover depth of the reads
--l | --length INT of a read
--o | --output STR Output folder name
+-s | --snp INT Number of SNPs to simulate (Default 0)
+-i | --indel INT Number of INDELs to simulate (Default 0)
+-d | --depth INT Cover depth of the reads (Default 30)
+-l | --length INT of a read (Default 100)
+-o | --output STR Output folder name (Default 'output')
 -h | --help Display this help message
 ````
 
@@ -110,8 +111,10 @@ Script will also produce the below report for `vg giraffe` and the final compari
 +-------------------------------------------------------------------------------------------------------------------------+
 ```
 
-#### _Reference_
-1. [Alignment of High-Throughput Sequencing Data using BWA](https://ucdavis-bioinformatics-training.github.io/2017-August-Variant-Analysis-Workshop/wednesday/alignment.html)
-2. [Mapping short reads with Giraffe](https://github.com/vgteam/vg/wiki/Mapping-short-reads-with-Giraffe)
+#### _References_
+1. Alignment of high-throughput sequencing data using BWA. UC Davis Bioinformatics Core 2017 Variant Analysis Workshop. (n.d.). https://ucdavis-bioinformatics-training.github.io/2017-August-Variant-Analysis-Workshop/wednesday/alignment.html 
+2. Vgteam. (n.d.). Mapping short reads with giraffe. GitHub. https://github.com/vgteam/vg/wiki/Mapping-short-reads-with-Giraffe 
+3. Buffalo, V. (2015). Bioinformatics Data Skills: Reproducible and Robust Research with Open Source Tools. “O’Reilly Media, Inc.”
+4. Dudley, J. T., & Karczewski, K. J. (2013). Exploring Personal Genomics. OUP Oxford.
 
 
