@@ -51,7 +51,7 @@ The National Library of Medicine is the largest library focused on biomedicine w
 
 ---
 # Procedure 
-### 1. Downloading and preparng assembly data file 4Sim.fa
+### 1. Downloading and preparing assembly data file 4Sim.fa
 
 Please follow the proedure described in this [page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/preparing_data_files.md)
 
