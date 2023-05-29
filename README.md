@@ -229,6 +229,18 @@ _Note: To download the output folder from the Nesi environment you can first zip
 ### ODGI 2D drawing
 ![ODGI 2D drawing](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.lay.draw.png?raw=true)
 
+
+
+
+
+
+
+
+
+
+
+
+<!---
 # Variant Call Analysis using the VCF file (`-s 1000`)
 
 ### Finding stats of the VCF file
@@ -238,6 +250,7 @@ _Note: To download the output folder from the Nesi environment you can first zip
 
 #### 1. Creating VCF file using linear method
 The procedure described in [this page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/linear_reference_vc.md) can be used to find linear reference based stats. 
+
 
 #### 2. Creating VCF file using graph method
 As explained in a previouse section we sepcified the option `-V 'NC_017518.1:#'`. That will execute the command,
@@ -448,7 +461,7 @@ Now repeat the procedure for Identity 90% and 95%.
 |90%     |         10,041   |           8,606|               8,546|                   60|                    |                1,495|       85.11%|            |
 |95%     |         10,041   |           8,678|               8,617|                   61|                    |                1,424|       85.81%|            |
 |98%     |         10,041   |           8,617|               8,553|                   64|                    |                1,488|       85.18%|            |
--->
+
 # PanGenome Graph Evaluator
 ---
 ## Executing pgge tool using Singularity container
@@ -456,7 +469,7 @@ First we need to download a .R file to the working directory.
 ```
 wget https://raw.githubusercontent.com/pangenome/pgge/master/scripts/beehave.R
 ```
-<!---
+
 Now execute the script [pgge_test.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pgge_test.sh)
 
 ```bash
