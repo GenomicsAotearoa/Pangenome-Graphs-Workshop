@@ -136,6 +136,9 @@ singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 2 -S -m 
 
 In `pggb` `-i` is for specifying the sequence file. `-s` specifies the segment length for mapping and `-p` specifies percent identity for mapping/alignment. `-n` is for number of haplotypes (or number of samples). `-k` for minimum matching length. `-t` says number of threads to be used for the execution. `-S` will generate the stats. `-m` will generate MultiQC report of graphs' statistics and visualizations. `-o` specifies the output directory name. `-V 'NC_017518.1:#'` will create a vcf file and its stats considering NC_017518.1 as the reference sequence. 
 
+You can run run pggb without parameters to get information on the meaning of each parameter. Noe take a look at the files in the "output" folder.
+We get a graph in GFA (*.gfa) and odgi (*.og) formats. These can be used downstream in many methods, including those in vg, like vg giraffe. You can visualize the GFA format graph with BandageNG, and use odgi directly on the \*.gfa or \*.og output. 
+
 ---
 # Executing `pggb` as a [SLURM](https://github.com/SchedMD/slurm) Job
 
