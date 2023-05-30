@@ -233,6 +233,18 @@ Memory Efficiency: 19.18% of 4.00 GB
 
 Now we can try the same script by changing the `pggb` parameters `-s`, `-p` and `-k` and compare the results. Please refer [script folder](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Scripts) for scripts. 
 
+#### Understanding odgi visualizations
+We obtain a series of diagnostic images that represent the pangenome alignment. These are created with odgi viz (1D matrix) and odgi layout with odgi draw (2D graph drawings). First, the 2D layout gives us a view of the total alignment. For small graphs, we can look at the version that shows where specific paths go (\*.draw_multiqc.png): For larger ones, the \*.draw.png result is usually more legible.
+
+#### The effect of haplotype count `-n`
+What happens if we set a lower `-n`? This parameter determines how many mappings we have. Each sequence is aligned against its n-1 best matches. Setting -n 6 causes clustering of sequences into groups that are more similar.
+
+#### The effect of the minimum match filter `-k`
+Another key parameter is -k, which affects the behavior of seqwish. This filter removes exact matches from alignments that are shorter than -k. Short matches occur in regions of high diversity. In practice, these short matches contribute little to the overall structure of the graph, and we remove them to further simplify the base graph structure.
+
+### Decreasing mapping segment length `-s` increases sensitivity
+By setting a lower mapping segment length, which affects the behavior of the very first step in the pipeline, wfmash’s mapping step (itself based on a heavily modified version of MashMap). This defaults to -s 5k. We can use -s 1k to guarantee we pick up on smaller homology segments, leading to a more complete alignment.
+
 ---
 # MultiQC Report
 The script generated [output](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Output) directory consists of a compehensive and interactive [MutltiQC Report](https://multiqc.info/) which will decribe all. Open the file multiqc_report.html which is in the output folder from your browser.
