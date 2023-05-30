@@ -1,5 +1,6 @@
-# Script for finding Linear Reference Based Variant Calls
+# Mapping Reads using `bwa mem` (Linear Method)
 _Note: folder : /nesi/nobackup/ga03793/pg_workshop/vc_exact_compare/_
+We can use below script to map the reads to the reference sequnce using linear method `bwa mem`. 
 ```bash
 #Load required modules with specific versions
 module purge
@@ -8,8 +9,8 @@ module load SAMtools/1.9-GCC-7.4.0
 module load BWA/0.7.17-GCC-9.2.0
 module load wgsim/20111017-GCC-11.3.0
 
-mkdir VC_compare
-cd VC_compare
+mkdir vc_exact_compare
+cd vc_exact_compare
 
 #Copy the below files into the folder
 $ ls -1trhs
@@ -97,3 +98,37 @@ SN      0       number of indels:       345
 SN      0       number of others:       0
 SN      0       number of multiallelic sites:   1
 ```
+
+# Mapping Reads using `vg giraffe` (Graph Method)
+Here we map reads to a pangenome graph instead of single linear reference sequence. For example we'll consider the first case `Simulation_INDEL_5000.simseq.genome.fa`. We can build a graph considering the reference sequence `GCF_000191525.1_ASM19152v1_genomic.fna` and the ground truth VCF file 
+
+```bash
+#Load  additional model need for vg
+module load vg/1.46.0
+
+#Copy the vcf files into the folder
+ls -1trhs Simulation_*.vcf
+768K Simulation_SNP_5000.refseq2simseq.SNP.vcf
+768K Simulation_INDEL_5000.refseq2simseq.INDEL.vcf
+768K Simulation_SNP_4000_INDEL_4000.refseq2simseq.SNP.vcf
+768K Simulation_SNP_4000_INDEL_4000.refseq2simseq.INDEL.vcf
+ 512 Simulation_SNP_4000_INDEL_4000_INV_4.refseq2simseq.inversion.vcf
+256K Simulation_SNP_4000_INDEL_4000_CNV_4.refseq2simseq.CNV.vcf
+
+#create tabix index
+bgzip Simulation_SNP_5000.refseq2simseq.SNP.vcf
+tabix Simulation_SNP_5000.refseq2simseq.SNP.vcf.gz
+
+#create the graph and index (-p is prefix for filenames)
+vg autoindex --workflow giraffe -r GCF_000191525.1_ASM19152v1_genomic.fna -v Simulation_SNP_5000.refseq2simseq.SNP.vcf.gz -p VG_SNP_5000
+
+#Map reads to the graph
+vg giraffe -Z VG_SNP_5000.giraffe.gbz -f Simulation_INDEL_5000.read1.fq -f Simulation_INDEL_5000.read2.fq -o SAM > Simulation_VG_SNP_5000.sam
+
+#Follow same procedure for VCF file creation
+samtools view -bS Simulation_VG_SNP_5000.sam | samtools sort - > Simulation_VG_SNP_5000.bam
+bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_VG_SNP_5000.bam | bcftools call -vmO z -o Simulation_VG_SNP_5000.giraffe.30x.100R.vcf.gz
+bcftools index Simulation_VG_SNP_5000.giraffe.30x.100R.vcf.gz 
+```
+We can follow the same procedure for the rest of the samples and generate VCF files. 
+
