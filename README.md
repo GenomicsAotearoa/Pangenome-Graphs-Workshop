@@ -274,6 +274,7 @@ _Note: To download the output folder from the Nesi environment you can first zip
 ### ODGI 2D drawing
 ![ODGI 2D drawing](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.lay.draw.png?raw=true)
 
+# Compare accuracies of mapping reads using linear methods and graph methods
 
 
 
