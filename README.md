@@ -128,9 +128,6 @@ WD=/nesi/nobackup/ga03793/pg_workshop #Working Directory
 container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
 data=${WD}/ASM19152v1_pgsim.fa
 
-#Bind filesystem to container image 
-export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
-
 singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 2 -S -m -o output -V 'NC_017518.1:#' 
 ```
 
@@ -161,8 +158,7 @@ WD=/nesi/nobackup/ga03793/pg_workshop #Working Directory
 container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
 data=${WD}/ASM19152v1_pgsim.fa
 
-#Bind filesystem to container image 
-export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
+
 
 singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 24 -S -m -o output_1K95 -V 'NC_017518.1:#'  
 ```
@@ -525,9 +521,6 @@ module load Singularity
 WD=/nesi/nobackup/ga03793/pg_workshop #Working Directory
 container=/nesi/project/ga03793/software/pgge/pgge_032023.simg
 data=${WD}/4Sim.fa
-
-#Bind filesystem to container image 
-export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
 
 singularity exec ${container} pgge -g ${WD}/output/*.gfa -f $data -o pgge -r ${WD}/beehave.R -b pgge/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
 ```
