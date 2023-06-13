@@ -1,5 +1,5 @@
 # Mapping Reads using `bwa mem` (Linear Method)
-_Note: folder : /nesi/nobackup/ga03793/pg_workshop/vc_exact_compare/_
+_Note: folder : /nesi/nobackup/nesi02659/pg_workshop/vc_exact_compare/_
 We can use below script to map the reads to the reference sequnce using linear method `bwa mem`. 
 ```bash
 #Load required modules with specific versions

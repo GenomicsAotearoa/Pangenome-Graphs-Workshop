@@ -1,8 +1,8 @@
 evaluation:
-  input-gfa:          /nesi/nobackup/ga03793/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa
-  input-fasta:        /nesi/nobackup/ga03793/pg_workshop/4Sim.fa
+  input-gfa:          /nesi/nobackup/nesi02659/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa
+  input-fasta:        /nesi/nobackup/nesi02659/pg_workshop/4Sim.fa
   output-dir:         pgge
-  beehave-r:          /nesi/nobackup/ga03793/pg_workshop/beehave.R
+  beehave-r:          /nesi/nobackup/nesi02659/pg_workshop/beehave.R
   peanut-bed:         true
   input-graph-names:  false
 splitfa:

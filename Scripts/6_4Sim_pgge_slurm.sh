@@ -11,7 +11,7 @@ module load Singularity
 
 #export container to a variable for convenience
 
-container=/nesi/project/ga03793/software/pgge/pgge_032023.simg
+container=/nesi/project/nesi02659/software/pgge/pgge_032023.simg
 
 
 WD=/home/zyang/pg_workshop/4Sim_pgge #Working Directory
@@ -23,7 +23,7 @@ beehave=/home/zyang/pg_workshop/beehave.R
 
 
 #Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
+export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
 
 
 for x in $inputGFA

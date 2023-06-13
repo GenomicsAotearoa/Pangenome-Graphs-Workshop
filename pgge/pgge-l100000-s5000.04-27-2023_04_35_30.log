@@ -1,14 +1,14 @@
 Starting pgge on Thu Apr 27 04:35:30 NZST 2023
 
-Command: /usr/local/bin/pgge -g /nesi/nobackup/ga03793/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa -f /nesi/nobackup/ga03793/pg_workshop/4Sim.fa -o pgge -r /nesi/nobackup/ga03793/pg_workshop/beehave.R -b pgge/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
+Command: /usr/local/bin/pgge -g /nesi/nobackup/nesi02659/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa -f /nesi/nobackup/nesi02659/pg_workshop/4Sim.fa -o pgge -r /nesi/nobackup/nesi02659/pg_workshop/beehave.R -b pgge/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
 
 PARAMETERS
 
 evaluation:
-  input-gfa:          /nesi/nobackup/ga03793/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa
-  input-fasta:        /nesi/nobackup/ga03793/pg_workshop/4Sim.fa
+  input-gfa:          /nesi/nobackup/nesi02659/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa
+  input-fasta:        /nesi/nobackup/nesi02659/pg_workshop/4Sim.fa
   output-dir:         pgge
-  beehave-r:          /nesi/nobackup/ga03793/pg_workshop/beehave.R
+  beehave-r:          /nesi/nobackup/nesi02659/pg_workshop/beehave.R
   peanut-bed:         true
   input-graph-names:  false
 splitfa:
@@ -21,13 +21,13 @@ general:
 
 Running pgge
 
-samtools faidx /nesi/nobackup/ga03793/pg_workshop/4Sim.fa NC_neisseria
+samtools faidx /nesi/nobackup/nesi02659/pg_workshop/4Sim.fa NC_neisseria
 0.01s user 0.02s system 97% cpu 0.03s total 3568Kb max memory
-samtools faidx /nesi/nobackup/ga03793/pg_workshop/4Sim.fa Sim1_3k
+samtools faidx /nesi/nobackup/nesi02659/pg_workshop/4Sim.fa Sim1_3k
 0.00s user 0.00s system 86% cpu 0.01s total 3568Kb max memory
-samtools faidx /nesi/nobackup/ga03793/pg_workshop/4Sim.fa Sim2_4k
+samtools faidx /nesi/nobackup/nesi02659/pg_workshop/4Sim.fa Sim2_4k
 0.01s user 0.00s system 93% cpu 0.01s total 3568Kb max memory
-samtools faidx /nesi/nobackup/ga03793/pg_workshop/4Sim.fa Sim3_5k
+samtools faidx /nesi/nobackup/nesi02659/pg_workshop/4Sim.fa Sim3_5k
 0.01s user 0.00s system 29% cpu 0.04s total 3568Kb max memory
 splitfa pgge/pgge-l100000-s5000.NC_neisseria.4Sim.fa -l 100000 -s 5000
 0.00s user 0.02s system 33% cpu 0.08s total 7716Kb max memory
@@ -38,28 +38,28 @@ splitfa pgge/pgge-l100000-s5000.Sim2_4k.4Sim.fa -l 100000 -s 5000
 splitfa pgge/pgge-l100000-s5000.Sim3_5k.4Sim.fa -l 100000 -s 5000
 0.00s user 0.01s system 46% cpu 0.05s total 7716Kb max memory
 GraphAligner bioconda 1.0.13-
-GraphAligner -g /nesi/nobackup/ga03793/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa -f pgge/pgge-l100000-s5000.NC_neisseria.4Sim.fa.splitfa.fa -a pgge/pgge-l100000-s5000.NC_neisseria.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf -x dbg --precise-clipping 0.501 -t 16
+GraphAligner -g /nesi/nobackup/nesi02659/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa -f pgge/pgge-l100000-s5000.NC_neisseria.4Sim.fa.splitfa.fa -a pgge/pgge-l100000-s5000.NC_neisseria.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf -x dbg --precise-clipping 0.501 -t 16
 28.46s user 0.55s system 196% cpu 14.79s total 352572Kb max memory
 cut -f 2,3,4,16 pgge/pgge-l100000-s5000.NC_neisseria.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf
 0.00s user 0.00s system 66% cpu 0.00s total 644Kb max memory
 peanut -g pgge/pgge-l100000-s5000.NC_neisseria.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf -b pgge/pgge-l100000-s5000.NC_neisseria.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.bed
 0.16s user 0.01s system 99% cpu 0.17s total 2720Kb max memory
 GraphAligner bioconda 1.0.13-
-GraphAligner -g /nesi/nobackup/ga03793/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa -f pgge/pgge-l100000-s5000.Sim1_3k.4Sim.fa.splitfa.fa -a pgge/pgge-l100000-s5000.Sim1_3k.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf -x dbg --precise-clipping 0.501 -t 16
+GraphAligner -g /nesi/nobackup/nesi02659/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa -f pgge/pgge-l100000-s5000.Sim1_3k.4Sim.fa.splitfa.fa -a pgge/pgge-l100000-s5000.Sim1_3k.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf -x dbg --precise-clipping 0.501 -t 16
 28.80s user 0.50s system 196% cpu 14.88s total 350012Kb max memory
 cut -f 2,3,4,16 pgge/pgge-l100000-s5000.Sim1_3k.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf
 0.00s user 0.00s system 83% cpu 0.00s total 644Kb max memory
 peanut -g pgge/pgge-l100000-s5000.Sim1_3k.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf -b pgge/pgge-l100000-s5000.Sim1_3k.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.bed
 0.16s user 0.00s system 98% cpu 0.16s total 2612Kb max memory
 GraphAligner bioconda 1.0.13-
-GraphAligner -g /nesi/nobackup/ga03793/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa -f pgge/pgge-l100000-s5000.Sim2_4k.4Sim.fa.splitfa.fa -a pgge/pgge-l100000-s5000.Sim2_4k.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf -x dbg --precise-clipping 0.501 -t 16
+GraphAligner -g /nesi/nobackup/nesi02659/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa -f pgge/pgge-l100000-s5000.Sim2_4k.4Sim.fa.splitfa.fa -a pgge/pgge-l100000-s5000.Sim2_4k.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf -x dbg --precise-clipping 0.501 -t 16
 28.51s user 0.55s system 196% cpu 14.75s total 363264Kb max memory
 cut -f 2,3,4,16 pgge/pgge-l100000-s5000.Sim2_4k.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf
 0.00s user 0.00s system 83% cpu 0.00s total 644Kb max memory
 peanut -g pgge/pgge-l100000-s5000.Sim2_4k.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf -b pgge/pgge-l100000-s5000.Sim2_4k.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.bed
 0.16s user 0.00s system 98% cpu 0.16s total 2652Kb max memory
 GraphAligner bioconda 1.0.13-
-GraphAligner -g /nesi/nobackup/ga03793/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa -f pgge/pgge-l100000-s5000.Sim3_5k.4Sim.fa.splitfa.fa -a pgge/pgge-l100000-s5000.Sim3_5k.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf -x dbg --precise-clipping 0.501 -t 16
+GraphAligner -g /nesi/nobackup/nesi02659/pg_workshop/output/4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa -f pgge/pgge-l100000-s5000.Sim3_5k.4Sim.fa.splitfa.fa -a pgge/pgge-l100000-s5000.Sim3_5k.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf -x dbg --precise-clipping 0.501 -t 16
 28.34s user 0.54s system 196% cpu 14.67s total 355860Kb max memory
 cut -f 2,3,4,16 pgge/pgge-l100000-s5000.Sim3_5k.4Sim.fa.3541aba.c2fac19.9d98660.smooth.final.gfa.gaf
 0.00s user 0.00s system 66% cpu 0.00s total 644Kb max memory
@@ -91,5 +91,5 @@ The following object is masked from 'package:dplyr':
 
     combine
 
-Rscript /nesi/nobackup/ga03793/pg_workshop/beehave.R pgge/pgge-l100000-s5000.pgge.tsv pgge/pgge-l100000-s5000.pgge.tsv.png
+Rscript /nesi/nobackup/nesi02659/pg_workshop/beehave.R pgge/pgge-l100000-s5000.pgge.tsv pgge/pgge-l100000-s5000.pgge.tsv.png
 2.04s user 1.20s system 72% cpu 4.49s total 176908Kb max memory

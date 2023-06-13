@@ -59,7 +59,7 @@ ST42Sim 2249050 6784474 2249050 2249051
 ```bash
 module purge
 module load Singularity
-container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
 
 # Execute singularity exec ${container} pggb to check the command list of PGGB
 singularity exec ${container} pggb 
@@ -177,7 +177,7 @@ ST42Sim 0.00251903      0.00366686      0.00375609
 ```bash
 module purge
 module load Singularity
-container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
 
 # Execute singularity exec ${container} pggb, set -s 1000
 singularity exec ${container} pggb -i 4Sim.fa -s 1000 -p 96 -n 4 -t 24 -S -m -o 4Sim_1K96 -V 'NC_017518:#'
@@ -202,13 +202,13 @@ module load Singularity
 
 #export container to a variable for convenience
 WD=/home/zyang/pg_workshop #Working Directory
-container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
 data=/home/zyang/pg_workshop/4Sim.fa
 output=/home/zyang/pg_workshop
 
 
 #Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
+export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
 
 singularity exec ${container} pggb -i $data -s 1000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_1K96 -V 'NC_017518:#'
 
@@ -232,13 +232,13 @@ module load Singularity
 
 #export container to a variable for convenience
 WD=/home/zyang/pg_workshop #Working Directory
-container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
 data=/home/zyang/pg_workshop/4Sim.fa
 output=/home/zyang/pg_workshop
 
 
 #Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
+export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
 
 singularity exec ${container} pggb -i $data -s 10000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_10K96 -V 'NC_017518:#'
 ```
@@ -258,13 +258,13 @@ module load Singularity
 
 #export container to a variable for convenience
 WD=/home/zyang/pg_workshop #Working Directory
-container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
 data=/home/zyang/pg_workshop/4Sim.fa
 output=/home/zyang/pg_workshop
 
 
 #Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
+export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
 
 singularity exec ${container} pggb -i $data -s 1000 -p 96 -n 4 -K 79 -t 24 -S -m -o $output/4Sim_1K96_K79 -V 'NC_017518:#'
 ```
@@ -409,7 +409,7 @@ module load Singularity
 
 #export container to a variable for convenience
 
-container=/nesi/project/ga03793/software/pgge/pgge_032023.simg
+container=/nesi/project/nesi02659/software/pgge/pgge_032023.simg
 
 
 WD=/home/zyang/pg_workshop/4Sim_pgge #Working Directory
@@ -421,7 +421,7 @@ beehave=/home/zyang/pg_workshop/beehave.R
 
 
 #Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
+export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
 
 
 for x in $inputGFA
@@ -441,7 +441,7 @@ cp /home/zyang/pg_workshop/vg_deconstruct/4Sim_1K96.gfa /home/zyang/pg_workshop/
 
 module purge
 module load Singularity
-container=/nesi/project/ga03793/software/odgi/odgi_0.8.2.simg
+container=/nesi/project/nesi02659/software/odgi/odgi_0.8.2.simg
 singularity exec ${container} odgi paths -i 4Sim_1K96.gfa -d -D 'AAAA' >4Sim_1K96.gfa_distance
 cut -f 1,2,6 4Sim_1K96.gfa_distance >4Sim_1K96.gfa_distance_cut
 ```
@@ -459,7 +459,7 @@ module purge
 module load Singularity
 
 #export container to a variable for convenience
-container=/nesi/project/ga03793/software/odgi/odgi_0.8.2.simg
+container=/nesi/project/nesi02659/software/odgi/odgi_0.8.2.simg
 data=/home/zyang/pg_workshop/odgi_distance/4Sim_1K96.gfa
 output=/home/zyang/pg_workshop/odgi_distance
 
@@ -577,7 +577,7 @@ module purge
 module load Singularity
 
 #export container to a variable for convenience
-container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
 data=/home/zyang/pg_workshop/3ST.fa
 output=/home/zyang/pg_workshop
 
@@ -681,13 +681,13 @@ module load Singularity
 
 #export container to a variable for convenience
 WD=/home/zyang/pg_workshop #Working Directory
-container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
 data=/home/zyang/pg_workshop/24NM.fa
 output=/home/zyang/pg_workshop
 
 
 #Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
+export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
 
 singularity exec ${container} pggb -i $data -s 10000 -p 95 -n 24 -t 24 -S -m -o $output/24NM_10K95 -V 'NC_017518:#'
 ```
@@ -707,13 +707,13 @@ module load Singularity
 
 #export container to a variable for convenience
 WD=/home/zyang/pg_workshop #Working Directory
-container=/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
 data=/home/zyang/pg_workshop/24NM.fa
 output=/home/zyang/pg_workshop
 
 
 #Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/ga03793/"
+export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
 
 singularity exec ${container} pggb -i $data -s 10000 -p 95 -n 24 -x auto -t 24 -S -m -o $output/24NM_10K95x -V 'NC_017518:#'
 ```

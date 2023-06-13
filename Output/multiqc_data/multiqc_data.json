@@ -2,13 +2,13 @@
     "report_data_sources": {
         "Bcftools": {
             "stats": {
-                "ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf": "/nesi/nobackup/ga03793/pg_workshop/output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf.stats"
+                "ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf": "/nesi/nobackup/nesi02659/pg_workshop/output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.NC_017518.1.vcf.stats"
             }
         },
         "ODGI": {
             "all_sections": {
-                "seqwish": "/nesi/nobackup/ga03793/pg_workshop/output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.seqwish.og.stats.yaml",
-                "smooth": "/nesi/nobackup/ga03793/pg_workshop/output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.stats.yaml"
+                "seqwish": "/nesi/nobackup/nesi02659/pg_workshop/output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.seqwish.og.stats.yaml",
+                "smooth": "/nesi/nobackup/nesi02659/pg_workshop/output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.stats.yaml"
             }
         }
     },
@@ -941,7 +941,7 @@
         }
     },
     "config_analysis_dir_abs": [
-        "/nesi/nobackup/ga03793/pg_workshop/output"
+        "/nesi/nobackup/nesi02659/pg_workshop/output"
     ],
     "config_analysis_dir": [
         "output"

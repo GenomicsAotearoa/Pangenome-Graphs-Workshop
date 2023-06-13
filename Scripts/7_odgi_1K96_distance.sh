@@ -10,7 +10,7 @@ module purge
 module load Singularity
 
 #export container to a variable for convenience
-container=/nesi/project/ga03793/software/odgi/odgi_0.8.2.simg
+container=/nesi/project/nesi02659/software/odgi/odgi_0.8.2.simg
 data=/home/zyang/pg_workshop/odgi_distance/4Sim_1K96.gfa
 output=/home/zyang/pg_workshop/odgi_distance
 

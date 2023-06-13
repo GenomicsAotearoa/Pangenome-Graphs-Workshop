@@ -1,5 +1,5 @@
 general:
-  input-fasta:        /nesi/nobackup/ga03793/pg_workshop/ASM19152v1_pgsim.fa
+  input-fasta:        /nesi/nobackup/nesi02659/pg_workshop/ASM19152v1_pgsim.fa
   output-dir:         output
   temp-dir:           output
   resume:             false

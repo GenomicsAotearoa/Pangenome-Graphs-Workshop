@@ -1,6 +1,6 @@
 ### A script to simulate and compare variant calls generated using linear method (`bwa mem`) and graph method (`vg giraffe`)
 
-This script [sim_vc_compare.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/sim_vc_compare.sh) peforms the below tasks; (_Nesi folder : /nesi/nobackup/ga03793/pg_workshop/vc_compare_script/_)
+This script [sim_vc_compare.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/sim_vc_compare.sh) peforms the below tasks; (_Nesi folder : /nesi/nobackup/nesi02659/pg_workshop/vc_compare_script/_)
 1. Simulate new sequence with predefined SNPs and INDELs count usnig [simuG](https://github.com/yjx1217/simuG) and create ground truth VCF file (call it as `ground_truth.vcf`)
 2. Simulate reads from the new sequence with with specific coverage depth and read length using `wgsim`
 3. Map the reads with the reference using `bwa mem` and generate VCF file (call it as `simulated.vcf`)
