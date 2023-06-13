@@ -177,114 +177,123 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
 -o, --output-dir PATH       output directory
 
 ### Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p 
-```bash
-module purge
-module load Mash/2.3-GCC-11.3.0
-mash triangle 4Sim.fa >4Sim.fa_mash
-less -S 4Sim.fa_mash
-        4
-NC_017518
-ST41Sim 0.0010072
-ST154Sim        0.00121124      0.000830728
-ST42Sim 0.00251903      0.00366686      0.00375609
-```
+
+!!! terminal "code"
+
+    ```bash
+    module purge
+    module load Mash/2.3-GCC-11.3.0
+    mash triangle 4Sim.fa >4Sim.fa_mash
+    less -S 4Sim.fa_mash
+            4
+    NC_017518
+    ST41Sim 0.0010072
+    ST154Sim        0.00121124      0.000830728
+    ST42Sim 0.00251903      0.00366686      0.00375609
+    ```
 
 
 ### construct pangenome graph for 4Sim genomes with Singularity container PGGB, -k 1000, -p 96
-```bash
-module purge
-module load Singularity
-container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
 
-# Execute singularity exec ${container} pggb, set -s 1000
-singularity exec ${container} pggb -i 4Sim.fa -s 1000 -p 96 -n 4 -t 24 -S -m -o 4Sim_1K96 -V 'NC_017518:#'
-```
+!!! terminal "code"
+
+     ```bash
+     module purge
+     module load Singularity
+     container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
+     
+     # Execute singularity exec ${container} pggb, set -s 1000
+     singularity exec ${container} pggb -i 4Sim.fa -s 1000 -p 96 -n 4 -t 24 -S -m -o 4Sim_1K96 -V 'NC_017518:#'
+     ```
 ### Executing `pggb` as a [SLURM](https://github.com/SchedMD/slurm) Job
 Executing shell scripts in the Nesi environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previusely explained script as below to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
 
 
 
 #### pggb_slurm_1K96_4Sim.sh
-```bash
-#!/bin/bash
 
-#SBATCH --account       ga03793
-#SBATCH --job-name      4Sim_1K96
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
+!!! terminal "code"
 
-module purge
-module load Singularity
-
-#export container to a variable for convenience
-WD=/home/zyang/pg_workshop #Working Directory
-container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
-data=/home/zyang/pg_workshop/4Sim.fa
-output=/home/zyang/pg_workshop
-
-
-#Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
-
-singularity exec ${container} pggb -i $data -s 1000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_1K96 -V 'NC_017518:#'
-
-```
+    ```bash
+    #!/bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      4Sim_1K96
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+    
+    module purge
+    module load Singularity
+    
+    #export container to a variable for convenience
+    WD=/home/zyang/pg_workshop #Working Directory
+    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
+    data=/home/zyang/pg_workshop/4Sim.fa
+    output=/home/zyang/pg_workshop
+    
+    
+    #Bind filesystem to container image
+    export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
+    
+    singularity exec ${container} pggb -i $data -s 1000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_1K96 -V 'NC_017518:#'   
+    ```
 The job can be submitted using the `sbatch` command it will show a job id.
 
 
 #### pggb_slurm_10K96_4Sim.sh
 
-```bash
-#!/bin/bash
+!!! terminal "code"
 
-#SBATCH --account       ga03793
-#SBATCH --job-name      4Sim_10K96
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
-
-module purge
-module load Singularity
-
-#export container to a variable for convenience
-WD=/home/zyang/pg_workshop #Working Directory
-container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
-data=/home/zyang/pg_workshop/4Sim.fa
-output=/home/zyang/pg_workshop
-
-
-#Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
-
-singularity exec ${container} pggb -i $data -s 10000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_10K96 -V 'NC_017518:#'
-```
+    ```bash
+    #!/bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      4Sim_10K96
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+    
+    module purge
+    module load Singularity
+    
+    #export container to a variable for convenience
+    WD=/home/zyang/pg_workshop #Working Directory
+    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
+    data=/home/zyang/pg_workshop/4Sim.fa
+    output=/home/zyang/pg_workshop
+    
+    
+    singularity exec ${container} pggb -i $data -s 10000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_10K96 -V 'NC_017518:#'
+    ```
 #### pggb_slurm_10K96_K79_4Sim.sh
 
-```bash
-#!/bin/bash
+!!! terminal "code"
 
-#SBATCH --account       ga03793
-#SBATCH --job-name      4Sim_1K96_K79
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
-
-module purge
-module load Singularity
-
-#export container to a variable for convenience
-WD=/home/zyang/pg_workshop #Working Directory
-container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
-data=/home/zyang/pg_workshop/4Sim.fa
-output=/home/zyang/pg_workshop
-
-
-#Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
-
-singularity exec ${container} pggb -i $data -s 1000 -p 96 -n 4 -K 79 -t 24 -S -m -o $output/4Sim_1K96_K79 -V 'NC_017518:#'
-```
+    ```bash
+    #!/bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      4Sim_1K96_K79
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+    
+    module purge
+    module load Singularity
+    
+    #export container to a variable for convenience
+    WD=/home/zyang/pg_workshop #Working Directory
+    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
+    data=/home/zyang/pg_workshop/4Sim.fa
+    output=/home/zyang/pg_workshop
+    
+    
+    #Bind filesystem to container image
+    export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
+    
+    singularity exec ${container} pggb -i $data -s 1000 -p 96 -n 4 -K 79 -t 24 -S -m -o $output/4Sim_1K96_K79 -V 'NC_017518:#'
+    ```
 
 ### Evaluate Pangenome Graphs for 4Sim Genomes Constructed with Different Settings
 - We have employed three distinct settings to construct the pangenome graph of the 4Sim genomes. Which setting yielded the most optimal result? How can we determine this? 
