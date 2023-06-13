@@ -1,7 +1,6 @@
-# pangenome graph construction with PGGB on Nesi
-<p align="justify">
+# pangenome graph construction with PGGB
+
 In this workshop, we employes PanGenome Graph Builder (PGGB) to construction the pangenome graphs
-</p>
 
 ## How does the pggb graph build work?
 pggb builds pangenome variation graphs from a set of input sequences.
