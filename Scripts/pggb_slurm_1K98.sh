@@ -1,4 +1,4 @@
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      NC_017518.1_1K98

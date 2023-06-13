@@ -1,4 +1,4 @@
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      24NM_10k95

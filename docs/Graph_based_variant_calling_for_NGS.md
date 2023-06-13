@@ -25,34 +25,37 @@ cd graph_NGS
 mkdir simu_NGS_data
 ```
 The script for simulation NGS data
-```bash
-#!/bin.bash
 
-#SBATCH --account       ga03793
-#SBATCH --job-name      5NGS_simulate
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
+!!! terminal "code"
 
-module purge
-module load SAMtools/1.16.1-GCC-11.3.0
-
-input_folder=/home/zyang/pg_workshop/dataset_for_pg_workshop/12_genomes_for_NGS_simulation
-output_folder=/home/zyang/pg_workshop/graph_NGS/simu_NGS_data
-
-for f in NC_017518_6k.fa ST154_6k.fa ST154Sim_6k.fa ST41Sim_6k.fa ST42Sim_6k.fa
-
-do
-
-x=$(basename $f .fa)
-echo ${x}
-
-wgsim $input_folder/${x}.fa -N 1000000 -1 150 -2 150  -e 0.005 -r 0 -R 0 -X 0 $output_folder/${x}.wgsim_er0.005.R1.fq  $output_folder/${x}.wgsim_er0.005.R2.fq
-gzip $output_folder/${x}.wgsim_er0.005.R1.fq
-gzip $output_folder/${x}.wgsim_er0.005.R2.fq
-
-done
-```
+    ```bash
+    #!/bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      5NGS_simulate
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+    
+    module purge
+    module load SAMtools/1.16.1-GCC-11.3.0
+    
+    input_folder=/home/zyang/pg_workshop/dataset_for_pg_workshop/12_genomes_for_NGS_simulation
+    output_folder=/home/zyang/pg_workshop/graph_NGS/simu_NGS_data
+    
+    for f in NC_017518_6k.fa ST154_6k.fa ST154Sim_6k.fa ST41Sim_6k.fa ST42Sim_6k.fa
+    
+    do
+    
+    x=$(basename $f .fa)
+    echo ${x}
+    
+    wgsim $input_folder/${x}.fa -N 1000000 -1 150 -2 150  -e 0.005 -r 0 -R 0 -X 0 $output_folder/${x}.wgsim_er0.005.R1.fq  $output_folder/${x}.wgsim_er0.005.R2.fq
+    gzip $output_folder/${x}.wgsim_er0.005.R1.fq
+    gzip $output_folder/${x}.wgsim_er0.005.R2.fq
+    
+    done
+    ```
 
 ## build index for graph
 ```bash
@@ -66,7 +69,7 @@ mkdir /home/zyang/pg_workshop/graph_NGS/refs/temp_dir
 ```
 
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      build_index_for_4SimGraph
@@ -109,7 +112,7 @@ mkdir /home/zyang/pg_workshop/graph_NGS/graph_based_mapping
 ```bash
 
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      vgmap_5e_4Sim
@@ -159,7 +162,7 @@ mkdir /home/zyang/pg_workshop/graph_NGS/vgmap_12e_sim4_allR10S3_typing
 
 generate snarls of graph
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      vgmap_generate_snarls
@@ -179,7 +182,7 @@ vg snarls $input_folder/4Sim_1K96_256.xg > $output_folder/4Sim_1K96_256.xg.snarl
 
 genotyping 
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      5e_vgmap_genotying
@@ -229,7 +232,7 @@ mkdir /home/zyang/pg_workshop/graph_NGS/vgmap_5e_sim4_allR10S3_novelcalling
 ```
 
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      5e_vgmap_novelvariant_calling

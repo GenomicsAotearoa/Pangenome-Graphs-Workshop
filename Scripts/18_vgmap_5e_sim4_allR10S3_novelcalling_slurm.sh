@@ -1,4 +1,4 @@
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      5e_vgmap_novelvariant_calling 

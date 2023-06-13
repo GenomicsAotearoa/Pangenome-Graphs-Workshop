@@ -1,4 +1,4 @@
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      vgmap_5e_4Sim

@@ -1,4 +1,4 @@
-#!/bin.bash
+#!/bin/bash
 #Handling command line options
 SHORT=r:,s:,i:,d:,l:,o:h
 LONG=ref:,snp:,indel:,depth:,length:,output:,help

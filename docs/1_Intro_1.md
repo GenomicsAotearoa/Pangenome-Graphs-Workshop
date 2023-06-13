@@ -513,7 +513,7 @@ wget https://raw.githubusercontent.com/pangenome/pgge/master/scripts/beehave.R
 Now execute the script [pgge_test.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pgge_test.sh)
 
 ```bash
-#!/bin.bash
+#!/bin/bash
 module load Singularity
 #export container to a variable for convenience
 WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory

@@ -1,4 +1,4 @@
-#!/bin.bash
+#!/bin/bash
 module load Singularity
 #export container to a variable for convenience
 WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory

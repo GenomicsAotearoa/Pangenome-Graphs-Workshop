@@ -484,7 +484,7 @@ The pangenome graph evaluation is a pipeline in the pangenome graphs, which meas
 <h3 id="3-executing-pggb-tool-using-singularity-container">3. Executing <code>pggb</code> tool using Singularity container<a class="headerlink" href="#3-executing-pggb-tool-using-singularity-container" title="Permanent link">¶</a></h3>
 <p>We can follow the procedure in <a href="https://github.com/pangenome/pggb#singularity">https://github.com/pangenome/pggb#singularity</a> to setup the Singularity image. This is already done and the image is in <code>/nesi/project/nesi02659/software/pggb/</code> directory for version 0.5.3. </p>
 <p>Following script (<a href="https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pggb_test.sh">pggb_test.sh</a>) can be used to run <code>pggb</code> on the downloaded sequence. </p>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="ch">#!/bin.bash</span>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="ch">#!/bin/bash</span>
 <a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
 <a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1">#export container to a variable for convenience</span>
 <a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="nv">WD</span><span class="o">=</span>/nesi/nobackup/nesi02659/pg_workshop<span class="w"> </span><span class="c1">#Working Directory</span>
@@ -499,7 +499,7 @@ We get a graph in GFA (<em>.gfa) and odgi (</em>.og) formats. These can be used 
 <hr/>
 <h1 id="executing-pggb-as-a-slurm-job">Executing <code>pggb</code> as a <a href="https://github.com/SchedMD/slurm">SLURM</a> Job<a class="headerlink" href="#executing-pggb-as-a-slurm-job" title="Permanent link">¶</a></h1>
 <p>Executing shell scripts in the Nesi environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previusely explained script as below (<a href="https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pggb_slurm_1K95.sh">pggb_slurm_1K95.sh</a>) to run as SLURM job. Note the additional parameters specified by <code>#SBATCH</code> which will indicate maximum resource limitations. </p>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="ch">#!/bin.bash</span>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="ch">#!/bin/bash</span>
 <a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>
 <a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="c1">#SBATCH --account       ga03793</span>
 <a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="c1">#SBATCH --job-name      NC_017518.1_1K95</span>
@@ -822,7 +822,7 @@ First we need to download a .R file to the working directory.
 
 Now execute the script [pgge_test.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pgge_test.sh)
 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="ch">#!/bin.bash</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="ch">#!/bin/bash</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="c1">#export container to a variable for convenience</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="nv">WD</span><span class="o">=</span>/nesi/nobackup/nesi02659/pg_workshop<span class="w"> </span><span class="c1">#Working Directory</span>

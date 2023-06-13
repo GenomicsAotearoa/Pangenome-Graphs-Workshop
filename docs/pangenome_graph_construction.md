@@ -189,7 +189,7 @@ Executing shell scripts in the Nesi environment might not be the best way to han
 
 #### pggb_slurm_1K96_4Sim.sh
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      4Sim_1K96
@@ -219,7 +219,7 @@ The job can be submitted using the `sbatch` command it will show a job id.
 #### pggb_slurm_10K96_4Sim.sh
 
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      4Sim_10K96
@@ -245,7 +245,7 @@ singularity exec ${container} pggb -i $data -s 10000 -p 96 -n 4 -t 24 -S -m -o $
 #### pggb_slurm_10K96_K79_4Sim.sh
 
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      4Sim_1K96_K79
@@ -351,7 +351,7 @@ done
 ```
 #### bcftools isec to check the overlap of the 1k96 -K 19, 1k96, -K 79
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      4Sim_1k96_isec
@@ -396,7 +396,7 @@ cp /home/zyang/pg_workshop/4Sim_10K96/4Sim.fa.e7f7fe6.417fcdf.7659dc8.smooth.fin
 ```
 #### PGGE script
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      4Sim_pgge
@@ -447,7 +447,7 @@ cut -f 1,2,6 4Sim_1K96.gfa_distance >4Sim_1K96.gfa_distance_cut
 ```
 ### script for ODGI paths to extract distance
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      4Sim_1K96_distance
@@ -510,7 +510,7 @@ write.tree(phy=tree, file = '4Sim_1k96_distance.tree')
 ```
 ### run the R script for clustering based on distance on Nesi
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      4Sim_1K96_distance_clustering
@@ -565,7 +565,7 @@ Mauve alignments demonstrated large inversions among the 3ST genomes.
 
 ### pggb_slurm_2K95_3ST.sh, -k 2000, -p 95
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      3ST_2K95
@@ -668,7 +668,7 @@ ST154   0.0151872       0.0182524       0.0164989       0.0182524       0.017126
 
 ### pggb_slurm_2K95_3ST.sh, -k 2000, -p 95
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      24NM_10k95
@@ -694,7 +694,7 @@ singularity exec ${container} pggb -i $data -s 10000 -p 95 -n 24 -t 24 -S -m -o 
 
 ### pggb_slurm_2K95_3ST.sh, -k 2000, -p 95, -x 
 ```bash
-#!/bin.bash
+#!/bin/bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      24NM_10k95_X
