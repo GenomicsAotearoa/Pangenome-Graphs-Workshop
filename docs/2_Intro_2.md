@@ -59,22 +59,26 @@ Lastly, the VG toolkit is harnessed for NGS data analysis against the graph, whi
 
  </p>
 
-![Overview of the pangenome graph workflow](https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/Figures/Fig.1_overview%20of%20pangenome%20graph%20pipeline.png?raw=true])
+ ![image](./theme_figures/Fig.1_overview%20of%20pangenome%20graph%20pipeline.png)
+
+<center><small>Overview of the pangenome graph workflow</small></center>
 
 ## Tools used in this pipeline
-The tools used for the pangenome graph pipeline
 
-- graph construction using the PanGenome Graph Builder (PGGB) (https://github.com/pangenome/pggb)
 
-- graph manipulation through the Optimized Dynamic Genome/Graph Implementation (ODGI)(https://github.com/pangenome/odgi)
+!!! screwdriver-wrench "Tools used for the pangenome graph pipeline"
 
-- variant calling for Next-Generation Sequencing (NGS) data using the VG toolkit(https://github.com/vgteam/vg)
-
-- https://github.com/marbl/Mash
-- https://github.com/samtools/samtools
-- https://github.com/yjx1217/simuG
-- https://github.com/pangenome/pgge
-- https://github.com/samtools/bcftools
+    - graph construction using the PanGenome Graph Builder (PGGB) (https://github.com/pangenome/pggb)
+    
+    - graph manipulation through the Optimized Dynamic Genome/Graph Implementation (ODGI)(https://github.com/pangenome/odgi)
+    
+    - variant calling for Next-Generation Sequencing (NGS) data using the VG toolkit(https://github.com/vgteam/vg)
+    
+    - https://github.com/marbl/Mash
+    - https://github.com/samtools/samtools
+    - https://github.com/yjx1217/simuG
+    - https://github.com/pangenome/pgge
+    - https://github.com/samtools/bcftools
 
 
 ## Datasets used in this pipeline 
