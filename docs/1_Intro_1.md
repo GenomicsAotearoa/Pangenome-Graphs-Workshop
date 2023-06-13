@@ -87,23 +87,25 @@ Please follow the proedure described in this [page](https://github.com/nuzla/Pan
 
 ### 2. Creating an index for the seuqence file and check
 
-```bash
-#Use samtools to create the index file
-#In Nesi environment you will have to load the command first
+!!! terminal "code"
 
-$ module load SAMtools
-
-$ samtools faidx ASM19152v1_pgsim.fa 
-
-$ $ cat ASM19152v1_pgsim.fa.fai 
-NC_017518.1     2248966 64      80      81
-NC_017518.1_SNP_5000    2248966 2277165 2248966 2248967
-NC_017518.1_INDEL_5000  2249048 4526156 2249048 2249049
-NC_017518.1_SNP_4000_INDEL_4000 2242147 6775238 2242147 2242148
-NC_017518.1_SNP_4000_INDEL_4000_INV_4   2242147 9017425 2242147 2242148
-NC_017518.1_SNP_4000_INDEL_4000_CNV_4   2415498 11259612        2415498 2415499
-```
-
+    ```bash
+    #Use samtools to create the index file
+    #In Nesi environment you will have to load the command first
+    
+    $ module load SAMtools
+    
+    $ samtools faidx ASM19152v1_pgsim.fa 
+    
+    $ cat ASM19152v1_pgsim.fa.fai 
+    NC_017518.1     2248966 64      80      81
+    NC_017518.1_SNP_5000    2248966 2277165 2248966 2248967
+    NC_017518.1_INDEL_5000  2249048 4526156 2249048 2249049
+    NC_017518.1_SNP_4000_INDEL_4000 2242147 6775238 2242147 2242148
+    NC_017518.1_SNP_4000_INDEL_4000_INV_4   2242147 9017425 2242147 2242148
+    NC_017518.1_SNP_4000_INDEL_4000_CNV_4   2415498 11259612        2415498 2415499
+    ```
+    
 As per the index this assembly consists of 6 samples described in the below table. 
 
 | Name                                | Length    | SNPs   | INDELs | INV | CNV |
