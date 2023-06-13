@@ -1,0 +1,1493 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Genomics Aotearoa" name="author"/>
+<link href="https://genomicsaotearoa.github.io/Pangenome-Graphs-Workshop/pangenome_graph_construction/" rel="canonical"/>
+<link href="../mapping_reads/" rel="prev"/>
+<link href="../preparing_data_files/" rel="next"/>
+<link href="../theme_figures/nesi_ga.png" rel="icon"/>
+<meta content="mkdocs-1.4.3, mkdocs-material-9.1.9" name="generator"/>
+<title>pangenome graph construction with PGGB on Nesi - Pangenome Graphs</title>
+<link href="../assets/stylesheets/main.85bb2934.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.a6bdf11c.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#pangenome-graph-construction-with-pggb-on-nesi">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Pangenome Graphs" class="md-header__button md-logo" data-md-component="logo" href=".." title="Pangenome Graphs">
+<img alt="logo" src="../theme_figures/nesi_ga.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Pangenome Graphs
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              pangenome graph construction with PGGB on Nesi
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_3" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"></path></svg>
+</label>
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"></path></svg>
+</label>
+<input aria-label="Switch to system preference" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="indigo" data-md-color-scheme="slate" id="__palette_3" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to system preference">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GenomicsAotearoa/Pangenome-Graphs-Workshop
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Pangenome Graphs" class="md-nav__button md-logo" data-md-component="logo" href=".." title="Pangenome Graphs">
+<img alt="logo" src="../theme_figures/nesi_ga.png"/>
+</a>
+    Pangenome Graphs
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GenomicsAotearoa/Pangenome-Graphs-Workshop
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+        Welcome to MkDocs
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Graph_based_variant_calling_for_NGS/">
+        NGS data analysis used graph as reference on Nesi
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Intro_1/">
+        Pangenome Graphs Workshop
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Intro_2/">
+        Intro 2
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../mapping_reads/">
+        Mapping Reads using `bwa mem` (Linear Method)
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          pangenome graph construction with PGGB on Nesi
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        pangenome graph construction with PGGB on Nesi
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-does-the-pggb-graph-build-work">
+    How does the pggb graph build work?
+  </a>
+<nav aria-label="How does the pggb graph build work?" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#learning-objectives">
+    Learning objectives
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#getting-started">
+    Getting started
+  </a>
+<nav aria-label="Getting started" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#setting-up-your-project-directory-and-download-the-datasets">
+    Setting up your project directory and download the datasets
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#construct-pangenome-graph-for-the-4sim-genomes">
+    Construct pangenome graph for the 4Sim genomes
+  </a>
+<nav aria-label="Construct pangenome graph for the 4Sim genomes" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#executing-pggb-tool-using-singularity-container">
+    Executing pggb tool using Singularity container
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#key-parameters-for-executing-pggb">
+    key parameters for executing PGGB
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#examples-of-key-parameters-for-executing-pggb">
+    examples of key parameters for executing PGGB
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#other-parameters-for-executing-pggb">
+    other parameters for executing PGGB
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p">
+    Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#construct-pangenome-graph-for-4sim-genomes-with-singularity-container-pggb-k-1000-p-96">
+    construct pangenome graph for 4Sim genomes with Singularity container PGGB, -k 1000, -p 96
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#executing-pggb-as-a-slurm-job">
+    Executing pggb as a SLURM Job
+  </a>
+<nav aria-label="Executing pggb as a SLURM Job" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pggb_slurm_1k96_4simsh">
+    pggb_slurm_1K96_4Sim.sh
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pggb_slurm_10k96_4simsh">
+    pggb_slurm_10K96_4Sim.sh
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pggb_slurm_10k96_k79_4simsh">
+    pggb_slurm_10K96_K79_4Sim.sh
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#evaluate-pangenome-graphs-for-4sim-genomes-constructed-with-different-settings">
+    Evaluate Pangenome Graphs for 4Sim Genomes Constructed with Different Settings
+  </a>
+<nav aria-label="Evaluate Pangenome Graphs for 4Sim Genomes Constructed with Different Settings" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1k96">
+    1k96
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1k96-k79">
+    1k96,-K79
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#10k96">
+    10k96
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#vg-deconstruct-graph-to-get-the-variations-in-vcf">
+    vg deconstruct graph to get the variations in vcf
+  </a>
+<nav aria-label="vg deconstruct graph to get the variations in vcf" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4sim_vg_deconstructsh">
+    4Sim_vg_deconstruct.sh
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bcftools-isec-to-check-the-overlap-of-the-1k96-k-19-1k96-k-79">
+    bcftools isec to check the overlap of the 1k96 -K 19, 1k96, -K 79
+  </a>
+<nav aria-label="bcftools isec to check the overlap of the 1k96 -K 19, 1k96, -K 79" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#difference-between-1k96-k-19-vs-1k96-k-79">
+    difference between 1k96 -K 19 Vs 1k96 -K 79
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pgge">
+    PGGE
+  </a>
+<nav aria-label="PGGE" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pgge-script">
+    PGGE script
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#odgi-paths-to-extract-distance">
+    ODGI paths to extract distance
+  </a>
+<nav aria-label="ODGI paths to extract distance" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#script-for-odgi-paths-to-extract-distance">
+    script for ODGI paths to extract distance
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#r-script-for-clustering-based-on-distance-among-paths-of-a-graph-4sim-1k96">
+    R script for clustering based on distance among paths of a graph, 4Sim 1k96
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#run-the-r-script-for-clustering-based-on-distance-on-nesi">
+    run the R script for clustering based on distance on Nesi
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#construct-pangenome-graph-for-the-3st-genomes">
+    Construct pangenome graph for the 3ST genomes
+  </a>
+<nav aria-label="Construct pangenome graph for the 3ST genomes" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prepare-dataset-and-build-index">
+    prepare dataset and build index
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p_1">
+    Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#check-the-mauve-aligment-of-3st">
+    check the Mauve aligment of 3ST
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pggb_slurm_2k95_3stsh-k-2000-p-95">
+    pggb_slurm_2K95_3ST.sh, -k 2000, -p 95
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#construct-pangenome-graph-for-the-24nm-genomes">
+    Construct pangenome graph for the 24NM genomes
+  </a>
+<nav aria-label="Construct pangenome graph for the 24NM genomes" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prepare-dataset-and-build-index_1">
+    prepare dataset and build index
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p_2">
+    Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pggb_slurm_2k95_3stsh-k-2000-p-95_1">
+    pggb_slurm_2K95_3ST.sh, -k 2000, -p 95
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pggb_slurm_2k95_3stsh-k-2000-p-95-x">
+    pggb_slurm_2K95_3ST.sh, -k 2000, -p 95, -x
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../preparing_data_files/">
+        Preparing required data files with simuG tool
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../simulate_and_compare/">
+        Simulate and compare
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../vc_position_based_comparison/">
+        How to compare 2 VCF files based on the exact variant position?
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-does-the-pggb-graph-build-work">
+    How does the pggb graph build work?
+  </a>
+<nav aria-label="How does the pggb graph build work?" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#learning-objectives">
+    Learning objectives
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#getting-started">
+    Getting started
+  </a>
+<nav aria-label="Getting started" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#setting-up-your-project-directory-and-download-the-datasets">
+    Setting up your project directory and download the datasets
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#construct-pangenome-graph-for-the-4sim-genomes">
+    Construct pangenome graph for the 4Sim genomes
+  </a>
+<nav aria-label="Construct pangenome graph for the 4Sim genomes" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#executing-pggb-tool-using-singularity-container">
+    Executing pggb tool using Singularity container
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#key-parameters-for-executing-pggb">
+    key parameters for executing PGGB
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#examples-of-key-parameters-for-executing-pggb">
+    examples of key parameters for executing PGGB
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#other-parameters-for-executing-pggb">
+    other parameters for executing PGGB
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p">
+    Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#construct-pangenome-graph-for-4sim-genomes-with-singularity-container-pggb-k-1000-p-96">
+    construct pangenome graph for 4Sim genomes with Singularity container PGGB, -k 1000, -p 96
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#executing-pggb-as-a-slurm-job">
+    Executing pggb as a SLURM Job
+  </a>
+<nav aria-label="Executing pggb as a SLURM Job" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pggb_slurm_1k96_4simsh">
+    pggb_slurm_1K96_4Sim.sh
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pggb_slurm_10k96_4simsh">
+    pggb_slurm_10K96_4Sim.sh
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pggb_slurm_10k96_k79_4simsh">
+    pggb_slurm_10K96_K79_4Sim.sh
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#evaluate-pangenome-graphs-for-4sim-genomes-constructed-with-different-settings">
+    Evaluate Pangenome Graphs for 4Sim Genomes Constructed with Different Settings
+  </a>
+<nav aria-label="Evaluate Pangenome Graphs for 4Sim Genomes Constructed with Different Settings" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1k96">
+    1k96
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1k96-k79">
+    1k96,-K79
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#10k96">
+    10k96
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#vg-deconstruct-graph-to-get-the-variations-in-vcf">
+    vg deconstruct graph to get the variations in vcf
+  </a>
+<nav aria-label="vg deconstruct graph to get the variations in vcf" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4sim_vg_deconstructsh">
+    4Sim_vg_deconstruct.sh
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bcftools-isec-to-check-the-overlap-of-the-1k96-k-19-1k96-k-79">
+    bcftools isec to check the overlap of the 1k96 -K 19, 1k96, -K 79
+  </a>
+<nav aria-label="bcftools isec to check the overlap of the 1k96 -K 19, 1k96, -K 79" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#difference-between-1k96-k-19-vs-1k96-k-79">
+    difference between 1k96 -K 19 Vs 1k96 -K 79
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pgge">
+    PGGE
+  </a>
+<nav aria-label="PGGE" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pgge-script">
+    PGGE script
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#odgi-paths-to-extract-distance">
+    ODGI paths to extract distance
+  </a>
+<nav aria-label="ODGI paths to extract distance" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#script-for-odgi-paths-to-extract-distance">
+    script for ODGI paths to extract distance
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#r-script-for-clustering-based-on-distance-among-paths-of-a-graph-4sim-1k96">
+    R script for clustering based on distance among paths of a graph, 4Sim 1k96
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#run-the-r-script-for-clustering-based-on-distance-on-nesi">
+    run the R script for clustering based on distance on Nesi
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#construct-pangenome-graph-for-the-3st-genomes">
+    Construct pangenome graph for the 3ST genomes
+  </a>
+<nav aria-label="Construct pangenome graph for the 3ST genomes" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prepare-dataset-and-build-index">
+    prepare dataset and build index
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p_1">
+    Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#check-the-mauve-aligment-of-3st">
+    check the Mauve aligment of 3ST
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pggb_slurm_2k95_3stsh-k-2000-p-95">
+    pggb_slurm_2K95_3ST.sh, -k 2000, -p 95
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#construct-pangenome-graph-for-the-24nm-genomes">
+    Construct pangenome graph for the 24NM genomes
+  </a>
+<nav aria-label="Construct pangenome graph for the 24NM genomes" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prepare-dataset-and-build-index_1">
+    prepare dataset and build index
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p_2">
+    Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pggb_slurm_2k95_3stsh-k-2000-p-95_1">
+    pggb_slurm_2K95_3ST.sh, -k 2000, -p 95
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pggb_slurm_2k95_3stsh-k-2000-p-95-x">
+    pggb_slurm_2K95_3ST.sh, -k 2000, -p 95, -x
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="pangenome-graph-construction-with-pggb-on-nesi">pangenome graph construction with PGGB on Nesi<a class="headerlink" href="#pangenome-graph-construction-with-pggb-on-nesi" title="Permanent link">¶</a></h1>
+<p align="justify">
+In this workshop, we employes PanGenome Graph Builder (PGGB) to construction the pangenome graphs
+</p>
+<h2 id="how-does-the-pggb-graph-build-work">How does the pggb graph build work?<a class="headerlink" href="#how-does-the-pggb-graph-build-work" title="Permanent link">¶</a></h2>
+<p>pggb builds pangenome variation graphs from a set of input sequences.</p>
+<p>A pangenome variation graph is a kind of generic multiple sequence alignment. It lets us understand any kind of sequence variation between a collection of genomes. It shows us similarity where genomes walk through the same parts of the graph, and differences where they do not.</p>
+<p>pggb generates this kind of graph using an all-to-all alignment of input sequences (wfmash), graph induction (seqwish), and progressive normalization (smoothxg, gfaffix). After construction, pggb generates diagnostic visualizations of the graph (odgi). A variant call report (in VCF) representing both small and large variants can be generated based on any reference genome included in the graph (vg). pggb writes its output in GFAv1 format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits.</p>
+<p>pggb has been tested at scale in the Human Pangenome Reference Consortium (HPRC) as a method to build a graph from the draft human pangenome. </p>
+<p>more details can be find <a href="https://github.com/pangenome/pggb">(PGGB)</a></p>
+<h3 id="learning-objectives">Learning objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">¶</a></h3>
+<ul>
+<li>build pangenome graphs using pggb</li>
+<li>explore pggb’s results</li>
+<li>understand how parameters affect the built pangenome graphs</li>
+</ul>
+<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">¶</a></h2>
+<p>NeSI HPC environment is used for the analysis. Please make sure to have a NeSI account and you are able to login.</p>
+<h3 id="setting-up-your-project-directory-and-download-the-datasets">Setting up your project directory and download the datasets<a class="headerlink" href="#setting-up-your-project-directory-and-download-the-datasets" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1"># Create a new directory in somewhere and change to that directory</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>mkdir<span class="w"> </span>pg_workshop
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="nb">cd</span><span class="w"> </span>pg_workshop
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="c1"># Keep a note of the absolute path of your directory</span>
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="nb">pwd</span>
+<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>/home/zyang/pg_worhshop
+<a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>
+<a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="c1"># Downloading and preparing datasets</span>
+<a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ZoeYang2020/dataset_for_pg_workshop
+<a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>
+<a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="c1"># copy the 4Sim.fa dataset to your work directory, mine is /home/zyang/pg_worhshop</span>
+<a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>cp<span class="w"> </span>/home/zyang/pg_worhshop/dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/4Sim.fa<span class="w"> </span>/home/zyang/pg_worhshop
+<a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>
+<a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="c1"># go back to your work directory </span>
+<a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="nb">cd</span><span class="w"> </span>/home/zyang/pg_worhshop
+</code></pre></div>
+<h2 id="construct-pangenome-graph-for-the-4sim-genomes">Construct pangenome graph for the 4Sim genomes<a class="headerlink" href="#construct-pangenome-graph-for-the-4sim-genomes" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1">#Creating an index for the seqence file using samtools and check</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="c1">#In Nesi environment you will have to load the samtools module first</span>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>module<span class="w"> </span>load<span class="w"> </span>SAMtools/1.16.1-GCC-11.3.0
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>samtools<span class="w"> </span>faidx<span class="w"> </span>4Sim.fa
+<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>less<span class="w"> </span>-S<span class="w"> </span>4Sim.fa.fai
+<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>NC_017518<span class="w">       </span><span class="m">2248966</span><span class="w"> </span><span class="m">16</span><span class="w">      </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>ST41Sim<span class="w"> </span><span class="m">2249014</span><span class="w"> </span><span class="m">2286474</span><span class="w"> </span><span class="m">2249014</span><span class="w"> </span><span class="m">2249015</span>
+<a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a>ST154Sim<span class="w">        </span><span class="m">2248965</span><span class="w"> </span><span class="m">4535499</span><span class="w"> </span><span class="m">2248965</span><span class="w"> </span><span class="m">2248966</span>
+<a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a>ST42Sim<span class="w"> </span><span class="m">2249050</span><span class="w"> </span><span class="m">6784474</span><span class="w"> </span><span class="m">2249050</span><span class="w"> </span><span class="m">2249051</span>
+</code></pre></div>
+<h3 id="executing-pggb-tool-using-singularity-container">Executing <code>pggb</code> tool using Singularity container<a class="headerlink" href="#executing-pggb-tool-using-singularity-container" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="nv">container</span><span class="o">=</span>/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="c1"># Execute singularity exec ${container} pggb to check the command list of PGGB</span>
+<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="si">${</span><span class="nv">container</span><span class="si">}</span><span class="w"> </span>pggb<span class="w"> </span>
+<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>ERROR:<span class="w"> </span>mandatory<span class="w"> </span>arguments<span class="w"> </span>-i<span class="w"> </span>and<span class="w"> </span>-n
+<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>ERROR:<span class="w"> </span>-n<span class="w"> </span>must<span class="w"> </span>be<span class="w"> </span>greater<span class="w"> </span>than<span class="w"> </span>or<span class="w"> </span>equal<span class="w"> </span>to<span class="w"> </span><span class="m">2</span>
+<a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>usage:<span class="w"> </span>/usr/local/bin/pggb<span class="w"> </span>-i<span class="w"> </span>&lt;input-fasta&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;n-haplotypes&gt;<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+<a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>options:
+<a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">   </span><span class="o">[</span>wfmash<span class="o">]</span>
+<a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span>-i,<span class="w"> </span>--input-fasta<span class="w"> </span>FILE<span class="w">      </span>input<span class="w"> </span>FASTA/FASTQ<span class="w"> </span>file
+<a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span>-s,<span class="w"> </span>--segment-length<span class="w"> </span>N<span class="w">      </span>segment<span class="w"> </span>length<span class="w"> </span><span class="k">for</span><span class="w"> </span>mapping<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">5000</span><span class="o">]</span>
+<a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">    </span>-l,<span class="w"> </span>--block-length<span class="w"> </span>N<span class="w">        </span>minimum<span class="w"> </span>block<span class="w"> </span>length<span class="w"> </span>filter<span class="w"> </span><span class="k">for</span><span class="w"> </span>mapping<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">5</span>*segment-length<span class="o">]</span>
+<a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">    </span>-p,<span class="w"> </span>--map-pct-id<span class="w"> </span>PCT<span class="w">        </span>percent<span class="w"> </span>identity<span class="w"> </span><span class="k">for</span><span class="w"> </span>mapping/alignment<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">90</span><span class="o">]</span>
+<a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">    </span>-n,<span class="w"> </span>--n-haplotypes<span class="w"> </span>N<span class="w">        </span>number<span class="w"> </span>of<span class="w"> </span>haplotypes
+<a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">    </span>-N,<span class="w"> </span>--no-split<span class="w">              </span>disable<span class="w"> </span>splitting<span class="w"> </span>of<span class="w"> </span>input<span class="w"> </span>sequences<span class="w"> </span>during<span class="w"> </span>mapping<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>enabled<span class="o">]</span>
+<a href="#__codelineno-2-18" id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="w">    </span>-x,<span class="w"> </span>--sparse-map<span class="w"> </span>N<span class="w">          </span>keep<span class="w"> </span>this<span class="w"> </span>fraction<span class="w"> </span>of<span class="w"> </span>mappings<span class="w"> </span><span class="o">(</span><span class="s1">'auto'</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>giant<span class="w"> </span>component<span class="w"> </span>heuristic<span class="o">)</span><span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">1</span>.0<span class="o">]</span>
+<a href="#__codelineno-2-19" id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="w">    </span>-K,<span class="w"> </span>--mash-kmer<span class="w"> </span>N<span class="w">           </span>kmer<span class="w"> </span>size<span class="w"> </span><span class="k">for</span><span class="w"> </span>mapping<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">19</span><span class="o">]</span>
+<a href="#__codelineno-2-20" id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="w">    </span>-F,<span class="w"> </span>--mash-kmer-thres<span class="w"> </span>N<span class="w">     </span>ignore<span class="w"> </span>the<span class="w"> </span>top<span class="w"> </span>%<span class="w"> </span>most-frequent<span class="w"> </span>kmers<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">0</span>.001<span class="o">]</span>
+<a href="#__codelineno-2-21" id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="w">    </span>-Y,<span class="w"> </span>--exclude-delim<span class="w"> </span>C<span class="w">       </span>skip<span class="w"> </span>mappings<span class="w"> </span>between<span class="w"> </span>sequences<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>same<span class="w"> </span>name<span class="w"> </span>prefix<span class="w"> </span>before
+<a href="#__codelineno-2-22" id="__codelineno-2-22" name="__codelineno-2-22"></a><span class="w">                                </span>the<span class="w"> </span>given<span class="w"> </span>delimiter<span class="w"> </span>character<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>all-vs-all<span class="w"> </span>and<span class="w"> </span>!self<span class="o">]</span>
+<a href="#__codelineno-2-23" id="__codelineno-2-23" name="__codelineno-2-23"></a><span class="w">   </span><span class="o">[</span>seqwish<span class="o">]</span>
+<a href="#__codelineno-2-24" id="__codelineno-2-24" name="__codelineno-2-24"></a><span class="w">    </span>-k,<span class="w"> </span>--min-match-len<span class="w"> </span>N<span class="w">       </span>filter<span class="w"> </span>exact<span class="w"> </span>matches<span class="w"> </span>below<span class="w"> </span>this<span class="w"> </span>length<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">19</span><span class="o">]</span>
+<a href="#__codelineno-2-25" id="__codelineno-2-25" name="__codelineno-2-25"></a><span class="w">    </span>-f,<span class="w"> </span>--sparse-factor<span class="w"> </span>N<span class="w">       </span>keep<span class="w"> </span>this<span class="w"> </span>randomly<span class="w"> </span>selected<span class="w"> </span>fraction<span class="w"> </span>of<span class="w"> </span>input<span class="w"> </span>matches<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>no<span class="w"> </span>sparsification<span class="o">]</span>
+<a href="#__codelineno-2-26" id="__codelineno-2-26" name="__codelineno-2-26"></a><span class="w">    </span>-B,<span class="w"> </span>--transclose-batch<span class="w">      </span>number<span class="w"> </span>of<span class="w"> </span>bp<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span><span class="k">for</span><span class="w"> </span>transitive<span class="w"> </span>closure<span class="w"> </span>batch<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">10000000</span><span class="o">]</span>
+<a href="#__codelineno-2-27" id="__codelineno-2-27" name="__codelineno-2-27"></a><span class="w">   </span><span class="o">[</span>smoothxg<span class="o">]</span>
+<a href="#__codelineno-2-28" id="__codelineno-2-28" name="__codelineno-2-28"></a><span class="w">    </span>-X,<span class="w"> </span>--skip-normalization<span class="w">    </span><span class="k">do</span><span class="w"> </span>not<span class="w"> </span>normalize<span class="w"> </span>the<span class="w"> </span>final<span class="w"> </span>graph<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>normalize<span class="w"> </span>the<span class="w"> </span>graph<span class="o">]</span>
+<a href="#__codelineno-2-29" id="__codelineno-2-29" name="__codelineno-2-29"></a><span class="w">    </span>-H,<span class="w"> </span>--n-haplotypes-smooth<span class="w"> </span>N<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>haplotypes,<span class="w"> </span><span class="k">if</span><span class="w"> </span>different<span class="w"> </span>than<span class="w"> </span>that<span class="w"> </span><span class="nb">set</span><span class="w"> </span>with<span class="w"> </span>-n<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>-n<span class="o">]</span>
+<a href="#__codelineno-2-30" id="__codelineno-2-30" name="__codelineno-2-30"></a><span class="w">    </span>-j,<span class="w"> </span>--path-jump-max<span class="w">         </span>maximum<span class="w"> </span>path<span class="w"> </span>jump<span class="w"> </span>to<span class="w"> </span>include<span class="w"> </span><span class="k">in</span><span class="w"> </span>block<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">0</span><span class="o">]</span>
+<a href="#__codelineno-2-31" id="__codelineno-2-31" name="__codelineno-2-31"></a><span class="w">    </span>-e,<span class="w"> </span>--edge-jump-max<span class="w"> </span>N<span class="w">       </span>maximum<span class="w"> </span>edge<span class="w"> </span>jump<span class="w"> </span>before<span class="w"> </span>breaking<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">0</span><span class="o">]</span>
+<a href="#__codelineno-2-32" id="__codelineno-2-32" name="__codelineno-2-32"></a><span class="w">    </span>-G,<span class="w"> </span>--poa-length-target<span class="w"> </span>N,M<span class="w"> </span>target<span class="w"> </span>sequence<span class="w"> </span>length<span class="w"> </span><span class="k">for</span><span class="w"> </span>POA,<span class="w"> </span>one<span class="w"> </span>per<span class="w"> </span>pass<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">700</span>,900,1100<span class="o">]</span>
+<a href="#__codelineno-2-33" id="__codelineno-2-33" name="__codelineno-2-33"></a><span class="w">    </span>-P,<span class="w"> </span>--poa-params<span class="w"> </span>PARAMS<span class="w">     </span>score<span class="w"> </span>parameters<span class="w"> </span><span class="k">for</span><span class="w"> </span>POA<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>form<span class="w"> </span>of<span class="w"> </span>match,mismatch,gap1,ext1,gap2,ext2
+<a href="#__codelineno-2-34" id="__codelineno-2-34" name="__codelineno-2-34"></a><span class="w">                                </span>may<span class="w"> </span>also<span class="w"> </span>be<span class="w"> </span>given<span class="w"> </span>as<span class="w"> </span>presets:<span class="w"> </span>asm5,<span class="w"> </span>asm10,<span class="w"> </span>asm15,<span class="w"> </span>asm20
+<a href="#__codelineno-2-35" id="__codelineno-2-35" name="__codelineno-2-35"></a><span class="w">                                </span><span class="o">[</span>default:<span class="w"> </span><span class="m">1</span>,19,39,3,81,1<span class="w"> </span><span class="o">=</span><span class="w"> </span>asm5<span class="o">]</span>
+<a href="#__codelineno-2-36" id="__codelineno-2-36" name="__codelineno-2-36"></a><span class="w">    </span>-O,<span class="w"> </span>--poa-padding<span class="w"> </span>N<span class="w">         </span>pad<span class="w"> </span>each<span class="w"> </span>end<span class="w"> </span>of<span class="w"> </span>each<span class="w"> </span>sequence<span class="w"> </span><span class="k">in</span><span class="w"> </span>POA<span class="w"> </span>with<span class="w"> </span>N*<span class="o">(</span>mean_seq_len<span class="o">)</span><span class="w"> </span>bp<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">0</span>.001<span class="o">]</span>
+<a href="#__codelineno-2-37" id="__codelineno-2-37" name="__codelineno-2-37"></a><span class="w">    </span>-d,<span class="w"> </span>--pad-max-depth<span class="w"> </span>N<span class="w">       </span>depth/haplotype<span class="w"> </span>at<span class="w"> </span>which<span class="w"> </span>we<span class="w"> </span>don<span class="s1">'t pad the POA problem [default: 100]</span>
+<a href="#__codelineno-2-38" id="__codelineno-2-38" name="__codelineno-2-38"></a><span class="s1">    -b, --run-abpoa             run abPOA [default: SPOA]</span>
+<a href="#__codelineno-2-39" id="__codelineno-2-39" name="__codelineno-2-39"></a><span class="s1">    -z, --global-poa            run the POA in global mode [default: local mode]</span>
+<a href="#__codelineno-2-40" id="__codelineno-2-40" name="__codelineno-2-40"></a><span class="s1">    -M, --write-maf             write MAF output representing merged POA blocks [default: off]</span>
+<a href="#__codelineno-2-41" id="__codelineno-2-41" name="__codelineno-2-41"></a><span class="s1">    -Q, --consensus-prefix P    use this prefix for consensus path names [default: Consensus_]</span>
+<a href="#__codelineno-2-42" id="__codelineno-2-42" name="__codelineno-2-42"></a><span class="s1">   [odgi]</span>
+<a href="#__codelineno-2-43" id="__codelineno-2-43" name="__codelineno-2-43"></a><span class="s1">    -v, --skip-viz              don'</span>t<span class="w"> </span>render<span class="w"> </span>visualizations<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>graph<span class="w"> </span><span class="k">in</span><span class="w"> </span>1D<span class="w"> </span>and<span class="w"> </span>2D<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>make<span class="w"> </span>them<span class="o">]</span>
+<a href="#__codelineno-2-44" id="__codelineno-2-44" name="__codelineno-2-44"></a><span class="w">    </span>-S,<span class="w"> </span>--stats<span class="w">                 </span>generate<span class="w"> </span>statistics<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>seqwish<span class="w"> </span>and<span class="w"> </span>smoothxg<span class="w"> </span>graph<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>off<span class="o">]</span>
+<a href="#__codelineno-2-45" id="__codelineno-2-45" name="__codelineno-2-45"></a><span class="w">   </span><span class="o">[</span>vg<span class="o">]</span>
+<a href="#__codelineno-2-46" id="__codelineno-2-46" name="__codelineno-2-46"></a><span class="w">    </span>-V,<span class="w"> </span>--vcf-spec<span class="w"> </span>SPEC<span class="w">         </span>specify<span class="w"> </span>a<span class="w"> </span><span class="nb">set</span><span class="w"> </span>of<span class="w"> </span>VCFs<span class="w"> </span>to<span class="w"> </span>produce<span class="w"> </span>with<span class="w"> </span><span class="nv">SPEC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>REF:DELIM<span class="o">[</span>:LEN<span class="o">][</span>,REF:DELIM:<span class="o">[</span>LEN<span class="o">]]</span>*
+<a href="#__codelineno-2-47" id="__codelineno-2-47" name="__codelineno-2-47"></a><span class="w">                                </span>the<span class="w"> </span>paths<span class="w"> </span>matching<span class="w"> </span>^REF<span class="w"> </span>are<span class="w"> </span>used<span class="w"> </span>as<span class="w"> </span>a<span class="w"> </span>reference,<span class="w"> </span><span class="k">while</span><span class="w"> </span>the<span class="w"> </span>sample<span class="w"> </span>haplotypes
+<a href="#__codelineno-2-48" id="__codelineno-2-48" name="__codelineno-2-48"></a><span class="w">                                </span>are<span class="w"> </span>derived<span class="w"> </span>from<span class="w"> </span>path<span class="w"> </span>names,<span class="w"> </span>e.g.<span class="w"> </span>when<span class="w"> </span><span class="nv">DELIM</span><span class="o">=</span><span class="c1"># and with '-V chm13:#',</span>
+<a href="#__codelineno-2-49" id="__codelineno-2-49" name="__codelineno-2-49"></a><span class="w">                                </span>a<span class="w"> </span>path<span class="w"> </span>named<span class="w"> </span>HG002#1#ctg<span class="w"> </span>would<span class="w"> </span>be<span class="w"> </span>assigned<span class="w"> </span>to<span class="w"> </span>sample<span class="w"> </span>HG002<span class="w"> </span>phase<span class="w"> </span><span class="m">1</span>.
+<a href="#__codelineno-2-50" id="__codelineno-2-50" name="__codelineno-2-50"></a><span class="w">                                </span>If<span class="w"> </span>LEN<span class="w"> </span>is<span class="w"> </span>specified<span class="w"> </span>and<span class="w"> </span>greater<span class="w"> </span>than<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>the<span class="w"> </span>VCFs<span class="w"> </span>are<span class="w"> </span>decomposed,<span class="w"> </span>filtering
+<a href="#__codelineno-2-51" id="__codelineno-2-51" name="__codelineno-2-51"></a><span class="w">                                </span>sites<span class="w"> </span>whose<span class="w"> </span>max<span class="w"> </span>allele<span class="w"> </span>length<span class="w"> </span>is<span class="w"> </span>greater<span class="w"> </span>than<span class="w"> </span>LEN.<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>off<span class="o">]</span>
+<a href="#__codelineno-2-52" id="__codelineno-2-52" name="__codelineno-2-52"></a><span class="w">   </span><span class="o">[</span>multiqc<span class="o">]</span>
+<a href="#__codelineno-2-53" id="__codelineno-2-53" name="__codelineno-2-53"></a><span class="w">    </span>-m,<span class="w"> </span>--multiqc<span class="w">               </span>generate<span class="w"> </span>MultiQC<span class="w"> </span>report<span class="w"> </span>of<span class="w"> </span>graphs<span class="err">'</span><span class="w"> </span>statistics<span class="w"> </span>and<span class="w"> </span>visualizations,
+<a href="#__codelineno-2-54" id="__codelineno-2-54" name="__codelineno-2-54"></a><span class="w">                                </span>automatically<span class="w"> </span>runs<span class="w"> </span>odgi<span class="w"> </span>stats<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>off<span class="o">]</span>
+<a href="#__codelineno-2-55" id="__codelineno-2-55" name="__codelineno-2-55"></a><span class="w">   </span><span class="o">[</span>general<span class="o">]</span>
+<a href="#__codelineno-2-56" id="__codelineno-2-56" name="__codelineno-2-56"></a><span class="w">    </span>-o,<span class="w"> </span>--output-dir<span class="w"> </span>PATH<span class="w">       </span>output<span class="w"> </span>directory
+<a href="#__codelineno-2-57" id="__codelineno-2-57" name="__codelineno-2-57"></a><span class="w">    </span>-D,<span class="w"> </span>--temp-dir<span class="w"> </span>PATH<span class="w">         </span>directory<span class="w"> </span><span class="k">for</span><span class="w"> </span>temporary<span class="w"> </span>files
+<a href="#__codelineno-2-58" id="__codelineno-2-58" name="__codelineno-2-58"></a><span class="w">    </span>-a,<span class="w"> </span>--input-paf<span class="w"> </span>FILE<span class="w">        </span>input<span class="w"> </span>PAF<span class="w"> </span>file<span class="p">;</span><span class="w"> </span>the<span class="w"> </span>wfmash<span class="w"> </span>alignment<span class="w"> </span>step<span class="w"> </span>is<span class="w"> </span>skipped
+<a href="#__codelineno-2-59" id="__codelineno-2-59" name="__codelineno-2-59"></a><span class="w">    </span>-r,<span class="w"> </span>--resume<span class="w">                </span><span class="k">do</span><span class="w"> </span>not<span class="w"> </span>overwrite<span class="w"> </span>existing<span class="w"> </span>outputs<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>given<span class="w"> </span>directory
+<a href="#__codelineno-2-60" id="__codelineno-2-60" name="__codelineno-2-60"></a><span class="w">                                </span><span class="o">[</span>default:<span class="w"> </span>start<span class="w"> </span>pipeline<span class="w"> </span>from<span class="w"> </span>scratch<span class="o">]</span>
+<a href="#__codelineno-2-61" id="__codelineno-2-61" name="__codelineno-2-61"></a><span class="w">    </span>-t,<span class="w"> </span>--threads<span class="w"> </span>N<span class="w">             </span>number<span class="w"> </span>of<span class="w"> </span>compute<span class="w"> </span>threads<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span><span class="k">in</span><span class="w"> </span>parallel<span class="w"> </span>steps<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">72</span><span class="o">]</span>
+<a href="#__codelineno-2-62" id="__codelineno-2-62" name="__codelineno-2-62"></a><span class="w">    </span>-T,<span class="w"> </span>--poa-threads<span class="w"> </span>N<span class="w">         </span>number<span class="w"> </span>of<span class="w"> </span>compute<span class="w"> </span>threads<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span>during<span class="w"> </span>POA<span class="w"> </span><span class="o">(</span><span class="nb">set</span><span class="w"> </span>lower<span class="w"> </span><span class="k">if</span><span class="w"> </span>you<span class="w"> </span>OOM<span class="w"> </span>during<span class="w"> </span>smoothing<span class="o">)</span>
+<a href="#__codelineno-2-63" id="__codelineno-2-63" name="__codelineno-2-63"></a><span class="w">    </span>-A,<span class="w"> </span>--keep-temp-files<span class="w">       </span>keep<span class="w"> </span>intermediate<span class="w"> </span>graphs
+<a href="#__codelineno-2-64" id="__codelineno-2-64" name="__codelineno-2-64"></a><span class="w">    </span>-Z,<span class="w"> </span>--compress<span class="w">              </span>compress<span class="w"> </span>alignment<span class="w"> </span><span class="o">(</span>.paf<span class="o">)</span>,<span class="w"> </span>graph<span class="w"> </span><span class="o">(</span>.gfa,<span class="w"> </span>.og<span class="o">)</span>,<span class="w"> </span>and<span class="w"> </span>MSA<span class="w"> </span><span class="o">(</span>.maf<span class="o">)</span><span class="w"> </span>outputs<span class="w"> </span>with<span class="w"> </span>pigz,
+<a href="#__codelineno-2-65" id="__codelineno-2-65" name="__codelineno-2-65"></a><span class="w">                                </span>and<span class="w"> </span>variant<span class="w"> </span><span class="o">(</span>.vcf<span class="o">)</span><span class="w"> </span>outputs<span class="w"> </span>with<span class="w"> </span>bgzip
+<a href="#__codelineno-2-66" id="__codelineno-2-66" name="__codelineno-2-66"></a><span class="w">    </span>--version<span class="w">                   </span>display<span class="w"> </span>the<span class="w"> </span>version<span class="w"> </span>of<span class="w"> </span>pggb
+<a href="#__codelineno-2-67" id="__codelineno-2-67" name="__codelineno-2-67"></a><span class="w">    </span>-h,<span class="w"> </span>--help<span class="w">                  </span>this<span class="w"> </span>text
+<a href="#__codelineno-2-68" id="__codelineno-2-68" name="__codelineno-2-68"></a>
+<a href="#__codelineno-2-69" id="__codelineno-2-69" name="__codelineno-2-69"></a>Use<span class="w"> </span>wfmash,<span class="w"> </span>seqwish,<span class="w"> </span>smoothxg,<span class="w"> </span>odgi,<span class="w"> </span>gfaffix,<span class="w"> </span>and<span class="w"> </span>vg<span class="w"> </span>to<span class="w"> </span>build,<span class="w"> </span>project<span class="w"> </span>and<span class="w"> </span>display<span class="w"> </span>a<span class="w"> </span>pangenome<span class="w"> </span>graph.
+</code></pre></div>
+<h3 id="key-parameters-for-executing-pggb">key parameters for executing PGGB<a class="headerlink" href="#key-parameters-for-executing-pggb" title="Permanent link">¶</a></h3>
+<p><a href="https://github.com/pangenome/pggb">https://github.com/pangenome/pggb</a>
+The overall structure of pggb's output graph is defined by three parameters: genome number (-n), segment length (-s), and pairwise identity (-p). </p>
+<p>Genome number (-n) is a given, but varies in ways that are difficult to infer and is thus left up to the user. Segment length defines the seed length used by the "MashMap3" homology mapper in wfmash. </p>
+<p>The pairwise identity (-p) is the minimum allowed pairwise identity between seeds, which is estimated using a mash-type approximation based on k-mer Jaccard. Mappings are initiated from collinear chains of around 5 seeds (-l, --block-length), and extended greedily as far as possible, allowing up to -n minus 1 mappings at each query position.</p>
+<p>An additional parameter, -k, can also greatly affect graph structure by pruning matches shorter than a given threshold from the initial graph model. In effect, -k N removes any match shorter than Nbp from the initial alignment. This filter removes potentially ambiguous pairwise alignments from consideration in establishing the initial scaffold of the graph.</p>
+<p>The initial graph is defined by parameters to wfmash and seqwish. But due to the ambiguities generated across the many pairwise alignments we use as input, this graph can be locally very complex. To regularize it we orchestrate a series of graph transformations. First, with smoothxg, we "smooth" it by locally realigning sequences to each other with a traditional multiple sequence alignment (we specifically apply POA). This process repeats multiple times to smooth over any boundary effects that may occur due to binning errors near MSA boundaries. Finally, we apply gfaffix to remove forks where both alternatives have the same sequence.</p>
+<h3 id="examples-of-key-parameters-for-executing-pggb">examples of key parameters for executing PGGB<a class="headerlink" href="#examples-of-key-parameters-for-executing-pggb" title="Permanent link">¶</a></h3>
+<ul>
+<li>Human, whole genome, 90 haplotypes: pggb -p 98 -s 50k -n 90 -k 79 ...</li>
+<li>15 helicobacter genomes, 5% divergence: pggb -n 15 -k 79, and 15 at higher (10%) divergence pggb -n 15 -k 19 -P asm20 ...</li>
+<li>Yeast genomes, 5% divergence: pggb's defaults should work well, just set -n.</li>
+<li>Aligning 9 MHC class II assemblies from vertebrate genomes (5-10% divergence): pggb -n 9 -k 29 ...</li>
+<li>A few thousand bacterial genomes pggb -x auto -n 2146 .... In general mapping sparsification (-x auto) is a good idea when you have many hundreds to thousands of genomes.</li>
+<li>pggb defaults to using the number of threads as logical processors on the system (the thread count given by getconf _NPROCESSORS_ONLN). Use -t to set an appropriate level of parallelism if you can't use all the processors on your system.</li>
+</ul>
+<h3 id="other-parameters-for-executing-pggb">other parameters for executing PGGB<a class="headerlink" href="#other-parameters-for-executing-pggb" title="Permanent link">¶</a></h3>
+<p>-S generate statistics of the seqwish and smoothxg graph</p>
+<p>-m generate MultiQC report of graphs' statistics and visualizations, automatically runs odgi stats</p>
+<p>-V specify a set of VCFs to produce with SPEC = REF:DELIM[:LEN][,REF:DELIM:[LEN]]* the paths matching ^REF are used as a reference, while the sample haplotype are derived from path names, e.g. when DELIM=# and with '-V chm13:#', a path named <a class="magiclink magiclink-github magiclink-issue" href="https://github.com/squidfunk/HG002/issues/1" title="GitHub Issue: squidfunk/HG002 #1">HG002#1</a>#ctg would be assigned to sample HG002 phase 1. If LEN is specified and greater than 0, the VCFs are decomposed, filtering sites whose max allele length is greater than LEN. [default: off]</p>
+<p>-o, --output-dir PATH       output directory</p>
+<h3 id="use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p">Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p<a class="headerlink" href="#use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>module<span class="w"> </span>load<span class="w"> </span>Mash/2.3-GCC-11.3.0
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>mash<span class="w"> </span>triangle<span class="w"> </span>4Sim.fa<span class="w"> </span>&gt;4Sim.fa_mash
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>less<span class="w"> </span>-S<span class="w"> </span>4Sim.fa_mash
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">        </span><span class="m">4</span>
+<a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>NC_017518
+<a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a>ST41Sim<span class="w"> </span><span class="m">0</span>.0010072
+<a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a>ST154Sim<span class="w">        </span><span class="m">0</span>.00121124<span class="w">      </span><span class="m">0</span>.000830728
+<a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a>ST42Sim<span class="w"> </span><span class="m">0</span>.00251903<span class="w">      </span><span class="m">0</span>.00366686<span class="w">      </span><span class="m">0</span>.00375609
+</code></pre></div>
+<h3 id="construct-pangenome-graph-for-4sim-genomes-with-singularity-container-pggb-k-1000-p-96">construct pangenome graph for 4Sim genomes with Singularity container PGGB, -k 1000, -p 96<a class="headerlink" href="#construct-pangenome-graph-for-4sim-genomes-with-singularity-container-pggb-k-1000-p-96" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="nv">container</span><span class="o">=</span>/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="c1"># Execute singularity exec ${container} pggb, set -s 1000</span>
+<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="si">${</span><span class="nv">container</span><span class="si">}</span><span class="w"> </span>pggb<span class="w"> </span>-i<span class="w"> </span>4Sim.fa<span class="w"> </span>-s<span class="w"> </span><span class="m">1000</span><span class="w"> </span>-p<span class="w"> </span><span class="m">96</span><span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>-t<span class="w"> </span><span class="m">24</span><span class="w"> </span>-S<span class="w"> </span>-m<span class="w"> </span>-o<span class="w"> </span>4Sim_1K96<span class="w"> </span>-V<span class="w"> </span><span class="s1">'NC_017518:#'</span>
+</code></pre></div>
+<h3 id="executing-pggb-as-a-slurm-job">Executing <code>pggb</code> as a <a href="https://github.com/SchedMD/slurm">SLURM</a> Job<a class="headerlink" href="#executing-pggb-as-a-slurm-job" title="Permanent link">¶</a></h3>
+<p>Executing shell scripts in the Nesi environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previusely explained script as below to run as SLURM job. Note the additional parameters specified by <code>#SBATCH</code> which will indicate maximum resource limitations. </p>
+<h4 id="pggb_slurm_1k96_4simsh">pggb_slurm_1K96_4Sim.sh<a class="headerlink" href="#pggb_slurm_1k96_4simsh" title="Permanent link">¶</a></h4>
+<p><div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="ch">#!/usr/bin/bash</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="c1">#SBATCH --account       ga03793</span>
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="c1">#SBATCH --job-name      4Sim_1K96</span>
+<a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="c1">#SBATCH --cpus-per-task 8</span>
+<a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="c1">#SBATCH --mem           4G</span>
+<a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="c1">#SBATCH --time          1:00:00</span>
+<a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a>
+<a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
+<a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a>
+<a href="#__codelineno-5-12" id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="c1">#export container to a variable for convenience</span>
+<a href="#__codelineno-5-13" id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="nv">WD</span><span class="o">=</span>/home/zyang/pg_workshop<span class="w"> </span><span class="c1">#Working Directory</span>
+<a href="#__codelineno-5-14" id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="nv">container</span><span class="o">=</span>/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+<a href="#__codelineno-5-15" id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="nv">data</span><span class="o">=</span>/home/zyang/pg_workshop/4Sim.fa
+<a href="#__codelineno-5-16" id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="nv">output</span><span class="o">=</span>/home/zyang/pg_workshop
+<a href="#__codelineno-5-17" id="__codelineno-5-17" name="__codelineno-5-17"></a>
+<a href="#__codelineno-5-18" id="__codelineno-5-18" name="__codelineno-5-18"></a>
+<a href="#__codelineno-5-19" id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="c1">#Bind filesystem to container image</span>
+<a href="#__codelineno-5-20" id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SINGULARITY_BIND</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">WD</span><span class="si">}</span><span class="s2">, /nesi/project/ga03793/"</span>
+<a href="#__codelineno-5-21" id="__codelineno-5-21" name="__codelineno-5-21"></a>
+<a href="#__codelineno-5-22" id="__codelineno-5-22" name="__codelineno-5-22"></a>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="si">${</span><span class="nv">container</span><span class="si">}</span><span class="w"> </span>pggb<span class="w"> </span>-i<span class="w"> </span><span class="nv">$data</span><span class="w"> </span>-s<span class="w"> </span><span class="m">1000</span><span class="w"> </span>-p<span class="w"> </span><span class="m">96</span><span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>-t<span class="w"> </span><span class="m">24</span><span class="w"> </span>-S<span class="w"> </span>-m<span class="w"> </span>-o<span class="w"> </span><span class="nv">$output</span>/4Sim_1K96<span class="w"> </span>-V<span class="w"> </span><span class="s1">'NC_017518:#'</span>
+</code></pre></div>
+The job can be submitted using the <code>sbatch</code> command it will show a job id.</p>
+<h4 id="pggb_slurm_10k96_4simsh">pggb_slurm_10K96_4Sim.sh<a class="headerlink" href="#pggb_slurm_10k96_4simsh" title="Permanent link">¶</a></h4>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="ch">#!/usr/bin/bash</span>
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>
+<a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="c1">#SBATCH --account       ga03793</span>
+<a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="c1">#SBATCH --job-name      4Sim_10K96</span>
+<a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="c1">#SBATCH --cpus-per-task 8</span>
+<a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="c1">#SBATCH --mem           4G</span>
+<a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="c1">#SBATCH --time          1:00:00</span>
+<a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a>
+<a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
+<a href="#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a>
+<a href="#__codelineno-6-12" id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="c1">#export container to a variable for convenience</span>
+<a href="#__codelineno-6-13" id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="nv">WD</span><span class="o">=</span>/home/zyang/pg_workshop<span class="w"> </span><span class="c1">#Working Directory</span>
+<a href="#__codelineno-6-14" id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="nv">container</span><span class="o">=</span>/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+<a href="#__codelineno-6-15" id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="nv">data</span><span class="o">=</span>/home/zyang/pg_workshop/4Sim.fa
+<a href="#__codelineno-6-16" id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="nv">output</span><span class="o">=</span>/home/zyang/pg_workshop
+<a href="#__codelineno-6-17" id="__codelineno-6-17" name="__codelineno-6-17"></a>
+<a href="#__codelineno-6-18" id="__codelineno-6-18" name="__codelineno-6-18"></a>
+<a href="#__codelineno-6-19" id="__codelineno-6-19" name="__codelineno-6-19"></a><span class="c1">#Bind filesystem to container image</span>
+<a href="#__codelineno-6-20" id="__codelineno-6-20" name="__codelineno-6-20"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SINGULARITY_BIND</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">WD</span><span class="si">}</span><span class="s2">, /nesi/project/ga03793/"</span>
+<a href="#__codelineno-6-21" id="__codelineno-6-21" name="__codelineno-6-21"></a>
+<a href="#__codelineno-6-22" id="__codelineno-6-22" name="__codelineno-6-22"></a>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="si">${</span><span class="nv">container</span><span class="si">}</span><span class="w"> </span>pggb<span class="w"> </span>-i<span class="w"> </span><span class="nv">$data</span><span class="w"> </span>-s<span class="w"> </span><span class="m">10000</span><span class="w"> </span>-p<span class="w"> </span><span class="m">96</span><span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>-t<span class="w"> </span><span class="m">24</span><span class="w"> </span>-S<span class="w"> </span>-m<span class="w"> </span>-o<span class="w"> </span><span class="nv">$output</span>/4Sim_10K96<span class="w"> </span>-V<span class="w"> </span><span class="s1">'NC_017518:#'</span>
+</code></pre></div>
+<h4 id="pggb_slurm_10k96_k79_4simsh">pggb_slurm_10K96_K79_4Sim.sh<a class="headerlink" href="#pggb_slurm_10k96_k79_4simsh" title="Permanent link">¶</a></h4>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="ch">#!/usr/bin/bash</span>
+<a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="c1">#SBATCH --account       ga03793</span>
+<a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="c1">#SBATCH --job-name      4Sim_1K96_K79</span>
+<a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="c1">#SBATCH --cpus-per-task 8</span>
+<a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="c1">#SBATCH --mem           4G</span>
+<a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="c1">#SBATCH --time          1:00:00</span>
+<a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a>
+<a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
+<a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a>
+<a href="#__codelineno-7-12" id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="c1">#export container to a variable for convenience</span>
+<a href="#__codelineno-7-13" id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="nv">WD</span><span class="o">=</span>/home/zyang/pg_workshop<span class="w"> </span><span class="c1">#Working Directory</span>
+<a href="#__codelineno-7-14" id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="nv">container</span><span class="o">=</span>/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+<a href="#__codelineno-7-15" id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="nv">data</span><span class="o">=</span>/home/zyang/pg_workshop/4Sim.fa
+<a href="#__codelineno-7-16" id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="nv">output</span><span class="o">=</span>/home/zyang/pg_workshop
+<a href="#__codelineno-7-17" id="__codelineno-7-17" name="__codelineno-7-17"></a>
+<a href="#__codelineno-7-18" id="__codelineno-7-18" name="__codelineno-7-18"></a>
+<a href="#__codelineno-7-19" id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="c1">#Bind filesystem to container image</span>
+<a href="#__codelineno-7-20" id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SINGULARITY_BIND</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">WD</span><span class="si">}</span><span class="s2">, /nesi/project/ga03793/"</span>
+<a href="#__codelineno-7-21" id="__codelineno-7-21" name="__codelineno-7-21"></a>
+<a href="#__codelineno-7-22" id="__codelineno-7-22" name="__codelineno-7-22"></a>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="si">${</span><span class="nv">container</span><span class="si">}</span><span class="w"> </span>pggb<span class="w"> </span>-i<span class="w"> </span><span class="nv">$data</span><span class="w"> </span>-s<span class="w"> </span><span class="m">1000</span><span class="w"> </span>-p<span class="w"> </span><span class="m">96</span><span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>-K<span class="w"> </span><span class="m">79</span><span class="w"> </span>-t<span class="w"> </span><span class="m">24</span><span class="w"> </span>-S<span class="w"> </span>-m<span class="w"> </span>-o<span class="w"> </span><span class="nv">$output</span>/4Sim_1K96_K79<span class="w"> </span>-V<span class="w"> </span><span class="s1">'NC_017518:#'</span>
+</code></pre></div>
+<h3 id="evaluate-pangenome-graphs-for-4sim-genomes-constructed-with-different-settings">Evaluate Pangenome Graphs for 4Sim Genomes Constructed with Different Settings<a class="headerlink" href="#evaluate-pangenome-graphs-for-4sim-genomes-constructed-with-different-settings" title="Permanent link">¶</a></h3>
+<ul>
+<li>
+<p>We have employed three distinct settings to construct the pangenome graph of the 4Sim genomes. Which setting yielded the most optimal result? How can we determine this? </p>
+</li>
+<li>
+<p>download the multiqc.html file, check the Detailed ODGI stats table.</p>
+</li>
+</ul>
+<h4 id="1k96">1k96<a class="headerlink" href="#1k96" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th align="left">Sample Name</th>
+<th align="right">Length</th>
+<th align="right">Nodes</th>
+<th align="right">Edges</th>
+<th align="right">Components</th>
+<th align="right">A</th>
+<th align="right">C</th>
+<th align="right">T</th>
+<th align="right">G</th>
+<th align="right">N</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">seqwish</td>
+<td align="right">2280344</td>
+<td align="right">22216</td>
+<td align="right">29823</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">551639</td>
+<td align="right">578590</td>
+<td align="right">557450</td>
+<td align="right">592665</td>
+</tr>
+<tr>
+<td align="left">smooth</td>
+<td align="right">2261163</td>
+<td align="right">29965</td>
+<td align="right">40179</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">548754</td>
+<td align="right">574693</td>
+<td align="right">551650</td>
+<td align="right">586066</td>
+</tr>
+</tbody>
+</table>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/pggb_4sim/1k96/4Sim.fa.97e7156.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png?raw=true]"><img alt="1k96 ODGI 1D visualization by path orientation" src="https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/pggb_4sim/1k96/4Sim.fa.97e7156.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png?raw=true]"/></a></p>
+<h4 id="1k96-k79">1k96,-K79<a class="headerlink" href="#1k96-k79" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th align="left">Sample Name</th>
+<th align="right">Length</th>
+<th align="right">Nodes</th>
+<th align="right">Edges</th>
+<th align="right">Components</th>
+<th align="right">A</th>
+<th align="right">C</th>
+<th align="right">T</th>
+<th align="right">G</th>
+<th align="right">N</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">seqwish</td>
+<td align="right">2279905</td>
+<td align="right">22209</td>
+<td align="right">29812</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">551588</td>
+<td align="right">578459</td>
+<td align="right">557291</td>
+<td align="right">592567</td>
+</tr>
+<tr>
+<td align="left">smooth</td>
+<td align="right">2261401</td>
+<td align="right">29976</td>
+<td align="right">40199</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">553049</td>
+<td align="right">580469</td>
+<td align="right">547460</td>
+<td align="right">580423</td>
+</tr>
+</tbody>
+</table>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/pggb_4sim/1k96_K79/4Sim.fa.f958389.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png?raw=true]"><img alt="1k96K79 ODGI 1D visualization by path orientation" src="https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/pggb_4sim/1k96_K79/4Sim.fa.f958389.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png?raw=true]"/></a></p>
+<h4 id="10k96">10k96<a class="headerlink" href="#10k96" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th align="left">Sample Name</th>
+<th align="right">Length</th>
+<th align="right">Nodes</th>
+<th align="right">Edges</th>
+<th align="right">Components</th>
+<th align="right">A</th>
+<th align="right">C</th>
+<th align="right">T</th>
+<th align="right">G</th>
+<th align="right">N</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">seqwish</td>
+<td align="right">2340700</td>
+<td align="right">22166</td>
+<td align="right">29759</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">566559</td>
+<td align="right">594741</td>
+<td align="right">571836</td>
+<td align="right">607564</td>
+</tr>
+<tr>
+<td align="left">smooth</td>
+<td align="right">2319601</td>
+<td align="right">29888</td>
+<td align="right">40070</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">566755</td>
+<td align="right">599287</td>
+<td align="right">562078</td>
+<td align="right">591481</td>
+</tr>
+</tbody>
+</table>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/pggb_4sim/10k96/4Sim.fa.e7f7fe6.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png?raw=true]"><img alt="10k96 ODGI 1D visualization by path orientation" src="https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/pggb_4sim/10k96/4Sim.fa.e7f7fe6.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png?raw=true]"/></a></p>
+<h3 id="vg-deconstruct-graph-to-get-the-variations-in-vcf">vg deconstruct graph to get the variations in vcf<a class="headerlink" href="#vg-deconstruct-graph-to-get-the-variations-in-vcf" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>mkdir<span class="w"> </span>vg_deconstruct
+<a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="c1">#copy gfa to vg_deconsturct and rename the gfa files with its PGGB settings</span>
+<a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a>cp<span class="w"> </span>/home/zyang/pg_workshop/4Sim_1K96/4Sim.fa.97e7156.417fcdf.7659dc8.smooth.final.gfa<span class="w"> </span>/home/zyang/pg_workshop/vg_deconstruct/4Sim_1K96.gfa
+<a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a>cp<span class="w"> </span>/home/zyang/pg_workshop/4Sim_1K96_K79/4Sim.fa.f958389.417fcdf.7659dc8.smooth.final.gfa<span class="w"> </span>/home/zyang/pg_workshop/vg_deconstruct/4Sim_1K96_K79.gfa
+<a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a>
+<a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="nb">cd</span><span class="w"> </span>/home/zyang/pg_workshop/vg_deconstruct
+<a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a>
+<a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a>module<span class="w"> </span>load<span class="w"> </span>vg/1.46.0
+<a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a>module<span class="w"> </span>load<span class="w"> </span>BCFtools/1.16-GCC-11.3.0
+<a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a>
+<a href="#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a>vg<span class="w"> </span>deconstruct<span class="w"> </span>-p<span class="w"> </span>NC_017518<span class="w">  </span>-a<span class="w"> </span>-e<span class="w"> </span>4Sim_1K96.gfa<span class="w"> </span>&gt;4Sim_1K96_aep1.vcf
+<a href="#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a>bcftools<span class="w"> </span>stats<span class="w"> </span>4Sim_1K96_aep1.vcf<span class="w"> </span>&gt;4Sim_1K96_aep1.vcf_stats
+</code></pre></div>
+<h4 id="4sim_vg_deconstructsh">4Sim_vg_deconstruct.sh<a class="headerlink" href="#4sim_vg_deconstructsh" title="Permanent link">¶</a></h4>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="ch">#!/usr//bin/bash</span>
+<a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>
+<a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="c1">#SBATCH --account       ga03793</span>
+<a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="c1">#SBATCH --job-name      4Sim_vg_deconstruct</span>
+<a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="c1">#SBATCH --cpus-per-task 8</span>
+<a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="c1">#SBATCH --mem           4G</span>
+<a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="c1">#SBATCH --time          1:00:00</span>
+<a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a>
+<a href="#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-9-10" id="__codelineno-9-10" name="__codelineno-9-10"></a>module<span class="w"> </span>load<span class="w"> </span>vg/1.46.0
+<a href="#__codelineno-9-11" id="__codelineno-9-11" name="__codelineno-9-11"></a>module<span class="w"> </span>load<span class="w"> </span>BCFtools/1.16-GCC-11.3.0
+<a href="#__codelineno-9-12" id="__codelineno-9-12" name="__codelineno-9-12"></a>
+<a href="#__codelineno-9-13" id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="nb">export</span><span class="w"> </span>container<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>variable<span class="w"> </span><span class="k">for</span><span class="w"> </span>convenience
+<a href="#__codelineno-9-14" id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="nv">inputGFA</span><span class="o">=</span>/home/zyang/pg_workshop/vg_deconstruct/*.gfa
+<a href="#__codelineno-9-15" id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="nv">input_folder</span><span class="o">=</span>/home/zyang/pg_workshop/vg_deconstruct
+<a href="#__codelineno-9-16" id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="nv">output</span><span class="o">=</span>/home/zyang/pg_workshop/vg_deconstruct
+<a href="#__codelineno-9-17" id="__codelineno-9-17" name="__codelineno-9-17"></a>
+<a href="#__codelineno-9-18" id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$inputGFA</span>
+<a href="#__codelineno-9-19" id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="k">do</span>
+<a href="#__codelineno-9-20" id="__codelineno-9-20" name="__codelineno-9-20"></a>
+<a href="#__codelineno-9-21" id="__codelineno-9-21" name="__codelineno-9-21"></a><span class="nv">x</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="nv">$f</span><span class="w"> </span>.gfa<span class="k">)</span>
+<a href="#__codelineno-9-22" id="__codelineno-9-22" name="__codelineno-9-22"></a><span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">x</span><span class="si">}</span>
+<a href="#__codelineno-9-23" id="__codelineno-9-23" name="__codelineno-9-23"></a>
+<a href="#__codelineno-9-24" id="__codelineno-9-24" name="__codelineno-9-24"></a>vg<span class="w"> </span>deconstruct<span class="w"> </span>-p<span class="w"> </span>NC_017518<span class="w">  </span>-a<span class="w"> </span>-e<span class="w"> </span><span class="nv">$input_folder</span>/<span class="si">${</span><span class="nv">x</span><span class="si">}</span>.gfa<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$output</span>/<span class="si">${</span><span class="nv">x</span><span class="si">}</span>aep1.vcf
+<a href="#__codelineno-9-25" id="__codelineno-9-25" name="__codelineno-9-25"></a>bcftools<span class="w"> </span>stats<span class="w"> </span><span class="nv">$output</span>/<span class="si">${</span><span class="nv">x</span><span class="si">}</span>aep1.vcf<span class="w"> </span>&gt;<span class="nv">$output</span>/<span class="si">${</span><span class="nv">x</span><span class="si">}</span>aep1.vcf_stats
+<a href="#__codelineno-9-26" id="__codelineno-9-26" name="__codelineno-9-26"></a><span class="k">done</span>
+</code></pre></div>
+<h4 id="bcftools-isec-to-check-the-overlap-of-the-1k96-k-19-1k96-k-79">bcftools isec to check the overlap of the 1k96 -K 19, 1k96, -K 79<a class="headerlink" href="#bcftools-isec-to-check-the-overlap-of-the-1k96-k-19-1k96-k-79" title="Permanent link">¶</a></h4>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="ch">#!/usr/bin/bash</span>
+<a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a>
+<a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="c1">#SBATCH --account       ga03793</span>
+<a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="c1">#SBATCH --job-name      4Sim_1k96_isec</span>
+<a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="c1">#SBATCH --cpus-per-task 8</span>
+<a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="c1">#SBATCH --mem           4G</span>
+<a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="c1">#SBATCH --time          1:00:00</span>
+<a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a>
+<a href="#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a>module<span class="w"> </span>load<span class="w"> </span>BCFtools/1.16-GCC-11.3.0
+<a href="#__codelineno-10-11" id="__codelineno-10-11" name="__codelineno-10-11"></a>
+<a href="#__codelineno-10-12" id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="nv">input_folder</span><span class="o">=</span>/home/zyang/pg_workshop/vg_deconstruct
+<a href="#__codelineno-10-13" id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="nv">output_folder</span><span class="o">=</span>/home/zyang/pg_workshop/vg_deconstruct
+<a href="#__codelineno-10-14" id="__codelineno-10-14" name="__codelineno-10-14"></a>
+<a href="#__codelineno-10-15" id="__codelineno-10-15" name="__codelineno-10-15"></a>
+<a href="#__codelineno-10-16" id="__codelineno-10-16" name="__codelineno-10-16"></a>bcftools<span class="w"> </span>view<span class="w"> </span><span class="nv">$input_folder</span>/4Sim_1K96aep1.vcf<span class="w">  </span>-Oz<span class="w"> </span>-o<span class="w"> </span><span class="nv">$output_folder</span>/4Sim_1K96aep1.vcf.gz
+<a href="#__codelineno-10-17" id="__codelineno-10-17" name="__codelineno-10-17"></a>bcftools<span class="w"> </span>view<span class="w"> </span><span class="nv">$input_folder</span>/4Sim_1K96_K79aep1.vcf<span class="w"> </span>-Oz<span class="w"> </span>-o<span class="w"> </span><span class="nv">$output_folder</span>/4Sim_1K96_K79aep1.vcf.gz
+<a href="#__codelineno-10-18" id="__codelineno-10-18" name="__codelineno-10-18"></a>
+<a href="#__codelineno-10-19" id="__codelineno-10-19" name="__codelineno-10-19"></a>bcftools<span class="w"> </span>index<span class="w"> </span><span class="nv">$output_folder</span>/4Sim_1K96aep1.vcf.gz
+<a href="#__codelineno-10-20" id="__codelineno-10-20" name="__codelineno-10-20"></a>bcftools<span class="w"> </span>index<span class="w"> </span><span class="nv">$output_folder</span>/4Sim_1K96_K79aep1.vcf.gz
+<a href="#__codelineno-10-21" id="__codelineno-10-21" name="__codelineno-10-21"></a>
+<a href="#__codelineno-10-22" id="__codelineno-10-22" name="__codelineno-10-22"></a>bcftools<span class="w"> </span>isec<span class="w"> </span><span class="nv">$output_folder</span>/4Sim_1K96aep1.vcf.gz<span class="w"> </span><span class="nv">$output_folder</span>/4Sim_1K96_K79aep1.vcf.gz<span class="w"> </span>-p<span class="w"> </span><span class="nv">$output_folder</span>/isec_4Sim_1K96
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="c1">#specific to  1k96 -K 19</span>
+<a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a>less<span class="w"> </span>-S<span class="w"> </span>/home/zyang/pg_workshop/vg_deconstruct/isec_4Sim_1K96/0000.vcf
+<a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="c1">#specific to  1k96 -K 79</span>
+<a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a>less<span class="w"> </span>-S<span class="w"> </span>/home/zyang/pg_workshop/vg_deconstruct/isec_4Sim_1K96/0001.vcf
+</code></pre></div>
+<h5 id="difference-between-1k96-k-19-vs-1k96-k-79">difference between 1k96 -K 19 Vs 1k96 -K 79<a class="headerlink" href="#difference-between-1k96-k-19-vs-1k96-k-79" title="Permanent link">¶</a></h5>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/Figures/4Sim1K96_K19vsK79_specific_variation.png?raw=true"><img alt="difference between 1k96 -K 19 Vs 1k96 -K 79" src="https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/Figures/4Sim1K96_K19vsK79_specific_variation.png?raw=true"/></a></p>
+<h3 id="pgge">PGGE<a class="headerlink" href="#pgge" title="Permanent link">¶</a></h3>
+<p>This pangenome graph evaluation pipeline measures the reconstruction accuracy of a pangenome graph (in the variation graph model). Its goal is to give guidance in finding the best pangenome graph construction tool for a given input data and task.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a>mkdir<span class="w"> </span>4Sim_pgge
+<a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="c1">#copy *.gfa to 4Sim_pgge</span>
+<a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a>cp<span class="w"> </span>/home/zyang/pg_workshop/vg_deconstruct/*.gfa<span class="w"> </span>/home/zyang/pg_workshop/4Sim_pgge
+<a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a>cp<span class="w"> </span>/home/zyang/pg_workshop/4Sim_10K96/4Sim.fa.e7f7fe6.417fcdf.7659dc8.smooth.final.gfa<span class="w"> </span>/home/zyang/pg_workshop/4Sim_pgge/4Sim_10K96.gfa
+</code></pre></div>
+<h4 id="pgge-script">PGGE script<a class="headerlink" href="#pgge-script" title="Permanent link">¶</a></h4>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="ch">#!/usr/bin/bash</span>
+<a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a>
+<a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="c1">#SBATCH --account       ga03793</span>
+<a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="c1">#SBATCH --job-name      4Sim_pgge</span>
+<a href="#__codelineno-13-5" id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="c1">#SBATCH --cpus-per-task 8</span>
+<a href="#__codelineno-13-6" id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="c1">#SBATCH --mem           4G</span>
+<a href="#__codelineno-13-7" id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="c1">#SBATCH --time          1:00:00</span>
+<a href="#__codelineno-13-8" id="__codelineno-13-8" name="__codelineno-13-8"></a>
+<a href="#__codelineno-13-9" id="__codelineno-13-9" name="__codelineno-13-9"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-13-10" id="__codelineno-13-10" name="__codelineno-13-10"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
+<a href="#__codelineno-13-11" id="__codelineno-13-11" name="__codelineno-13-11"></a>
+<a href="#__codelineno-13-12" id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="c1">#export container to a variable for convenience</span>
+<a href="#__codelineno-13-13" id="__codelineno-13-13" name="__codelineno-13-13"></a>
+<a href="#__codelineno-13-14" id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="nv">container</span><span class="o">=</span>/nesi/project/ga03793/software/pgge/pgge_032023.simg
+<a href="#__codelineno-13-15" id="__codelineno-13-15" name="__codelineno-13-15"></a>
+<a href="#__codelineno-13-16" id="__codelineno-13-16" name="__codelineno-13-16"></a>
+<a href="#__codelineno-13-17" id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="nv">WD</span><span class="o">=</span>/home/zyang/pg_workshop/4Sim_pgge<span class="w"> </span><span class="c1">#Working Directory</span>
+<a href="#__codelineno-13-18" id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="nv">inputGFA</span><span class="o">=</span>/home/zyang/pg_workshop/4Sim_pgge/*.gfa
+<a href="#__codelineno-13-19" id="__codelineno-13-19" name="__codelineno-13-19"></a><span class="nv">input_folder</span><span class="o">=</span>/home/zyang/pg_workshop/4Sim_pgge
+<a href="#__codelineno-13-20" id="__codelineno-13-20" name="__codelineno-13-20"></a><span class="nv">inputfa</span><span class="o">=</span>/home/zyang/pg_workshop/4Sim.fa
+<a href="#__codelineno-13-21" id="__codelineno-13-21" name="__codelineno-13-21"></a><span class="nv">output</span><span class="o">=</span>/home/zyang/pg_workshop/4Sim_pgge
+<a href="#__codelineno-13-22" id="__codelineno-13-22" name="__codelineno-13-22"></a><span class="nv">beehave</span><span class="o">=</span>/home/zyang/pg_workshop/beehave.R
+<a href="#__codelineno-13-23" id="__codelineno-13-23" name="__codelineno-13-23"></a>
+<a href="#__codelineno-13-24" id="__codelineno-13-24" name="__codelineno-13-24"></a>
+<a href="#__codelineno-13-25" id="__codelineno-13-25" name="__codelineno-13-25"></a><span class="c1">#Bind filesystem to container image</span>
+<a href="#__codelineno-13-26" id="__codelineno-13-26" name="__codelineno-13-26"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SINGULARITY_BIND</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">WD</span><span class="si">}</span><span class="s2">, /nesi/project/ga03793/"</span>
+<a href="#__codelineno-13-27" id="__codelineno-13-27" name="__codelineno-13-27"></a>
+<a href="#__codelineno-13-28" id="__codelineno-13-28" name="__codelineno-13-28"></a>
+<a href="#__codelineno-13-29" id="__codelineno-13-29" name="__codelineno-13-29"></a><span class="k">for</span><span class="w"> </span>x<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$inputGFA</span>
+<a href="#__codelineno-13-30" id="__codelineno-13-30" name="__codelineno-13-30"></a>
+<a href="#__codelineno-13-31" id="__codelineno-13-31" name="__codelineno-13-31"></a><span class="k">do</span>
+<a href="#__codelineno-13-32" id="__codelineno-13-32" name="__codelineno-13-32"></a>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="si">${</span><span class="nv">container</span><span class="si">}</span><span class="w"> </span>pgge<span class="w"> </span>-g<span class="w"> </span><span class="nv">$x</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">$inputfa</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">$output</span><span class="w"> </span>-r<span class="w"> </span><span class="nv">$beehave</span><span class="w"> </span>-b<span class="w"> </span><span class="nv">$output</span>/pgge_4Sim_peanut_bed<span class="w"> </span>-l<span class="w"> </span><span class="m">100000</span><span class="w"> </span>-s<span class="w"> </span><span class="m">5000</span><span class="w"> </span>-t<span class="w"> </span><span class="m">16</span>
+<a href="#__codelineno-13-33" id="__codelineno-13-33" name="__codelineno-13-33"></a>
+<a href="#__codelineno-13-34" id="__codelineno-13-34" name="__codelineno-13-34"></a><span class="k">done</span>
+</code></pre></div>
+<h2 id="odgi-paths-to-extract-distance">ODGI paths to extract distance<a class="headerlink" href="#odgi-paths-to-extract-distance" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a>mkdir<span class="w"> </span>odgi_distance
+<a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a>cp<span class="w"> </span>odgi_distance
+<a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="c1">#copy gfa to odgi_distance working directory </span>
+<a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a>cp<span class="w"> </span>/home/zyang/pg_workshop/vg_deconstruct/4Sim_1K96.gfa<span class="w"> </span>/home/zyang/pg_workshop/odgi_distance/
+<a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a>
+<a href="#__codelineno-14-6" id="__codelineno-14-6" name="__codelineno-14-6"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-14-7" id="__codelineno-14-7" name="__codelineno-14-7"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
+<a href="#__codelineno-14-8" id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="nv">container</span><span class="o">=</span>/nesi/project/ga03793/software/odgi/odgi_0.8.2.simg
+<a href="#__codelineno-14-9" id="__codelineno-14-9" name="__codelineno-14-9"></a>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="si">${</span><span class="nv">container</span><span class="si">}</span><span class="w"> </span>odgi<span class="w"> </span>paths<span class="w"> </span>-i<span class="w"> </span>4Sim_1K96.gfa<span class="w"> </span>-d<span class="w"> </span>-D<span class="w"> </span><span class="s1">'AAAA'</span><span class="w"> </span>&gt;4Sim_1K96.gfa_distance
+<a href="#__codelineno-14-10" id="__codelineno-14-10" name="__codelineno-14-10"></a>cut<span class="w"> </span>-f<span class="w"> </span><span class="m">1</span>,2,6<span class="w"> </span>4Sim_1K96.gfa_distance<span class="w"> </span>&gt;4Sim_1K96.gfa_distance_cut
+</code></pre></div>
+<h3 id="script-for-odgi-paths-to-extract-distance">script for ODGI paths to extract distance<a class="headerlink" href="#script-for-odgi-paths-to-extract-distance" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="ch">#!/usr/bin/bash</span>
+<a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a>
+<a href="#__codelineno-15-3" id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="c1">#SBATCH --account       ga03793</span>
+<a href="#__codelineno-15-4" id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="c1">#SBATCH --job-name      4Sim_1K96_distance</span>
+<a href="#__codelineno-15-5" id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="c1">#SBATCH --cpus-per-task 8</span>
+<a href="#__codelineno-15-6" id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="c1">#SBATCH --mem           4G</span>
+<a href="#__codelineno-15-7" id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="c1">#SBATCH --time          1:00:00</span>
+<a href="#__codelineno-15-8" id="__codelineno-15-8" name="__codelineno-15-8"></a>
+<a href="#__codelineno-15-9" id="__codelineno-15-9" name="__codelineno-15-9"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-15-10" id="__codelineno-15-10" name="__codelineno-15-10"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
+<a href="#__codelineno-15-11" id="__codelineno-15-11" name="__codelineno-15-11"></a>
+<a href="#__codelineno-15-12" id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="c1">#export container to a variable for convenience</span>
+<a href="#__codelineno-15-13" id="__codelineno-15-13" name="__codelineno-15-13"></a><span class="nv">container</span><span class="o">=</span>/nesi/project/ga03793/software/odgi/odgi_0.8.2.simg
+<a href="#__codelineno-15-14" id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="nv">data</span><span class="o">=</span>/home/zyang/pg_workshop/odgi_distance/4Sim_1K96.gfa
+<a href="#__codelineno-15-15" id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="nv">output</span><span class="o">=</span>/home/zyang/pg_workshop/odgi_distance
+<a href="#__codelineno-15-16" id="__codelineno-15-16" name="__codelineno-15-16"></a>
+<a href="#__codelineno-15-17" id="__codelineno-15-17" name="__codelineno-15-17"></a>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="si">${</span><span class="nv">container</span><span class="si">}</span><span class="w"> </span>odgi<span class="w"> </span>paths<span class="w"> </span>-i<span class="w"> </span><span class="nv">$data</span><span class="w"> </span>-d<span class="w"> </span>-D<span class="w"> </span><span class="s1">'AAAA'</span><span class="w"> </span>&gt;<span class="nv">$output</span>/4Sim_1K96.gfa_distance
+<a href="#__codelineno-15-18" id="__codelineno-15-18" name="__codelineno-15-18"></a>cut<span class="w"> </span>-f<span class="w"> </span><span class="m">1</span>,2,6<span class="w"> </span><span class="nv">$output</span>/4Sim_1K96.gfa_distance<span class="w"> </span>&gt;<span class="nv">$output</span>/4Sim_1K96.gfa_distance_cut
+</code></pre></div>
+<h3 id="r-script-for-clustering-based-on-distance-among-paths-of-a-graph-4sim-1k96">R script for clustering based on distance among paths of a graph, 4Sim 1k96<a class="headerlink" href="#r-script-for-clustering-based-on-distance-among-paths-of-a-graph-4sim-1k96" title="Permanent link">¶</a></h3>
+<p>list2dist_clustering_4Sim.R
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a>setwd<span class="o">(</span><span class="s2">"/home/zyang/pg_workshop/odgi_distance"</span><span class="o">)</span>
+<a href="#__codelineno-16-2" id="__codelineno-16-2" name="__codelineno-16-2"></a>
+<a href="#__codelineno-16-3" id="__codelineno-16-3" name="__codelineno-16-3"></a>library<span class="o">(</span>reshape<span class="o">)</span>
+<a href="#__codelineno-16-4" id="__codelineno-16-4" name="__codelineno-16-4"></a>library<span class="o">(</span>ape<span class="o">)</span>
+<a href="#__codelineno-16-5" id="__codelineno-16-5" name="__codelineno-16-5"></a>
+<a href="#__codelineno-16-6" id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="c1"># read in the data</span>
+<a href="#__codelineno-16-7" id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="nv">dat</span><span class="o">=</span>read.csv<span class="o">(</span><span class="s2">"4Sim_1K96.gfa_distance_cut"</span>,sep<span class="o">=</span><span class="s2">"\t"</span><span class="o">)</span>
+<a href="#__codelineno-16-8" id="__codelineno-16-8" name="__codelineno-16-8"></a>dat
+<a href="#__codelineno-16-9" id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="c1"># use reshape's cast function to change to matrix</span>
+<a href="#__codelineno-16-10" id="__codelineno-16-10" name="__codelineno-16-10"></a>m<span class="w"> </span>&lt;-<span class="w"> </span>cast<span class="o">(</span>dat,<span class="w"> </span>group.a<span class="w"> </span>~<span class="w"> </span>group.b<span class="o">)</span>
+<a href="#__codelineno-16-11" id="__codelineno-16-11" name="__codelineno-16-11"></a>m
+<a href="#__codelineno-16-12" id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="c1"># set the row names</span>
+<a href="#__codelineno-16-13" id="__codelineno-16-13" name="__codelineno-16-13"></a>rownames<span class="o">(</span>m<span class="o">)</span><span class="w"> </span>&lt;-<span class="w"> </span>m<span class="o">[</span>,1<span class="o">]</span>
+<a href="#__codelineno-16-14" id="__codelineno-16-14" name="__codelineno-16-14"></a>rownames<span class="o">(</span>m<span class="o">)</span>
+<a href="#__codelineno-16-15" id="__codelineno-16-15" name="__codelineno-16-15"></a>
+<a href="#__codelineno-16-16" id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="c1">#The fellowing two lines code will cause no IDs in the clustering</span>
+<a href="#__codelineno-16-17" id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="c1"># get rid of a couple of rows</span>
+<a href="#__codelineno-16-18" id="__codelineno-16-18" name="__codelineno-16-18"></a><span class="c1">#m &lt;- m[,-2]</span>
+<a href="#__codelineno-16-19" id="__codelineno-16-19" name="__codelineno-16-19"></a><span class="c1"># convert any 0s that were read in as strings to integers</span>
+<a href="#__codelineno-16-20" id="__codelineno-16-20" name="__codelineno-16-20"></a><span class="c1">#m &lt;- apply(m, 2, as.numeric )</span>
+<a href="#__codelineno-16-21" id="__codelineno-16-21" name="__codelineno-16-21"></a>m
+<a href="#__codelineno-16-22" id="__codelineno-16-22" name="__codelineno-16-22"></a>
+<a href="#__codelineno-16-23" id="__codelineno-16-23" name="__codelineno-16-23"></a><span class="c1"># change the matrix to a distance matrix</span>
+<a href="#__codelineno-16-24" id="__codelineno-16-24" name="__codelineno-16-24"></a>d<span class="w"> </span>&lt;-<span class="w"> </span>dist<span class="o">(</span>m<span class="o">)</span>
+<a href="#__codelineno-16-25" id="__codelineno-16-25" name="__codelineno-16-25"></a>d
+<a href="#__codelineno-16-26" id="__codelineno-16-26" name="__codelineno-16-26"></a>
+<a href="#__codelineno-16-27" id="__codelineno-16-27" name="__codelineno-16-27"></a><span class="c1"># do hierarchical clustering</span>
+<a href="#__codelineno-16-28" id="__codelineno-16-28" name="__codelineno-16-28"></a>h<span class="w"> </span>&lt;-<span class="w"> </span>hclust<span class="o">(</span>d<span class="o">)</span>
+<a href="#__codelineno-16-29" id="__codelineno-16-29" name="__codelineno-16-29"></a>
+<a href="#__codelineno-16-30" id="__codelineno-16-30" name="__codelineno-16-30"></a>h
+<a href="#__codelineno-16-31" id="__codelineno-16-31" name="__codelineno-16-31"></a><span class="c1"># plot the dendrogram</span>
+<a href="#__codelineno-16-32" id="__codelineno-16-32" name="__codelineno-16-32"></a>plot<span class="o">(</span>h<span class="o">)</span>
+<a href="#__codelineno-16-33" id="__codelineno-16-33" name="__codelineno-16-33"></a>
+<a href="#__codelineno-16-34" id="__codelineno-16-34" name="__codelineno-16-34"></a><span class="c1"># use ape's as phylo function</span>
+<a href="#__codelineno-16-35" id="__codelineno-16-35" name="__codelineno-16-35"></a>tree<span class="w"> </span>&lt;-<span class="w"> </span>as.phylo<span class="o">(</span>h<span class="o">)</span>
+<a href="#__codelineno-16-36" id="__codelineno-16-36" name="__codelineno-16-36"></a><span class="c1"># export as newick for viewing in figtree</span>
+<a href="#__codelineno-16-37" id="__codelineno-16-37" name="__codelineno-16-37"></a>write.tree<span class="o">(</span><span class="nv">phy</span><span class="o">=</span>tree,<span class="w"> </span><span class="nv">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'4Sim_1k96_distance.tree'</span><span class="o">)</span>
+</code></pre></div></p>
+<h3 id="run-the-r-script-for-clustering-based-on-distance-on-nesi">run the R script for clustering based on distance on Nesi<a class="headerlink" href="#run-the-r-script-for-clustering-based-on-distance-on-nesi" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="ch">#!/usr/bin/bash</span>
+<a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a>
+<a href="#__codelineno-17-3" id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="c1">#SBATCH --account       ga03793</span>
+<a href="#__codelineno-17-4" id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="c1">#SBATCH --job-name      4Sim_1K96_distance_clustering</span>
+<a href="#__codelineno-17-5" id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="c1">#SBATCH --cpus-per-task 8</span>
+<a href="#__codelineno-17-6" id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="c1">#SBATCH --mem           4G</span>
+<a href="#__codelineno-17-7" id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="c1">#SBATCH --time          1:00:00</span>
+<a href="#__codelineno-17-8" id="__codelineno-17-8" name="__codelineno-17-8"></a>
+<a href="#__codelineno-17-9" id="__codelineno-17-9" name="__codelineno-17-9"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-17-10" id="__codelineno-17-10" name="__codelineno-17-10"></a>module<span class="w"> </span>load<span class="w"> </span>R/4.0.1-gimkl-2020
+<a href="#__codelineno-17-11" id="__codelineno-17-11" name="__codelineno-17-11"></a>
+<a href="#__codelineno-17-12" id="__codelineno-17-12" name="__codelineno-17-12"></a>Rscript<span class="w"> </span>8_list2dist_clustering_4Sim.R
+</code></pre></div>
+<h2 id="construct-pangenome-graph-for-the-3st-genomes">Construct pangenome graph for the 3ST genomes<a class="headerlink" href="#construct-pangenome-graph-for-the-3st-genomes" title="Permanent link">¶</a></h2>
+<h3 id="prepare-dataset-and-build-index">prepare dataset and build index<a class="headerlink" href="#prepare-dataset-and-build-index" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="c1"># copy the 3ST.fa dataset to your work directory, mine is /home/zyang/pg_worhshop</span>
+<a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a>cp<span class="w"> </span>/home/zyang/pg_workshop/dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/3ST.fa<span class="w"> </span>/home/zyang/pg_workshop
+<a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a>
+<a href="#__codelineno-18-4" id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="c1"># go back to your work directory </span>
+<a href="#__codelineno-18-5" id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="nb">cd</span><span class="w"> </span>/home/zyang/pg_worhshop
+<a href="#__codelineno-18-6" id="__codelineno-18-6" name="__codelineno-18-6"></a>
+<a href="#__codelineno-18-7" id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="c1">#build index for 3ST.fa</span>
+<a href="#__codelineno-18-8" id="__codelineno-18-8" name="__codelineno-18-8"></a>
+<a href="#__codelineno-18-9" id="__codelineno-18-9" name="__codelineno-18-9"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-18-10" id="__codelineno-18-10" name="__codelineno-18-10"></a>module<span class="w"> </span>load<span class="w"> </span>SAMtools/1.16.1-GCC-11.3.0
+<a href="#__codelineno-18-11" id="__codelineno-18-11" name="__codelineno-18-11"></a>samtools<span class="w"> </span>faidx<span class="w"> </span>3ST.fa
+<a href="#__codelineno-18-12" id="__codelineno-18-12" name="__codelineno-18-12"></a>
+<a href="#__codelineno-18-13" id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="c1">#check index </span>
+<a href="#__codelineno-18-14" id="__codelineno-18-14" name="__codelineno-18-14"></a>less<span class="w"> </span>-S<span class="w"> </span>3ST.fa.fai
+<a href="#__codelineno-18-15" id="__codelineno-18-15" name="__codelineno-18-15"></a>NC_017518<span class="w">       </span><span class="m">2248966</span><span class="w"> </span><span class="m">77</span><span class="w">      </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-18-16" id="__codelineno-18-16" name="__codelineno-18-16"></a>ST41<span class="w">    </span><span class="m">2217832</span><span class="w"> </span><span class="m">2286541</span><span class="w"> </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-18-17" id="__codelineno-18-17" name="__codelineno-18-17"></a>ST154<span class="w">   </span><span class="m">2233582</span><span class="w"> </span><span class="m">4541354</span><span class="w"> </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+</code></pre></div>
+<h3 id="use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p_1">Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p<a class="headerlink" href="#use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p_1" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-19-2" id="__codelineno-19-2" name="__codelineno-19-2"></a>module<span class="w"> </span>load<span class="w"> </span>Mash/2.3-GCC-11.3.0
+<a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a>mash<span class="w"> </span>triangle<span class="w"> </span>4Sim.fa<span class="w"> </span>&gt;4Sim.fa_mash
+<a href="#__codelineno-19-4" id="__codelineno-19-4" name="__codelineno-19-4"></a>less<span class="w"> </span>-S<span class="w"> </span>3ST.fa_mash
+<a href="#__codelineno-19-5" id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">        </span><span class="m">3</span>
+<a href="#__codelineno-19-6" id="__codelineno-19-6" name="__codelineno-19-6"></a>NC_017518
+<a href="#__codelineno-19-7" id="__codelineno-19-7" name="__codelineno-19-7"></a>ST41<span class="w">    </span><span class="m">0</span>.00146992
+<a href="#__codelineno-19-8" id="__codelineno-19-8" name="__codelineno-19-8"></a>ST154<span class="w">   </span><span class="m">0</span>.00165343<span class="w">      </span><span class="m">0</span>.00131423
+</code></pre></div>
+<h3 id="check-the-mauve-aligment-of-3st">check the Mauve aligment of 3ST<a class="headerlink" href="#check-the-mauve-aligment-of-3st" title="Permanent link">¶</a></h3>
+<p>Mauve alignments demonstrated large inversions among the 3ST genomes. 
+<a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/Figures/Fig.3ST_mauve%20alignment.png??raw=true]"><img alt="Mauve alignment of the 3STs genomes" src="https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/Figures/Fig.3ST_mauve%20alignment.png??raw=true]"/></a></p>
+<h3 id="pggb_slurm_2k95_3stsh-k-2000-p-95">pggb_slurm_2K95_3ST.sh, -k 2000, -p 95<a class="headerlink" href="#pggb_slurm_2k95_3stsh-k-2000-p-95" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="ch">#!/usr/bin/bash</span>
+<a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a>
+<a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="c1">#SBATCH --account       ga03793</span>
+<a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="c1">#SBATCH --job-name      3ST_2K95</span>
+<a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="c1">#SBATCH --cpus-per-task 8</span>
+<a href="#__codelineno-20-6" id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="c1">#SBATCH --mem           4G</span>
+<a href="#__codelineno-20-7" id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="c1">#SBATCH --time          1:00:00</span>
+<a href="#__codelineno-20-8" id="__codelineno-20-8" name="__codelineno-20-8"></a>
+<a href="#__codelineno-20-9" id="__codelineno-20-9" name="__codelineno-20-9"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-20-10" id="__codelineno-20-10" name="__codelineno-20-10"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
+<a href="#__codelineno-20-11" id="__codelineno-20-11" name="__codelineno-20-11"></a>
+<a href="#__codelineno-20-12" id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="c1">#export container to a variable for convenience</span>
+<a href="#__codelineno-20-13" id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="nv">container</span><span class="o">=</span>/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+<a href="#__codelineno-20-14" id="__codelineno-20-14" name="__codelineno-20-14"></a><span class="nv">data</span><span class="o">=</span>/home/zyang/pg_workshop/3ST.fa
+<a href="#__codelineno-20-15" id="__codelineno-20-15" name="__codelineno-20-15"></a><span class="nv">output</span><span class="o">=</span>/home/zyang/pg_workshop
+<a href="#__codelineno-20-16" id="__codelineno-20-16" name="__codelineno-20-16"></a>
+<a href="#__codelineno-20-17" id="__codelineno-20-17" name="__codelineno-20-17"></a>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="si">${</span><span class="nv">container</span><span class="si">}</span><span class="w"> </span>pggb<span class="w"> </span>-i<span class="w"> </span><span class="nv">$data</span><span class="w"> </span>-s<span class="w"> </span><span class="m">2000</span><span class="w"> </span>-p<span class="w"> </span><span class="m">95</span><span class="w"> </span>-n<span class="w"> </span><span class="m">3</span><span class="w"> </span>-t<span class="w"> </span><span class="m">24</span><span class="w"> </span>-S<span class="w"> </span>-m<span class="w"> </span>-o<span class="w"> </span><span class="nv">$output</span>/3ST_2K95<span class="w"> </span>-V<span class="w"> </span><span class="s1">'NC_017518:#'</span>
+</code></pre></div>
+<h2 id="construct-pangenome-graph-for-the-24nm-genomes">Construct pangenome graph for the 24NM genomes<a class="headerlink" href="#construct-pangenome-graph-for-the-24nm-genomes" title="Permanent link">¶</a></h2>
+<h3 id="prepare-dataset-and-build-index_1">prepare dataset and build index<a class="headerlink" href="#prepare-dataset-and-build-index_1" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="c1"># copy the 24NM.fa.gz dataset to your work directory, mine is /home/zyang/pg_worhshop</span>
+<a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a>cp<span class="w"> </span>/home/zyang/pg_workshop/dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/24NM.fa.gz<span class="w"> </span>/home/zyang/pg_workshop
+<a href="#__codelineno-21-3" id="__codelineno-21-3" name="__codelineno-21-3"></a>
+<a href="#__codelineno-21-4" id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="c1"># go back to your work directory </span>
+<a href="#__codelineno-21-5" id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="nb">cd</span><span class="w"> </span>/home/zyang/pg_worhshop
+<a href="#__codelineno-21-6" id="__codelineno-21-6" name="__codelineno-21-6"></a>
+<a href="#__codelineno-21-7" id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="c1">#uncompress 24NM.fa.gz</span>
+<a href="#__codelineno-21-8" id="__codelineno-21-8" name="__codelineno-21-8"></a>gzip<span class="w"> </span>-d<span class="w"> </span>24NM.fa.gz
+<a href="#__codelineno-21-9" id="__codelineno-21-9" name="__codelineno-21-9"></a>
+<a href="#__codelineno-21-10" id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="c1">#build index for 24NM.fa</span>
+<a href="#__codelineno-21-11" id="__codelineno-21-11" name="__codelineno-21-11"></a>
+<a href="#__codelineno-21-12" id="__codelineno-21-12" name="__codelineno-21-12"></a>module<span class="w"> </span>purge<span class="w"> </span>
+<a href="#__codelineno-21-13" id="__codelineno-21-13" name="__codelineno-21-13"></a>module<span class="w"> </span>load<span class="w"> </span>SAMtools/1.16.1-GCC-11.3.0
+<a href="#__codelineno-21-14" id="__codelineno-21-14" name="__codelineno-21-14"></a>samtools<span class="w"> </span>faidx<span class="w"> </span>24NM.fa
+<a href="#__codelineno-21-15" id="__codelineno-21-15" name="__codelineno-21-15"></a>
+<a href="#__codelineno-21-16" id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="c1">#check index </span>
+<a href="#__codelineno-21-17" id="__codelineno-21-17" name="__codelineno-21-17"></a>less<span class="w"> </span>-S<span class="w"> </span>24NM.fa.fai
+<a href="#__codelineno-21-18" id="__codelineno-21-18" name="__codelineno-21-18"></a>NC_003112.2<span class="w">     </span><span class="m">2272360</span><span class="w"> </span><span class="m">60</span><span class="w">      </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-19" id="__codelineno-21-19" name="__codelineno-21-19"></a>NC_003116.1<span class="w">     </span><span class="m">2184406</span><span class="w"> </span><span class="m">2310354</span><span class="w"> </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-20" id="__codelineno-21-20" name="__codelineno-21-20"></a>NC_008767.1<span class="w">     </span><span class="m">2194961</span><span class="w"> </span><span class="m">4531228</span><span class="w"> </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-21" id="__codelineno-21-21" name="__codelineno-21-21"></a>NC_010120.1<span class="w">     </span><span class="m">2153416</span><span class="w"> </span><span class="m">6762834</span><span class="w"> </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-22" id="__codelineno-21-22" name="__codelineno-21-22"></a>NC_017501.1<span class="w">     </span><span class="m">2277550</span><span class="w"> </span><span class="m">8952201</span><span class="w"> </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-23" id="__codelineno-21-23" name="__codelineno-21-23"></a>NC_013016.1<span class="w">     </span><span class="m">2145295</span><span class="w"> </span><span class="m">11267774</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-24" id="__codelineno-21-24" name="__codelineno-21-24"></a>NC_017505.1<span class="w">     </span><span class="m">2242947</span><span class="w"> </span><span class="m">13448888</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-25" id="__codelineno-21-25" name="__codelineno-21-25"></a>NC_017513.1<span class="w">     </span><span class="m">2184862</span><span class="w"> </span><span class="m">15729279</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-26" id="__codelineno-21-26" name="__codelineno-21-26"></a>NC_017514.1<span class="w">     </span><span class="m">2223518</span><span class="w"> </span><span class="m">17950622</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-27" id="__codelineno-21-27" name="__codelineno-21-27"></a>NC_017515.1<span class="w">     </span><span class="m">2250449</span><span class="w"> </span><span class="m">20211265</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-28" id="__codelineno-21-28" name="__codelineno-21-28"></a>NC_017512.1<span class="w">     </span><span class="m">2227255</span><span class="w"> </span><span class="m">22499286</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-29" id="__codelineno-21-29" name="__codelineno-21-29"></a>NZ_CP012392.1<span class="w">   </span><span class="m">2170619</span><span class="w"> </span><span class="m">24763743</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-30" id="__codelineno-21-30" name="__codelineno-21-30"></a>NZ_CP016627.1<span class="w">   </span><span class="m">2173408</span><span class="w"> </span><span class="m">26970619</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-31" id="__codelineno-21-31" name="__codelineno-21-31"></a>NZ_CP016646.1<span class="w">   </span><span class="m">2173686</span><span class="w"> </span><span class="m">29180331</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-32" id="__codelineno-21-32" name="__codelineno-21-32"></a>NZ_CP016682.1<span class="w">   </span><span class="m">2175832</span><span class="w"> </span><span class="m">31390326</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-33" id="__codelineno-21-33" name="__codelineno-21-33"></a>NZ_CP020402.2<span class="w">   </span><span class="m">2305818</span><span class="w"> </span><span class="m">33602508</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-34" id="__codelineno-21-34" name="__codelineno-21-34"></a>NZ_CP031334.1<span class="w">   </span><span class="m">2314390</span><span class="w"> </span><span class="m">35946837</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-35" id="__codelineno-21-35" name="__codelineno-21-35"></a>NZ_CP031324.1<span class="w">   </span><span class="m">2291778</span><span class="w"> </span><span class="m">38299881</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-36" id="__codelineno-21-36" name="__codelineno-21-36"></a>NZ_CP031328.1<span class="w">   </span><span class="m">2223855</span><span class="w"> </span><span class="m">40629936</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-37" id="__codelineno-21-37" name="__codelineno-21-37"></a>NZ_CP031333.1<span class="w">   </span><span class="m">2280611</span><span class="w"> </span><span class="m">42890936</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-38" id="__codelineno-21-38" name="__codelineno-21-38"></a>NZ_CP021517.1<span class="w">   </span><span class="m">2167947</span><span class="w"> </span><span class="m">45209638</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-39" id="__codelineno-21-39" name="__codelineno-21-39"></a>NC_017518<span class="w">       </span><span class="m">2248966</span><span class="w"> </span><span class="m">47413790</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-40" id="__codelineno-21-40" name="__codelineno-21-40"></a>ST41<span class="w">    </span><span class="m">2217832</span><span class="w"> </span><span class="m">49700245</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+<a href="#__codelineno-21-41" id="__codelineno-21-41" name="__codelineno-21-41"></a>ST154<span class="w">   </span><span class="m">2233582</span><span class="w"> </span><span class="m">51955048</span><span class="w">        </span><span class="m">60</span><span class="w">      </span><span class="m">61</span>
+</code></pre></div>
+<h3 id="use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p_2">Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p<a class="headerlink" href="#use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p_2" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-22-2" id="__codelineno-22-2" name="__codelineno-22-2"></a>module<span class="w"> </span>load<span class="w"> </span>Mash/2.3-GCC-11.3.0
+<a href="#__codelineno-22-3" id="__codelineno-22-3" name="__codelineno-22-3"></a>mash<span class="w"> </span>triangle<span class="w"> </span>24NM.fa<span class="w"> </span>&gt;24NM.fa_mash
+<a href="#__codelineno-22-4" id="__codelineno-22-4" name="__codelineno-22-4"></a>less<span class="w"> </span>-S<span class="w"> </span>24NM.fa_mash
+<a href="#__codelineno-22-5" id="__codelineno-22-5" name="__codelineno-22-5"></a>
+<a href="#__codelineno-22-6" id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="w">        </span><span class="m">24</span>
+<a href="#__codelineno-22-7" id="__codelineno-22-7" name="__codelineno-22-7"></a>NC_003112.2
+<a href="#__codelineno-22-8" id="__codelineno-22-8" name="__codelineno-22-8"></a>NC_003116.1<span class="w">     </span><span class="m">0</span>.0188675
+<a href="#__codelineno-22-9" id="__codelineno-22-9" name="__codelineno-22-9"></a>NC_008767.1<span class="w">     </span><span class="m">0</span>.0174175<span class="w">       </span><span class="m">0</span>.0171844
+<a href="#__codelineno-22-10" id="__codelineno-22-10" name="__codelineno-22-10"></a>NC_010120.1<span class="w">     </span><span class="m">0</span>.0184965<span class="w">       </span><span class="m">0</span>.0166683<span class="w">       </span><span class="m">0</span>.0166117
+<a href="#__codelineno-22-11" id="__codelineno-22-11" name="__codelineno-22-11"></a>NC_017501.1<span class="w">     </span><span class="m">0</span>.0181313<span class="w">       </span><span class="m">0</span>.0181313<span class="w">       </span><span class="m">0</span>.016782<span class="w">        </span><span class="m">0</span>.0190552
+<a href="#__codelineno-22-12" id="__codelineno-22-12" name="__codelineno-22-12"></a>NC_013016.1<span class="w">     </span><span class="m">0</span>.0218499<span class="w">       </span><span class="m">0</span>.0190552<span class="w">       </span><span class="m">0</span>.0171844<span class="w">       </span><span class="m">0</span>.0191812<span class="w">       </span><span class="m">0</span>.0188053
+<a href="#__codelineno-22-13" id="__codelineno-22-13" name="__codelineno-22-13"></a>NC_017505.1<span class="w">     </span><span class="m">0</span>.015943<span class="w">        </span><span class="m">0</span>.0191812<span class="w">       </span><span class="m">0</span>.0168963<span class="w">       </span><span class="m">0</span>.0187432<span class="w">       </span><span class="m">0</span>.0175939<span class="w">       </span><span class="m">0</span>.0212923
+<a href="#__codelineno-22-14" id="__codelineno-22-14" name="__codelineno-22-14"></a>NC_017513.1<span class="w">     </span><span class="m">0</span>.0186195<span class="w">       </span><span class="m">0</span>.0175939<span class="w">       </span><span class="m">0</span>.00861543<span class="w">      </span><span class="m">0</span>.0167251<span class="w">       </span><span class="m">0</span>.016782<span class="w">        </span><span class="m">0</span>.0174175<span class="w">       </span><span class="m">0</span>.0169536
+<a href="#__codelineno-22-15" id="__codelineno-22-15" name="__codelineno-22-15"></a>NC_017514.1<span class="w">     </span><span class="m">0</span>.0154006<span class="w">       </span><span class="m">0</span>.0185579<span class="w">       </span><span class="m">0</span>.0167251<span class="w">       </span><span class="m">0</span>.0185579<span class="w">       </span><span class="m">0</span>.0172424<span class="w">       </span><span class="m">0</span>.0204123<span class="w">       </span><span class="m">0</span>.00977265<span class="w">      </span><span class="m">0</span>.0175939
+<a href="#__codelineno-22-16" id="__codelineno-22-16" name="__codelineno-22-16"></a>NC_017515.1<span class="w">     </span><span class="m">0</span>.0115313<span class="w">       </span><span class="m">0</span>.0177716<span class="w">       </span><span class="m">0</span>.0157245<span class="w">       </span><span class="m">0</span>.0170111<span class="w">       </span><span class="m">0</span>.0168391<span class="w">       </span><span class="m">0</span>.0202137<span class="w">       </span><span class="m">0</span>.016782<span class="w">        </span><span class="m">0</span>.0155619<span class="w">       </span><span class="m">0</span>.0158335
+<a href="#__codelineno-22-17" id="__codelineno-22-17" name="__codelineno-22-17"></a>NC_017512.1<span class="w">     </span><span class="m">0</span>.0192445<span class="w">       </span><span class="m">0</span>.00594242<span class="w">      </span><span class="m">0</span>.0177716<span class="w">       </span><span class="m">0</span>.0173006<span class="w">       </span><span class="m">0</span>.0184965<span class="w">       </span><span class="m">0</span>.0200822<span class="w">       </span><span class="m">0</span>.0202137<span class="w">       </span><span class="m">0</span>.0182524<span class="w">       </span><span class="m">0</span>.0199514<span class="w">       </span><span class="m">0</span>.0179508
+<a href="#__codelineno-22-18" id="__codelineno-22-18" name="__codelineno-22-18"></a>NZ_CP012392.1<span class="w">   </span><span class="m">0</span>.0183741<span class="w">       </span><span class="m">0</span>.0171844<span class="w">       </span><span class="m">0</span>.017359<span class="w">        </span><span class="m">0</span>.0172424<span class="w">       </span><span class="m">0</span>.0183132<span class="w">       </span><span class="m">0</span>.0204789<span class="w">       </span><span class="m">0</span>.0180108<span class="w">       </span><span class="m">0</span>.0170111<span class="w">       </span><span class="m">0</span>.0172424<span class="w">       </span><span class="m">0</span>.0162193<span class="w">       </span><span class="m">0</span>.0177716
+<a href="#__codelineno-22-19" id="__codelineno-22-19" name="__codelineno-22-19"></a>NZ_CP016627.1<span class="w">   </span><span class="m">0</span>.0181313<span class="w">       </span><span class="m">0</span>.0174175<span class="w">       </span><span class="m">0</span>.00279888<span class="w">      </span><span class="m">0</span>.0166117<span class="w">       </span><span class="m">0</span>.0172424<span class="w">       </span><span class="m">0</span>.0179508<span class="w">       </span><span class="m">0</span>.0175349<span class="w">       </span><span class="m">0</span>.00877107<span class="w">      </span><span class="m">0</span>.0171265<span class="w">       </span><span class="m">0</span>.0166683<span class="w">       </span><span class="m">0</span>.017359
+<a href="#__codelineno-22-20" id="__codelineno-22-20" name="__codelineno-22-20"></a>NZ_CP016646.1<span class="w">   </span><span class="m">0</span>.0178909<span class="w">       </span><span class="m">0</span>.0172424<span class="w">       </span><span class="m">0</span>.0163866<span class="w">       </span><span class="m">0</span>.0171265<span class="w">       </span><span class="m">0</span>.0174761<span class="w">       </span><span class="m">0</span>.0184352<span class="w">       </span><span class="m">0</span>.0189925<span class="w">       </span><span class="m">0</span>.0163307<span class="w">       </span><span class="m">0</span>.017653<span class="w">        </span><span class="m">0</span>.0165552<span class="w">       </span><span class="m">0</span>.0177716
+<a href="#__codelineno-22-21" id="__codelineno-22-21" name="__codelineno-22-21"></a>NZ_CP016682.1<span class="w">   </span><span class="m">0</span>.0180108<span class="w">       </span><span class="m">0</span>.0170111<span class="w">       </span><span class="m">0</span>.0162193<span class="w">       </span><span class="m">0</span>.0169536<span class="w">       </span><span class="m">0</span>.0171844<span class="w">       </span><span class="m">0</span>.0181313<span class="w">       </span><span class="m">0</span>.0189299<span class="w">       </span><span class="m">0</span>.0164427<span class="w">       </span><span class="m">0</span>.0175939<span class="w">       </span><span class="m">0</span>.0162749<span class="w">       </span><span class="m">0</span>.0175349
+<a href="#__codelineno-22-22" id="__codelineno-22-22" name="__codelineno-22-22"></a>NZ_CP020402.2<span class="w">   </span><span class="m">0</span>.0196919<span class="w">       </span><span class="m">0</span>.0188675<span class="w">       </span><span class="m">0</span>.0177122<span class="w">       </span><span class="m">0</span>.0180709<span class="w">       </span><span class="m">0</span>.0134525<span class="w">       </span><span class="m">0</span>.0185579<span class="w">       </span><span class="m">0</span>.0171844<span class="w">       </span><span class="m">0</span>.0171265<span class="w">       </span><span class="m">0</span>.0170111<span class="w">       </span><span class="m">0</span>.0182524<span class="w">       </span><span class="m">0</span>.0199514
+<a href="#__codelineno-22-23" id="__codelineno-22-23" name="__codelineno-22-23"></a>NZ_CP031334.1<span class="w">   </span><span class="m">0</span>.0170111<span class="w">       </span><span class="m">0</span>.0180709<span class="w">       </span><span class="m">0</span>.0156702<span class="w">       </span><span class="m">0</span>.0163866<span class="w">       </span><span class="m">0</span>.0147145<span class="w">       </span><span class="m">0</span>.0183132<span class="w">       </span><span class="m">0</span>.0165552<span class="w">       </span><span class="m">0</span>.0149759<span class="w">       </span><span class="m">0</span>.0164427<span class="w">       </span><span class="m">0</span>.0152936<span class="w">       </span><span class="m">0</span>.0191181
+<a href="#__codelineno-22-24" id="__codelineno-22-24" name="__codelineno-22-24"></a>NZ_CP031324.1<span class="w">   </span><span class="m">0</span>.0177716<span class="w">       </span><span class="m">0</span>.0189925<span class="w">       </span><span class="m">0</span>.0166683<span class="w">       </span><span class="m">0</span>.0181313<span class="w">       </span><span class="m">0</span>.0146626<span class="w">       </span><span class="m">0</span>.0193079<span class="w">       </span><span class="m">0</span>.0178909<span class="w">       </span><span class="m">0</span>.0161637<span class="w">       </span><span class="m">0</span>.0166117<span class="w">       </span><span class="m">0</span>.0160531<span class="w">       </span><span class="m">0</span>.0194991
+<a href="#__codelineno-22-25" id="__codelineno-22-25" name="__codelineno-22-25"></a>NZ_CP031328.1<span class="w">   </span><span class="m">0</span>.0181313<span class="w">       </span><span class="m">0</span>.0180108<span class="w">       </span><span class="m">0</span>.0168391<span class="w">       </span><span class="m">0</span>.0174175<span class="w">       </span><span class="m">0</span>.0162749<span class="w">       </span><span class="m">0</span>.0196275<span class="w">       </span><span class="m">0</span>.0182524<span class="w">       </span><span class="m">0</span>.0166683<span class="w">       </span><span class="m">0</span>.0157789<span class="w">       </span><span class="m">0</span>.0168391<span class="w">       </span><span class="m">0</span>.0184965
+<a href="#__codelineno-22-26" id="__codelineno-22-26" name="__codelineno-22-26"></a>NZ_CP031333.1<span class="w">   </span><span class="m">0</span>.0117112<span class="w">       </span><span class="m">0</span>.0172424<span class="w">       </span><span class="m">0</span>.0158335<span class="w">       </span><span class="m">0</span>.0170687<span class="w">       </span><span class="m">0</span>.0168391<span class="w">       </span><span class="m">0</span>.0201478<span class="w">       </span><span class="m">0</span>.016782<span class="w">        </span><span class="m">0</span>.0156702<span class="w">       </span><span class="m">0</span>.0158335<span class="w">       </span><span class="m">0</span>.00186568<span class="w">      </span><span class="m">0</span>.0171844
+<a href="#__codelineno-22-27" id="__codelineno-22-27" name="__codelineno-22-27"></a>NZ_CP021517.1<span class="w">   </span><span class="m">0</span>.0178312<span class="w">       </span><span class="m">0</span>.0163866<span class="w">       </span><span class="m">0</span>.0171265<span class="w">       </span><span class="m">0</span>.0165552<span class="w">       </span><span class="m">0</span>.0180709<span class="w">       </span><span class="m">0</span>.0194352<span class="w">       </span><span class="m">0</span>.0178909<span class="w">       </span><span class="m">0</span>.0165552<span class="w">       </span><span class="m">0</span>.0174761<span class="w">       </span><span class="m">0</span>.0158335<span class="w">       </span><span class="m">0</span>.0170687
+<a href="#__codelineno-22-28" id="__codelineno-22-28" name="__codelineno-22-28"></a>NC_017518<span class="w">       </span><span class="m">0</span>.0152404<span class="w">       </span><span class="m">0</span>.0186195<span class="w">       </span><span class="m">0</span>.0166117<span class="w">       </span><span class="m">0</span>.0183741<span class="w">       </span><span class="m">0</span>.016782<span class="w">        </span><span class="m">0</span>.0200167<span class="w">       </span><span class="m">0</span>.00916565<span class="w">      </span><span class="m">0</span>.0174761<span class="w">       </span><span class="m">0</span>.001839<span class="w">        </span><span class="m">0</span>.015508<span class="w">        </span><span class="m">0</span>.0194991
+<a href="#__codelineno-22-29" id="__codelineno-22-29" name="__codelineno-22-29"></a>ST41<span class="w">    </span><span class="m">0</span>.0150813<span class="w">       </span><span class="m">0</span>.0184352<span class="w">       </span><span class="m">0</span>.0164427<span class="w">       </span><span class="m">0</span>.0183132<span class="w">       </span><span class="m">0</span>.0170687<span class="w">       </span><span class="m">0</span>.0201478<span class="w">       </span><span class="m">0</span>.00912584<span class="w">      </span><span class="m">0</span>.017653<span class="w">        </span><span class="m">0</span>.00128842<span class="w">      </span><span class="m">0</span>.0158335<span class="w">       </span><span class="m">0</span>.0194991<span class="w">       </span><span class="m">0</span>.
+<a href="#__codelineno-22-30" id="__codelineno-22-30" name="__codelineno-22-30"></a>ST154<span class="w">   </span><span class="m">0</span>.0151872<span class="w">       </span><span class="m">0</span>.0182524<span class="w">       </span><span class="m">0</span>.0164989<span class="w">       </span><span class="m">0</span>.0182524<span class="w">       </span><span class="m">0</span>.0171265<span class="w">       </span><span class="m">0</span>.0200167<span class="w">       </span><span class="m">0</span>.00952763<span class="w">      </span><span class="m">0</span>.0173006<span class="w">       </span><span class="m">0</span>.00175922<span class="w">      </span><span class="m">0</span>.0156702<span class="w">       </span><span class="m">0</span>.0193714<span class="w">       </span><span class="m">0</span>.
+</code></pre></div>
+<h3 id="pggb_slurm_2k95_3stsh-k-2000-p-95_1">pggb_slurm_2K95_3ST.sh, -k 2000, -p 95<a class="headerlink" href="#pggb_slurm_2k95_3stsh-k-2000-p-95_1" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="ch">#!/usr/bin/bash</span>
+<a href="#__codelineno-23-2" id="__codelineno-23-2" name="__codelineno-23-2"></a>
+<a href="#__codelineno-23-3" id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="c1">#SBATCH --account       ga03793</span>
+<a href="#__codelineno-23-4" id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="c1">#SBATCH --job-name      24NM_10k95</span>
+<a href="#__codelineno-23-5" id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="c1">#SBATCH --cpus-per-task 8</span>
+<a href="#__codelineno-23-6" id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="c1">#SBATCH --mem           4G</span>
+<a href="#__codelineno-23-7" id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="c1">#SBATCH --time          3:00:00</span>
+<a href="#__codelineno-23-8" id="__codelineno-23-8" name="__codelineno-23-8"></a>
+<a href="#__codelineno-23-9" id="__codelineno-23-9" name="__codelineno-23-9"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-23-10" id="__codelineno-23-10" name="__codelineno-23-10"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
+<a href="#__codelineno-23-11" id="__codelineno-23-11" name="__codelineno-23-11"></a>
+<a href="#__codelineno-23-12" id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="c1">#export container to a variable for convenience</span>
+<a href="#__codelineno-23-13" id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="nv">WD</span><span class="o">=</span>/home/zyang/pg_workshop<span class="w"> </span><span class="c1">#Working Directory</span>
+<a href="#__codelineno-23-14" id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="nv">container</span><span class="o">=</span>/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+<a href="#__codelineno-23-15" id="__codelineno-23-15" name="__codelineno-23-15"></a><span class="nv">data</span><span class="o">=</span>/home/zyang/pg_workshop/24NM.fa
+<a href="#__codelineno-23-16" id="__codelineno-23-16" name="__codelineno-23-16"></a><span class="nv">output</span><span class="o">=</span>/home/zyang/pg_workshop
+<a href="#__codelineno-23-17" id="__codelineno-23-17" name="__codelineno-23-17"></a>
+<a href="#__codelineno-23-18" id="__codelineno-23-18" name="__codelineno-23-18"></a>
+<a href="#__codelineno-23-19" id="__codelineno-23-19" name="__codelineno-23-19"></a><span class="c1">#Bind filesystem to container image</span>
+<a href="#__codelineno-23-20" id="__codelineno-23-20" name="__codelineno-23-20"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SINGULARITY_BIND</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">WD</span><span class="si">}</span><span class="s2">, /nesi/project/ga03793/"</span>
+<a href="#__codelineno-23-21" id="__codelineno-23-21" name="__codelineno-23-21"></a>
+<a href="#__codelineno-23-22" id="__codelineno-23-22" name="__codelineno-23-22"></a>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="si">${</span><span class="nv">container</span><span class="si">}</span><span class="w"> </span>pggb<span class="w"> </span>-i<span class="w"> </span><span class="nv">$data</span><span class="w"> </span>-s<span class="w"> </span><span class="m">10000</span><span class="w"> </span>-p<span class="w"> </span><span class="m">95</span><span class="w"> </span>-n<span class="w"> </span><span class="m">24</span><span class="w"> </span>-t<span class="w"> </span><span class="m">24</span><span class="w"> </span>-S<span class="w"> </span>-m<span class="w"> </span>-o<span class="w"> </span><span class="nv">$output</span>/24NM_10K95<span class="w"> </span>-V<span class="w"> </span><span class="s1">'NC_017518:#'</span>
+</code></pre></div>
+<h3 id="pggb_slurm_2k95_3stsh-k-2000-p-95-x">pggb_slurm_2K95_3ST.sh, -k 2000, -p 95, -x<a class="headerlink" href="#pggb_slurm_2k95_3stsh-k-2000-p-95-x" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="ch">#!/usr/bin/bash</span>
+<a href="#__codelineno-24-2" id="__codelineno-24-2" name="__codelineno-24-2"></a>
+<a href="#__codelineno-24-3" id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="c1">#SBATCH --account       ga03793</span>
+<a href="#__codelineno-24-4" id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="c1">#SBATCH --job-name      24NM_10k95_X</span>
+<a href="#__codelineno-24-5" id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="c1">#SBATCH --cpus-per-task 8</span>
+<a href="#__codelineno-24-6" id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="c1">#SBATCH --mem           4G</span>
+<a href="#__codelineno-24-7" id="__codelineno-24-7" name="__codelineno-24-7"></a><span class="c1">#SBATCH --time          3:00:00</span>
+<a href="#__codelineno-24-8" id="__codelineno-24-8" name="__codelineno-24-8"></a>
+<a href="#__codelineno-24-9" id="__codelineno-24-9" name="__codelineno-24-9"></a>module<span class="w"> </span>purge
+<a href="#__codelineno-24-10" id="__codelineno-24-10" name="__codelineno-24-10"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
+<a href="#__codelineno-24-11" id="__codelineno-24-11" name="__codelineno-24-11"></a>
+<a href="#__codelineno-24-12" id="__codelineno-24-12" name="__codelineno-24-12"></a><span class="c1">#export container to a variable for convenience</span>
+<a href="#__codelineno-24-13" id="__codelineno-24-13" name="__codelineno-24-13"></a><span class="nv">WD</span><span class="o">=</span>/home/zyang/pg_workshop<span class="w"> </span><span class="c1">#Working Directory</span>
+<a href="#__codelineno-24-14" id="__codelineno-24-14" name="__codelineno-24-14"></a><span class="nv">container</span><span class="o">=</span>/nesi/project/ga03793/software/pggb/pggb_0.5.3.simg
+<a href="#__codelineno-24-15" id="__codelineno-24-15" name="__codelineno-24-15"></a><span class="nv">data</span><span class="o">=</span>/home/zyang/pg_workshop/24NM.fa
+<a href="#__codelineno-24-16" id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="nv">output</span><span class="o">=</span>/home/zyang/pg_workshop
+<a href="#__codelineno-24-17" id="__codelineno-24-17" name="__codelineno-24-17"></a>
+<a href="#__codelineno-24-18" id="__codelineno-24-18" name="__codelineno-24-18"></a>
+<a href="#__codelineno-24-19" id="__codelineno-24-19" name="__codelineno-24-19"></a><span class="c1">#Bind filesystem to container image</span>
+<a href="#__codelineno-24-20" id="__codelineno-24-20" name="__codelineno-24-20"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SINGULARITY_BIND</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">WD</span><span class="si">}</span><span class="s2">, /nesi/project/ga03793/"</span>
+<a href="#__codelineno-24-21" id="__codelineno-24-21" name="__codelineno-24-21"></a>
+<a href="#__codelineno-24-22" id="__codelineno-24-22" name="__codelineno-24-22"></a>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="si">${</span><span class="nv">container</span><span class="si">}</span><span class="w"> </span>pggb<span class="w"> </span>-i<span class="w"> </span><span class="nv">$data</span><span class="w"> </span>-s<span class="w"> </span><span class="m">10000</span><span class="w"> </span>-p<span class="w"> </span><span class="m">95</span><span class="w"> </span>-n<span class="w"> </span><span class="m">24</span><span class="w"> </span>-x<span class="w"> </span>auto<span class="w"> </span>-t<span class="w"> </span><span class="m">24</span><span class="w"> </span>-S<span class="w"> </span>-m<span class="w"> </span>-o<span class="w"> </span><span class="nv">$output</span>/24NM_10K95x<span class="w"> </span>-V<span class="w"> </span><span class="s1">'NC_017518:#'</span>
+</code></pre></div>
+</article>
+</div>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
+            Back to top
+          </button>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../assets/javascripts/bundle.fac441b0.min.js"></script>
+<script src="../javascripts/mathjax.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
