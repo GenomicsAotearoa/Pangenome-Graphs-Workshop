@@ -1,4 +1,4 @@
-# Pangenome Graphs Workshop
+# Intro 1 : Pangenome Graphs Workshop
 <p align="justify">
 This repository contains material to construct pangenome graphs for a small bacteria dataset detailing every step in the Nesi environment. This study includes an anaysis of Neisseria Bacteria genome sequence data with 4Sim data samples to construct pangenome graphs to identify genetic variation and structural variance.
 </p>

@@ -1,4 +1,4 @@
-#
+# Intro 2: Pangenome Graphs Workshop 
 <p align="justify">
 This repository includes sample datasets and scripts, which are utilized for the construction of pangenome graphs. It provides a comprehensive walkthrough of each step executed within the Nesi environment.
 </p>

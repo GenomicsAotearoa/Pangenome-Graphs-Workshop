@@ -11,8 +11,8 @@ repo_url: https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop
 
 theme:
   name: material
-  logo: ./theme_figures/nesi_ga.png
-  favicon: ./theme_figures/nesi_ga.png
+  logo: ../theme_figures/nesi_ga.png
+  favicon: ../theme_figures/nesi_ga.png
    # 404 page
   static_templates:
     - 404.html
