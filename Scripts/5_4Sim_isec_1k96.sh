@@ -7,7 +7,7 @@
 #SBATCH --time          1:00:00
 
 module purge
-module load BCFtools/1.16-GCC-11.3.0
+module load BCFtools/1.15.1-GCC-11.3.0
 
 input_folder=/home/zyang/pg_workshop/vg_deconstruct
 output_folder=/home/zyang/pg_workshop/vg_deconstruct

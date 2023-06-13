@@ -314,7 +314,7 @@ cd /home/zyang/pg_workshop/vg_deconstruct
 
 module purge
 module load vg/1.46.0
-module load BCFtools/1.16-GCC-11.3.0
+module load BCFtools/1.15.1-GCC-11.3.0
 
 vg deconstruct -p NC_017518  -a -e 4Sim_1K96.gfa >4Sim_1K96_aep1.vcf
 bcftools stats 4Sim_1K96_aep1.vcf >4Sim_1K96_aep1.vcf_stats
@@ -332,7 +332,7 @@ bcftools stats 4Sim_1K96_aep1.vcf >4Sim_1K96_aep1.vcf_stats
 
 module purge
 module load vg/1.46.0
-module load BCFtools/1.16-GCC-11.3.0
+module load BCFtools/1.15.1-GCC-11.3.0
 
 export container to a variable for convenience
 inputGFA=/home/zyang/pg_workshop/vg_deconstruct/*.gfa
@@ -360,7 +360,7 @@ done
 #SBATCH --time          1:00:00
 
 module purge
-module load BCFtools/1.16-GCC-11.3.0
+module load BCFtools/1.15.1-GCC-11.3.0
 
 input_folder=/home/zyang/pg_workshop/vg_deconstruct
 output_folder=/home/zyang/pg_workshop/vg_deconstruct

@@ -95,9 +95,9 @@ then
 echo ">>> Loading required modules ...";
 #Load required modules with specific versions
    module purge
-   module load BCFtools/1.9-GCC-7.4.0
-   module load SAMtools/1.9-GCC-7.4.0
-   module load BWA/0.7.17-GCC-9.2.0
+   module load BCFtools/1.15.1-GCC-11.3.0
+   module load SAMtools/1.15.1-GCC-11.3.0
+   module load BWA/0.7.17-GCC-11.3.0
    module load wgsim/20111017-GCC-11.3.0
    module load vg/1.46.0
 fi;

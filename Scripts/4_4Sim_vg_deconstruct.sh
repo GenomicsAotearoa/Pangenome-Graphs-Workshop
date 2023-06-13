@@ -8,7 +8,7 @@
 
 module purge
 module load vg/1.46.0
-module load BCFtools/1.16-GCC-11.3.0
+module load BCFtools/1.15.1-GCC-11.3.0
 
 export container to a variable for convenience
 inputGFA=/home/zyang/pg_workshop/vg_deconstruct/*.gfa

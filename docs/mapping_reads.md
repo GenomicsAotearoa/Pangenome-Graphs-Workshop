@@ -1,67 +1,80 @@
 # Mapping Reads using `bwa mem` (Linear Method)
 _Note: folder : /nesi/nobackup/nesi02659/pg_workshop/vc_exact_compare/_
-We can use below script to map the reads to the reference sequnce using linear method `bwa mem`. 
-```bash
-#Load required modules with specific versions
-module purge
-module load BCFtools/1.9-GCC-7.4.0
-module load SAMtools/1.9-GCC-7.4.0
-module load BWA/0.7.17-GCC-9.2.0
-module load wgsim/20111017-GCC-11.3.0
+We can use below script to map the reads to the reference sequnce using linear method `bwa mem`.
 
-mkdir vc_exact_compare
-cd vc_exact_compare
+!!! terminal "code"
 
-#Copy the below files into the folder
-$ ls -1trhs
-total 14M
-2.3M GCF_000191525.1_ASM19152v1_genomic.fna
-2.3M Simulation_INDEL_5000.simseq.genome.fa
-2.5M Simulation_SNP_4000_INDEL_4000_CNV_4.simseq.genome.fa
-2.3M Simulation_SNP_4000_INDEL_4000_INV_4.simseq.genome.fa
-2.3M Simulation_SNP_4000_INDEL_4000.simseq.genome.fa
-2.3M Simulation_SNP_5000.simseq.genome.fa
-
-#indexing the reference sample
-bwa index GCF_000191525.1_ASM19152v1_genomic.fna 
-```
+    ```bash
+    #Load required modules with specific versions
+    module purge
+    module load BCFtools/1.15.1-GCC-11.3.0
+    module load SAMtools/1.15.1-GCC-11.3.0
+    module load BWA/0.7.17-GCC-11.3.0
+    module load wgsim/20111017-GCC-11.3.0
+    
+    mkdir vc_exact_compare
+    cd vc_exact_compare
+    
+    #Copy the below files into the folder
+    $ ls -1trhs
+    total 14M
+    2.3M GCF_000191525.1_ASM19152v1_genomic.fna
+    2.3M Simulation_INDEL_5000.simseq.genome.fa
+    2.5M Simulation_SNP_4000_INDEL_4000_CNV_4.simseq.genome.fa
+    2.3M Simulation_SNP_4000_INDEL_4000_INV_4.simseq.genome.fa
+    2.3M Simulation_SNP_4000_INDEL_4000.simseq.genome.fa
+    2.3M Simulation_SNP_5000.simseq.genome.fa
+    
+    #indexing the reference sample
+    bwa index GCF_000191525.1_ASM19152v1_genomic.fna 
+    ```
 In order to simulate a real sequensing experiment, we'll simulate the short reads too from the simulated full sequence using `wgsim` and map those reads to the reference sequnce using `bwa`. Since the length of the each sequnce is around 2.3 million, 0.7 millions of 100pb reads will give 30x read depth. (700000x100/2300000 ~ 30)
 
-```bash
-#creating VCF files for each sample file considering GCF_000191525.1_ASM19152v1_genomic.fna as reference and silulating 30x 100bp reads. 
-#export OMP_NUM_THREADS=1
-wgsim -N675000 -1100 -2100 Simulation_SNP_5000.simseq.genome.fa Simulation_SNP_5000.read1.fq Simulation_SNP_5000.read2.fq 
-bwa mem -R "@RG\tID:Simulation_SNP_5000\tSM:Simulation_SNP_5000\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_5000.read1.fq Simulation_SNP_5000.read2.fq > Simulation_SNP_5000.sam
-samtools view -bS Simulation_SNP_5000.sam | samtools sort - > Simulation_SNP_5000.bam
-bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_5000.bam | bcftools call -vmO z -o Simulation_SNP_5000.bwa.30x.100R.vcf.gz
-bcftools index Simulation_SNP_5000.bwa.30x.100R.vcf.gz 
+!!! terminal "code"
 
-wgsim -N675000 -1100 -2100 Simulation_INDEL_5000.simseq.genome.fa Simulation_INDEL_5000.read1.fq Simulation_INDEL_5000.read2.fq 
-bwa mem -R "@RG\tID:Simulation_INDEL_5000\tSM:Simulation_INDEL_5000\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_INDEL_5000.read1.fq Simulation_INDEL_5000.read2.fq > Simulation_INDEL_5000.sam
-samtools view -bS Simulation_INDEL_5000.sam | samtools sort - > Simulation_INDEL_5000.bam
-bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_INDEL_5000.bam | bcftools call -vmO z -o Simulation_INDEL_5000.bwa.30x.100R.vcf.gz
-bcftools index Simulation_INDEL_5000.bwa.30x.100R.vcf.gz 
-
-wgsim -N675000 -1100 -2100 Simulation_SNP_4000_INDEL_4000.simseq.genome.fa Simulation_SNP_4000_INDEL_4000.read1.fq Simulation_SNP_4000_INDEL_4000.read2.fq 
-bwa mem -R "@RG\tID:Simulation_SNP_4000_INDEL_4000\tSM:Simulation_SNP_4000_INDEL_4000\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000.read1.fq  Simulation_SNP_4000_INDEL_4000.read2.fq > Simulation_SNP_4000_INDEL_4000.sam
-samtools view -bS Simulation_SNP_4000_INDEL_4000.sam | samtools sort - > Simulation_SNP_4000_INDEL_4000.bam
-bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000.bam | bcftools call -vmO z -o Simulation_SNP_4000_INDEL_4000.bwa.30x.100R.vcf.gz
-bcftools index Simulation_SNP_4000_INDEL_4000.bwa.30x.100R.vcf.gz
-
-wgsim -N675000 -1100 -2100 Simulation_SNP_4000_INDEL_4000_INV_4.simseq.genome.fa Simulation_SNP_4000_INDEL_4000_INV_4.read1.fq Simulation_SNP_4000_INDEL_4000_INV_4.read2.fq
-bwa mem -R "@RG\tID:Simulation_SNP_4000_INDEL_4000_INV_4\tSM:Simulation_SNP_4000_INDEL_4000_INV_4\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000_INV_4.read1.fq Simulation_SNP_4000_INDEL_4000_INV_4.read2.fq > Simulation_SNP_4000_INDEL_4000_INV_4.sam
-samtools view -bS Simulation_SNP_4000_INDEL_4000_INV_4.sam | samtools sort - > Simulation_SNP_4000_INDEL_4000_INV_4.bam
-bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000_INV_4.bam | bcftools call -vmO z -o Simulation_SNP_4000_INDEL_4000_INV_4.bwa.30x.100R.vcf.gz
-bcftools index Simulation_SNP_4000_INDEL_4000_INV_4.bwa.30x.100R.vcf.gz
-
-wgsim -N675000 -1100 -2100 Simulation_SNP_4000_INDEL_4000_CNV_4.simseq.genome.fa Simulation_SNP_4000_INDEL_4000_CNV_4.read1.fq Simulation_SNP_4000_INDEL_4000_CNV_4.read2.fq
-bwa mem -R "@RG\tID:Simulation_SNP_4000_INDEL_4000_CNV_4\tSM:Simulation_SNP_4000_INDEL_4000_CNV_4\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000_CNV_4.read1.fq Simulation_SNP_4000_INDEL_4000_CNV_4.read2.fq > Simulation_SNP_4000_INDEL_4000_CNV_4.sam
-samtools view -bS Simulation_SNP_4000_INDEL_4000_CNV_4.sam | samtools sort - > Simulation_SNP_4000_INDEL_4000_CNV_4.bam
-bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000_CNV_4.bam | bcftools call -vmO z -o Simulation_SNP_4000_INDEL_4000_CNV_4.bwa.30x.100R.vcf.gz
-bcftools index Simulation_SNP_4000_INDEL_4000_CNV_4.bwa.30x.100R.vcf.gz
-```
-
-(You can find above script as a SLURM job script here [vc_bwa_compare.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/vc_bwa_compare.sh))
+    ```bash
+    #creating VCF files for each sample file considering GCF_000191525.1_ASM19152v1_genomic.fna as reference and silulating 30x 100bp reads. 
+    #export OMP_NUM_THREADS=1
+    wgsim -N675000 -1100 -2100 Simulation_SNP_5000.simseq.genome.fa Simulation_SNP_5000.read1.fq Simulation_SNP_5000.read2.fq 
+    bwa mem -R "@RG\tID:Simulation_SNP_5000\tSM:Simulation_SNP_5000\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_5000.read1.fq Simulation_SNP_5000.read2.fq > Simulation_SNP_5000.sam
+    samtools view -bS Simulation_SNP_5000.sam | samtools sort - > Simulation_SNP_5000.bam
+    bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_5000.bam | bcftools call -vmO z -o Simulation_SNP_5000.bwa.30x.100R.vcf.gz
+    bcftools index Simulation_SNP_5000.bwa.30x.100R.vcf.gz 
+    ```
+!!! terminal "code"
+    ```bash    
+    wgsim -N675000 -1100 -2100 Simulation_INDEL_5000.simseq.genome.fa Simulation_INDEL_5000.read1.fq Simulation_INDEL_5000.read2.fq 
+    bwa mem -R "@RG\tID:Simulation_INDEL_5000\tSM:Simulation_INDEL_5000\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_INDEL_5000.read1.fq Simulation_INDEL_5000.read2.fq > Simulation_INDEL_5000.sam
+    samtools view -bS Simulation_INDEL_5000.sam | samtools sort - > Simulation_INDEL_5000.bam
+    bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_INDEL_5000.bam | bcftools call -vmO z -o Simulation_INDEL_5000.bwa.30x.100R.vcf.gz
+    bcftools index Simulation_INDEL_5000.bwa.30x.100R.vcf.gz 
+    ```
+!!! terminal "code"
+    ```bash 
+    wgsim -N675000 -1100 -2100 Simulation_SNP_4000_INDEL_4000.simseq.genome.fa Simulation_SNP_4000_INDEL_4000.read1.fq Simulation_SNP_4000_INDEL_4000.read2.fq 
+    bwa mem -R "@RG\tID:Simulation_SNP_4000_INDEL_4000\tSM:Simulation_SNP_4000_INDEL_4000\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000.read1.fq  Simulation_SNP_4000_INDEL_4000.read2.fq > Simulation_SNP_4000_INDEL_4000.sam
+    samtools view -bS Simulation_SNP_4000_INDEL_4000.sam | samtools sort - > Simulation_SNP_4000_INDEL_4000.bam
+    bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000.bam | bcftools call -vmO z -o Simulation_SNP_4000_INDEL_4000.bwa.30x.100R.vcf.gz
+    bcftools index Simulation_SNP_4000_INDEL_4000.bwa.30x.100R.vcf.gz
+    ```
+!!! terminal "code"
+    ```bash    
+    wgsim -N675000 -1100 -2100 Simulation_SNP_4000_INDEL_4000_INV_4.simseq.genome.fa Simulation_SNP_4000_INDEL_4000_INV_4.read1.fq Simulation_SNP_4000_INDEL_4000_INV_4.read2.fq
+    bwa mem -R "@RG\tID:Simulation_SNP_4000_INDEL_4000_INV_4\tSM:Simulation_SNP_4000_INDEL_4000_INV_4\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000_INV_4.read1.fq Simulation_SNP_4000_INDEL_4000_INV_4.read2.fq > Simulation_SNP_4000_INDEL_4000_INV_4.sam
+    samtools view -bS Simulation_SNP_4000_INDEL_4000_INV_4.sam | samtools sort - > Simulation_SNP_4000_INDEL_4000_INV_4.bam
+    bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000_INV_4.bam | bcftools call -vmO z -o Simulation_SNP_4000_INDEL_4000_INV_4.bwa.30x.100R.vcf.gz
+    bcftools index Simulation_SNP_4000_INDEL_4000_INV_4.bwa.30x.100R.vcf.gz
+    ```
+!!! terminal "code"
+    ```bash    
+    wgsim -N675000 -1100 -2100 Simulation_SNP_4000_INDEL_4000_CNV_4.simseq.genome.fa Simulation_SNP_4000_INDEL_4000_CNV_4.read1.fq Simulation_SNP_4000_INDEL_4000_CNV_4.read2.fq
+    bwa mem -R "@RG\tID:Simulation_SNP_4000_INDEL_4000_CNV_4\tSM:Simulation_SNP_4000_INDEL_4000_CNV_4\tLB:L1" GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000_CNV_4.read1.fq Simulation_SNP_4000_INDEL_4000_CNV_4.read2.fq > Simulation_SNP_4000_INDEL_4000_CNV_4.sam
+    samtools view -bS Simulation_SNP_4000_INDEL_4000_CNV_4.sam | samtools sort - > Simulation_SNP_4000_INDEL_4000_CNV_4.bam
+    bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_4000_INDEL_4000_CNV_4.bam | bcftools call -vmO z -o Simulation_SNP_4000_INDEL_4000_CNV_4.bwa.30x.100R.vcf.gz
+    bcftools index Simulation_SNP_4000_INDEL_4000_CNV_4.bwa.30x.100R.vcf.gz
+    ```
+    
+(You can find above script as a Slurm job script here [vc_bwa_compare.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/vc_bwa_compare.sh))
 
 Now we can find the variant call stats using `bcftools stats`. 
 

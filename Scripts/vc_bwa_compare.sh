@@ -7,9 +7,9 @@
 #SBATCH --time          2:00:00
 
 module purge
-module load BCFtools/1.9-GCC-7.4.0
-module load SAMtools/1.9-GCC-7.4.0
-module load BWA/0.7.17-GCC-9.2.0
+module load BCFtools/1.15.1-GCC-11.3.0
+module load SAMtools/1.15.1-GCC-11.3.0
+module load BWA/0.7.17-GCC-11.3.0
 
 #indexing the reference sample
 bwa index GCF_000191525.1_ASM19152v1_genomic.fna
