@@ -334,15 +334,15 @@
   }
   .md-typeset .admonition.rectangle-list,
   .md-typeset details.rectangle-list {
-    border-color: rgb(168, 216, 153);
+    border-color: rgb(99, 161, 241);
   }
   .md-typeset .rectangle-list > .admonition-title,
   .md-typeset .rectangle-list > summary {
-    background-color: rgba(30, 145, 87, 0.315);
+    background-color: rgba(14, 130, 238, 0.63);
   }
   .md-typeset .rectangle-list > .admonition-title::before,
   .md-typeset .rectangle-list > summary::before {
-    background-color: rgb(8, 92, 53);
+    background-color: rgb(53, 3, 94);
     -webkit-mask-image: var(--md-admonition-icon--rectangle-list);
             mask-image: var(--md-admonition-icon--rectangle-list);
   }

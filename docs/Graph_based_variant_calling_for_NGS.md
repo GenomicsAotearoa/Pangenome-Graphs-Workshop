@@ -1,4 +1,4 @@
-# NGS data analysis used graph as reference on Nesi
+# NGS data analysis used graph as reference 
 
 In this workshop, we deploys the VG toolkit for NGS data analysis based on pangenome graph reference 
 
