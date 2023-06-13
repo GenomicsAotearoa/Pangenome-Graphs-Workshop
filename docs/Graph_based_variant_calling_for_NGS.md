@@ -26,7 +26,7 @@ mkdir simu_NGS_data
 ```
 The script for simulation NGS data
 ```bash
-#!/usr/bin/bash
+#!/bin.bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      5NGS_simulate
@@ -66,7 +66,7 @@ mkdir /home/zyang/pg_workshop/graph_NGS/refs/temp_dir
 ```
 
 ```bash
-#!/usr/bin/bash
+#!/bin.bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      build_index_for_4SimGraph
@@ -109,7 +109,7 @@ mkdir /home/zyang/pg_workshop/graph_NGS/graph_based_mapping
 ```bash
 
 ```bash
-#!/usr/bin/bash
+#!/bin.bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      vgmap_5e_4Sim
@@ -159,7 +159,7 @@ mkdir /home/zyang/pg_workshop/graph_NGS/vgmap_12e_sim4_allR10S3_typing
 
 generate snarls of graph
 ```bash
-#!/usr/bin/bash
+#!/bin.bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      vgmap_generate_snarls
@@ -179,7 +179,7 @@ vg snarls $input_folder/4Sim_1K96_256.xg > $output_folder/4Sim_1K96_256.xg.snarl
 
 genotyping 
 ```bash
-#!/usr/bin/bash
+#!/bin.bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      5e_vgmap_genotying
@@ -229,7 +229,7 @@ mkdir /home/zyang/pg_workshop/graph_NGS/vgmap_5e_sim4_allR10S3_novelcalling
 ```
 
 ```bash
-#!/usr/bin/bash
+#!/bin.bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      5e_vgmap_novelvariant_calling

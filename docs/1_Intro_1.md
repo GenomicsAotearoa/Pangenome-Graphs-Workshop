@@ -122,16 +122,20 @@ We can follow the procedure in https://github.com/pangenome/pggb#singularity to 
 
 Following script ([pggb_test.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pggb_test.sh)) can be used to run `pggb` on the downloaded sequence. 
 
-```bash
-#!/usr/bin/bash
-module load Singularity
-#export container to a variable for convenience
-WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory
-container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
-data=${WD}/ASM19152v1_pgsim.fa
+!!! terminal "code"
 
-singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 2 -S -m -o output -V 'NC_017518.1:#' 
-```
+    ```bash
+    #!/bin/bash
+    
+    module load Singularity
+
+    #export container to a variable for convenience
+    WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory
+    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
+    data=${WD}/ASM19152v1_pgsim.fa
+    
+    singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 2 -S -m -o output -V 'NC_017518.1:#' 
+    ```
 
 In `pggb` `-i` is for specifying the sequence file. `-s` specifies the segment length for mapping and `-p` specifies percent identity for mapping/alignment. `-n` is for number of haplotypes (or number of samples). `-k` for minimum matching length. `-t` says number of threads to be used for the execution. `-S` will generate the stats. `-m` will generate MultiQC report of graphs' statistics and visualizations. `-o` specifies the output directory name. `-V 'NC_017518.1:#'` will create a vcf file and its stats considering NC_017518.1 as the reference sequence. 
 
@@ -139,95 +143,87 @@ You can run run pggb without parameters to get information on the meaning of eac
 We get a graph in GFA (*.gfa) and odgi (*.og) formats. These can be used downstream in many methods, including those in vg, like vg giraffe. You can visualize the GFA format graph with BandageNG, and use odgi directly on the \*.gfa or \*.og output. 
 
 ---
-# Executing `pggb` as a [SLURM](https://github.com/SchedMD/slurm) Job
+# Executing `pggb` as a [Slurm](https://github.com/SchedMD/slurm) Job
 
 Executing shell scripts in the Nesi environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previusely explained script as below ([pggb_slurm_1K95.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pggb_slurm_1K95.sh)) to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
 
-```bash
-#!/usr/bin/bash
+!!! terminal "code"
 
-#SBATCH --account       ga03793
-#SBATCH --job-name      NC_017518.1_1K95
-#SBATCH --cpus-per-task 8 
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
-
-module purge
-module load Singularity
-
-#export container to a variable for convenience
-WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory
-container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
-data=${WD}/ASM19152v1_pgsim.fa
-
-
-
-singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 24 -S -m -o output_1K95 -V 'NC_017518.1:#'  
-```
+    ```bash
+    #!/bin/bash -e
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      NC_017518.1_1K95
+    #SBATCH --cpus-per-task 8 
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+    
+    module purge
+    module load Singularity
+    
+    #export container to a variable for convenience
+    WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory
+    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
+    data=${WD}/ASM19152v1_pgsim.fa
+    
+    
+    
+    singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 24 -S -m -o output_1K95 -V 'NC_017518.1:#'  
+    ```
 
 The job can be submitted using the `sbatch` command it will show a job id. In this case 35887085
 
-```
-$ sbatch pggb_slurm_1K95.sh
-Submitted batch job 35887085
-```
+!!! terminal "code"
 
-We can monitor the job status using `seff` and `squeue` specifying the job id. 
+    ```bash
+    $ sbatch pggb_slurm_1K95.sh
+    Submitted batch job 35887085
+    ```
 
-```
-seff 35887085
-Job ID: 35887085
-Cluster: mahuika
-User/Group: ismnu81p/ismnu81p
-State: RUNNING
-Nodes: 1
-Cores per node: 8
-CPU Utilized: 00:00:00
-CPU Efficiency: 0.00% of 00:04:16 core-walltime
-Job Wall-clock time: 00:00:32
-Memory Utilized: 0.00 MB (estimated maximum)
-Memory Efficiency: 0.00% of 4.00 GB (4.00 GB/node)
-WARNING: Efficiency statistics may be misleading for RUNNING jobs.
-```
+We can monitor the job status using `squeue` specifying the job id. 
 
-```
-$ squeue --job 35887085
-JOBID         USER     ACCOUNT   NAME        CPUS MIN_MEM PARTITI START_TIME     TIME_LEFT STATE    NODELIST(REASON)    
-35887085      ismnu81p ga03793   NC_017518.1_   8      4G large   2023-05-21T0       58:35 RUNNING  wbn063 
-```
+!!! terminal "code"
 
-SLURM will also create a output log file and we can monitor it realtime using  `tail -f`. 
+    ```bash
+    $ squeue -j 35887085
+    JOBID         USER     ACCOUNT   NAME        CPUS MIN_MEM PARTITI START_TIME     TIME_LEFT STATE    NODELIST(REASON)    
+    35887085      ismnu81p ga03793   NC_017518.1_   8      4G large   2023-05-21T0       58:35 RUNNING  wbn063 
+    ```
 
-```bash
-$ tail -f slurm-35887085.out 
-[smoothxg::(1-3)::prep] writing graph output_1K95/ASM19152v1_pgsim.fa.2ab4142.c2fac19.seqwish.gfa.prep.0.gfa
-[smoothxg::(1-3)::main] building xg index
-[smoothxg::(1-3)::smoothable_blocks] computing blocks
-[smoothxg::(1-3)::smoothable_blocks] computing blocks for 54747 handles: 100.00% @ 5.47e+04/s elapsed: 00:00:00:01 remain: 00:00:00:00
-[smoothxg::(1-3)::break_and_split_blocks] cutting blocks that contain sequences longer than max-poa-length (1400) and depth >= 0
-[smoothxg::(1-3)::break_and_split_blocks] splitting 3862 blocks at identity 0.950 (WFA-based clustering) and at estimated-identity 0.950 (mash-based clustering)
-[smoothxg::(1-3)::break_and_split_blocks] cutting and splitting 3862 blocks: 100.00% @ 1.49e+04/s elapsed: 00:00:00:00 remain: 00:00:00:00
-[smoothxg::(1-3)::break_and_split_blocks] cut 0 blocks of which 0 had repeats
-[smoothxg::(1-3)::break_and_split_blocks] split 0 blocks
-[smoothxg::(1-3)::smooth_and_lace] applying local SPOA to 3862 blocks: 78.40% @ 5.77e+01/s elapsed: 00:00:00:52 remain: 00:00:00:14
-```
+Slurm will also create a output log file and we can monitor it realtime using  `tail -f`. 
+
+!!! terminal "code"
+
+    ```bash
+    $ tail -f slurm-35887085.out 
+    [smoothxg::(1-3)::prep] writing graph output_1K95/ASM19152v1_pgsim.fa.2ab4142.c2fac19.seqwish.gfa.prep.0.gfa
+    [smoothxg::(1-3)::main] building xg index
+    [smoothxg::(1-3)::smoothable_blocks] computing blocks
+    [smoothxg::(1-3)::smoothable_blocks] computing blocks for 54747 handles: 100.00% @ 5.47e+04/s elapsed: 00:00:00:01 remain: 00:00:00:00
+    [smoothxg::(1-3)::break_and_split_blocks] cutting blocks that contain sequences longer than max-poa-length (1400) and depth >= 0
+    [smoothxg::(1-3)::break_and_split_blocks] splitting 3862 blocks at identity 0.950 (WFA-based clustering) and at estimated-identity 0.950 (mash-based clustering)
+    [smoothxg::(1-3)::break_and_split_blocks] cutting and splitting 3862 blocks: 100.00% @ 1.49e+04/s elapsed: 00:00:00:00 remain: 00:00:00:00
+    [smoothxg::(1-3)::break_and_split_blocks] cut 0 blocks of which 0 had repeats
+    [smoothxg::(1-3)::break_and_split_blocks] split 0 blocks
+    [smoothxg::(1-3)::smooth_and_lace] applying local SPOA to 3862 blocks: 78.40% @ 5.77e+01/s elapsed: 00:00:00:52 remain: 00:00:00:14
+    ```
 
 When the job is completed the `seff` command will show a summary report with below details. The job has used 785.61 MB memory and taken 7 minuted and 50 seconds to complete. 
 
-```
-$ seff 35887085
-Job ID: 35887085
-Cluster: mahuika
-User/Group: ismnu81p/ismnu81p
-State: COMPLETED (exit code 0)
-Nodes: 1
-Cores per node: 8
-CPU Utilized: 00:41:23
-CPU Efficiency: 66.04% of 01:02:40 core-walltime
-Job Wall-clock time: 00:07:50
-Memory Utilized: 785.61 MB
-Memory Efficiency: 19.18% of 4.00 GB
-```
+!!! terminal "code"
+
+    ```bash
+    $ nn_seff 35887085
+    Cluster: mahuika
+    Job ID: 35887085
+    State: COMPLETED
+    Cores: 4
+    Tasks: 1
+    Nodes: 1
+    Job Wall-time:   13.1%  00:07:50 of 01:00:00 time limit
+    CPU Efficiency: 132.1%  00:41:23 of 00:31:20 core-walltime
+    Mem Efficiency:  19.2%  785.61 MB of 4.00 GB
+    ```
 
 Now we can try the same script by changing the `pggb` parameters `-s`, `-p` and `-k` and compare the results. Please refer [script folder](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Scripts) for scripts. 
 
@@ -517,7 +513,7 @@ wget https://raw.githubusercontent.com/pangenome/pgge/master/scripts/beehave.R
 Now execute the script [pgge_test.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pgge_test.sh)
 
 ```bash
-#!/usr/bin/bash
+#!/bin.bash
 module load Singularity
 #export container to a variable for convenience
 WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory

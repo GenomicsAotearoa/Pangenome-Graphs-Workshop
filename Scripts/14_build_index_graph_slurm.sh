@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin.bash
 
 #SBATCH --account       ga03793
 #SBATCH --job-name      build_index_for_4SimGraph
