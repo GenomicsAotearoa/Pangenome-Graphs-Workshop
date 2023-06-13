@@ -1,12 +1,12 @@
-site_name: Introduction to R
+site_name: Pangenome Graphs
 site_author: Genomics Aotearoa
 site_dir: public
-site_url: "https://genomicsaotearoa.github.io/Introduction-to-R/"
+site_url: "https://genomicsaotearoa.github.io/Pangenome-Graphs-Workshop/"
 
 #Repository information
 
-repo_name:   GenomicsAotearoa/Introduction-to-R 
-repo_url: https://github.com/GenomicsAotearoa/Introduction-to-R
+repo_name:   GenomicsAotearoa/Pangenome-Graphs-Workshop
+repo_url: https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop
 
 
 theme:
