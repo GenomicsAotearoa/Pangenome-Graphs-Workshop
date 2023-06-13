@@ -3,42 +3,51 @@
 In this workshop, we employes PanGenome Graph Builder (PGGB) to construction the pangenome graphs
 
 ## How does the pggb graph build work?
-pggb builds pangenome variation graphs from a set of input sequences.
 
-A pangenome variation graph is a kind of generic multiple sequence alignment. It lets us understand any kind of sequence variation between a collection of genomes. It shows us similarity where genomes walk through the same parts of the graph, and differences where they do not.
+!!! info ""
 
-pggb generates this kind of graph using an all-to-all alignment of input sequences (wfmash), graph induction (seqwish), and progressive normalization (smoothxg, gfaffix). After construction, pggb generates diagnostic visualizations of the graph (odgi). A variant call report (in VCF) representing both small and large variants can be generated based on any reference genome included in the graph (vg). pggb writes its output in GFAv1 format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits.
-
-pggb has been tested at scale in the Human Pangenome Reference Consortium (HPRC) as a method to build a graph from the draft human pangenome. 
-
-more details can be find [(PGGB)](https://github.com/pangenome/pggb)
-
+    pggb builds pangenome variation graphs from a set of input sequences.
+    
+    A pangenome variation graph is a kind of generic multiple sequence alignment. It lets us understand any kind of sequence variation between a collection of genomes. It shows us similarity where genomes walk through the same parts of the graph, and differences where they do not.
+    
+    pggb generates this kind of graph using an all-to-all alignment of input sequences (wfmash), graph induction (seqwish), and progressive normalization (smoothxg, gfaffix). After construction, pggb generates diagnostic visualizations of the graph (odgi). A variant call report (in VCF) representing both small and large variants can be generated based on any reference genome included in the graph (vg). pggb writes its output in GFAv1 format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits.
+    
+    pggb has been tested at scale in the Human Pangenome Reference Consortium (HPRC) as a method to build a graph from the draft human pangenome. 
+    
+    more details can be find [(PGGB)](https://github.com/pangenome/pggb)
+    
 ### Learning objectives
-- build pangenome graphs using pggb
-- explore pggb’s results
-- understand how parameters affect the built pangenome graphs
+
+!!! quote ""
+
+    - build pangenome graphs using pggb
+    - explore pggb’s results
+    - understand how parameters affect the built pangenome graphs
 
 ## Getting started
 NeSI HPC environment is used for the analysis. Please make sure to have a NeSI account and you are able to login.
 
 ### Setting up your project directory and download the datasets
-```bash
-# Create a new directory in somewhere and change to that directory
-mkdir pg_workshop
-cd pg_workshop
-# Keep a note of the absolute path of your directory
-pwd
-/home/zyang/pg_worhshop
 
-# Downloading and preparing datasets
-git clone https://github.com/ZoeYang2020/dataset_for_pg_workshop
+!!! terminal "code"
 
-# copy the 4Sim.fa dataset to your work directory, mine is /home/zyang/pg_worhshop
-cp /home/zyang/pg_worhshop/dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/4Sim.fa /home/zyang/pg_worhshop
-
-# go back to your work directory 
-cd /home/zyang/pg_worhshop
-```
+    ```bash
+    # Create a new directory in somewhere and change to that directory
+    mkdir pg_workshop
+    cd pg_workshop
+    # Keep a note of the absolute path of your directory
+    pwd
+    /home/zyang/pg_worhshop
+    
+    # Downloading and preparing datasets
+    git clone https://github.com/ZoeYang2020/dataset_for_pg_workshop
+    
+    # copy the 4Sim.fa dataset to your work directory, mine is /home/zyang/pg_worhshop
+    cp /home/zyang/pg_worhshop/dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/4Sim.fa /home/zyang/pg_worhshop
+    
+    # go back to your work directory 
+    cd /home/zyang/pg_worhshop
+    ```
 
 ## Construct pangenome graph for the 4Sim genomes
 ```bash
