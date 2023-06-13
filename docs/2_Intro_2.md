@@ -4,10 +4,12 @@ This repository includes sample datasets and scripts, which are utilized for the
 </p>
 
 # Pangenome Graphs Workshop
-<p align="justify">
+
 Unlock the Power of Pangenome Graphs in Bioinformatics
 
-![example of pangenome graph in 2D visulization](https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/Figures/DRB1-3123.fa.gz.pggb-E-s5000-l15000-p80-n10-a0-K16-k8-w50000-j5000-e5000-I0-R0-N.smooth.chop.og.lay.draw_mqc.png?raw=true])
+![image](./theme_figures/DRB1-3123.fa.gz.pggb-E-s5000-l15000-p80-n10-a0-K16-k8-w50000-j5000-e5000-I0-R0-N.smooth.chop.og.lay.draw_mqc.png)
+
+<center><small>example of pangenome graph in 2D visulization</small></center>
 
 
 Don't let reference bias hinder your genomic analysis! Discover the cutting-edge potential of pangenome graphs in our pangenome workshop. 
