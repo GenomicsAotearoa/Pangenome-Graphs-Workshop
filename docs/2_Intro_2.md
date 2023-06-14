@@ -1,6 +1,6 @@
 # Intro 2: Pangenome Graphs Workshop 
 <p align="justify">
-This repository includes sample datasets and scripts, which are utilized for the construction of pangenome graphs. It provides a comprehensive walkthrough of each step executed within the Nesi environment.
+This repository includes sample datasets and scripts, which are utilized for the construction of pangenome graphs. It provides a comprehensive walkthrough of each step executed within the NeSI environment.
 </p>
 
 # Pangenome Graphs Workshop
@@ -9,7 +9,7 @@ Unlock the Power of Pangenome Graphs in Bioinformatics
 
 ![image](./theme_figures/DRB1-3123.fa.gz.pggb-E-s5000-l15000-p80-n10-a0-K16-k8-w50000-j5000-e5000-I0-R0-N.smooth.chop.og.lay.draw_mqc.png)
 
-<center><small>example of pangenome graph in 2D visulization</small></center>
+<center><small>Example of pangenome graph in 2D visulization</small></center>
 
 
 Don't let reference bias hinder your genomic analysis! Discover the cutting-edge potential of pangenome graphs in our pangenome workshop. 
@@ -18,7 +18,7 @@ In the field of bioinformatics, relying on a single reference genome can lead to
  
 Our workshop delves into the construction of dynamic pangenome graphs that incorporate multiple genomes and their alignments. By representing all types of variations within a graph structure, pangenome graphs provide an efficient model for analyzing complex genomic data.
  
-Throughout the workshop, we will guide you through a practical pangenome bioinformatics pipeline, utilizing the PanGenome Graph Builder and the Variation Graph toolkit. You will learn how to construct pangenomes from assembled genomes, align whole genome sequencing data, and call variants against a graph reference.
+Throughout the workshop, we will guide you through a practical pangenome bioinformatics pipeline, utilizing the PanGenome Graph Builder (`PGGB`) and the Variation Graph (`vg`) toolkit. You will learn how to construct pangenomes from assembled genomes, align whole genome sequencing data, and call variants against a graph reference.
  
 Gain a deep understanding of pangenome concepts and gain hands-on experience building and analyzing pangenome graphs. Discover how to apply these methods to tackle intricate research questions that involve understanding the intricate relationships between multiple genomes or accounting for variability in new genome analyses. By the end of the course, you will possess a strong grasp of pangenome methods based on whole genome assemblies.
 
@@ -49,11 +49,11 @@ Pangenome graphs are pangenomes stored in graph models that can capture the enti
  
 This pipeline for pangenome graph comprises three key stages: graph construction using PGGB, graph manipulation via ODGI, and variant calling for Next-Generation Sequencing (NGS) data utilizing the VG toolkit, as shown in Figure 1C.
 
-The PGGB pipeline, which operates without a reference method, builds pangenome graphs using an all-to-all whole genome alignment approach with wfmash. Subsequent graph induction is accomplished through seqwish, followed by progressive normalization implemented with smoothxg and gfaffix.
+The PGGB pipeline, which operates without a reference method, builds pangenome graphs using an all-to-all whole genome alignment approach with `wfmash`. Subsequent graph induction is accomplished through `seqwish`, followed by progressive normalization implemented with `smoothxg` and `gfaffix`.
 
 ODGI is employed for various graph manipulation tasks, including visualization and the extraction of distances between paths within the graph. This feature enables further phylogenetic analysis.
 
-By using the pangenome graph created with PGGB, it is possible to concurrently identify a variety of genetic variations. These include structural sariations (SVs), rearrangements, and smaller variants such as single nucleotide polymorphisms (SNPs) and insertions/deletions, which can be identified through the 'vg deconstruction' process.
+By using the pangenome graph created with PGGB, it is possible to concurrently identify a variety of genetic variations. These include structural variations (SVs), rearrangements, and smaller variants such as single nucleotide polymorphisms (SNPs) and insertions/deletions, which can be identified through the `vg deconstruction` process.
 
 Lastly, the VG toolkit is harnessed for NGS data analysis against the graph, which includes tasks like read mapping and variant calling.
 
