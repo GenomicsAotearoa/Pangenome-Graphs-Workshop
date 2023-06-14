@@ -190,7 +190,7 @@ Stats of the merged vcf file should show 4000 SNPs and 4000 INDELs.
         SiS     0       1       4000    1372    2628    4000    0       0       4000
         ```
 
-Now we can apply the same procedure for comparison using `bcftools isec`.
+Now we can apply the same procedure for comparison using `bcftools isec`. <!-- This suggests some iteration, manual or looped, but I'm not sure where the iteration is implemented here? -->
 
 <!-- 
 What are learners looking for here? What is the downstream context here?
