@@ -288,7 +288,7 @@ We'll concatenate all these files into one and make an index too
 Concatenation could've looked like this:
 
 ```bash
-cat GCF_000191525.1_ASM19152v1_genomic.fna *simseq.genome.ga > ASM19152v1_pgsim.fa
+cat GCF_000191525.1_ASM19152v1_genomic.fna *simseq.genome.fa > ASM19152v1_pgsim.fa
 ```
 -->
 !!! terminal "code"
