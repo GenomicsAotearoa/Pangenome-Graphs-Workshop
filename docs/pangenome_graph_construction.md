@@ -66,17 +66,17 @@ NeSI HPC environment is used for the analysis. Please make sure to have a NeSI a
     ST154Sim        2248965 4535499 2248965 2248966
     ST42Sim 2249050 6784474 2249050 2249051
     ```
-### Executing `pggb` tool using Singularity container
+### Executing `pggb` tool
 
 !!! terminal "code"
 
     ```bash
     module purge
-    module load Singularity
-    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
+    module load pggb/0.5.3-Miniconda3
+    
 
-    # Execute singularity exec ${container} pggb to check the command list of PGGB
-    singularity exec ${container} pggb 
+    # Execute `pggb --help` to check the command list of PGGB
+    pggb --help
     ```
     ??? success "Output"
         ```bash 
@@ -183,7 +183,10 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
     ```bash
     module purge
     module load Mash/2.3-GCC-11.3.0
+
     mash triangle 4Sim.fa >4Sim.fa_mash
+    ```
+    ```bash
     less -S 4Sim.fa_mash
             4
     NC_017518
@@ -199,11 +202,10 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
 
      ```bash
      module purge
-     module load Singularity
-     container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
+     module load pggb/0.5.3-Miniconda3
      
      # Execute singularity exec ${container} pggb, set -s 1000
-     singularity exec ${container} pggb -i 4Sim.fa -s 1000 -p 96 -n 4 -t 24 -S -m -o 4Sim_1K96 -V 'NC_017518:#'
+     pggb -i 4Sim.fa -s 1000 -p 96 -n 4 -t 24 -S -m -o 4Sim_1K96 -V 'NC_017518:#'
      ```
 ### Executing `pggb` as a [SLURM](https://github.com/SchedMD/slurm) Job
 Executing shell scripts in the Nesi environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previusely explained script as below to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
