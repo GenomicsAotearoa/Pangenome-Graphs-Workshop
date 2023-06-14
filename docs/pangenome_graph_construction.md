@@ -322,83 +322,92 @@ The job can be submitted using the `sbatch` command it will show a job id.
 
 ### vg deconstruct graph to get the variations in vcf 
 
-```bash
-mkdir vg_deconstruct
-#copy gfa to vg_deconsturct and rename the gfa files with its PGGB settings
-cp /home/zyang/pg_workshop/4Sim_1K96/4Sim.fa.97e7156.417fcdf.7659dc8.smooth.final.gfa /home/zyang/pg_workshop/vg_deconstruct/4Sim_1K96.gfa
-cp /home/zyang/pg_workshop/4Sim_1K96_K79/4Sim.fa.f958389.417fcdf.7659dc8.smooth.final.gfa /home/zyang/pg_workshop/vg_deconstruct/4Sim_1K96_K79.gfa
+!!! terminal "code"
 
-cd /home/zyang/pg_workshop/vg_deconstruct
-
-module purge
-module load vg/1.46.0
-module load BCFtools/1.15.1-GCC-11.3.0
-
-vg deconstruct -p NC_017518  -a -e 4Sim_1K96.gfa >4Sim_1K96_aep1.vcf
-bcftools stats 4Sim_1K96_aep1.vcf >4Sim_1K96_aep1.vcf_stats
-```
+    ```bash
+    mkdir vg_deconstruct
+    #copy gfa to vg_deconsturct and rename the gfa files with its PGGB settings
+    cp /home/zyang/pg_workshop/4Sim_1K96/4Sim.fa.97e7156.417fcdf.7659dc8.smooth.final.gfa /home/zyang/pg_workshop/vg_deconstruct/4Sim_1K96.gfa
+    cp /home/zyang/pg_workshop/4Sim_1K96_K79/4Sim.fa.f958389.417fcdf.7659dc8.smooth.final.gfa /home/zyang/pg_workshop/vg_deconstruct/4Sim_1K96_K79.gfa
+    
+    cd /home/zyang/pg_workshop/vg_deconstruct
+    
+    module purge
+    module load vg/1.46.0
+    module load BCFtools/1.15.1-GCC-11.3.0
+    
+    vg deconstruct -p NC_017518  -a -e 4Sim_1K96.gfa >4Sim_1K96_aep1.vcf
+    bcftools stats 4Sim_1K96_aep1.vcf >4Sim_1K96_aep1.vcf_stats
+    ```
 
 #### 4Sim_vg_deconstruct.sh
-```bash
-#!/usr//bin/bash
 
-#SBATCH --account       ga03793
-#SBATCH --job-name      4Sim_vg_deconstruct
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
+!!! terminal "code"
 
-module purge
-module load vg/1.46.0
-module load BCFtools/1.15.1-GCC-11.3.0
-
-export container to a variable for convenience
-inputGFA=/home/zyang/pg_workshop/vg_deconstruct/*.gfa
-input_folder=/home/zyang/pg_workshop/vg_deconstruct
-output=/home/zyang/pg_workshop/vg_deconstruct
-
-for f in $inputGFA
-do
-
-x=$(basename $f .gfa)
-echo ${x}
-
-vg deconstruct -p NC_017518  -a -e $input_folder/${x}.gfa > $output/${x}aep1.vcf
-bcftools stats $output/${x}aep1.vcf >$output/${x}aep1.vcf_stats
-done
-```
+    ```bash
+    #!/usr//bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      4Sim_vg_deconstruct
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+    
+    module purge
+    module load vg/1.46.0
+    module load BCFtools/1.15.1-GCC-11.3.0
+    
+    export container to a variable for convenience
+    inputGFA=/home/zyang/pg_workshop/vg_deconstruct/*.gfa
+    input_folder=/home/zyang/pg_workshop/vg_deconstruct
+    output=/home/zyang/pg_workshop/vg_deconstruct
+    
+    for f in $inputGFA
+    do
+    
+    x=$(basename $f .gfa)
+    echo ${x}
+    
+    vg deconstruct -p NC_017518  -a -e $input_folder/${x}.gfa > $output/${x}aep1.vcf
+    bcftools stats $output/${x}aep1.vcf >$output/${x}aep1.vcf_stats
+    done
+    ```
 #### bcftools isec to check the overlap of the 1k96 -K 19, 1k96, -K 79
-```bash
-#!/bin/bash
 
-#SBATCH --account       ga03793
-#SBATCH --job-name      4Sim_1k96_isec
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
+!!! terminal "code"
 
-module purge
-module load BCFtools/1.15.1-GCC-11.3.0
+    ```bash
+    #!/bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      4Sim_1k96_isec
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+    
+    module purge
+    module load BCFtools/1.15.1-GCC-11.3.0
+    
+    input_folder=/home/zyang/pg_workshop/vg_deconstruct
+    output_folder=/home/zyang/pg_workshop/vg_deconstruct
+    
+    
+    bcftools view $input_folder/4Sim_1K96aep1.vcf  -Oz -o $output_folder/4Sim_1K96aep1.vcf.gz
+    bcftools view $input_folder/4Sim_1K96_K79aep1.vcf -Oz -o $output_folder/4Sim_1K96_K79aep1.vcf.gz
+    
+    bcftools index $output_folder/4Sim_1K96aep1.vcf.gz
+    bcftools index $output_folder/4Sim_1K96_K79aep1.vcf.gz
+    
+    bcftools isec $output_folder/4Sim_1K96aep1.vcf.gz $output_folder/4Sim_1K96_K79aep1.vcf.gz -p $output_folder/isec_4Sim_1K96
+    ```
+!!! terminal "code"
 
-input_folder=/home/zyang/pg_workshop/vg_deconstruct
-output_folder=/home/zyang/pg_workshop/vg_deconstruct
-
-
-bcftools view $input_folder/4Sim_1K96aep1.vcf  -Oz -o $output_folder/4Sim_1K96aep1.vcf.gz
-bcftools view $input_folder/4Sim_1K96_K79aep1.vcf -Oz -o $output_folder/4Sim_1K96_K79aep1.vcf.gz
-
-bcftools index $output_folder/4Sim_1K96aep1.vcf.gz
-bcftools index $output_folder/4Sim_1K96_K79aep1.vcf.gz
-
-bcftools isec $output_folder/4Sim_1K96aep1.vcf.gz $output_folder/4Sim_1K96_K79aep1.vcf.gz -p $output_folder/isec_4Sim_1K96
-```
-
-```bash
-#specific to  1k96 -K 19
-less -S /home/zyang/pg_workshop/vg_deconstruct/isec_4Sim_1K96/0000.vcf
-#specific to  1k96 -K 79
-less -S /home/zyang/pg_workshop/vg_deconstruct/isec_4Sim_1K96/0001.vcf
-```
+    ```bash
+    #specific to  1k96 -K 19
+    less -S /home/zyang/pg_workshop/vg_deconstruct/isec_4Sim_1K96/0000.vcf
+    #specific to  1k96 -K 79
+    less -S /home/zyang/pg_workshop/vg_deconstruct/isec_4Sim_1K96/0001.vcf
+    ```
 ##### difference between 1k96 -K 19 Vs 1k96 -K 79
 ![difference between 1k96 -K 19 Vs 1k96 -K 79](https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/Figures/4Sim1K96_K19vsK79_specific_variation.png?raw=true)
 
@@ -406,49 +415,54 @@ less -S /home/zyang/pg_workshop/vg_deconstruct/isec_4Sim_1K96/0001.vcf
 ### PGGE 
 This pangenome graph evaluation pipeline measures the reconstruction accuracy of a pangenome graph (in the variation graph model). Its goal is to give guidance in finding the best pangenome graph construction tool for a given input data and task.
 
-```bash
-mkdir 4Sim_pgge
-#copy *.gfa to 4Sim_pgge
-cp /home/zyang/pg_workshop/vg_deconstruct/*.gfa /home/zyang/pg_workshop/4Sim_pgge
-cp /home/zyang/pg_workshop/4Sim_10K96/4Sim.fa.e7f7fe6.417fcdf.7659dc8.smooth.final.gfa /home/zyang/pg_workshop/4Sim_pgge/4Sim_10K96.gfa
-```
+!!! terminal "code"
+
+    ```bash
+    mkdir 4Sim_pgge
+    #copy *.gfa to 4Sim_pgge
+    cp /home/zyang/pg_workshop/vg_deconstruct/*.gfa /home/zyang/pg_workshop/4Sim_pgge
+    cp /home/zyang/pg_workshop/4Sim_10K96/4Sim.fa.e7f7fe6.417fcdf.7659dc8.smooth.final.gfa /home/zyang/pg_workshop/4Sim_pgge/4Sim_10K96.gfa
+    ```
 #### PGGE script
-```bash
-#!/bin/bash
 
-#SBATCH --account       ga03793
-#SBATCH --job-name      4Sim_pgge
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
+!!! terminal "code"
 
-module purge
-module load Singularity
-
-#export container to a variable for convenience
-
-container=/nesi/project/nesi02659/software/pgge/pgge_032023.simg
-
-
-WD=/home/zyang/pg_workshop/4Sim_pgge #Working Directory
-inputGFA=/home/zyang/pg_workshop/4Sim_pgge/*.gfa
-input_folder=/home/zyang/pg_workshop/4Sim_pgge
-inputfa=/home/zyang/pg_workshop/4Sim.fa
-output=/home/zyang/pg_workshop/4Sim_pgge
-beehave=/home/zyang/pg_workshop/beehave.R
-
-
-#Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
-
-
-for x in $inputGFA
-
-do
-singularity exec ${container} pgge -g $x -f $inputfa -o $output -r $beehave -b $output/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
-
-done
-```
+    ```bash
+    #!/bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      4Sim_pgge
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+    
+    module purge
+    module load Singularity
+    
+    #export container to a variable for convenience
+    
+    container=/nesi/project/nesi02659/software/pgge/pgge_032023.simg
+    
+    
+    WD=/home/zyang/pg_workshop/4Sim_pgge #Working Directory
+    inputGFA=/home/zyang/pg_workshop/4Sim_pgge/*.gfa
+    input_folder=/home/zyang/pg_workshop/4Sim_pgge
+    inputfa=/home/zyang/pg_workshop/4Sim.fa
+    output=/home/zyang/pg_workshop/4Sim_pgge
+    beehave=/home/zyang/pg_workshop/beehave.R
+    
+    
+    #Bind filesystem to container image
+    export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
+    
+    
+    for x in $inputGFA
+    
+    do
+    singularity exec ${container} pgge -g $x -f $inputfa -o $output -r $beehave -b $output/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
+    
+    done
+    ```
 
 ## ODGI paths to extract distance  
 
