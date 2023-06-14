@@ -276,19 +276,15 @@ The job can be submitted using the `sbatch` command it will show a job id.
     #SBATCH --time          1:00:00
     
     module purge
-    module load Singularity
+    module load pggb/0.5.3-Miniconda3
     
     #export container to a variable for convenience
     WD=/home/zyang/pg_workshop #Working Directory
-    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
     data=/home/zyang/pg_workshop/4Sim.fa
     output=/home/zyang/pg_workshop
     
     
-    #Bind filesystem to container image
-    export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
-    
-    singularity exec ${container} pggb -i $data -s 1000 -p 96 -n 4 -K 79 -t 24 -S -m -o $output/4Sim_1K96_K79 -V 'NC_017518:#'
+    pggb -i $data -s 1000 -p 96 -n 4 -K 79 -t 24 -S -m -o $output/4Sim_1K96_K79 -V 'NC_017518:#'
     ```
 
 ### Evaluate Pangenome Graphs for 4Sim Genomes Constructed with Different Settings
@@ -462,9 +458,8 @@ cp odgi_distance
 cp /home/zyang/pg_workshop/vg_deconstruct/4Sim_1K96.gfa /home/zyang/pg_workshop/odgi_distance/
 
 module purge
-module load Singularity
-container=/nesi/project/nesi02659/software/odgi/odgi_0.8.2.simg
-singularity exec ${container} odgi paths -i 4Sim_1K96.gfa -d -D 'AAAA' >4Sim_1K96.gfa_distance
+module load pggb/0.5.3-Miniconda3
+odgi paths -i 4Sim_1K96.gfa -d -D 'AAAA' >4Sim_1K96.gfa_distance
 cut -f 1,2,6 4Sim_1K96.gfa_distance >4Sim_1K96.gfa_distance_cut
 ```
 ### script for ODGI paths to extract distance
@@ -478,14 +473,13 @@ cut -f 1,2,6 4Sim_1K96.gfa_distance >4Sim_1K96.gfa_distance_cut
 #SBATCH --time          1:00:00
 
 module purge
-module load Singularity
+module load pggb/0.5.3-Miniconda3
 
 #export container to a variable for convenience
-container=/nesi/project/nesi02659/software/odgi/odgi_0.8.2.simg
 data=/home/zyang/pg_workshop/odgi_distance/4Sim_1K96.gfa
 output=/home/zyang/pg_workshop/odgi_distance
 
-singularity exec ${container} odgi paths -i $data -d -D 'AAAA' >$output/4Sim_1K96.gfa_distance
+odgi paths -i $data -d -D 'AAAA' >$output/4Sim_1K96.gfa_distance
 cut -f 1,2,6 $output/4Sim_1K96.gfa_distance >$output/4Sim_1K96.gfa_distance_cut
 ```
 ### R script for clustering based on distance among paths of a graph, 4Sim 1k96
