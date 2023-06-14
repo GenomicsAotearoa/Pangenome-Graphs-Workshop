@@ -263,7 +263,7 @@ for vcf in *refseq2simseq.*.vcf; do
   bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_${prefix}.bam \
     | bcftools call -vm -Oz -o Simulation_${prefix}.giraffe.30x.100R.vcf.gz
   # Index VCF
-  vcftools index Simulation_${prefix}.giraffe.30x.100R.vcf.gz
+  bcftools index Simulation_${prefix}.giraffe.30x.100R.vcf.gz
 done
 ```
 -->
