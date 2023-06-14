@@ -4,7 +4,7 @@ When simulating the new sequences in the previous procedure [Preparing required 
 If the ground truth simulated VCF is `Simulation_SNP_5000.refseq2simseq.SNP.vcf` (generated [here](./preparing_data_files.md)) and the linear method based vcf file (generated [here](./mapping_reads.md)) is `Simulation_SNP_5000.bwa.30x.100R.vcf`; first we need to `bgzip` the files and make indexes. 
 
 ### Ground Truth vs Linear based variant comparison 
-
+<!--This seems redundant, the earlier exercise already generated the tables-->
 !!! terminal "code"
     
     ```bash
@@ -125,6 +125,7 @@ When simulating multiple types of variants using `simuG` tool it creates multipl
     2.3M Simulation_SNP_4000_INDEL_4000.simseq.genome.fa
     ```
 
+<!--This seems redundant, the earlier exercise already generated the tables-->
 zip the files and making indexes. 
 
 !!! terminal "code"
