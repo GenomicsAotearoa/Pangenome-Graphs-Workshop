@@ -211,7 +211,7 @@ Here we map reads to a pangenome graph instead of single linear reference sequen
     256K Simulation_SNP_4000_INDEL_4000_CNV_4.refseq2simseq.CNV.vcf
     ```
 
-
+<!-- Loop/array job? -->
 !!! terminal "code"
 
     ```bash
