@@ -32,33 +32,36 @@ The script accepts following options.
     ```
 
 For an example if we try the below 
-```
-./sim_vc_compare.sh --ref GCF_000191525.1_ASM19152v1_genomic.fna -snp 5000 --indel 1000
-```
-Script will produce the below report for `bwa mem`.
 
-```
-+------------------------------------------------+
-|  REPORT (BWA MEM)                              |
-+------------------------------------------------+
-|  Ground Truth SNPs                =      5,000 |
-|  Ground Truth INDELs              =      1,000 |
-|  Identified SNPs in Simulation    =      6,646 |
-|  Identified INDELs in Simulation  =      1,666 |
-|  SNPs Private to Simulation       =      1,831 |
-|  INDELs Private to Simulation     =      1,153 |
-|  Exact Matched SNPs               =      4,815 |
-|  Exact Matched INDELs             =        513 |
-|  True Positive (TP)               =      5,328 |
-|  False Positive (FP)              =      2,984 |
-|  True Negative (TN)               =  2,239,982 |
-|  False Negative (FN)              =        672 |
-+------------------------------------------------+
-|  Sensitivity                      =   88.8000% |
-|  Specificity                      =   99.8669% |
-|  F1 Score                         =   74.4550% |
-+------------------------------------------------+
-```
+!!! terminal "code"
+
+    ```bash
+    ./sim_vc_compare.sh --ref GCF_000191525.1_ASM19152v1_genomic.fna -snp 5000 --indel 1000
+    ```
+!!! success "Script will produce the below report for `bwa mem`."
+
+    ```bash
+    +------------------------------------------------+
+    |  REPORT (BWA MEM)                              |
+    +------------------------------------------------+
+    |  Ground Truth SNPs                =      5,000 |
+    |  Ground Truth INDELs              =      1,000 |
+    |  Identified SNPs in Simulation    =      6,646 |
+    |  Identified INDELs in Simulation  =      1,666 |
+    |  SNPs Private to Simulation       =      1,831 |
+    |  INDELs Private to Simulation     =      1,153 |
+    |  Exact Matched SNPs               =      4,815 |
+    |  Exact Matched INDELs             =        513 |
+    |  True Positive (TP)               =      5,328 |
+    |  False Positive (FP)              =      2,984 |
+    |  True Negative (TN)               =  2,239,982 |
+    |  False Negative (FN)              =        672 |
+    +------------------------------------------------+
+    |  Sensitivity                      =   88.8000% |
+    |  Specificity                      =   99.8669% |
+    |  F1 Score                         =   74.4550% |
+    +------------------------------------------------+
+    ```
 
 #### Definitions
 1. True Positive (TP) = SNPs+INDELs which are exactly matched in `groud_truth.vcf` and `simulated.vcf` (TP=4,815+513=5,328)
@@ -81,40 +84,40 @@ F1\:Score & = \frac{TP}{TP+\frac{1}{2}(FP+FN)} \\
 \end{aligned}
 ```
 
-Script will also produce the below report for `vg giraffe` and the final comparison report.
+!!! success "Script will also produce the below report for `vg giraffe` and the final comparison report."
 
-```
-+------------------------------------------------+
-|  REPORT (VG GIRAFFE)                           |
-+------------------------------------------------+
-|  Ground Truth SNPs                =      5,000 |
-|  Ground Truth INDELs              =      1,000 |
-|  Identified SNPs in Simulation    =      6,832 |
-|  Identified INDELs in Simulation  =      1,486 |
-|  SNPs Private to Simulation       =      1,839 |
-|  INDELs Private to Simulation     =        753 |
-|  Exact Matched SNPs               =      4,993 |
-|  Exact Matched INDELs             =        733 |
-|  True Positive (TP)               =      5,726 |
-|  False Positive (FP)              =      2,592 |
-|  True Negative (TN)               =  2,240,374 |
-|  False Negative (FN)              =        274 |
-+------------------------------------------------+
-|  Sensitivity                      =   95.4333% |
-|  Specificity                      =   99.8844% |
-|  F1 Score                         =   79.9832% |
-+------------------------------------------------+
-```
+    ```bash
+    +------------------------------------------------+
+    |  REPORT (VG GIRAFFE)                           |
+    +------------------------------------------------+
+    |  Ground Truth SNPs                =      5,000 |
+    |  Ground Truth INDELs              =      1,000 |
+    |  Identified SNPs in Simulation    =      6,832 |
+    |  Identified INDELs in Simulation  =      1,486 |
+    |  SNPs Private to Simulation       =      1,839 |
+    |  INDELs Private to Simulation     =        753 |
+    |  Exact Matched SNPs               =      4,993 |
+    |  Exact Matched INDELs             =        733 |
+    |  True Positive (TP)               =      5,726 |
+    |  False Positive (FP)              =      2,592 |
+    |  True Negative (TN)               =  2,240,374 |
+    |  False Negative (FN)              =        274 |
+    +------------------------------------------------+
+    |  Sensitivity                      =   95.4333% |
+    |  Specificity                      =   99.8844% |
+    |  F1 Score                         =   79.9832% |
+    +------------------------------------------------+
+    ```
 
-```
-+-------------------------------------------------------------------------------------------------------------------------+
-|  Method        |     TP       |     TN       |     FP       |     FN       |  Sensitivity |  Specificity |   F1 Score   |
-+-------------------------------------------------------------------------------------------------------------------------+
-|  bwa mem       |       5,328  |   2,239,982  |       2,984  |         672  |    88.8000%  |    99.8669%  |    74.4550%  |
-+-------------------------------------------------------------------------------------------------------------------------+
-|  vg giraffe    |       5,726  |   2,240,374  |       2,592  |         274  |    95.4333%  |    99.8844%  |    79.9832%  |
-+-------------------------------------------------------------------------------------------------------------------------+
-```
+    ```bash
+    +-------------------------------------------------------------------------------------------------------------------------+
+    |  Method        |     TP       |     TN       |     FP       |     FN       |  Sensitivity |  Specificity |   F1 Score   |
+    +-------------------------------------------------------------------------------------------------------------------------+
+    |  bwa mem       |       5,328  |   2,239,982  |       2,984  |         672  |    88.8000%  |    99.8669%  |    74.4550%  |
+    +-------------------------------------------------------------------------------------------------------------------------+
+    |  vg giraffe    |       5,726  |   2,240,374  |       2,592  |         274  |    95.4333%  |    99.8844%  |    79.9832%  |
+    +-------------------------------------------------------------------------------------------------------------------------+
+    ```
 
 
 !!! quote-right "References"
