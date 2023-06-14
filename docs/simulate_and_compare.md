@@ -1,30 +1,35 @@
 ### A script to simulate and compare variant calls generated using linear method (`bwa mem`) and graph method (`vg giraffe`)
 
-This script [sim_vc_compare.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/sim_vc_compare.sh) peforms the below tasks; (_Nesi folder : /nesi/nobackup/nesi02659/pg_workshop/vc_compare_script/_)
-1. Simulate new sequence with predefined SNPs and INDELs count usnig [simuG](https://github.com/yjx1217/simuG) and create ground truth VCF file (call it as `ground_truth.vcf`)
-2. Simulate reads from the new sequence with with specific coverage depth and read length using `wgsim`
-3. Map the reads with the reference using `bwa mem` and generate VCF file (call it as `simulated.vcf`)
-4. Compare `ground_truth.vcf` and `simulated.vcf` using `bcftools isec` and generate a report
-5. Repeat steps 3 and 4 using `vg giraffe`
-6. Generate a comparision stats report
+!!! quote ""
+
+    This script [sim_vc_compare.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/sim_vc_compare.sh) peforms the below tasks; (_Nesi folder : /nesi/nobackup/nesi02659/pg_workshop/vc_compare_script/_)
+    
+    1. Simulate new sequence with predefined SNPs and INDELs count usnig [simuG](https://github.com/yjx1217/simuG) and create ground truth VCF file (call it as `ground_truth.vcf`)
+    2. Simulate reads from the new sequence with with specific coverage depth and read length using `wgsim`
+    3. Map the reads with the reference using `bwa mem` and generate VCF file (call it as `simulated.vcf`)
+    4. Compare `ground_truth.vcf` and `simulated.vcf` using `bcftools isec` and generate a report
+    5. Repeat steps 3 and 4 using `vg giraffe`
+    6. Generate a comparision stats report
 
 The script accepts following options. 
 
-````
-$ ./sim_vc_compare.sh --help
-Program : sim_vc_compare
-Version : 1.0
-Contact : fathima.nuzla.ismail@gmail.com
-Usage   : sim_vc_compare.sh [options]
-Options :
--r | --ref STR reference sequence file
--s | --snp INT Number of SNPs to simulate (Default 0)
--i | --indel INT Number of INDELs to simulate (Default 0)
--d | --depth INT Cover depth of the reads (Default 30)
--l | --length INT of a read (Default 100)
--o | --output STR Output folder name (Default 'output')
--h | --help Display this help message
-````
+!!! terminal "code"
+
+    ```bash
+    $ ./sim_vc_compare.sh --help
+    Program : sim_vc_compare
+    Version : 1.0
+    Contact : fathima.nuzla.ismail@gmail.com
+    Usage   : sim_vc_compare.sh [options]
+    Options :
+    -r | --ref STR reference sequence file
+    -s | --snp INT Number of SNPs to simulate (Default 0)
+    -i | --indel INT Number of INDELs to simulate (Default 0)
+    -d | --depth INT Cover depth of the reads (Default 30)
+    -l | --length INT of a read (Default 100)
+    -o | --output STR Output folder name (Default 'output')
+    -h | --help Display this help message
+    ```
 
 For an example if we try the below 
 ```
