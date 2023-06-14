@@ -70,7 +70,7 @@ For an example if we try the below
 4. False Negative (FN) = Ground Truth SNPs+Ground Truth INDELs - True Positive. (FN=5,000+1,000-5,328=672)
 5. Sensitivity, Specificity, and F1 Score will be, 
 
-```math
+$$
 \begin{aligned}
 Sensitivity  & = \frac{TP}{TP+FN} \\
               &  = \frac{5,328}{5,328+672} \\
@@ -82,7 +82,7 @@ F1\:Score & = \frac{TP}{TP+\frac{1}{2}(FP+FN)} \\
             &  = \frac{5,328}{5,328+0.5\times(2,984+672)} \\ \\
             & = 74.4550\% \\
 \end{aligned}
-```
+$$
 
 !!! success "Script will also produce the below report for `vg giraffe` and the final comparison report."
 
