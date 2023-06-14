@@ -217,7 +217,7 @@ Executing shell scripts in the Nesi environment might not be the best way to han
     ```bash
     #!/bin/bash
     
-    #SBATCH --account       ga03793
+    #SBATCH --account       nesi02659
     #SBATCH --job-name      4Sim_1K96
     #SBATCH --cpus-per-task 8
     #SBATCH --mem           4G
@@ -248,7 +248,7 @@ The job can be submitted using the `sbatch` command it will show a job id.
     ```bash
     #!/bin/bash
     
-    #SBATCH --account       ga03793
+    #SBATCH --account       nesi02659
     #SBATCH --job-name      4Sim_10K96
     #SBATCH --cpus-per-task 8
     #SBATCH --mem           4G
@@ -273,7 +273,7 @@ The job can be submitted using the `sbatch` command it will show a job id.
     ```bash
     #!/bin/bash
     
-    #SBATCH --account       ga03793
+    #SBATCH --account       nesi02659
     #SBATCH --job-name      4Sim_1K96_K79
     #SBATCH --cpus-per-task 8
     #SBATCH --mem           4G
@@ -350,7 +350,7 @@ bcftools stats 4Sim_1K96_aep1.vcf >4Sim_1K96_aep1.vcf_stats
 ```bash
 #!/usr//bin/bash
 
-#SBATCH --account       ga03793
+#SBATCH --account       nesi02659
 #SBATCH --job-name      4Sim_vg_deconstruct
 #SBATCH --cpus-per-task 8
 #SBATCH --mem           4G
@@ -379,7 +379,7 @@ done
 ```bash
 #!/bin/bash
 
-#SBATCH --account       ga03793
+#SBATCH --account       nesi02659
 #SBATCH --job-name      4Sim_1k96_isec
 #SBATCH --cpus-per-task 8
 #SBATCH --mem           4G
@@ -424,7 +424,7 @@ cp /home/zyang/pg_workshop/4Sim_10K96/4Sim.fa.e7f7fe6.417fcdf.7659dc8.smooth.fin
 ```bash
 #!/bin/bash
 
-#SBATCH --account       ga03793
+#SBATCH --account       nesi02659
 #SBATCH --job-name      4Sim_pgge
 #SBATCH --cpus-per-task 8
 #SBATCH --mem           4G
@@ -475,7 +475,7 @@ cut -f 1,2,6 4Sim_1K96.gfa_distance >4Sim_1K96.gfa_distance_cut
 ```bash
 #!/bin/bash
 
-#SBATCH --account       ga03793
+#SBATCH --account       nesi02659
 #SBATCH --job-name      4Sim_1K96_distance
 #SBATCH --cpus-per-task 8
 #SBATCH --mem           4G
@@ -538,7 +538,7 @@ write.tree(phy=tree, file = '4Sim_1k96_distance.tree')
 ```bash
 #!/bin/bash
 
-#SBATCH --account       ga03793
+#SBATCH --account       nesi02659
 #SBATCH --job-name      4Sim_1K96_distance_clustering
 #SBATCH --cpus-per-task 8
 #SBATCH --mem           4G
@@ -593,7 +593,7 @@ Mauve alignments demonstrated large inversions among the 3ST genomes.
 ```bash
 #!/bin/bash
 
-#SBATCH --account       ga03793
+#SBATCH --account       nesi02659
 #SBATCH --job-name      3ST_2K95
 #SBATCH --cpus-per-task 8
 #SBATCH --mem           4G
@@ -696,7 +696,7 @@ ST154   0.0151872       0.0182524       0.0164989       0.0182524       0.017126
 ```bash
 #!/bin/bash
 
-#SBATCH --account       ga03793
+#SBATCH --account       nesi02659
 #SBATCH --job-name      24NM_10k95
 #SBATCH --cpus-per-task 8
 #SBATCH --mem           4G
@@ -722,7 +722,7 @@ singularity exec ${container} pggb -i $data -s 10000 -p 95 -n 24 -t 24 -S -m -o 
 ```bash
 #!/bin/bash
 
-#SBATCH --account       ga03793
+#SBATCH --account       nesi02659
 #SBATCH --job-name      24NM_10k95_X
 #SBATCH --cpus-per-task 8
 #SBATCH --mem           4G

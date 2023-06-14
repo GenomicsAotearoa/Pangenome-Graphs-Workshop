@@ -29,11 +29,11 @@ The key features and purpose of the PGGb include:
 
 ### All-to-all alignment
 Generally, refers to the process of aligning all sequences in a given set against each other, rather than aligning them to a single reference sequence.
-We begin with an alignment, with wfmash. This compares all sequences to each other and finds the best N mappings for each. It produces base-level alignments.
+We begin with an alignment, with `wfmash`. This compares all sequences to each other and finds the best N mappings for each. It produces base-level alignments.
 
 ### Inducing the graph
 Refers to the process of constructing the genome graph by progressively integrating genetic variants into a reference genome.
-These base-level alignments are converted into a graph with seqwish. A filter is applied to remove short matches, which anchors the graph on confident longer exact matches.
+These base-level alignments are converted into a graph with `seqwish`. A filter is applied to remove short matches, which anchors the graph on confident longer exact matches.
 
 ### Normalizing the graph
 refers to a process that aims to optimize the structure and representation of the genome graph by resolving redundant or overlapping elements. This step is typically performed after the initial construction of the graph.
@@ -43,10 +43,10 @@ The normalization process in PGGb involves several steps, which may vary dependi
 3.	Compact Representation: Normalization aims to reduce the overall size of the graph by compacting the representation. This can involve compressing repetitive regions or simplifying complex structures while preserving the essential information and variant representation.
 4.	Graph Refinement: The normalization process also involves refining the graph structure by resolving inconsistencies, correcting errors, and improving the overall quality of the graph representation. This may include resolving conflicts between nodes and edges, addressing mismatches, and ensuring the graph accurately reflects the underlying genetic variations
 
-To normalize the graph and harmonize the allele representation, we use smoothxg to apply a local MSA across all parts of the graph.
+To normalize the graph and harmonize the allele representation, we use `smoothxg` to apply a local MSA <!-- define: Multiple sequence alignment? --> across all parts of the graph.
 
 ### Downstream
-These graphs offer a wide range of capabilities. Initially, we can generate several diagnostic visualizations derived from the graphs, providing a user-friendly way to comprehend the alignments at a broader level. Additionally, using the PGGb tool, we can generate variant calls by leveraging vg deconstruct. The graphs produced by PGGb serve as reference systems for aligning short reads through vg giraffe or long reads through GraphAligner. Furthermore, odgi allows us to utilize the graphs as reference systems to elucidate homology relationships across entire genomes.
+These graphs offer a wide range of capabilities. Initially, we can generate several diagnostic visualizations derived from the graphs, providing a user-friendly way to comprehend the alignments at a broader level. Additionally, using the `PGGB` tool, we can generate variant calls by leveraging `vg deconstruct`. The graphs produced by `PGGB` serve as reference systems for aligning short reads through vg giraffe or long reads through `GraphAligner`. Furthermore, `odgi` allows us to utilize the graphs as reference systems to elucidate homology relationships across entire genomes.
 
 ### PanGenome Graph Evaluator [(PGGE)](https://github.com/pangenome/pgge)
 <p align="justify">
@@ -83,21 +83,26 @@ The National Library of Medicine is the largest library focused on biomedicine w
 # Procedure 
 ### 1. Downloading and preparing assembly data file 4Sim.fa
 
-Please follow the proedure described in this [page](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/preparing_data_files.md)
+Please follow the procedure described in this [page](./preparing_data_files.md)
 
-### 2. Creating an index for the seuqence file and check
+### 2. Creating an index for the sequence file and check
 
 !!! terminal "code"
 
     ```bash
-    #Use samtools to create the index file
-    #In Nesi environment you will have to load the command first
+    # Use SAMtools to create the index file
+    # In NeSI environment you will have to load the command first
     
-    $ module load SAMtools
+    module load SAMtools
     
-    $ samtools faidx ASM19152v1_pgsim.fa 
+    samtools faidx ASM19152v1_pgsim.fa 
     
-    $ cat ASM19152v1_pgsim.fa.fai 
+    cat ASM19152v1_pgsim.fa.fai
+    ```
+
+!!! success "Output"
+
+    ```
     NC_017518.1     2248966 64      80      81
     NC_017518.1_SNP_5000    2248966 2277165 2248966 2248967
     NC_017518.1_INDEL_5000  2249048 4526156 2249048 2249049
@@ -111,15 +116,16 @@ As per the index this assembly consists of 6 samples described in the below tabl
 | Name                                | Length    | SNPs   | INDELs | INV | CNV |
 |:-----                               |----------:|-------:|-------:|----:|----:|
 |NC_017518.1 (Reference)              | 2,248,966 |     N/A|     N/A| N/A |  N/A|
-|NC_017518.1_SNP_5000                | 2,248,966 |   5,000|       0|   0 |   0 |
+|NC_017518.1_SNP_5000                 | 2,248,966 |   5,000|       0|   0 |   0 |
 |NC_017518.1_INDEL_5000               | 2,249,048 |       0|   5,000|   0 |   0 |
 |NC_017518.1_SNP_4000_INDEL_4000      | 2,153,883 |   4,000|   4,000|   0 |   0 |
 |NC_017518.1_SNP_4000_INDEL_4000_INV_4| 2,242,147 |   4,000|   4,000|   4 |   0 |
 |NC_017518.1_SNP_4000_INDEL_4000_CNV_4| 2,415,498 |   4,000|   4,000|   0 |   4 |
 
 ### 3. Executing `pggb` tool using Singularity container
-We can follow the procedure in https://github.com/pangenome/pggb#singularity to setup the Singularity image. This is already done and the image is in `/nesi/project/nesi02659/software/pggb/` directory for version 0.5.3. 
+We can follow the procedure [here](https://github.com/pangenome/pggb#singularity) to setup the Singularity image. <!-- Turned into module, wait Dini to green light --> This is already done and the image is in `/nesi/project/nesi02659/software/pggb/` directory for version 0.5.3. 
 
+<!-- redundant -->
 Following script ([pggb_test.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pggb_test.sh)) can be used to run `pggb` on the downloaded sequence. 
 
 !!! terminal "code"
@@ -137,46 +143,52 @@ Following script ([pggb_test.sh](https://github.com/nuzla/Pangenome-Graphs-Works
     singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 2 -S -m -o output -V 'NC_017518.1:#' 
     ```
 
-In `pggb` `-i` is for specifying the sequence file. `-s` specifies the segment length for mapping and `-p` specifies percent identity for mapping/alignment. `-n` is for number of haplotypes (or number of samples). `-k` for minimum matching length. `-t` says number of threads to be used for the execution. `-S` will generate the stats. `-m` will generate MultiQC report of graphs' statistics and visualizations. `-o` specifies the output directory name. `-V 'NC_017518.1:#'` will create a vcf file and its stats considering NC_017518.1 as the reference sequence. 
+In `pggb`, `-i` is for specifying the sequence file. `-s` specifies the segment length for mapping and `-p` specifies percent identity for mapping/alignment. `-n` is for number of haplotypes (or number of samples). `-k` for minimum matching length. `-t` says number of threads to be used for the execution. `-S` will generate the stats. `-m` will generate MultiQC report of graphs' statistics and visualizations. `-o` specifies the output directory name. `-V 'NC_017518.1:#'` will create a VCF file and its stats considering NC_017518.1 as the reference sequence. 
 
-You can run run pggb without parameters to get information on the meaning of each parameter. Noe take a look at the files in the "output" folder.
-We get a graph in GFA (*.gfa) and odgi (*.og) formats. These can be used downstream in many methods, including those in vg, like vg giraffe. You can visualize the GFA format graph with BandageNG, and use odgi directly on the \*.gfa or \*.og output. 
+You can run run `pggb` without parameters to get information on the meaning of each parameter. Now take a look at the files in the `output/` directory.
+We get a graph in GFA (`*.gfa`) and odgi (`*.og`) formats. These can be used downstream in many methods, including those in `vg`, like `vg giraffe`. You can visualize the GFA format graph with BandageNG, and use odgi directly on the `*.gfa` or `*.og` output. 
 
 ---
 # Executing `pggb` as a [Slurm](https://github.com/SchedMD/slurm) Job
 
-Executing shell scripts in the Nesi environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previusely explained script as below ([pggb_slurm_1K95.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pggb_slurm_1K95.sh)) to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
+Executing shell scripts in the NeSI environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previusely explained script as below ([pggb_slurm_1K95.sh](../Scripts/pggb_slurm_1K95.sh)) to run as Slurm job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
 
+<!-- To be modified to module load pggb in near future -->
 !!! terminal "code"
 
     ```bash
     #!/bin/bash -e
     
-    #SBATCH --account       ga03793
+    #SBATCH --account       nesi02659
     #SBATCH --job-name      NC_017518.1_1K95
     #SBATCH --cpus-per-task 8 
     #SBATCH --mem           4G
-    #SBATCH --time          1:00:00
+    #SBATCH --time          20:00
+    #SBATCH --output        %x_%j.out
+    #SBATCH --error         %x_%j.err
     
     module purge
     module load Singularity
     
     #export container to a variable for convenience
-    WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory
-    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
-    data=${WD}/ASM19152v1_pgsim.fa
-    
-    
+    WD=$PWD #Working Directory
+    container=/opt/nesi/containers/pggb/pggb-0.5.3.simg
+    data=${WD}/ASM19152v1_pgsim.fa    
     
     singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 24 -S -m -o output_1K95 -V 'NC_017518.1:#'  
     ```
 
-The job can be submitted using the `sbatch` command it will show a job id. In this case 35887085
+The job can be submitted using the `sbatch` command it will show a job ID. In this case, the job ID is 35887085.
 
 !!! terminal "code"
 
     ```bash
-    $ sbatch pggb_slurm_1K95.sh
+    sbatch pggb_slurm_1K95.sh
+    ```
+
+!!! success "Output"
+
+    ```
     Submitted batch job 35887085
     ```
 
@@ -185,7 +197,12 @@ We can monitor the job status using `squeue` specifying the job id.
 !!! terminal "code"
 
     ```bash
-    $ squeue -j 35887085
+    squeue -j 35887085
+    ```
+
+!!! success "Output"
+
+    ```
     JOBID         USER     ACCOUNT   NAME        CPUS MIN_MEM PARTITI START_TIME     TIME_LEFT STATE    NODELIST(REASON)    
     35887085      ismnu81p ga03793   NC_017518.1_   8      4G large   2023-05-21T0       58:35 RUNNING  wbn063 
     ```
@@ -195,7 +212,12 @@ Slurm will also create a output log file and we can monitor it realtime using  `
 !!! terminal "code"
 
     ```bash
-    $ tail -f slurm-35887085.out 
+    tail -f NC_017518.1_1K95_35887085.out 
+    ```
+
+!!! success "Output"
+
+    ```
     [smoothxg::(1-3)::prep] writing graph output_1K95/ASM19152v1_pgsim.fa.2ab4142.c2fac19.seqwish.gfa.prep.0.gfa
     [smoothxg::(1-3)::main] building xg index
     [smoothxg::(1-3)::smoothable_blocks] computing blocks
@@ -213,7 +235,12 @@ When the job is completed the `seff` command will show a summary report with bel
 !!! terminal "code"
 
     ```bash
-    $ nn_seff 35887085
+    nn_seff 35887085
+    ```
+
+!!! success "Output"
+
+    ```
     Cluster: mahuika
     Job ID: 35887085
     State: COMPLETED
@@ -225,48 +252,48 @@ When the job is completed the `seff` command will show a summary report with bel
     Mem Efficiency:  19.2%  785.61 MB of 4.00 GB
     ```
 
-Now we can try the same script by changing the `pggb` parameters `-s`, `-p` and `-k` and compare the results. Please refer [script folder](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Scripts) for scripts. 
+Now we can try the same script by changing the `pggb` parameters `-s`, `-p` and `-k` and compare the results. <!-- Convert this script into an admonition --> Please refer [script folder](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Scripts) for scripts. 
 
 ### Understanding odgi visualizations
-We obtain a series of diagnostic images that represent the pangenome alignment. These are created with odgi viz (1D matrix) and odgi layout with odgi draw (2D graph drawings). First, the 2D layout gives us a view of the total alignment. For small graphs, we can look at the version that shows where specific paths go (\*.draw_multiqc.png): For larger ones, the \*.draw.png result is usually more legible.
+We obtain a series of diagnostic images that represent the pangenome alignment. These are created with odgi viz (1D matrix) and odgi layout with odgi draw (2D graph drawings). First, the 2D layout gives us a view of the total alignment. For small graphs, we can look at the version that shows where specific paths go (`*.draw_multiqc.png`): For larger ones, the `*.draw.png` result is usually more legible.
 
 ### The effect of haplotype count `-n`
-What happens if we set a lower `-n`? This parameter determines how many mappings we have. Each sequence is aligned against its n-1 best matches. Setting -n 6 causes clustering of sequences into groups that are more similar.
+What happens if we set a lower `-n`? This parameter determines how many mappings we have. Each sequence is aligned against its n-1 best matches. Setting `-n 6` causes clustering of sequences into groups that are more similar.
 
 ### The effect of the minimum match filter `-k`
-Another key parameter is -k, which affects the behavior of seqwish. This filter removes exact matches from alignments that are shorter than -k. Short matches occur in regions of high diversity. In practice, these short matches contribute little to the overall structure of the graph, and we remove them to further simplify the base graph structure.
+Another key parameter is -k, which affects the behaviour of `seqwish`. This filter removes exact matches from alignments that are shorter than -k. Short matches occur in regions of high diversity. In practice, these short matches contribute little to the overall structure of the graph, and we remove them to further simplify the base graph structure.
 
 ### Decreasing mapping segment length `-s` increases sensitivity
-By setting a lower mapping segment length, which affects the behavior of the very first step in the pipeline, wfmash’s mapping step (itself based on a heavily modified version of MashMap). This defaults to -s 5k. We can use -s 1k to guarantee we pick up on smaller homology segments, leading to a more complete alignment.
+By setting a lower mapping segment length, which affects the behaviour of the very first step in the pipeline, `wfmash`’s mapping step (itself based on a heavily modified version of MashMap). This defaults to `-s 5000`. We can use `-s 1000` to guarantee we pick up on smaller homology segments, leading to a more complete alignment.
 
 ---
 # MultiQC Report
-The script generated [output](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Output) directory consists of a compehensive and interactive [MutltiQC Report](https://multiqc.info/) which will decribe all. Open the file multiqc_report.html which is in the output folder from your browser.
+The script generated <!-- Not sure how to deal with this... But definitely doesn't need to be in here. Maybe as an admonition with the directory structure? -->[output](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Output) directory consists of a comprehensive and interactive [MutltiQC Report](https://multiqc.info/) which will describe all. Open the file `multiqc_report.html` which is in the output folder from your browser.
 
 _Note: To download the output folder from the Nesi environment you can first zip it using the command `zip -r output.zip output`_
 
 ## Graph Viszualization Details (`-s 1000`, `-p 95`)
 
 ### ODGI Compressed 1D visualization
-![ODGI Compressed 1D visualization](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_O_multiqc.png?raw=true)
+![ODGI Compressed 1D visualization](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_O_multiqc.png)
 
 ### ODGI 1D visualization
-![ODGI 1D visualization](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_multiqc.png?raw=true)
+![ODGI 1D visualization](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_multiqc.png)
 
 ### ODGI 1D visualization by path position
-![ODGI 1D visualization by path position](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_pos_multiqc.png?raw=true)
+![ODGI 1D visualization by path position](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_pos_multiqc.png)
 
 ### ODGI 1D visualization by path orientation
-![ODGI 1D visualization by path orientation](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_inv_multiqc.png?raw=true)
+![ODGI 1D visualization by path orientation](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_inv_multiqc.png)
 
 ### ODGI 1D visualization by node depth
-![ODGI 1D visualization by node depth](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_depth_multiqc.png?raw=true)
+![ODGI 1D visualization by node depth](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_depth_multiqc.png)
 
 ### ODGI 1D visualization by uncalled bases
-![ODGI 1D visualization by uncalled bases](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_uncalled_multiqc.png?raw=true)
+![ODGI 1D visualization by uncalled bases](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_uncalled_multiqc.png)
 
 ### ODGI 2D drawing
-![ODGI 2D drawing](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Output/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.lay.draw.png?raw=true)
+![ODGI 2D drawing](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.lay.draw.png)
 
 # Compare accuracies of mapping reads using linear methods and graph methods
 

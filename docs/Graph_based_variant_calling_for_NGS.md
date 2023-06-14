@@ -38,7 +38,7 @@ The script for simulation NGS data
     ```bash
     #!/bin/bash
     
-    #SBATCH --account       ga03793
+    #SBATCH --account       nesi02659
     #SBATCH --job-name      5NGS_simulate
     #SBATCH --cpus-per-task 8
     #SBATCH --mem           4G
@@ -83,7 +83,7 @@ The script for simulation NGS data
     ```bash
     #!/bin/bash
     
-    #SBATCH --account       ga03793
+    #SBATCH --account       nesi02659
     #SBATCH --job-name      build_index_for_4SimGraph
     #SBATCH --cpus-per-task 8
     #SBATCH --mem           4G
@@ -130,7 +130,7 @@ The script for simulation NGS data
     ```bash
     #!/bin/bash
     
-    #SBATCH --account       ga03793
+    #SBATCH --account       nesi02659
     #SBATCH --job-name      vgmap_5e_4Sim
     #SBATCH --cpus-per-task 8
     #SBATCH --mem           4G
@@ -185,7 +185,7 @@ generate snarls of graph
      ```bash
      #!/bin/bash
      
-     #SBATCH --account       ga03793
+     #SBATCH --account       nesi02659
      #SBATCH --job-name      vgmap_generate_snarls
      #SBATCH --cpus-per-task 8
      #SBATCH --mem           4G
@@ -208,7 +208,7 @@ genotyping
     ```bash
     #!/bin/bash
     
-    #SBATCH --account       ga03793
+    #SBATCH --account       nesi02659
     #SBATCH --job-name      5e_vgmap_genotying
     #SBATCH --cpus-per-task 8
     #SBATCH --mem           4G
@@ -260,7 +260,7 @@ genotyping
     ```bash
     #!/bin/bash
     
-    #SBATCH --account       ga03793
+    #SBATCH --account       nesi02659
     #SBATCH --job-name      5e_vgmap_novelvariant_calling
     #SBATCH --cpus-per-task 8
     #SBATCH --mem           4G
