@@ -590,14 +590,13 @@ Mauve alignments demonstrated large inversions among the 3ST genomes.
 #SBATCH --time          1:00:00
 
 module purge
-module load Singularity
+module load pggb/0.5.3-Miniconda3
 
 #export container to a variable for convenience
-container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
 data=/home/zyang/pg_workshop/3ST.fa
 output=/home/zyang/pg_workshop
 
-singularity exec ${container} pggb -i $data -s 2000 -p 95 -n 3 -t 24 -S -m -o $output/3ST_2K95 -V 'NC_017518:#'
+pggb -i $data -s 2000 -p 95 -n 3 -t 24 -S -m -o $output/3ST_2K95 -V 'NC_017518:#'
 ```
 
 ## Construct pangenome graph for the 24NM genomes
@@ -652,6 +651,8 @@ ST154   2233582 51955048        60      61
 module purge
 module load Mash/2.3-GCC-11.3.0
 mash triangle 24NM.fa >24NM.fa_mash
+```
+```
 less -S 24NM.fa_mash
 
         24
@@ -679,7 +680,6 @@ NZ_CP021517.1   0.0178312       0.0163866       0.0171265       0.0165552       
 NC_017518       0.0152404       0.0186195       0.0166117       0.0183741       0.016782        0.0200167       0.00916565      0.0174761       0.001839        0.015508        0.0194991
 ST41    0.0150813       0.0184352       0.0164427       0.0183132       0.0170687       0.0201478       0.00912584      0.017653        0.00128842      0.0158335       0.0194991       0.
 ST154   0.0151872       0.0182524       0.0164989       0.0182524       0.0171265       0.0200167       0.00952763      0.0173006       0.00175922      0.0156702       0.0193714       0.
-
 ```
 
 ### pggb_slurm_2K95_3ST.sh, -k 2000, -p 95
@@ -693,19 +693,14 @@ ST154   0.0151872       0.0182524       0.0164989       0.0182524       0.017126
 #SBATCH --time          3:00:00
 
 module purge
-module load Singularity
+module load pggb/0.5.3-Miniconda3
 
 #export container to a variable for convenience
 WD=/home/zyang/pg_workshop #Working Directory
-container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
 data=/home/zyang/pg_workshop/24NM.fa
 output=/home/zyang/pg_workshop
 
-
-#Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
-
-singularity exec ${container} pggb -i $data -s 10000 -p 95 -n 24 -t 24 -S -m -o $output/24NM_10K95 -V 'NC_017518:#'
+pggb -i $data -s 10000 -p 95 -n 24 -t 24 -S -m -o $output/24NM_10K95 -V 'NC_017518:#'
 ```
 
 ### pggb_slurm_2K95_3ST.sh, -k 2000, -p 95, -x 
@@ -719,17 +714,12 @@ singularity exec ${container} pggb -i $data -s 10000 -p 95 -n 24 -t 24 -S -m -o 
 #SBATCH --time          3:00:00
 
 module purge
-module load Singularity
+module load pggb/0.5.3-Miniconda3
 
 #export container to a variable for convenience
 WD=/home/zyang/pg_workshop #Working Directory
-container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
 data=/home/zyang/pg_workshop/24NM.fa
 output=/home/zyang/pg_workshop
 
-
-#Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
-
-singularity exec ${container} pggb -i $data -s 10000 -p 95 -n 24 -x auto -t 24 -S -m -o $output/24NM_10K95x -V 'NC_017518:#'
+pggb -i $data -s 10000 -p 95 -n 24 -x auto -t 24 -S -m -o $output/24NM_10K95x -V 'NC_017518:#'
 ```
