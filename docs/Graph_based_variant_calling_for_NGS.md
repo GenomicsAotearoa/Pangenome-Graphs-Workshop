@@ -3,13 +3,13 @@
 In this workshop, we deploys the VG toolkit for NGS data analysis based on pangenome graph reference 
 
 ## vg mapping preliminaries
-Although vg contains a number of tools for working with pangenome graphs, it is best-known for read mapping. This is ultimately what many of its users are interested in vg for. In fact, vg contains three mature short read mapping tools:
+Although vg contains a number of tools for working with pangenome graphs, it is best-known for read mapping. This is ultimately what many of its users are interested in `vg` for. In fact, vg contains three mature short read mapping tools:
 
 !!! info ""
 
-    - vg map: the original, highly accurate mapping algorithm
-    - vg giraffe: the much faster and still accurate haplotype-based mapping algorithm
-    - vg mpmap: the splice-aware RNA-seq mapping algorithm
+    - `vg map`: the original, highly accurate mapping algorithm
+    - `vg giraffe`: the much faster and still accurate haplotype-based mapping algorithm
+    - `vg mpmap`: the splice-aware RNA-seq mapping algorithm
 
 more details of vg can be found https://github.com/vgteam/vg
 
