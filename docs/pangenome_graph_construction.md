@@ -66,17 +66,17 @@ NeSI HPC environment is used for the analysis. Please make sure to have a NeSI a
     ST154Sim        2248965 4535499 2248965 2248966
     ST42Sim 2249050 6784474 2249050 2249051
     ```
-### Executing `pggb` tool using Singularity container
+### Executing `pggb` tool
 
 !!! terminal "code"
 
     ```bash
     module purge
-    module load Singularity
-    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
+    module load pggb/0.5.3-Miniconda3
+    
 
-    # Execute singularity exec ${container} pggb to check the command list of PGGB
-    singularity exec ${container} pggb 
+    # Execute `pggb --help` to check the command list of PGGB
+    pggb --help
     ```
     ??? success "Output"
         ```bash 
@@ -183,7 +183,10 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
     ```bash
     module purge
     module load Mash/2.3-GCC-11.3.0
+
     mash triangle 4Sim.fa >4Sim.fa_mash
+    ```
+    ```bash
     less -S 4Sim.fa_mash
             4
     NC_017518
@@ -199,11 +202,10 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
 
      ```bash
      module purge
-     module load Singularity
-     container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
+     module load pggb/0.5.3-Miniconda3
      
      # Execute singularity exec ${container} pggb, set -s 1000
-     singularity exec ${container} pggb -i 4Sim.fa -s 1000 -p 96 -n 4 -t 24 -S -m -o 4Sim_1K96 -V 'NC_017518:#'
+     pggb -i 4Sim.fa -s 1000 -p 96 -n 4 -t 24 -S -m -o 4Sim_1K96 -V 'NC_017518:#'
      ```
 ### Executing `pggb` as a [SLURM](https://github.com/SchedMD/slurm) Job
 Executing shell scripts in the Nesi environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previusely explained script as below to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
@@ -217,26 +219,22 @@ Executing shell scripts in the Nesi environment might not be the best way to han
     ```bash
     #!/bin/bash
     
-    #SBATCH --account       nesi02659
+    #SBATCH --account       ga03793
     #SBATCH --job-name      4Sim_1K96
     #SBATCH --cpus-per-task 8
     #SBATCH --mem           4G
     #SBATCH --time          1:00:00
     
     module purge
-    module load Singularity
+    module load pggb/0.5.3-Miniconda3
     
     #export container to a variable for convenience
     WD=/home/zyang/pg_workshop #Working Directory
-    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
     data=/home/zyang/pg_workshop/4Sim.fa
     output=/home/zyang/pg_workshop
     
     
-    #Bind filesystem to container image
-    export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
-    
-    singularity exec ${container} pggb -i $data -s 1000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_1K96 -V 'NC_017518:#'   
+    pggb -i $data -s 1000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_1K96 -V 'NC_017518:#'   
     ```
 The job can be submitted using the `sbatch` command it will show a job id.
 
@@ -248,23 +246,21 @@ The job can be submitted using the `sbatch` command it will show a job id.
     ```bash
     #!/bin/bash
     
-    #SBATCH --account       nesi02659
+    #SBATCH --account       ga03793
     #SBATCH --job-name      4Sim_10K96
     #SBATCH --cpus-per-task 8
     #SBATCH --mem           4G
     #SBATCH --time          1:00:00
     
     module purge
-    module load Singularity
+    module load pggb/0.5.3-Miniconda3
     
     #export container to a variable for convenience
     WD=/home/zyang/pg_workshop #Working Directory
-    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
     data=/home/zyang/pg_workshop/4Sim.fa
     output=/home/zyang/pg_workshop
-    
-    
-    singularity exec ${container} pggb -i $data -s 10000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_10K96 -V 'NC_017518:#'
+
+    pggb -i $data -s 10000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_10K96 -V 'NC_017518:#'
     ```
 #### pggb_slurm_10K96_K79_4Sim.sh
 
@@ -273,26 +269,22 @@ The job can be submitted using the `sbatch` command it will show a job id.
     ```bash
     #!/bin/bash
     
-    #SBATCH --account       nesi02659
+    #SBATCH --account       ga03793
     #SBATCH --job-name      4Sim_1K96_K79
     #SBATCH --cpus-per-task 8
     #SBATCH --mem           4G
     #SBATCH --time          1:00:00
     
     module purge
-    module load Singularity
+    module load pggb/0.5.3-Miniconda3
     
     #export container to a variable for convenience
     WD=/home/zyang/pg_workshop #Working Directory
-    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
     data=/home/zyang/pg_workshop/4Sim.fa
     output=/home/zyang/pg_workshop
     
     
-    #Bind filesystem to container image
-    export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
-    
-    singularity exec ${container} pggb -i $data -s 1000 -p 96 -n 4 -K 79 -t 24 -S -m -o $output/4Sim_1K96_K79 -V 'NC_017518:#'
+    pggb -i $data -s 1000 -p 96 -n 4 -K 79 -t 24 -S -m -o $output/4Sim_1K96_K79 -V 'NC_017518:#'
     ```
 
 ### Evaluate Pangenome Graphs for 4Sim Genomes Constructed with Different Settings
@@ -350,7 +342,7 @@ bcftools stats 4Sim_1K96_aep1.vcf >4Sim_1K96_aep1.vcf_stats
 ```bash
 #!/usr//bin/bash
 
-#SBATCH --account       nesi02659
+#SBATCH --account       ga03793
 #SBATCH --job-name      4Sim_vg_deconstruct
 #SBATCH --cpus-per-task 8
 #SBATCH --mem           4G
@@ -379,7 +371,7 @@ done
 ```bash
 #!/bin/bash
 
-#SBATCH --account       nesi02659
+#SBATCH --account       ga03793
 #SBATCH --job-name      4Sim_1k96_isec
 #SBATCH --cpus-per-task 8
 #SBATCH --mem           4G
@@ -424,7 +416,7 @@ cp /home/zyang/pg_workshop/4Sim_10K96/4Sim.fa.e7f7fe6.417fcdf.7659dc8.smooth.fin
 ```bash
 #!/bin/bash
 
-#SBATCH --account       nesi02659
+#SBATCH --account       ga03793
 #SBATCH --job-name      4Sim_pgge
 #SBATCH --cpus-per-task 8
 #SBATCH --mem           4G
@@ -459,287 +451,332 @@ done
 ```
 
 ## ODGI paths to extract distance  
-```bash
-mkdir odgi_distance
-cp odgi_distance
-#copy gfa to odgi_distance working directory 
-cp /home/zyang/pg_workshop/vg_deconstruct/4Sim_1K96.gfa /home/zyang/pg_workshop/odgi_distance/
 
-module purge
-module load Singularity
-container=/nesi/project/nesi02659/software/odgi/odgi_0.8.2.simg
-singularity exec ${container} odgi paths -i 4Sim_1K96.gfa -d -D 'AAAA' >4Sim_1K96.gfa_distance
-cut -f 1,2,6 4Sim_1K96.gfa_distance >4Sim_1K96.gfa_distance_cut
-```
+!!! terminal "code"
+
+    ```bash
+    mkdir odgi_distance
+    cp odgi_distance
+    #copy gfa to odgi_distance working directory 
+    cp /home/zyang/pg_workshop/vg_deconstruct/4Sim_1K96.gfa /home/zyang/pg_workshop/odgi_distance/
+    ```
+!!! terminal "code"
+
+    ```bash
+    module purge
+    module load pggb/0.5.3-Miniconda3
+    odgi paths -i 4Sim_1K96.gfa -d -D 'AAAA' >4Sim_1K96.gfa_distance
+    cut -f 1,2,6 4Sim_1K96.gfa_distance >4Sim_1K96.gfa_distance_cut
+    ```
 ### script for ODGI paths to extract distance
-```bash
-#!/bin/bash
 
-#SBATCH --account       nesi02659
-#SBATCH --job-name      4Sim_1K96_distance
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
+!!! terminal "code"
 
-module purge
-module load Singularity
-
-#export container to a variable for convenience
-container=/nesi/project/nesi02659/software/odgi/odgi_0.8.2.simg
-data=/home/zyang/pg_workshop/odgi_distance/4Sim_1K96.gfa
-output=/home/zyang/pg_workshop/odgi_distance
-
-singularity exec ${container} odgi paths -i $data -d -D 'AAAA' >$output/4Sim_1K96.gfa_distance
-cut -f 1,2,6 $output/4Sim_1K96.gfa_distance >$output/4Sim_1K96.gfa_distance_cut
-```
+    ```bash
+    #!/bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      4Sim_1K96_distance
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+    
+    module purge
+    module load pggb/0.5.3-Miniconda3
+    
+    #export container to a variable for convenience
+    data=/home/zyang/pg_workshop/odgi_distance/4Sim_1K96.gfa
+    output=/home/zyang/pg_workshop/odgi_distance
+    
+    odgi paths -i $data -d -D 'AAAA' >$output/4Sim_1K96.gfa_distance
+    cut -f 1,2,6 $output/4Sim_1K96.gfa_distance >$output/4Sim_1K96.gfa_distance_cut
+    ```
 ### R script for clustering based on distance among paths of a graph, 4Sim 1k96
 
-list2dist_clustering_4Sim.R
-```bash
-setwd("/home/zyang/pg_workshop/odgi_distance")
+!!! r-project "code"
 
-library(reshape)
-library(ape)
 
-# read in the data
-dat=read.csv("4Sim_1K96.gfa_distance_cut",sep="\t")
-dat
-# use reshape's cast function to change to matrix
-m <- cast(dat, group.a ~ group.b)
-m
-# set the row names
-rownames(m) <- m[,1]
-rownames(m)
+    list2dist_clustering_4Sim.R
+    ```bash
+    setwd("/home/zyang/pg_workshop/odgi_distance")
+    
+    library(reshape)
+    library(ape)
+    
+    # read in the data
+    dat=read.csv("4Sim_1K96.gfa_distance_cut",sep="\t")
+    dat
+    # use reshape's cast function to change to matrix
+    m <- cast(dat, group.a ~ group.b)
+    m
+    # set the row names
+    rownames(m) <- m[,1]
+    rownames(m)
+    
+    #The fellowing two lines code will cause no IDs in the clustering
+    # get rid of a couple of rows
+    #m <- m[,-2]
+    # convert any 0s that were read in as strings to integers
+    #m <- apply(m, 2, as.numeric )
+    m
+    
+    # change the matrix to a distance matrix
+    d <- dist(m)
+    d
+    
+    # do hierarchical clustering
+    h <- hclust(d)
+    
+    h
+    # plot the dendrogram
+    plot(h)
+    
+    # use ape's as phylo function
+    tree <- as.phylo(h)
+    # export as newick for viewing in figtree
+    write.tree(phy=tree, file = '4Sim_1k96_distance.tree')
+    ```
+### run the R script for clustering based on distance 
 
-#The fellowing two lines code will cause no IDs in the clustering
-# get rid of a couple of rows
-#m <- m[,-2]
-# convert any 0s that were read in as strings to integers
-#m <- apply(m, 2, as.numeric )
-m
+!!! terminal "code"
 
-# change the matrix to a distance matrix
-d <- dist(m)
-d
-
-# do hierarchical clustering
-h <- hclust(d)
-
-h
-# plot the dendrogram
-plot(h)
-
-# use ape's as phylo function
-tree <- as.phylo(h)
-# export as newick for viewing in figtree
-write.tree(phy=tree, file = '4Sim_1k96_distance.tree')
-```
-### run the R script for clustering based on distance on Nesi
-```bash
-#!/bin/bash
-
-#SBATCH --account       nesi02659
-#SBATCH --job-name      4Sim_1K96_distance_clustering
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
-
-module purge
-module load R/4.0.1-gimkl-2020
-
-Rscript 8_list2dist_clustering_4Sim.R
-```
+    ```bash
+    #!/bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      4Sim_1K96_distance_clustering
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+    
+    module purge
+    module load R/4.0.1-gimkl-2020
+    
+    Rscript 8_list2dist_clustering_4Sim.R
+    ```
 
 ## Construct pangenome graph for the 3ST genomes
 ### prepare dataset and build index
-```bash
-# copy the 3ST.fa dataset to your work directory, mine is /home/zyang/pg_worhshop
-cp /home/zyang/pg_workshop/dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/3ST.fa /home/zyang/pg_workshop
 
-# go back to your work directory 
-cd /home/zyang/pg_worhshop
+!!! terminal "code"
+    ```bash
+    # copy the 3ST.fa dataset to your work directory, mine is /home/zyang/pg_worhshop
+    cp /home/zyang/pg_workshop/dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/3ST.fa /home/zyang/pg_workshop
+    
+    # go back to your work directory 
+    cd /home/zyang/pg_worhshop
+    ```
+!!! terminal "code"
 
-#build index for 3ST.fa
-
-module purge
-module load SAMtools/1.16.1-GCC-11.3.0
-samtools faidx 3ST.fa
-
-#check index 
-less -S 3ST.fa.fai
-NC_017518       2248966 77      60      61
-ST41    2217832 2286541 60      61
-ST154   2233582 4541354 60      61
-
-```
+    ```bash
+    #build index for 3ST.fa
+    
+    module purge
+    module load SAMtools/1.16.1-GCC-11.3.0
+    samtools faidx 3ST.fa
+    ```
+!!! terminal "code"
+    ```bash
+    #check index 
+    less -S 3ST.fa.fai
+    NC_017518       2248966 77      60      61
+    ST41    2217832 2286541 60      61
+    ST154   2233582 4541354 60      61  
+    ```
 
 ### Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p 
-```bash
-module purge
-module load Mash/2.3-GCC-11.3.0
-mash triangle 4Sim.fa >4Sim.fa_mash
-less -S 3ST.fa_mash
-        3
-NC_017518
-ST41    0.00146992
-ST154   0.00165343      0.00131423
-```
+
+!!! terminal "code"
+
+    ```bash
+    module purge
+    module load Mash/2.3-GCC-11.3.0
+    mash triangle 4Sim.fa >4Sim.fa_mash
+    ```
+!!! terminal "code"
+
+    ```bash
+    less -S 3ST.fa_mash
+    ```
+    ```
+            3
+    NC_017518
+    ST41    0.00146992
+    ST154   0.00165343      0.00131423
+    ```
 
 ### check the Mauve aligment of 3ST
 Mauve alignments demonstrated large inversions among the 3ST genomes. 
 ![Mauve alignment of the 3STs genomes](https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/Figures/Fig.3ST_mauve%20alignment.png??raw=true])
 
 ### pggb_slurm_2K95_3ST.sh, -k 2000, -p 95
-```bash
-#!/bin/bash
 
-#SBATCH --account       nesi02659
-#SBATCH --job-name      3ST_2K95
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
+!!! terminal "code"
 
-module purge
-module load Singularity
-
-#export container to a variable for convenience
-container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
-data=/home/zyang/pg_workshop/3ST.fa
-output=/home/zyang/pg_workshop
-
-singularity exec ${container} pggb -i $data -s 2000 -p 95 -n 3 -t 24 -S -m -o $output/3ST_2K95 -V 'NC_017518:#'
-```
+    ```bash
+    #!/bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      3ST_2K95
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+    
+    module purge
+    module load pggb/0.5.3-Miniconda3
+    
+    #export container to a variable for convenience
+    data=/home/zyang/pg_workshop/3ST.fa
+    output=/home/zyang/pg_workshop
+    
+    pggb -i $data -s 2000 -p 95 -n 3 -t 24 -S -m -o $output/3ST_2K95 -V 'NC_017518:#'
+    ```
 
 ## Construct pangenome graph for the 24NM genomes
 ### prepare dataset and build index
-```bash
-# copy the 24NM.fa.gz dataset to your work directory, mine is /home/zyang/pg_worhshop
-cp /home/zyang/pg_workshop/dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/24NM.fa.gz /home/zyang/pg_workshop
 
-# go back to your work directory 
-cd /home/zyang/pg_worhshop
+!!! terminal "code"
 
-#uncompress 24NM.fa.gz
-gzip -d 24NM.fa.gz
+    ```bash
+    # copy the 24NM.fa.gz dataset to your work directory, mine is /home/zyang/pg_worhshop
+    cp /home/zyang/pg_workshop/dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/24NM.fa.gz /home/zyang/pg_workshop
+    
+    # go back to your work directory 
+    cd /home/zyang/pg_worhshop
+    
+    #uncompress 24NM.fa.gz
+    gzip -d 24NM.fa.gz
+    
+    #build index for 24NM.fa
+    
+    module purge 
+    module load SAMtools/1.16.1-GCC-11.3.0
+    samtools faidx 24NM.fa
+    ```
+!!! terminal "code"
 
-#build index for 24NM.fa
+    ```bash
+    #check index 
+    less -S 24NM.fa.fai
+    ```
 
-module purge 
-module load SAMtools/1.16.1-GCC-11.3.0
-samtools faidx 24NM.fa
+    ??? success "Output"
 
-#check index 
-less -S 24NM.fa.fai
-NC_003112.2     2272360 60      60      61
-NC_003116.1     2184406 2310354 60      61
-NC_008767.1     2194961 4531228 60      61
-NC_010120.1     2153416 6762834 60      61
-NC_017501.1     2277550 8952201 60      61
-NC_013016.1     2145295 11267774        60      61
-NC_017505.1     2242947 13448888        60      61
-NC_017513.1     2184862 15729279        60      61
-NC_017514.1     2223518 17950622        60      61
-NC_017515.1     2250449 20211265        60      61
-NC_017512.1     2227255 22499286        60      61
-NZ_CP012392.1   2170619 24763743        60      61
-NZ_CP016627.1   2173408 26970619        60      61
-NZ_CP016646.1   2173686 29180331        60      61
-NZ_CP016682.1   2175832 31390326        60      61
-NZ_CP020402.2   2305818 33602508        60      61
-NZ_CP031334.1   2314390 35946837        60      61
-NZ_CP031324.1   2291778 38299881        60      61
-NZ_CP031328.1   2223855 40629936        60      61
-NZ_CP031333.1   2280611 42890936        60      61
-NZ_CP021517.1   2167947 45209638        60      61
-NC_017518       2248966 47413790        60      61
-ST41    2217832 49700245        60      61
-ST154   2233582 51955048        60      61
-
-```
+        ```bash
+        NC_003112.2     2272360 60      60      61
+        NC_003116.1     2184406 2310354 60      61
+        NC_008767.1     2194961 4531228 60      61
+        NC_010120.1     2153416 6762834 60      61
+        NC_017501.1     2277550 8952201 60      61
+        NC_013016.1     2145295 11267774        60      61
+        NC_017505.1     2242947 13448888        60      61
+        NC_017513.1     2184862 15729279        60      61
+        NC_017514.1     2223518 17950622        60      61
+        NC_017515.1     2250449 20211265        60      61
+        NC_017512.1     2227255 22499286        60      61
+        NZ_CP012392.1   2170619 24763743        60      61
+        NZ_CP016627.1   2173408 26970619        60      61
+        NZ_CP016646.1   2173686 29180331        60      61
+        NZ_CP016682.1   2175832 31390326        60      61
+        NZ_CP020402.2   2305818 33602508        60      61
+        NZ_CP031334.1   2314390 35946837        60      61
+        NZ_CP031324.1   2291778 38299881        60      61
+        NZ_CP031328.1   2223855 40629936        60      61
+        NZ_CP031333.1   2280611 42890936        60      61
+        NZ_CP021517.1   2167947 45209638        60      61
+        NC_017518       2248966 47413790        60      61
+        ST41    2217832 49700245        60      61
+        ST154   2233582 51955048        60      61
+        ```
 
 ### Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p 
-```bash
-module purge
-module load Mash/2.3-GCC-11.3.0
-mash triangle 24NM.fa >24NM.fa_mash
-less -S 24NM.fa_mash
 
-        24
-NC_003112.2
-NC_003116.1     0.0188675
-NC_008767.1     0.0174175       0.0171844
-NC_010120.1     0.0184965       0.0166683       0.0166117
-NC_017501.1     0.0181313       0.0181313       0.016782        0.0190552
-NC_013016.1     0.0218499       0.0190552       0.0171844       0.0191812       0.0188053
-NC_017505.1     0.015943        0.0191812       0.0168963       0.0187432       0.0175939       0.0212923
-NC_017513.1     0.0186195       0.0175939       0.00861543      0.0167251       0.016782        0.0174175       0.0169536
-NC_017514.1     0.0154006       0.0185579       0.0167251       0.0185579       0.0172424       0.0204123       0.00977265      0.0175939
-NC_017515.1     0.0115313       0.0177716       0.0157245       0.0170111       0.0168391       0.0202137       0.016782        0.0155619       0.0158335
-NC_017512.1     0.0192445       0.00594242      0.0177716       0.0173006       0.0184965       0.0200822       0.0202137       0.0182524       0.0199514       0.0179508
-NZ_CP012392.1   0.0183741       0.0171844       0.017359        0.0172424       0.0183132       0.0204789       0.0180108       0.0170111       0.0172424       0.0162193       0.0177716
-NZ_CP016627.1   0.0181313       0.0174175       0.00279888      0.0166117       0.0172424       0.0179508       0.0175349       0.00877107      0.0171265       0.0166683       0.017359
-NZ_CP016646.1   0.0178909       0.0172424       0.0163866       0.0171265       0.0174761       0.0184352       0.0189925       0.0163307       0.017653        0.0165552       0.0177716
-NZ_CP016682.1   0.0180108       0.0170111       0.0162193       0.0169536       0.0171844       0.0181313       0.0189299       0.0164427       0.0175939       0.0162749       0.0175349
-NZ_CP020402.2   0.0196919       0.0188675       0.0177122       0.0180709       0.0134525       0.0185579       0.0171844       0.0171265       0.0170111       0.0182524       0.0199514
-NZ_CP031334.1   0.0170111       0.0180709       0.0156702       0.0163866       0.0147145       0.0183132       0.0165552       0.0149759       0.0164427       0.0152936       0.0191181
-NZ_CP031324.1   0.0177716       0.0189925       0.0166683       0.0181313       0.0146626       0.0193079       0.0178909       0.0161637       0.0166117       0.0160531       0.0194991
-NZ_CP031328.1   0.0181313       0.0180108       0.0168391       0.0174175       0.0162749       0.0196275       0.0182524       0.0166683       0.0157789       0.0168391       0.0184965
-NZ_CP031333.1   0.0117112       0.0172424       0.0158335       0.0170687       0.0168391       0.0201478       0.016782        0.0156702       0.0158335       0.00186568      0.0171844
-NZ_CP021517.1   0.0178312       0.0163866       0.0171265       0.0165552       0.0180709       0.0194352       0.0178909       0.0165552       0.0174761       0.0158335       0.0170687
-NC_017518       0.0152404       0.0186195       0.0166117       0.0183741       0.016782        0.0200167       0.00916565      0.0174761       0.001839        0.015508        0.0194991
-ST41    0.0150813       0.0184352       0.0164427       0.0183132       0.0170687       0.0201478       0.00912584      0.017653        0.00128842      0.0158335       0.0194991       0.
-ST154   0.0151872       0.0182524       0.0164989       0.0182524       0.0171265       0.0200167       0.00952763      0.0173006       0.00175922      0.0156702       0.0193714       0.
+!!! terminal "code"
 
-```
+    ```bash
+    module purge
+    module load Mash/2.3-GCC-11.3.0
+    mash triangle 24NM.fa >24NM.fa_mash
+    ```
+!!! terminal "code"
+
+    ```bash
+    less -S 24NM.fa_mash
+    ```
+    ??? success "Output"
+    
+        ```bash    
+                24
+        NC_003112.2
+        NC_003116.1     0.0188675
+        NC_008767.1     0.0174175       0.0171844
+        NC_010120.1     0.0184965       0.0166683       0.0166117
+        NC_017501.1     0.0181313       0.0181313       0.016782        0.0190552
+        NC_013016.1     0.0218499       0.0190552       0.0171844       0.0191812       0.0188053
+        NC_017505.1     0.015943        0.0191812       0.0168963       0.0187432       0.0175939       0.0212923
+        NC_017513.1     0.0186195       0.0175939       0.00861543      0.0167251       0.016782        0.0174175       0.0169536
+        NC_017514.1     0.0154006       0.0185579       0.0167251       0.0185579       0.0172424       0.0204123       0.00977265      0.0175939
+        NC_017515.1     0.0115313       0.0177716       0.0157245       0.0170111       0.0168391       0.0202137       0.016782        0.0155619       0.0158335
+        NC_017512.1     0.0192445       0.00594242      0.0177716       0.0173006       0.0184965       0.0200822       0.0202137       0.0182524       0.0199514       0.0179508
+        NZ_CP012392.1   0.0183741       0.0171844       0.017359        0.0172424       0.0183132       0.0204789       0.0180108       0.0170111       0.0172424       0.0162193       0.0177716
+        NZ_CP016627.1   0.0181313       0.0174175       0.00279888      0.0166117       0.0172424       0.0179508       0.0175349       0.00877107      0.0171265       0.0166683       0.017359
+        NZ_CP016646.1   0.0178909       0.0172424       0.0163866       0.0171265       0.0174761       0.0184352       0.0189925       0.0163307       0.017653        0.0165552       0.0177716
+        NZ_CP016682.1   0.0180108       0.0170111       0.0162193       0.0169536       0.0171844       0.0181313       0.0189299       0.0164427       0.0175939       0.0162749       0.0175349
+        NZ_CP020402.2   0.0196919       0.0188675       0.0177122       0.0180709       0.0134525       0.0185579       0.0171844       0.0171265       0.0170111       0.0182524       0.0199514
+        NZ_CP031334.1   0.0170111       0.0180709       0.0156702       0.0163866       0.0147145       0.0183132       0.0165552       0.0149759       0.0164427       0.0152936       0.0191181
+        NZ_CP031324.1   0.0177716       0.0189925       0.0166683       0.0181313       0.0146626       0.0193079       0.0178909       0.0161637       0.0166117       0.0160531       0.0194991
+        NZ_CP031328.1   0.0181313       0.0180108       0.0168391       0.0174175       0.0162749       0.0196275       0.0182524       0.0166683       0.0157789       0.0168391       0.0184965
+        NZ_CP031333.1   0.0117112       0.0172424       0.0158335       0.0170687       0.0168391       0.0201478       0.016782        0.0156702       0.0158335       0.00186568      0.0171844
+        NZ_CP021517.1   0.0178312       0.0163866       0.0171265       0.0165552       0.0180709       0.0194352       0.0178909       0.0165552       0.0174761       0.0158335       0.0170687
+        NC_017518       0.0152404       0.0186195       0.0166117       0.0183741       0.016782        0.0200167       0.00916565      0.0174761       0.001839        0.015508        0.0194991
+        ST41    0.0150813       0.0184352       0.0164427       0.0183132       0.0170687       0.0201478       0.00912584      0.017653        0.00128842      0.0158335       0.0194991       0.
+        ST154   0.0151872       0.0182524       0.0164989       0.0182524       0.0171265       0.0200167       0.00952763      0.0173006       0.00175922      0.0156702       0.0193714       0.
+        ```
 
 ### pggb_slurm_2K95_3ST.sh, -k 2000, -p 95
-```bash
-#!/bin/bash
 
-#SBATCH --account       nesi02659
-#SBATCH --job-name      24NM_10k95
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          3:00:00
+!!! terminal "code"
 
-module purge
-module load Singularity
-
-#export container to a variable for convenience
-WD=/home/zyang/pg_workshop #Working Directory
-container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
-data=/home/zyang/pg_workshop/24NM.fa
-output=/home/zyang/pg_workshop
-
-
-#Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
-
-singularity exec ${container} pggb -i $data -s 10000 -p 95 -n 24 -t 24 -S -m -o $output/24NM_10K95 -V 'NC_017518:#'
-```
+    ```bash
+    #!/bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      24NM_10k95
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          3:00:00
+    
+    module purge
+    module load pggb/0.5.3-Miniconda3
+    
+    #export container to a variable for convenience
+    WD=/home/zyang/pg_workshop #Working Directory
+    data=/home/zyang/pg_workshop/24NM.fa
+    output=/home/zyang/pg_workshop
+    
+    pggb -i $data -s 10000 -p 95 -n 24 -t 24 -S -m -o $output/24NM_10K95 -V 'NC_017518:#'
+    ```
 
 ### pggb_slurm_2K95_3ST.sh, -k 2000, -p 95, -x 
-```bash
-#!/bin/bash
 
-#SBATCH --account       nesi02659
-#SBATCH --job-name      24NM_10k95_X
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          3:00:00
+!!! terminal "code"
 
-module purge
-module load Singularity
-
-#export container to a variable for convenience
-WD=/home/zyang/pg_workshop #Working Directory
-container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
-data=/home/zyang/pg_workshop/24NM.fa
-output=/home/zyang/pg_workshop
-
-
-#Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
-
-singularity exec ${container} pggb -i $data -s 10000 -p 95 -n 24 -x auto -t 24 -S -m -o $output/24NM_10K95x -V 'NC_017518:#'
-```
+    ```bash
+    #!/bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      24NM_10k95_X
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          3:00:00
+    
+    module purge
+    module load pggb/0.5.3-Miniconda3
+    
+    #export container to a variable for convenience
+    WD=/home/zyang/pg_workshop #Working Directory
+    data=/home/zyang/pg_workshop/24NM.fa
+    output=/home/zyang/pg_workshop
+    
+    pggb -i $data -s 10000 -p 95 -n 24 -x auto -t 24 -S -m -o $output/24NM_10K95x -V 'NC_017518:#'
+    ```

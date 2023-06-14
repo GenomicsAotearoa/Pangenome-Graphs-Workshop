@@ -133,14 +133,14 @@ Following script ([pggb_test.sh](https://github.com/nuzla/Pangenome-Graphs-Works
     ```bash
     #!/bin/bash
     
-    module load Singularity
+    module load pggb/0.5.3-Miniconda3
 
     #export container to a variable for convenience
     WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory
     container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
     data=${WD}/ASM19152v1_pgsim.fa
     
-    singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 2 -S -m -o output -V 'NC_017518.1:#' 
+    pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 2 -S -m -o output -V 'NC_017518.1:#' 
     ```
 
 In `pggb`, `-i` is for specifying the sequence file. `-s` specifies the segment length for mapping and `-p` specifies percent identity for mapping/alignment. `-n` is for number of haplotypes (or number of samples). `-k` for minimum matching length. `-t` says number of threads to be used for the execution. `-S` will generate the stats. `-m` will generate MultiQC report of graphs' statistics and visualizations. `-o` specifies the output directory name. `-V 'NC_017518.1:#'` will create a VCF file and its stats considering NC_017518.1 as the reference sequence. 
@@ -168,14 +168,14 @@ Executing shell scripts in the NeSI environment might not be the best way to han
     #SBATCH --error         %x_%j.err
     
     module purge
-    module load Singularity
+    module load pggb/0.5.3-Miniconda3
     
     #export container to a variable for convenience
     WD=$PWD #Working Directory
     container=/opt/nesi/containers/pggb/pggb-0.5.3.simg
     data=${WD}/ASM19152v1_pgsim.fa    
     
-    singularity exec ${container} pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 24 -S -m -o output_1K95 -V 'NC_017518.1:#'  
+    pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 24 -S -m -o output_1K95 -V 'NC_017518.1:#'  
     ```
 
 The job can be submitted using the `sbatch` command it will show a job ID. In this case, the job ID is 35887085.
