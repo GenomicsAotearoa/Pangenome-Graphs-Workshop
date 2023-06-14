@@ -226,19 +226,15 @@ Executing shell scripts in the Nesi environment might not be the best way to han
     #SBATCH --time          1:00:00
     
     module purge
-    module load Singularity
+    module load pggb/0.5.3-Miniconda3
     
     #export container to a variable for convenience
     WD=/home/zyang/pg_workshop #Working Directory
-    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
     data=/home/zyang/pg_workshop/4Sim.fa
     output=/home/zyang/pg_workshop
     
     
-    #Bind filesystem to container image
-    export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
-    
-    singularity exec ${container} pggb -i $data -s 1000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_1K96 -V 'NC_017518:#'   
+    pggb -i $data -s 1000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_1K96 -V 'NC_017518:#'   
     ```
 The job can be submitted using the `sbatch` command it will show a job id.
 
@@ -257,16 +253,14 @@ The job can be submitted using the `sbatch` command it will show a job id.
     #SBATCH --time          1:00:00
     
     module purge
-    module load Singularity
+    module load pggb/0.5.3-Miniconda3
     
     #export container to a variable for convenience
     WD=/home/zyang/pg_workshop #Working Directory
-    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
     data=/home/zyang/pg_workshop/4Sim.fa
     output=/home/zyang/pg_workshop
-    
-    
-    singularity exec ${container} pggb -i $data -s 10000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_10K96 -V 'NC_017518:#'
+
+    pggb -i $data -s 10000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_10K96 -V 'NC_017518:#'
     ```
 #### pggb_slurm_10K96_K79_4Sim.sh
 
