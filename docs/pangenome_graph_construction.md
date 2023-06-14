@@ -451,37 +451,46 @@ done
 ```
 
 ## ODGI paths to extract distance  
-```bash
-mkdir odgi_distance
-cp odgi_distance
-#copy gfa to odgi_distance working directory 
-cp /home/zyang/pg_workshop/vg_deconstruct/4Sim_1K96.gfa /home/zyang/pg_workshop/odgi_distance/
 
-module purge
-module load pggb/0.5.3-Miniconda3
-odgi paths -i 4Sim_1K96.gfa -d -D 'AAAA' >4Sim_1K96.gfa_distance
-cut -f 1,2,6 4Sim_1K96.gfa_distance >4Sim_1K96.gfa_distance_cut
-```
+!!! terminal "code"
+
+    ```bash
+    mkdir odgi_distance
+    cp odgi_distance
+    #copy gfa to odgi_distance working directory 
+    cp /home/zyang/pg_workshop/vg_deconstruct/4Sim_1K96.gfa /home/zyang/pg_workshop/odgi_distance/
+    ```
+!!! terminal "code"
+
+    ```bash
+    module purge
+    module load pggb/0.5.3-Miniconda3
+    odgi paths -i 4Sim_1K96.gfa -d -D 'AAAA' >4Sim_1K96.gfa_distance
+    cut -f 1,2,6 4Sim_1K96.gfa_distance >4Sim_1K96.gfa_distance_cut
+    ```
 ### script for ODGI paths to extract distance
-```bash
-#!/bin/bash
 
-#SBATCH --account       ga03793
-#SBATCH --job-name      4Sim_1K96_distance
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
+!!! terminal "code"
 
-module purge
-module load pggb/0.5.3-Miniconda3
-
-#export container to a variable for convenience
-data=/home/zyang/pg_workshop/odgi_distance/4Sim_1K96.gfa
-output=/home/zyang/pg_workshop/odgi_distance
-
-odgi paths -i $data -d -D 'AAAA' >$output/4Sim_1K96.gfa_distance
-cut -f 1,2,6 $output/4Sim_1K96.gfa_distance >$output/4Sim_1K96.gfa_distance_cut
-```
+    ```bash
+    #!/bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      4Sim_1K96_distance
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+    
+    module purge
+    module load pggb/0.5.3-Miniconda3
+    
+    #export container to a variable for convenience
+    data=/home/zyang/pg_workshop/odgi_distance/4Sim_1K96.gfa
+    output=/home/zyang/pg_workshop/odgi_distance
+    
+    odgi paths -i $data -d -D 'AAAA' >$output/4Sim_1K96.gfa_distance
+    cut -f 1,2,6 $output/4Sim_1K96.gfa_distance >$output/4Sim_1K96.gfa_distance_cut
+    ```
 ### R script for clustering based on distance among paths of a graph, 4Sim 1k96
 
 !!! r-project "code"
