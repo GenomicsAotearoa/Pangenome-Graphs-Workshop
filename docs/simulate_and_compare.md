@@ -9,14 +9,19 @@
     3. Map the reads with the reference using `bwa mem` and generate VCF file (call it as `simulated.vcf`)
     4. Compare `ground_truth.vcf` and `simulated.vcf` using `bcftools isec` and generate a report
     5. Repeat steps 3 and 4 using `vg giraffe`
-    6. Generate a comparision stats report
+    6. Generate a comparison stats report
 
 The script accepts following options. 
 
 !!! terminal "code"
 
     ```bash
-    $ ./sim_vc_compare.sh --help
+    ./sim_vc_compare.sh --help
+    ```
+
+!!! success "Output"
+
+    ```
     Program : sim_vc_compare
     Version : 1.0
     Contact : fathima.nuzla.ismail@gmail.com
