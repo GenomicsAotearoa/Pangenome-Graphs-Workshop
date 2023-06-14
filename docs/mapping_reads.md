@@ -211,7 +211,6 @@ Here we map reads to a pangenome graph instead of single linear reference sequen
     256K Simulation_SNP_4000_INDEL_4000_CNV_4.refseq2simseq.CNV.vcf
     ```
 
-<!-- Loop/array job? -->
 !!! terminal "code"
 
     ```bash
@@ -231,5 +230,43 @@ Here we map reads to a pangenome graph instead of single linear reference sequen
     bcftools index Simulation_VG_SNP_5000.giraffe.30x.100R.vcf.gz 
     ```
     
+<!-- 
+Loop/array job? 
+
+```bash
+for vcf in *refseq2simseq.*.vcf; do
+  # Get base name
+  name="${vcf%.refseq2simseq.*.vcf}"
+  # Create prefix
+  prefix=$(echo ${name} | sed -e 's/Simulation/VG/g')
+  # Create tabix index
+  bgzip ${vcf}
+  tabix ${vcf}.gz
+  # Create graph and index
+  vg autoindex \
+    --workflow giraffe \
+    -r GCF_000191525.1_ASM19152v1_genomic.fna \
+    -v ${vcf}.gz \
+    -p ${prefix}
+  # Map reads to graph
+  vg giraffe \
+    -Z ${prefix}.giraffe.gbz \
+    -f ${name}.read1.fq \
+    -f ${name}.read2.fq \
+    -o SAM \
+    > Simulation_${prefix}.sam
+  # Convert SAM to sorted BAM
+  samtools view -bS Simulation_${prefix}.sam \
+    | samtools sort - \
+    > Simulation_${prefix}.bam
+  # Call variants
+  bcftools mpileup -Ou -f GCF_000191525.1_ASM19152v1_genomic.fna Simulation_${prefix}.bam \
+    | bcftools call -vm -Oz -o Simulation_${prefix}.giraffe.30x.100R.vcf.gz
+  # Index VCF
+  vcftools index Simulation_${prefix}.giraffe.30x.100R.vcf.gz
+done
+```
+-->
+
 We can follow the same procedure for the rest of the samples and generate VCF files. 
 
