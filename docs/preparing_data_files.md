@@ -167,16 +167,22 @@ Let's apply 4 copy number variations also and make another simulated sequence.
     
 ### 4. Concatenate all files and make an index
 We'll concatenate all these files into one and make an index too
-```bash
-$ cat GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_5000.simseq.genome.fa Simulation_INDEL_5000.simseq.genome.fa Simulation_SNP_4000_INDEL_4000.simseq.genome.fa Simulation_SNP_4000_INDEL_4000_INV_4.simseq.genome.fa Simulation_SNP_4000_INDEL_4000_CNV_4.simseq.genome.fa > ASM19152v1_pgsim.fa
-$ module load SAMtools
-$ samtools faidx ASM19152v1_pgsim.fa 
-$ cat ASM19152v1_pgsim.fa.fai 
-NC_017518.1     2248966 64      80      81
-NC_017518.1_SNP_5000    2248966 2277165 2248966 2248967
-NC_017518.1_INDEL_5000  2249048 4526156 2249048 2249049
-NC_017518.1_SNP_4000_INDEL_4000 2242147 6775238 2242147 2242148
-NC_017518.1_SNP_4000_INDEL_4000_INV_4   2242147 9017425 2242147 2242148
-NC_017518.1_SNP_4000_INDEL_4000_CNV_4   2415498 11259612        2415498 2415499
-```
+
+!!! terminal "code"
+
+    ```bash
+    $ cat GCF_000191525.1_ASM19152v1_genomic.fna Simulation_SNP_5000.simseq.genome.fa Simulation_INDEL_5000.simseq.genome.fa Simulation_SNP_4000_INDEL_4000.simseq.genome.fa Simulation_SNP_4000_INDEL_4000_INV_4.simseq.genome.fa Simulation_SNP_4000_INDEL_4000_CNV_4.simseq.genome.fa > ASM19152v1_pgsim.fa
+    
+    $ module load SAMtools
+    
+    $ samtools faidx ASM19152v1_pgsim.fa 
+    
+    $ cat ASM19152v1_pgsim.fa.fai 
+    NC_017518.1     2248966 64      80      81
+    NC_017518.1_SNP_5000    2248966 2277165 2248966 2248967
+    NC_017518.1_INDEL_5000  2249048 4526156 2249048 2249049
+    NC_017518.1_SNP_4000_INDEL_4000 2242147 6775238 2242147 2242148
+    NC_017518.1_SNP_4000_INDEL_4000_INV_4   2242147 9017425 2242147 2242148
+    NC_017518.1_SNP_4000_INDEL_4000_CNV_4   2415498 11259612        2415498 2415499
+    ```
 
