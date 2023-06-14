@@ -484,120 +484,144 @@ cut -f 1,2,6 $output/4Sim_1K96.gfa_distance >$output/4Sim_1K96.gfa_distance_cut
 ```
 ### R script for clustering based on distance among paths of a graph, 4Sim 1k96
 
-list2dist_clustering_4Sim.R
-```bash
-setwd("/home/zyang/pg_workshop/odgi_distance")
+!!! r-project "code"
 
-library(reshape)
-library(ape)
 
-# read in the data
-dat=read.csv("4Sim_1K96.gfa_distance_cut",sep="\t")
-dat
-# use reshape's cast function to change to matrix
-m <- cast(dat, group.a ~ group.b)
-m
-# set the row names
-rownames(m) <- m[,1]
-rownames(m)
+    list2dist_clustering_4Sim.R
+    ```bash
+    setwd("/home/zyang/pg_workshop/odgi_distance")
+    
+    library(reshape)
+    library(ape)
+    
+    # read in the data
+    dat=read.csv("4Sim_1K96.gfa_distance_cut",sep="\t")
+    dat
+    # use reshape's cast function to change to matrix
+    m <- cast(dat, group.a ~ group.b)
+    m
+    # set the row names
+    rownames(m) <- m[,1]
+    rownames(m)
+    
+    #The fellowing two lines code will cause no IDs in the clustering
+    # get rid of a couple of rows
+    #m <- m[,-2]
+    # convert any 0s that were read in as strings to integers
+    #m <- apply(m, 2, as.numeric )
+    m
+    
+    # change the matrix to a distance matrix
+    d <- dist(m)
+    d
+    
+    # do hierarchical clustering
+    h <- hclust(d)
+    
+    h
+    # plot the dendrogram
+    plot(h)
+    
+    # use ape's as phylo function
+    tree <- as.phylo(h)
+    # export as newick for viewing in figtree
+    write.tree(phy=tree, file = '4Sim_1k96_distance.tree')
+    ```
+### run the R script for clustering based on distance 
 
-#The fellowing two lines code will cause no IDs in the clustering
-# get rid of a couple of rows
-#m <- m[,-2]
-# convert any 0s that were read in as strings to integers
-#m <- apply(m, 2, as.numeric )
-m
+!!! terminal "code"
 
-# change the matrix to a distance matrix
-d <- dist(m)
-d
-
-# do hierarchical clustering
-h <- hclust(d)
-
-h
-# plot the dendrogram
-plot(h)
-
-# use ape's as phylo function
-tree <- as.phylo(h)
-# export as newick for viewing in figtree
-write.tree(phy=tree, file = '4Sim_1k96_distance.tree')
-```
-### run the R script for clustering based on distance on Nesi
-```bash
-#!/bin/bash
-
-#SBATCH --account       ga03793
-#SBATCH --job-name      4Sim_1K96_distance_clustering
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
-
-module purge
-module load R/4.0.1-gimkl-2020
-
-Rscript 8_list2dist_clustering_4Sim.R
-```
+    ```bash
+    #!/bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      4Sim_1K96_distance_clustering
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+    
+    module purge
+    module load R/4.0.1-gimkl-2020
+    
+    Rscript 8_list2dist_clustering_4Sim.R
+    ```
 
 ## Construct pangenome graph for the 3ST genomes
 ### prepare dataset and build index
-```bash
-# copy the 3ST.fa dataset to your work directory, mine is /home/zyang/pg_worhshop
-cp /home/zyang/pg_workshop/dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/3ST.fa /home/zyang/pg_workshop
 
-# go back to your work directory 
-cd /home/zyang/pg_worhshop
+!!! terminal "code"
+    ```bash
+    # copy the 3ST.fa dataset to your work directory, mine is /home/zyang/pg_worhshop
+    cp /home/zyang/pg_workshop/dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/3ST.fa /home/zyang/pg_workshop
+    
+    # go back to your work directory 
+    cd /home/zyang/pg_worhshop
+    ```
+!!! terminal "code"
 
-#build index for 3ST.fa
-
-module purge
-module load SAMtools/1.16.1-GCC-11.3.0
-samtools faidx 3ST.fa
-
-#check index 
-less -S 3ST.fa.fai
-NC_017518       2248966 77      60      61
-ST41    2217832 2286541 60      61
-ST154   2233582 4541354 60      61
-
-```
+    ```bash
+    #build index for 3ST.fa
+    
+    module purge
+    module load SAMtools/1.16.1-GCC-11.3.0
+    samtools faidx 3ST.fa
+    ```
+!!! terminal "code"
+    ```bash
+    #check index 
+    less -S 3ST.fa.fai
+    NC_017518       2248966 77      60      61
+    ST41    2217832 2286541 60      61
+    ST154   2233582 4541354 60      61  
+    ```
 
 ### Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p 
-```bash
-module purge
-module load Mash/2.3-GCC-11.3.0
-mash triangle 4Sim.fa >4Sim.fa_mash
-less -S 3ST.fa_mash
-        3
-NC_017518
-ST41    0.00146992
-ST154   0.00165343      0.00131423
-```
+
+!!! terminal "code"
+
+    ```bash
+    module purge
+    module load Mash/2.3-GCC-11.3.0
+    mash triangle 4Sim.fa >4Sim.fa_mash
+    ```
+!!! terminal "code"
+
+    ```bash
+    less -S 3ST.fa_mash
+    ```
+    ```
+            3
+    NC_017518
+    ST41    0.00146992
+    ST154   0.00165343      0.00131423
+    ```
 
 ### check the Mauve aligment of 3ST
 Mauve alignments demonstrated large inversions among the 3ST genomes. 
 ![Mauve alignment of the 3STs genomes](https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/Figures/Fig.3ST_mauve%20alignment.png??raw=true])
 
 ### pggb_slurm_2K95_3ST.sh, -k 2000, -p 95
-```bash
-#!/bin/bash
 
-#SBATCH --account       ga03793
-#SBATCH --job-name      3ST_2K95
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
+!!! terminal "code"
 
-module purge
-module load pggb/0.5.3-Miniconda3
-
-#export container to a variable for convenience
-data=/home/zyang/pg_workshop/3ST.fa
-output=/home/zyang/pg_workshop
-
-pggb -i $data -s 2000 -p 95 -n 3 -t 24 -S -m -o $output/3ST_2K95 -V 'NC_017518:#'
-```
+    ```bash
+    #!/bin/bash
+    
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      3ST_2K95
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+    
+    module purge
+    module load pggb/0.5.3-Miniconda3
+    
+    #export container to a variable for convenience
+    data=/home/zyang/pg_workshop/3ST.fa
+    output=/home/zyang/pg_workshop
+    
+    pggb -i $data -s 2000 -p 95 -n 3 -t 24 -S -m -o $output/3ST_2K95 -V 'NC_017518:#'
+    ```
 
 ## Construct pangenome graph for the 24NM genomes
 ### prepare dataset and build index
