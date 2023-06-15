@@ -11,7 +11,7 @@ module load Singularity
 
 #export container to a variable for convenience
 WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory
-container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
+
 data=${WD}/ASM19152v1_pgsim.fa
 
 #Bind filesystem to container image 

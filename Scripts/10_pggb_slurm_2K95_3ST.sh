@@ -10,7 +10,7 @@ module purge
 module load Singularity
 
 #export container to a variable for convenience
-container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
+
 data=/home/zyang/pg_workshop/3ST.fa
 output=/home/zyang/pg_workshop
 

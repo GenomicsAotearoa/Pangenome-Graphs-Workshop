@@ -122,8 +122,7 @@ As per the index this assembly consists of 6 samples described in the below tabl
 |NC_017518.1_SNP_4000_INDEL_4000_INV_4| 2,242,147 |   4,000|   4,000|   4 |   0 |
 |NC_017518.1_SNP_4000_INDEL_4000_CNV_4| 2,415,498 |   4,000|   4,000|   0 |   4 |
 
-### 3. Executing `pggb` tool using Singularity container
-We can follow the procedure [here](https://github.com/pangenome/pggb#singularity) to setup the Singularity image. <!-- Turned into module, wait Dini to green light --> This is already done and the image is in `/nesi/project/nesi02659/software/pggb/` directory for version 0.5.3. 
+### 3. Executing `pggb` 
 
 <!-- redundant -->
 Following script ([pggb_test.sh](https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pggb_test.sh)) can be used to run `pggb` on the downloaded sequence. 
@@ -137,7 +136,7 @@ Following script ([pggb_test.sh](https://github.com/nuzla/Pangenome-Graphs-Works
 
     #export container to a variable for convenience
     WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory
-    container=/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
+    
     data=${WD}/ASM19152v1_pgsim.fa
     
     pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 2 -S -m -o output -V 'NC_017518.1:#' 
