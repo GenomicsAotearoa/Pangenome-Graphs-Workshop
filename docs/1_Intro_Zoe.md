@@ -93,8 +93,10 @@ Lastly, the VG toolkit is harnessed for NGS data analysis against the graph, whi
      
     In Aotearoa New Zealand (NZ), from 1991 to 2007, an extended serogroup B epidemic occurred due to a single strain known as NZMenB (designated B:4:P1.7-2,4), identified by the PorA variant (P1.7-2), which still accounts for around one-third of meningococcal disease cases in NZ. Based on our unpublished WGS data, we have categorized NZMenB into three phylogenetic clades, namely, clade154, clade41 and clade42 based on the multilocus sequence types (MLST) of seven housekeeping genes for sequence type (ST), ST154, ST41 and ST42 respectively. 
      
-    Mauve alignments demonstrated large inversions among the 3ST genomes. 
+    Mauve alignments demonstrated large inversions among the 3ST genomes.
+
     ![Mauve alignment of the 3STs genomes](./theme_figures/Fig.3ST_mauve%20alignment.png)
+
     To evaluate pangenome graph construction, we simulated three genomes from NC_017518 (ST42) by introducing either randomly generated SNPs or mutated according to the SNP differences of ST41 and ST154 relative to ST42. The simulation was followed by introducing 200 indels and two inversions using `simuG`(https://github.com/yjx1217/simuG). We named the three simulated genomes ST42Sim, ST41Sim, and ST154Sim. The three simulated genomes contained 200 indels and two inversions relative to ST42, with ST42Sim, ST41Sim and ST154Sim containing 5000, 2892 and 4283 SNPs respectively. We grouped the three simulated genomes with ST42, which we refer to as the 4Sim genomes. We used the 4Sim and 3ST genomes as examples for pangenome graph construction in this workshop.  
      
      
@@ -130,6 +132,7 @@ Lastly, the VG toolkit is harnessed for NGS data analysis against the graph, whi
     
 ## Learning Objectives
 Participants will learn about pangenome concepts and gain practical experience building and analyzing pangenome graphs. They will apply these methods to complex research questions that require understanding the relationships between multiple genomes or accounting for variability when analyzing new genomes. By the end of the course, participants will have a strong understanding of pangenome methods based on whole genome assemblies.
+
 1. Develop scripts within a specific work directory in the Nesi environment.
 2. Downloading and preparing sequencing data (in fasta format). 
 3. Construct graphs using the PanGenome Graph Builder (PGGB) (https://github.com/pangenome/pggb)
