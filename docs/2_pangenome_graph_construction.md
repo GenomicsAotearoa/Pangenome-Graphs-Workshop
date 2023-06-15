@@ -297,7 +297,7 @@ The job can be submitted using the `sbatch` command it will show a job id.
 |seqwish	|2280344	|22216	|29823	|4	|1	|551639	|578590	|557450	|592665	|0|
 |smooth	|2261163	|29965	|40179	|4	|1	|548754	|574693	|551650	|586066	|0|
 
-![1k96 ODGI 1D visualization by path orientation](https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/pggb_4sim/1k96/4Sim.fa.97e7156.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png?raw=true])
+![1k96 ODGI 1D visualization by path orientation](theme_figures/4Sim.fa.97e7156.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png)
 
 
 #### 1k96,-K79
@@ -309,7 +309,7 @@ The job can be submitted using the `sbatch` command it will show a job id.
 |smooth	|2261401	|29976	|40199	|4	|1	|553049	|580469	|547460	|580423	|0|
 
 
-![1k96K79 ODGI 1D visualization by path orientation](https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/pggb_4sim/1k96_K79/4Sim.fa.f958389.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png?raw=true])
+![1k96K79 ODGI 1D visualization by path orientation](theme_figures/4Sim.fa.f958389.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png)
 
 #### 10k96
 | Sample Name                         | Length    | Nodes  | Edges  | Components | A   |C    |T    |G    |N   |
@@ -317,7 +317,7 @@ The job can be submitted using the `sbatch` command it will show a job id.
 |seqwish	|2340700	|22166	|29759	|4	|1	|566559	|594741	|571836	|607564	|0|
 |smooth	|2319601	|29888	|40070	|4	|1	|566755	|599287	|562078	|591481	|0|
 
-![10k96 ODGI 1D visualization by path orientation](https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/pggb_4sim/10k96/4Sim.fa.e7f7fe6.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png?raw=true])
+![10k96 ODGI 1D visualization by path orientation](theme_figures/4Sim.fa.e7f7fe6.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png])
 
 
 ### vg deconstruct graph to get the variations in vcf 

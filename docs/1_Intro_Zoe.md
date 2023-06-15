@@ -18,7 +18,7 @@ In the field of bioinformatics, relying on a single reference genome can lead to
  
 Our workshop delves into the construction of dynamic pangenome graphs that incorporate multiple genomes and their alignments. By representing all types of variations within a graph structure, pangenome graphs provide an efficient model for analyzing complex genomic data.
  
-Throughout the workshop, we will guide you through a practical pangenome bioinformatics pipeline, utilizing the PanGenome Graph Builder (`PGGB`) and the Variation Graph (`vg`) toolkit. You will learn how to construct pangenomes from assembled genomes, align whole genome sequencing data, and call variants against a graph reference.
+Throughout the workshop, we will guide you through a practical pangenome bioinformatics pipeline, utilizing the PanGenome Graph Builder (PGGB) and the Variation Graph (vg) toolkit. You will learn how to construct pangenomes from assembled genomes, align whole genome sequencing data, and call variants against a graph reference.
  
 Gain a deep understanding of pangenome concepts and gain hands-on experience building and analyzing pangenome graphs. Discover how to apply these methods to tackle intricate research questions that involve understanding the intricate relationships between multiple genomes or accounting for variability in new genome analyses. By the end of the course, you will possess a strong grasp of pangenome methods based on whole genome assemblies.
 
