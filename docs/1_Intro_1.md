@@ -170,8 +170,7 @@ Executing shell scripts in the NeSI environment might not be the best way to han
     module load pggb/0.5.3-Miniconda3
     
     #export container to a variable for convenience
-    WD=$PWD #Working Directory
-    container=/opt/nesi/containers/pggb/pggb-0.5.3.simg
+    WD=$PWD #Working Directory 
     data=${WD}/ASM19152v1_pgsim.fa    
     
     pggb -i $data -s 1000 -p 95 -n 6 -k 79 -t 24 -S -m -o output_1K95 -V 'NC_017518.1:#'  
@@ -273,26 +272,28 @@ _Note: To download the output folder from the Nesi environment you can first zip
 
 ## Graph Viszualization Details (`-s 1000`, `-p 95`)
 
-### ODGI Compressed 1D visualization
-![ODGI Compressed 1D visualization](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_O_multiqc.png)
+!!! info ""
 
-### ODGI 1D visualization
-![ODGI 1D visualization](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_multiqc.png)
-
-### ODGI 1D visualization by path position
-![ODGI 1D visualization by path position](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_pos_multiqc.png)
-
-### ODGI 1D visualization by path orientation
-![ODGI 1D visualization by path orientation](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_inv_multiqc.png)
-
-### ODGI 1D visualization by node depth
-![ODGI 1D visualization by node depth](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_depth_multiqc.png)
-
-### ODGI 1D visualization by uncalled bases
-![ODGI 1D visualization by uncalled bases](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_uncalled_multiqc.png)
-
-### ODGI 2D drawing
-![ODGI 2D drawing](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.lay.draw.png)
+    ### ODGI Compressed 1D visualization
+    ![ODGI Compressed 1D visualization](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_O_multiqc.png)
+    
+    ### ODGI 1D visualization
+    ![ODGI 1D visualization](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_multiqc.png)
+    
+    ### ODGI 1D visualization by path position
+    ![ODGI 1D visualization by path position](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_pos_multiqc.png)
+    
+    ### ODGI 1D visualization by path orientation
+    ![ODGI 1D visualization by path orientation](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_inv_multiqc.png)
+    
+    ### ODGI 1D visualization by node depth
+    ![ODGI 1D visualization by node depth](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_depth_multiqc.png)
+    
+    ### ODGI 1D visualization by uncalled bases
+    ![ODGI 1D visualization by uncalled bases](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.viz_uncalled_multiqc.png)
+    
+    ### ODGI 2D drawing
+    ![ODGI 2D drawing](theme_figures/ASM19152v1_pgsim.fa.2ab4142.c2fac19.c47d9e7.smooth.final.og.lay.draw.png)
 
 # Compare accuracies of mapping reads using linear methods and graph methods
 
