@@ -60,9 +60,6 @@ The pangenome graph evaluation is a pipeline in the pangenome graphs, which meas
 3. Creating Pangenome graphs using [PGGB](https://github.com/pangenome/pggb) and [PGGE](https://github.com/pangenome/pgge) Tools.
 4. Identifying genetic variation and structural variance.
 
-# Working in the Nesi Environment 
-NeSI HPC environment is used for the analysis. Please make sure to have a NeSI account and you are able to login.
-
 ### Setting up your project directory
 
 ```bash
