@@ -24,8 +24,6 @@ Gain a deep understanding of pangenome concepts and gain hands-on experience bui
 
 </p>
 
-# Acknowledgments
-Erik Garrison, Andrea Guarracino, Nuzla Ismail, Patrick J. Biggs, Una Ren, Michael A Black, and Joep de Ligt
 
 
 ## Brief Overview of the pangenome graph workflow  

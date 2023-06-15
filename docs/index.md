@@ -17,3 +17,10 @@
     |[Preparing required data files with simuG tool](./preparing_data_files.md){ .md-button .md-button--primary }| Preparing required data files with simuG tool|
     |[Simulate and Compare](./simulate_and_compare.md){ .md-button .md-button--primary } | Simulate and Compare|
     |[Compare 2 VCFs](./vc_position_based_comparison.md){ .md-button .md-button--primary }| How to compare 2 VCF files based on the exact variant position?|
+
+
+
+
+!!! quote-right "Acknowledgments"
+
+    Erik Garrison, Andrea Guarracino, Nuzla Ismail, Patrick J. Biggs, Una Ren, Michael A Black, and Joep de Ligt
