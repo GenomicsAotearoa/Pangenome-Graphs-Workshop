@@ -7,9 +7,9 @@
 #SBATCH --time          3:00:00
 
 module purge
-module load Singularity
 
-#export container to a variable for convenience
+
+
 WD=/home/zyang/pg_workshop #Working Directory
 
 data=/home/zyang/pg_workshop/24NM.fa

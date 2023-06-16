@@ -228,7 +228,7 @@ Executing shell scripts in the Nesi environment might not be the best way to han
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     WD=/home/zyang/pg_workshop #Working Directory
     data=/home/zyang/pg_workshop/4Sim.fa
     output=/home/zyang/pg_workshop
@@ -255,7 +255,7 @@ The job can be submitted using the `sbatch` command it will show a job id.
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     WD=/home/zyang/pg_workshop #Working Directory
     data=/home/zyang/pg_workshop/4Sim.fa
     output=/home/zyang/pg_workshop
@@ -278,7 +278,7 @@ The job can be submitted using the `sbatch` command it will show a job id.
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     WD=/home/zyang/pg_workshop #Working Directory
     data=/home/zyang/pg_workshop/4Sim.fa
     output=/home/zyang/pg_workshop
@@ -437,9 +437,8 @@ This pangenome graph evaluation pipeline measures the reconstruction accuracy of
     #SBATCH --time          1:00:00
     
     module purge
-    module load Singularity
+    module load pgge/2021-Miniconda3   
     
-    #export container to a variable for convenience
     
     
     
@@ -498,7 +497,7 @@ This pangenome graph evaluation pipeline measures the reconstruction accuracy of
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     data=/home/zyang/pg_workshop/odgi_distance/4Sim_1K96.gfa
     output=/home/zyang/pg_workshop/odgi_distance
     
@@ -639,7 +638,7 @@ Mauve alignments demonstrated large inversions among the 3ST genomes.
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     data=/home/zyang/pg_workshop/3ST.fa
     output=/home/zyang/pg_workshop
     
@@ -763,7 +762,7 @@ Mauve alignments demonstrated large inversions among the 3ST genomes.
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     WD=/home/zyang/pg_workshop #Working Directory
     data=/home/zyang/pg_workshop/24NM.fa
     output=/home/zyang/pg_workshop
@@ -787,7 +786,7 @@ Mauve alignments demonstrated large inversions among the 3ST genomes.
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     WD=/home/zyang/pg_workshop #Working Directory
     data=/home/zyang/pg_workshop/24NM.fa
     output=/home/zyang/pg_workshop

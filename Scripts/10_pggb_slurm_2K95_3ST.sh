@@ -7,9 +7,9 @@
 #SBATCH --time          1:00:00
 
 module purge
-module load Singularity
 
-#export container to a variable for convenience
+
+
 
 data=/home/zyang/pg_workshop/3ST.fa
 output=/home/zyang/pg_workshop
