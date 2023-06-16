@@ -357,7 +357,6 @@ The job can be submitted using the `sbatch` command it will show a job id.
     module load vg/1.46.0
     module load BCFtools/1.15.1-GCC-11.3.0
     
-    export container to a variable for convenience
     inputGFA=/home/zyang/pg_workshop/vg_deconstruct/*.gfa
     input_folder=/home/zyang/pg_workshop/vg_deconstruct
     output=/home/zyang/pg_workshop/vg_deconstruct
@@ -409,7 +408,7 @@ The job can be submitted using the `sbatch` command it will show a job id.
     less -S /home/zyang/pg_workshop/vg_deconstruct/isec_4Sim_1K96/0001.vcf
     ```
 ##### difference between 1k96 -K 19 Vs 1k96 -K 79
-![difference between 1k96 -K 19 Vs 1k96 -K 79](https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/Figures/4Sim1K96_K19vsK79_specific_variation.png?raw=true)
+![difference between 1k96 -K 19 Vs 1k96 -K 79](theme_figures/4Sim1K96_K19vsK79_specific_variation.png)
 
 
 ### PGGE 
