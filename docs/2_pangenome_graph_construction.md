@@ -439,10 +439,6 @@ This pangenome graph evaluation pipeline measures the reconstruction accuracy of
     module purge
     module load pgge/2021-Miniconda3   
     
-    
-    
-    
-    
     WD=/home/zyang/pg_workshop/4Sim_pgge #Working Directory
     inputGFA=/home/zyang/pg_workshop/4Sim_pgge/*.gfa
     input_folder=/home/zyang/pg_workshop/4Sim_pgge
