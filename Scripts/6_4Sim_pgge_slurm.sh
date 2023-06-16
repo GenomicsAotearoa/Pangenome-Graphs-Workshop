@@ -22,8 +22,8 @@ output=/home/zyang/pg_workshop/4Sim_pgge
 beehave=/home/zyang/pg_workshop/beehave.R
 
 
-#Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
+
+
 
 
 for x in $inputGFA

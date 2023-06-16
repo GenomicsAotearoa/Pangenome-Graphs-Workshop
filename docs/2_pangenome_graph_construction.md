@@ -447,8 +447,8 @@ This pangenome graph evaluation pipeline measures the reconstruction accuracy of
     beehave=/home/zyang/pg_workshop/beehave.R
     
     
-    #Bind filesystem to container image
-    export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
+    
+    
     
     
     for x in $inputGFA

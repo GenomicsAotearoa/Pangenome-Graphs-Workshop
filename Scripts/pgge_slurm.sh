@@ -13,7 +13,7 @@ WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory
 
 data=${WD}/4Sim.fa
 
-#Bind filesystem to container image 
-export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
+ 
+
 
 singularity exec ${container} pgge -g ${WD}/output/*.gfa -f $data -o pgge_output -r ${WD}/beehave.R -b pgge_output/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 8 
