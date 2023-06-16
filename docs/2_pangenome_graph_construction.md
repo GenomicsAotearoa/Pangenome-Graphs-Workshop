@@ -441,7 +441,7 @@ This pangenome graph evaluation pipeline measures the reconstruction accuracy of
     
     #export container to a variable for convenience
     
-    container=/nesi/project/nesi02659/software/pgge/pgge_032023.simg
+    
     
     
     WD=/home/zyang/pg_workshop/4Sim_pgge #Working Directory

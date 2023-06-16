@@ -10,7 +10,7 @@ module purge
 module load Singularity
 #export container to a variable for convenience
 WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory
-container=/nesi/project/nesi02659/software/pgge/pgge_032023.simg
+
 data=${WD}/4Sim.fa
 
 #Bind filesystem to container image 
