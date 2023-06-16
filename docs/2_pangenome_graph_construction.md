@@ -37,35 +37,48 @@ NeSI HPC environment is used for the analysis. Please make sure to have a NeSI a
     cd pg_workshop
     # Keep a note of the absolute path of your directory
     pwd
-    /home/zyang/pg_worhshop
+    ```
+    !!! success "Output"
+
+        ```
+        /home/<YOUR_USER_ID>/pg_workshop
+        ```
     
+    ```bash
     # Downloading and preparing datasets
     git clone https://github.com/ZoeYang2020/dataset_for_pg_workshop
     
-    # copy the 4Sim.fa dataset to your work directory, mine is /home/zyang/pg_worhshop
-    cp /home/zyang/pg_worhshop/dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/4Sim.fa /home/zyang/pg_worhshop
-    
-    # go back to your work directory 
-    cd /home/zyang/pg_worhshop
+    # copy the 4Sim.fa dataset to your work directory
+    cp dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/4Sim.fa ./
     ```
 
 ## Construct pangenome graph for the 4Sim genomes
 
+Create an index for the sequence using SAMtools and check.
+
 !!! terminal "code"
 
-    ```bash
-    #Creating an index for the seqence file using samtools and check
-    #In Nesi environment you will have to load the samtools module first
-    
+    ```bash    
     module purge
     module load SAMtools/1.16.1-GCC-11.3.0
     samtools faidx 4Sim.fa
-    less -S 4Sim.fa.fai
-    NC_017518       2248966 16      60      61
-    ST41Sim 2249014 2286474 2249014 2249015
-    ST154Sim        2248965 4535499 2248965 2248966
-    ST42Sim 2249050 6784474 2249050 2249051
     ```
+
+    Inspect the index.
+
+    ```bash
+    less -S 4Sim.fa.fai
+    ```
+
+    !!! success "Output"
+        
+        ```
+        NC_017518       2248966 16      60      61
+        ST41Sim 2249014 2286474 2249014 2249015
+        ST154Sim        2248965 4535499 2248965 2248966
+        ST42Sim 2249050 6784474 2249050 2249051
+        ```
+
 ### Executing `pggb` tool
 
 !!! terminal "code"
@@ -73,11 +86,11 @@ NeSI HPC environment is used for the analysis. Please make sure to have a NeSI a
     ```bash
     module purge
     module load pggb/0.5.3-Miniconda3
-    
 
-    # Execute `pggb --help` to check the command list of PGGB
+    # Execute `pggb --help` to check the command list of PGGB.
     pggb --help
     ```
+    
     ??? success "Output"
         ```bash 
         ERROR: mandatory arguments -i and -n
@@ -144,8 +157,9 @@ NeSI HPC environment is used for the analysis. Please make sure to have a NeSI a
         
         Use wfmash, seqwish, smoothxg, odgi, gfaffix, and vg to build, project and display a pangenome graph.
         ```
-### key parameters for executing PGGB
-https://github.com/pangenome/pggb
+
+### Key parameters for executing [PGGB](https://github.com/pangenome/pggb)
+
 The overall structure of pggb's output graph is defined by three parameters: genome number (-n), segment length (-s), and pairwise identity (-p). 
 
 Genome number (-n) is a given, but varies in ways that are difficult to infer and is thus left up to the user. Segment length defines the seed length used by the "MashMap3" homology mapper in wfmash. 
@@ -156,9 +170,7 @@ An additional parameter, -k, can also greatly affect graph structure by pruning 
 
 The initial graph is defined by parameters to wfmash and seqwish. But due to the ambiguities generated across the many pairwise alignments we use as input, this graph can be locally very complex. To regularize it we orchestrate a series of graph transformations. First, with smoothxg, we "smooth" it by locally realigning sequences to each other with a traditional multiple sequence alignment (we specifically apply POA). This process repeats multiple times to smooth over any boundary effects that may occur due to binning errors near MSA boundaries. Finally, we apply gfaffix to remove forks where both alternatives have the same sequence.
 
-
-
-### examples of key parameters for executing PGGB
+### Examples of key parameters for executing PGGB
 - Human, whole genome, 90 haplotypes: pggb -p 98 -s 50k -n 90 -k 79 ...
 - 15 helicobacter genomes, 5% divergence: pggb -n 15 -k 79, and 15 at higher (10%) divergence pggb -n 15 -k 19 -P asm20 ...
 - Yeast genomes, 5% divergence: pggb's defaults should work well, just set -n.
@@ -167,7 +179,7 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
 - pggb defaults to using the number of threads as logical processors on the system (the thread count given by getconf _NPROCESSORS_ONLN). Use -t to set an appropriate level of parallelism if you can't use all the processors on your system.
 
 
-### other parameters for executing PGGB
+### Other parameters for executing PGGB
 -S generate statistics of the seqwish and smoothxg graph
 
 -m generate MultiQC report of graphs' statistics and visualizations, automatically runs odgi stats
@@ -184,19 +196,24 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
     module purge
     module load Mash/2.3-GCC-11.3.0
 
-    mash triangle 4Sim.fa >4Sim.fa_mash
-    ```
-    ```bash
+    mash triangle 4Sim.fa > 4Sim.fa_mash
+    
+    # Inspect the output
     less -S 4Sim.fa_mash
-            4
-    NC_017518
-    ST41Sim 0.0010072
-    ST154Sim        0.00121124      0.000830728
-    ST42Sim 0.00251903      0.00366686      0.00375609
     ```
 
+    ??? success "Output"
 
-### construct pangenome graph for 4Sim genomes with Singularity container PGGB, -k 1000, -p 96
+        ```
+                4
+        NC_017518
+        ST41Sim 0.0010072
+        ST154Sim        0.00121124      0.000830728
+        ST42Sim 0.00251903      0.00366686      0.00375609
+        ```
+
+
+### Construct pangenome graph for 4Sim genomes with -k 1000, -p 96
 
 !!! terminal "code"
 
@@ -207,38 +224,50 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
      # Execute pggb, set -s 1000
      pggb -i 4Sim.fa -s 1000 -p 96 -n 4 -t 24 -S -m -o 4Sim_1K96 -V 'NC_017518:#'
      ```
+
 ### Executing `pggb` as a [SLURM](https://github.com/SchedMD/slurm) Job
-Executing shell scripts in the Nesi environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previusely explained script as below to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
+Executing shell scripts in the NeSI environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previously explained script as below to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
 
-
-
-#### pggb_slurm_1K96_4Sim.sh
+The following is a SLURM script (`pggb_4Sim.sl`) for 3 PGGB runs with different settings
 
 !!! terminal "code"
 
     ```bash
-    #!/bin/bash
-    
-    #SBATCH --account       ga03793
-    #SBATCH --job-name      4Sim_1K96
-    #SBATCH --cpus-per-task 8
-    #SBATCH --mem           4G
+    #!/bin/bash -e     
+    #SBATCH --account       nesi02659
+    #SBATCH --job-name      pggb_4Sim
+    #SBATCH --cpus-per-task 16
+    #SBATCH --mem           16G
     #SBATCH --time          1:00:00
+    #SBATCH --error         %x_%j.err
+    #SBATCH --output        %x_%j.out
     
+    # Modules
     module purge
-    module load pggb/0.5.3-Miniconda3
+    module load pggb/0.5.3-Miniconda3    
     
+    # Variables
+    WD=~/pg_workshop #Working Directory
+    data=${WD}/4Sim.fa  
     
-    WD=/home/zyang/pg_workshop #Working Directory
-    data=/home/zyang/pg_workshop/4Sim.fa
-    output=/home/zyang/pg_workshop
-    
-    
-    pggb -i $data -s 1000 -p 96 -n 4 -t 24 -S -m -o $output/4Sim_1K96 -V 'NC_017518:#'   
+    # Run PGGB
+    # 1K96
+    pggb -i $data -s 1000 -p 96 -n 4 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/4Sim_1K96 -V 'NC_017518:#'
+    # 10K96
+    pggb -i $data -s 10000 -p 96 -n 4 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/4Sim_10K96 -V 'NC_017518:#'
+    # 10K96_K79
+    pggb -i $data -s 1000 -p 96 -n 4 -K 79 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/4Sim_1K96_K79 -V 'NC_017518:#'
     ```
-The job can be submitted using the `sbatch` command it will show a job id.
 
+The job can be submitted using the `sbatch` command as follows. Take note of the job ID for tracking the run.
 
+!!! terminal "code"
+
+    ```bash
+    sbatch pggb_4Sim.sl
+    ```
+
+<!--
 #### pggb_slurm_10K96_4Sim.sh
 
 !!! terminal "code"
@@ -286,6 +315,7 @@ The job can be submitted using the `sbatch` command it will show a job id.
     
     pggb -i $data -s 1000 -p 96 -n 4 -K 79 -t 24 -S -m -o $output/4Sim_1K96_K79 -V 'NC_017518:#'
     ```
+-->
 
 ### Evaluate Pangenome Graphs for 4Sim Genomes Constructed with Different Settings
 - We have employed three distinct settings to construct the pangenome graph of the 4Sim genomes. Which setting yielded the most optimal result? How can we determine this? 
@@ -321,7 +351,7 @@ The job can be submitted using the `sbatch` command it will show a job id.
 
 
 ### vg deconstruct graph to get the variations in vcf 
-
+<!-- 
 !!! terminal "code"
 
     ```bash
@@ -339,6 +369,57 @@ The job can be submitted using the `sbatch` command it will show a job id.
     vg deconstruct -p NC_017518  -a -e 4Sim_1K96.gfa >4Sim_1K96_aep1.vcf
     bcftools stats 4Sim_1K96_aep1.vcf >4Sim_1K96_aep1.vcf_stats
     ```
+-->
+
+Set up directory for VG and GFA files for each pangenome graph.
+
+!!! terminal "code"
+
+    ```bash
+    # Return to working directory
+    cd ~/pg_workshop
+
+    # Create VG directory
+    mkdir -p vg_deconstruct
+    ```
+
+Load the necessary modules for an example run.
+
+!!! terminal "code"
+
+    ```bash
+    module purge
+    module load vg/1.46.0
+    module load BCFtools/1.15.1-GCC-11.3.0
+    ```
+
+An example run to obtain VCF files from GFA.
+
+!!! terminal "code"
+
+    ```bash
+    vg deconstruct -p NC_017518 -a -e 4Sim_1K96/4Sim.fa.97e7156.417fcdf.7659dc8.smooth.final.gfa > 4Sim_1K96_aep1.vcf
+    bcftools stats 4Sim_1K96_aep1.vcf > 4Sim_1K96_aep1.vcf_stats
+    ```
+
+Iterate through all PGGB outputs using a loop.
+
+!!! terminal "code"
+
+    ```bash
+    for file in ~/pg_workshop/4Sim_*/*.gfa; do
+      # Obtain basename from directory name
+      name=$(basename $(dirname ${file}))
+      # Echo the basename
+      echo ${name}
+      # Run GFA to VCF conversion
+      vg deconstruct -p NC_017518 -a -e ${file} > vg_deconstruct/${name}_aep1.vcf
+      # Obtain stats
+      bcftools stats vg_deconstruct/${name}_aep1.vcf > vg_deconstruct/${name}_aep.vcf_stats
+    done
+    ```
+
+<!--
 
 #### 4Sim_vg_deconstruct.sh
 
@@ -371,8 +452,53 @@ The job can be submitted using the `sbatch` command it will show a job id.
     bcftools stats $output/${x}aep1.vcf >$output/${x}aep1.vcf_stats
     done
     ```
-#### bcftools isec to check the overlap of the 1k96 -K 19, 1k96, -K 79
+-->
 
+#### Use `bcftools isec` to check the overlap of the 1k96 -K 19, 1k96, -K 79
+
+Index the VCF files:
+
+!!! terminal "code"
+
+    ```bash
+    for file in vg_deconstruct/*_aep1.vcf; do
+      bcftools view ${file} -Oz =o ${file}.gz
+      bcftools index ${file}.gz
+    done
+    ```
+
+Compare 1K96 vs. 1K96_K79:
+
+!!! terminal "code"
+
+    ```bash
+    bcftools isec \
+      vg_deconstruct/4Sim_1K96_aep1.vcf.gz \
+      vg_deconstruct/4Sim_1K96_K79_aep1.vcf.gz \
+      -p vg_deconstruct/isec_4Sim_1K96
+    ```
+
+??? note "Compare all VCF files against each other"
+
+    ```bash
+    # Create an array of indexed VCF files
+    vcf_gz=(vg_deconstruct/*_aep1.vcf.gz)
+
+    # Iterate combinations
+    for (( i=0; i<${#vcf_gz[@]}; i++ )); do
+        for (( j=i+1; j<${#vcf_gz[@]}; j++ )); do
+            file1=${vcf_gz[$i]}
+            file2=${vcf_gz[$j]}
+
+            name1=$(basename ${file1} _aep1.vcf.gz)
+            name2=$(basename ${file2} _aep1.vcf.gz)
+
+            bcftools isec ${file1} ${file2} -p isec.${name1}.${name2}
+      done
+    done
+    ```
+
+<!--
 !!! terminal "code"
 
     ```bash
@@ -399,15 +525,17 @@ The job can be submitted using the `sbatch` command it will show a job id.
     
     bcftools isec $output_folder/4Sim_1K96aep1.vcf.gz $output_folder/4Sim_1K96_K79aep1.vcf.gz -p $output_folder/isec_4Sim_1K96
     ```
+-->
 !!! terminal "code"
 
     ```bash
     #specific to  1k96 -K 19
-    less -S /home/zyang/pg_workshop/vg_deconstruct/isec_4Sim_1K96/0000.vcf
+    less -S vg_deconstruct/isec_4Sim_1K96/0000.vcf
     #specific to  1k96 -K 79
-    less -S /home/zyang/pg_workshop/vg_deconstruct/isec_4Sim_1K96/0001.vcf
+    less -S vg_deconstruct/isec_4Sim_1K96/0001.vcf
     ```
-##### difference between 1k96 -K 19 Vs 1k96 -K 79
+
+##### Difference between 1k96 -K 19 Vs 1k96 -K 79
 ![difference between 1k96 -K 19 Vs 1k96 -K 79](theme_figures/4Sim1K96_K19vsK79_specific_variation.png)
 
 
@@ -498,8 +626,71 @@ This pangenome graph evaluation pipeline measures the reconstruction accuracy of
 
 !!! r-project "code"
 
+    Create a script named `list2dist_clustering.R` then paste the below into the script.
+
+    ```r
+    #!/usr/bin/env Rscript
+
+    # Packages
+    require(reshape)
+    require(ape)
+
+    # Read data
+    args <- commandArgs(trailingOnly = TRUE)
+
+    dat <- read.table(args[1], sep = "\t", header = TRUE)
+
+    # Recast data 
+    m <- cast(dat, group.a ~ group.b)
+
+    # Set row names
+    rownames(m) <- m[, 1]
+
+    # Remove first column
+    m <- m[, -1]
+
+    # Convert to matrix
+    m <- as.matrix(as.data.frame(m))
+
+    cat("\nRecast data to matrix\n")
+    print(m)
+
+    # Generate Euclidean distance matrix
+    d <- dist(m)
+
+    # Print distance matrix
+    cat("\nCalculate Euclidean distance\n")
+    print(d)
+
+    # Perform hierarchical clustering
+    h <- hclust(d)
+
+    # Convert dendrogram to phylogenetic tree
+    tree <- as.phylo(h)
+
+    # Write out tree
+    prefix <- sub("\\..*", "", args[1])
+    cat(paste0("\nWriting out tree: ", prefix, ".tree\n\n"))
+    write.tree(phy = tree, file = paste0(prefix, ".tree"))    
+    ```
+
+Run the R script on 4Sim 1k96:
+
+!!! terminal "code"
+
+    ```bash
+    # Make the script executable
+    chmod 755 list2dist_clustering.R
+
+    # Run the script
+    ./list2dist_clustering.R ~/pg_workshop/odgi_distance/4Sim_1K96.gfa_distance_cut
+    ```
+
+<!--
+!!! r-project "code"
 
     list2dist_clustering_4Sim.R
+
     ```bash
     setwd("/home/zyang/pg_workshop/odgi_distance")
     
@@ -557,6 +748,7 @@ This pangenome graph evaluation pipeline measures the reconstruction accuracy of
     
     Rscript 8_list2dist_clustering_4Sim.R
     ```
+-->
 
 ## Construct pangenome graph for the 3ST genomes
 ### prepare dataset and build index
@@ -594,7 +786,7 @@ This pangenome graph evaluation pipeline measures the reconstruction accuracy of
     ```bash
     module purge
     module load Mash/2.3-GCC-11.3.0
-    mash triangle 4Sim.fa >4Sim.fa_mash
+    mash triangle 3ST.fa >3ST.fa_mash
     ```
 !!! terminal "code"
 
@@ -610,7 +802,8 @@ This pangenome graph evaluation pipeline measures the reconstruction accuracy of
 
 ### check the Mauve aligment of 3ST
 Mauve alignments demonstrated large inversions among the 3ST genomes. 
-![Mauve alignment of the 3STs genomes](https://github.com/ZoeYang2020/Pangenome-Graphs-Workshop/blob/main/Figures/Fig.3ST_mauve%20alignment.png??raw=true])
+
+![Mauve alignment of the 3STs genomes](theme_figures/Fig.3ST_mauve%20alignment.png)
 
 ### pggb_slurm_2K95_3ST.sh, -k 2000, -p 95
 
