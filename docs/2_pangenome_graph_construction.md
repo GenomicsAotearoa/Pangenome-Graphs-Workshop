@@ -204,7 +204,7 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
      module purge
      module load pggb/0.5.3-Miniconda3
      
-     # Execute singularity exec ${container} pggb, set -s 1000
+     # Execute pggb, set -s 1000
      pggb -i 4Sim.fa -s 1000 -p 96 -n 4 -t 24 -S -m -o 4Sim_1K96 -V 'NC_017518:#'
      ```
 ### Executing `pggb` as a [SLURM](https://github.com/SchedMD/slurm) Job
@@ -446,15 +446,10 @@ This pangenome graph evaluation pipeline measures the reconstruction accuracy of
     output=/home/zyang/pg_workshop/4Sim_pgge
     beehave=/home/zyang/pg_workshop/beehave.R
     
-    
-    
-    
-    
-    
     for x in $inputGFA
     
     do
-    singularity exec ${container} pgge -g $x -f $inputfa -o $output -r $beehave -b $output/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
+    pgge -g $x -f $inputfa -o $output -r $beehave -b $output/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
     
     done
     ```

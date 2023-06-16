@@ -16,5 +16,5 @@ output=/home/zyang/pg_workshop/odgi_distance
 
 
 
-singularity exec ${container} odgi paths -i $data -d -D 'AAAA' >$output/4Sim_1K96.gfa_distance
+odgi paths -i $data -d -D 'AAAA' >$output/4Sim_1K96.gfa_distance
 cut -f 1,2,6 $output/4Sim_1K96.gfa_distance >$output/4Sim_1K96.gfa_distance_cut 

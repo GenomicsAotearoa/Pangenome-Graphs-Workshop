@@ -15,4 +15,4 @@ data=/home/zyang/pg_workshop/3ST.fa
 output=/home/zyang/pg_workshop
 
 
-singularity exec ${container} pggb -i $data -s 2000 -p 95 -n 3 -t 24 -S -m -o $output/3ST_2K95 -V 'NC_017518:#' 
+pggb -i $data -s 2000 -p 95 -n 3 -t 24 -S -m -o $output/3ST_2K95 -V 'NC_017518:#' 

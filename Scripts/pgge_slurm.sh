@@ -16,4 +16,4 @@ data=${WD}/4Sim.fa
  
 
 
-singularity exec ${container} pgge -g ${WD}/output/*.gfa -f $data -o pgge_output -r ${WD}/beehave.R -b pgge_output/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 8 
+pgge -g ${WD}/output/*.gfa -f $data -o pgge_output -r ${WD}/beehave.R -b pgge_output/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 8 

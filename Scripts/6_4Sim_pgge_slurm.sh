@@ -29,6 +29,6 @@ beehave=/home/zyang/pg_workshop/beehave.R
 for x in $inputGFA
 
 do
-singularity exec ${container} pgge -g $x -f $inputfa -o $output -r $beehave -b $output/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
+pgge -g $x -f $inputfa -o $output -r $beehave -b $output/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
 
 done
