@@ -486,7 +486,7 @@ The pangenome graph evaluation is a pipeline in the pangenome graphs, which meas
 <p>Following script (<a href="https://github.com/nuzla/Pangenome-Graphs-Workshop/blob/main/Scripts/pggb_test.sh">pggb_test.sh</a>) can be used to run <code>pggb</code> on the downloaded sequence. </p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="ch">#!/bin/bash</span>
 <a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
-<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1">#export container to a variable for convenience</span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1"></span>
 <a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="nv">WD</span><span class="o">=</span>/nesi/nobackup/nesi02659/pg_workshop<span class="w"> </span><span class="c1">#Working Directory</span>
 <a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="nv">container</span><span class="o">=</span>/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
 <a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="nv">data</span><span class="o">=</span><span class="si">${</span><span class="nv">WD</span><span class="si">}</span>/ASM19152v1_pgsim.fa
@@ -510,7 +510,7 @@ We get a graph in GFA (<em>.gfa) and odgi (</em>.og) formats. These can be used 
 <a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a>module<span class="w"> </span>purge
 <a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
 <a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a>
-<a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="c1">#export container to a variable for convenience</span>
+<a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="c1"></span>
 <a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="nv">WD</span><span class="o">=</span>/nesi/nobackup/nesi02659/pg_workshop<span class="w"> </span><span class="c1">#Working Directory</span>
 <a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="nv">container</span><span class="o">=</span>/nesi/project/nesi02659/software/pggb/pggb_0.5.3.simg
 <a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="nv">data</span><span class="o">=</span><span class="si">${</span><span class="nv">WD</span><span class="si">}</span>/ASM19152v1_pgsim.fa
@@ -824,7 +824,7 @@ Now execute the script [pgge_test.sh](https://github.com/nuzla/Pangenome-Graphs-
 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="ch">#!/bin/bash</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>module<span class="w"> </span>load<span class="w"> </span>Singularity
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="c1">#export container to a variable for convenience</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="c1"></span>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="nv">WD</span><span class="o">=</span>/nesi/nobackup/nesi02659/pg_workshop<span class="w"> </span><span class="c1">#Working Directory</span>
 <a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="nv">container</span><span class="o">=</span>/nesi/project/nesi02659/software/pgge/pgge_032023.simg
 <a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="nv">data</span><span class="o">=</span><span class="si">${</span><span class="nv">WD</span><span class="si">}</span>/4Sim.fa

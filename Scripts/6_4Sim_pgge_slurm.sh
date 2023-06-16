@@ -7,11 +7,11 @@
 #SBATCH --time          1:00:00
 
 module purge
-module load Singularity
 
-#export container to a variable for convenience
 
-container=/nesi/project/nesi02659/software/pgge/pgge_032023.simg
+
+
+
 
 
 WD=/home/zyang/pg_workshop/4Sim_pgge #Working Directory
@@ -22,13 +22,13 @@ output=/home/zyang/pg_workshop/4Sim_pgge
 beehave=/home/zyang/pg_workshop/beehave.R
 
 
-#Bind filesystem to container image
-export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
+
+
 
 
 for x in $inputGFA
 
 do
-singularity exec ${container} pgge -g $x -f $inputfa -o $output -r $beehave -b $output/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
+pgge -g $x -f $inputfa -o $output -r $beehave -b $output/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
 
 done

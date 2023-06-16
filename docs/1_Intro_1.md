@@ -131,7 +131,7 @@ Following script ([pggb_test.sh](https://github.com/nuzla/Pangenome-Graphs-Works
     
     module load pggb/0.5.3-Miniconda3
 
-    #export container to a variable for convenience
+    
     WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory
     
     data=${WD}/ASM19152v1_pgsim.fa
@@ -166,7 +166,7 @@ Executing shell scripts in the NeSI environment might not be the best way to han
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     WD=$PWD #Working Directory 
     data=${WD}/ASM19152v1_pgsim.fa    
     
@@ -538,13 +538,13 @@ Now execute the script [pgge_test.sh](https://github.com/nuzla/Pangenome-Graphs-
 
 ```bash
 #!/bin/bash
-module load Singularity
-#export container to a variable for convenience
+
+
 WD=/nesi/nobackup/nesi02659/pg_workshop #Working Directory
-container=/nesi/project/nesi02659/software/pgge/pgge_032023.simg
+
 data=${WD}/4Sim.fa
 
-singularity exec ${container} pgge -g ${WD}/output/*.gfa -f $data -o pgge -r ${WD}/beehave.R -b pgge/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
+pgge -g ${WD}/output/*.gfa -f $data -o pgge -r ${WD}/beehave.R -b pgge/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
 ```
 _Please explain the options_
 

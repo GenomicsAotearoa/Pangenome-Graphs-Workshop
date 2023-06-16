@@ -204,7 +204,7 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
      module purge
      module load pggb/0.5.3-Miniconda3
      
-     # Execute singularity exec ${container} pggb, set -s 1000
+     # Execute pggb, set -s 1000
      pggb -i 4Sim.fa -s 1000 -p 96 -n 4 -t 24 -S -m -o 4Sim_1K96 -V 'NC_017518:#'
      ```
 ### Executing `pggb` as a [SLURM](https://github.com/SchedMD/slurm) Job
@@ -228,7 +228,7 @@ Executing shell scripts in the Nesi environment might not be the best way to han
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     WD=/home/zyang/pg_workshop #Working Directory
     data=/home/zyang/pg_workshop/4Sim.fa
     output=/home/zyang/pg_workshop
@@ -255,7 +255,7 @@ The job can be submitted using the `sbatch` command it will show a job id.
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     WD=/home/zyang/pg_workshop #Working Directory
     data=/home/zyang/pg_workshop/4Sim.fa
     output=/home/zyang/pg_workshop
@@ -278,7 +278,7 @@ The job can be submitted using the `sbatch` command it will show a job id.
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     WD=/home/zyang/pg_workshop #Working Directory
     data=/home/zyang/pg_workshop/4Sim.fa
     output=/home/zyang/pg_workshop
@@ -437,12 +437,7 @@ This pangenome graph evaluation pipeline measures the reconstruction accuracy of
     #SBATCH --time          1:00:00
     
     module purge
-    module load Singularity
-    
-    #export container to a variable for convenience
-    
-    container=/nesi/project/nesi02659/software/pgge/pgge_032023.simg
-    
+    module load pgge/2021-Miniconda3   
     
     WD=/home/zyang/pg_workshop/4Sim_pgge #Working Directory
     inputGFA=/home/zyang/pg_workshop/4Sim_pgge/*.gfa
@@ -451,15 +446,10 @@ This pangenome graph evaluation pipeline measures the reconstruction accuracy of
     output=/home/zyang/pg_workshop/4Sim_pgge
     beehave=/home/zyang/pg_workshop/beehave.R
     
-    
-    #Bind filesystem to container image
-    export SINGULARITY_BIND="${WD}, /nesi/project/nesi02659/"
-    
-    
     for x in $inputGFA
     
     do
-    singularity exec ${container} pgge -g $x -f $inputfa -o $output -r $beehave -b $output/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
+    pgge -g $x -f $inputfa -o $output -r $beehave -b $output/pgge_4Sim_peanut_bed -l 100000 -s 5000 -t 16
     
     done
     ```
@@ -498,7 +488,7 @@ This pangenome graph evaluation pipeline measures the reconstruction accuracy of
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     data=/home/zyang/pg_workshop/odgi_distance/4Sim_1K96.gfa
     output=/home/zyang/pg_workshop/odgi_distance
     
@@ -639,7 +629,7 @@ Mauve alignments demonstrated large inversions among the 3ST genomes.
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     data=/home/zyang/pg_workshop/3ST.fa
     output=/home/zyang/pg_workshop
     
@@ -763,7 +753,7 @@ Mauve alignments demonstrated large inversions among the 3ST genomes.
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     WD=/home/zyang/pg_workshop #Working Directory
     data=/home/zyang/pg_workshop/24NM.fa
     output=/home/zyang/pg_workshop
@@ -787,7 +777,7 @@ Mauve alignments demonstrated large inversions among the 3ST genomes.
     module purge
     module load pggb/0.5.3-Miniconda3
     
-    #export container to a variable for convenience
+    
     WD=/home/zyang/pg_workshop #Working Directory
     data=/home/zyang/pg_workshop/24NM.fa
     output=/home/zyang/pg_workshop
