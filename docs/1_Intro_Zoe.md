@@ -134,8 +134,7 @@ Lastly, the VG toolkit is harnessed for NGS data analysis against the graph, whi
 Participants will learn about pangenome concepts and gain practical experience building and analyzing pangenome graphs. They will apply these methods to complex research questions that require understanding the relationships between multiple genomes or accounting for variability when analyzing new genomes. By the end of the course, participants will have a strong understanding of pangenome methods based on whole genome assemblies.
 
 1. Develop scripts within a specific work directory in the Nesi environment.
-2. Downloading and preparing sequencing data (in fasta format). 
-3. Construct graphs using the PanGenome Graph Builder (PGGB) (https://github.com/pangenome/pggb)
-4. Manipulate graphs using the Optimized Dynamic Genome/Graph Implementation (ODGI)(https://github.com/pangenome/odgi)
-5. variant calling for Next-Generation Sequencing (NGS) data using the VG toolkit(https://github.com/vgteam/vg)
+2. Construct graphs using the PanGenome Graph Builder (PGGB) (https://github.com/pangenome/pggb)
+3. Manipulate graphs using the Optimized Dynamic Genome/Graph Implementation (ODGI)(https://github.com/pangenome/odgi)
+4. variant calling for Next-Generation Sequencing (NGS) data using the VG toolkit(https://github.com/vgteam/vg)
 
