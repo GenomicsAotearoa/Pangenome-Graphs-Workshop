@@ -1,8 +1,5 @@
 # 2. Tools & setup
 
-## Tools used in this pipeline
-
-
 !!! screwdriver-wrench "Tools used for the pangenome graph pipeline"
 
     - Graph construction using the PanGenome Graph Builder (PGGB) (https://github.com/pangenome/pggb)
@@ -18,9 +15,8 @@
     - simuG (https://github.com/yjx1217/simuG)
     - PGGE (https://github.com/pangenome/pgge)
 
-!!! info ""
+!!! info "Running the pggb pipeline on NeSI"
 
-    ## Running on NeSI
     PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed on NeSI as modules. We need to load each module first. 
     ```bash
     module load pggb
@@ -30,10 +26,12 @@
     ......
     ```
 
-??? info "Running locally"
+??? info "Running the pggb workflow locally"
 
+    ### Obtaining pggb
     From https://github.com/pangenome/pggb, you can find the details about installing pggb with Docker, Singularity, bioconda, guix, or by manually building its dependencies.
-    ### Singularity
+    
+    ### Uisng pggb via Singularity
     Many managed HPCs utilize Singularity as a secure alternative to docker. Fortunately, docker images can be run through Singularity seamlessly.
     First pull the docker file and create a Singularity SIF image from the dockerfile. This might take a few minutes.
     ```bash
