@@ -50,8 +50,18 @@ singularity run -B ${PWD}/data:/data ../pggb_latest.sif pggb -i /data/HLA/DRB1-3
 
 # Data
 For this workshop, we utilized the genomes of the bacterium Neisseria meningitidis as a representative example.
-Neisseria (N.) meningitidis, also known as the meningococcus pathogen, is the primary agent responsible for invasive meningococcal diseases such as meningitis and septicemia, causing isolated incidents, outbreaks, and epidemics worldwide. The genome of this bacterium spans approximately 2.1 to 2.4 Mb and possesses a GC content ranging from 51-52%. One striking characteristic of N. meningitidis genomes is their high recombination rate, which largely fuels the extensive genetic diversity within this species. In this workshop, we utilized genome assemblies of N. meningitidis to assess the pangenome pipeline, covering pangenome graph construction to variant calling. 
+Neisseria (N.) meningitidis, also known as the meningococcus pathogen, is the primary agent responsible for invasive meningococcal diseases such as meningitis and septicemia, causing isolated incidents, outbreaks, and epidemics worldwide. The genome of this bacterium spans approximately 2.1 to 2.4 Mb and possesses a GC content ranging from 51-52%. One striking characteristic of N. meningitidis genomes is their high recombination rate, which largely fuels the extensive genetic diversity within this species. In this workshop, we utilized five genome assemblies of N. meningitidis to assess the pangenome pipeline, covering pangenome graph construction to variant calling. 
+>ASM19152v1
+>
 
+
+## 
+Download the genomes assemblies from the site Genome assembly ASM19152v1 and get the file ncbi_dataset/data/GCF_000191525.1/GCF_000191525.1_ASM19152v1_genomic.fna from he zip file GCF_000191525.1.zip. Rename it as "ref.fa" to refere easily in next steps.
+In Unix environment you can use curl.
+
+```bash
+curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000191525.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000191525.1.zip" -H "Accept: application/zip"
+```
 
 ## Setting up your project directory
 
