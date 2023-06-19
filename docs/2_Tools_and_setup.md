@@ -19,13 +19,18 @@
     - PGGE (https://github.com/pangenome/pgge)
 
 ## Running on NeSi
+PGGB,ODGi,VG, circulator,Mash, SAMTools et.al. have been installed on Nesi as modules. We need to load each module first. 
+```bash
+module load pggb
+module load  SAMtools
 
+```
 ## Running locally
 
 # Data
 ## Setting up your project directory
 
-```bash
+
 # Create a new directory in somewhere and change to that directory
 mkdir pg_workshop
 cd pg_workshop
