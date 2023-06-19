@@ -1,4 +1,4 @@
-![image](https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop/assets/67666551/42d5d793-1303-4280-a8ec-751d2ca40df6)# Tool & setup
+# Tool & setup
 
 ## Tools used in this pipeline
 
