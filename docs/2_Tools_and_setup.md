@@ -1,4 +1,4 @@
-# Tool & setup
+# 2. Tools & setup
 
 ## Tools used in this pipeline
 
