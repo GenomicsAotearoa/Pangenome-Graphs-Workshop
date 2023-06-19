@@ -19,7 +19,7 @@
     - PGGE (https://github.com/pangenome/pgge)
 
 ## Running on NeSi
-PGGB,ODGi,VG, circulator,Mash, SAMTools et.al. have been installed on Nesi as modules. We need to load each module first. 
+PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed on Nesi as modules. We need to load each module first. 
 ```bash
 module load pggb
 module load SAMtools
