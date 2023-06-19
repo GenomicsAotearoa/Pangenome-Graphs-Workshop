@@ -51,13 +51,7 @@ singularity run -B ${PWD}/data:/data ../pggb_latest.sif pggb -i /data/HLA/DRB1-3
 # Data
 For this workshop, we utilized the genomes of the bacterium Neisseria meningitidis as a representative example.
 Neisseria (N.) meningitidis, also known as the meningococcus pathogen, is the primary agent responsible for invasive meningococcal diseases such as meningitis and septicemia, causing isolated incidents, outbreaks, and epidemics worldwide. The genome of this bacterium spans approximately 2.1 to 2.4 Mb and possesses a GC content ranging from 51-52%. One striking characteristic of N. meningitidis genomes is their high recombination rate, which largely fuels the extensive genetic diversity within this species. In this workshop, we utilized five genome assemblies of N. meningitidis to assess the pangenome pipeline, covering pangenome graph construction to variant calling. 
-Neisseria meningitidis ID	SEROGROUP	ctrA	PorA	FetA	PorB	fHbp	NHBA	NadA	BAST	abcZ	adk 	aroE	fumC	gdh	pdhC	pgm	Sequence type	Clonal Complex
->NC_017518.1 Neisseria meningitidis NZ-05/33, complete sequence	B	ctrA	7-2,4	F1-5	NEIS2020_42	14	2	0	223	10	6	9	5	9	6	9	42	ST-41/44
->NC_003112.2 Neisseria meningitidis MC58, complete sequence	-	ctrA	7,16-2	F1-5	NEIS2020_10	1	3	1	23	4	10	5	4	5	3	2	74	ST-32
->NZ_CP007668.1 Neisseria meningitidis M0579 chromosome, complete genome	B	ctrA	5,2/5,2	F1-5	NEIS2020_40	20	2	0	-	12	6	9	9	9	6	9	-	ST-41/44
->NZ_CP016680.1 Neisseria meningitidis strain M22822 chromosome, complete genome	W	ctrA	5-1,2-36	F5-1	NEIS2020_234	22	9	new	-	179	7	4	56	26	18	8	2881	ST-175
->NZ_CP016880.1 Neisseria meningitidis strain M07165 chromosome	W	ctrA	5,2	-	NEIS2020_1321-like	348	29	6	-	2	3	4	3	8	4	6	11	ST-11
->NZ_CP020423.2 Neisseria meningitidis strain FDAARGOS_212 chromosome, complete genome	C	ctrA	5-1,10-4	F4-1	NEIS2020_1	23	20	0	-	20	3	6	3	8	11	2	-	ST16521
+
 ![image](https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop/assets/67666551/61442bd4-f9ba-422e-ae12-bdc0ff84b6b0)
 
 
