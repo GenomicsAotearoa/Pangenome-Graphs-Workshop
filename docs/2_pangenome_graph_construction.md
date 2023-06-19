@@ -29,10 +29,38 @@ NeSI HPC environment is used for the analysis. Please make sure to have a NeSI a
 
 ### Setting up your project directory and download the datasets
 
+As part of the workshop, the relevant working directory `pg_workshop/` and datasets have already been set up for you. These should be accessible to you from your home directory and should resemble the following structure:
+
+```bash
+/nesi/home/USER_ID
+|-- pg_workshop
+    |-- dataset_for_pg_workshop
+        |-- 12_genomes_for_NGS_simulation
+        |   |-- NC_017518_6k.fa
+        |   |-- NC_017518.fa
+        |   |-- ST154_6k.fa
+        |   |-- ST154.fa
+        |   |-- ST154Sim_6k.fa
+        |   |-- ST154Sim.fa
+        |   |-- ST41_6k.fa
+        |   |-- ST41.fa
+        |   |-- ST41Sim_6k.fa
+        |   |-- ST41Sim.fa
+        |   |-- ST42Sim_6k.fa
+        |   |-- ST42Sim.fa
+        |-- datasets_for_PangenomeGraphConstruction_pg_workshop
+            |-- 24NM.fa.gz
+            |-- 3ST.fa
+            |-- 4Sim.fa
+```
+
+If you are running this outside of the workshop, please follow the instructions below as part of the set up.
+
 !!! terminal "code"
 
     ```bash
-    # Create a new directory in somewhere and change to that directory
+    # We assume that you are in your home directory
+    # Create a new directory and then change into that directory
     mkdir pg_workshop
     cd pg_workshop
     # Keep a note of the absolute path of your directory
@@ -160,35 +188,38 @@ Create an index for the sequence using SAMtools and check.
 
 ### Key parameters for executing [PGGB](https://github.com/pangenome/pggb)
 
-The overall structure of pggb's output graph is defined by three parameters: genome number (-n), segment length (-s), and pairwise identity (-p). 
+The overall structure of pggb's output graph is defined by three parameters: genome number (`-n`), segment length (`-s`), and pairwise identity (`-p`). 
 
-Genome number (-n) is a given, but varies in ways that are difficult to infer and is thus left up to the user. Segment length defines the seed length used by the "MashMap3" homology mapper in wfmash. 
+Genome number (`-n`) is a given, but varies in ways that are difficult to infer and is thus left up to the user. Segment length (`-s`) defines the seed length used by the "MashMap3" homology mapper in wfmash. 
 
-The pairwise identity (-p) is the minimum allowed pairwise identity between seeds, which is estimated using a mash-type approximation based on k-mer Jaccard. Mappings are initiated from collinear chains of around 5 seeds (-l, --block-length), and extended greedily as far as possible, allowing up to -n minus 1 mappings at each query position.
+The pairwise identity (`-p`) is the minimum allowed pairwise identity between seeds, which is estimated using a mash-type approximation based on k-mer Jaccard. Mappings are initiated from collinear chains of around 5 seeds (`-l`, `--block-length`), and extended greedily as far as possible, allowing up to `-n` minus 1 mappings at each query position.
 
-An additional parameter, -k, can also greatly affect graph structure by pruning matches shorter than a given threshold from the initial graph model. In effect, -k N removes any match shorter than Nbp from the initial alignment. This filter removes potentially ambiguous pairwise alignments from consideration in establishing the initial scaffold of the graph.
+An additional parameter, `-k`, can also greatly affect graph structure by pruning matches shorter than a given threshold from the initial graph model. In effect, `-k N` removes any match shorter than Nbp from the initial alignment. This filter removes potentially ambiguous pairwise alignments from consideration in establishing the initial scaffold of the graph.
 
-The initial graph is defined by parameters to wfmash and seqwish. But due to the ambiguities generated across the many pairwise alignments we use as input, this graph can be locally very complex. To regularize it we orchestrate a series of graph transformations. First, with smoothxg, we "smooth" it by locally realigning sequences to each other with a traditional multiple sequence alignment (we specifically apply POA). This process repeats multiple times to smooth over any boundary effects that may occur due to binning errors near MSA boundaries. Finally, we apply gfaffix to remove forks where both alternatives have the same sequence.
+The initial graph is defined by parameters to wfmash and seqwish. However, due to the ambiguities generated across the many pairwise alignments we use as input, this graph can be locally very complex. To regularize it we orchestrate a series of graph transformations. First, with smoothxg, we "smooth" it by locally realigning sequences to each other with a traditional multiple sequence alignment (we specifically apply POA). This process repeats multiple times to smooth over any boundary effects that may occur due to binning errors near MSA boundaries. Finally, we apply gfaffix to remove forks where both alternatives have the same sequence.
 
 ### Examples of key parameters for executing PGGB
-- Human, whole genome, 90 haplotypes: pggb -p 98 -s 50k -n 90 -k 79 ...
-- 15 helicobacter genomes, 5% divergence: pggb -n 15 -k 79, and 15 at higher (10%) divergence pggb -n 15 -k 19 -P asm20 ...
+
+- Human, whole genome, 90 haplotypes: `pggb -p 98 -s 50k -n 90 -k 79 ...`
+- 15 helicobacter genomes, 5% divergence: `pggb -n 15 -k 79`, and 15 at higher (10%) divergence `pggb -n 15 -k 19 -P asm20 ...`
 - Yeast genomes, 5% divergence: pggb's defaults should work well, just set -n.
-- Aligning 9 MHC class II assemblies from vertebrate genomes (5-10% divergence): pggb -n 9 -k 29 ...
-- A few thousand bacterial genomes pggb -x auto -n 2146 .... In general mapping sparsification (-x auto) is a good idea when you have many hundreds to thousands of genomes.
-- pggb defaults to using the number of threads as logical processors on the system (the thread count given by getconf _NPROCESSORS_ONLN). Use -t to set an appropriate level of parallelism if you can't use all the processors on your system.
+- Aligning 9 MHC class II assemblies from vertebrate genomes (5-10% divergence): `pggb -n 9 -k 29 ...`
+- A few thousand bacterial genomes `pggb -x auto -n 2146 ....` In general mapping sparsification (`-x auto`) is a good idea when you have many hundreds to thousands of genomes.
+- pggb defaults to using the number of threads as logical processors on the system (the thread count given by `getconf _NPROCESSORS_ONLN`). Use `-t` to set an appropriate level of parallelism if you can't use all the processors on your system.
 
 
 ### Other parameters for executing PGGB
--S generate statistics of the seqwish and smoothxg graph
+`-S` generate statistics of the seqwish and smoothxg graph
 
--m generate MultiQC report of graphs' statistics and visualizations, automatically runs odgi stats
+`-m` generate MultiQC report of graphs' statistics and visualizations, automatically runs odgi stats
 
--V specify a set of VCFs to produce with SPEC = REF:DELIM[:LEN][,REF:DELIM:[LEN]]* the paths matching ^REF are used as a reference, while the sample haplotype are derived from path names, e.g. when DELIM=# and with '-V chm13:#', a path named HG002#1#ctg would be assigned to sample HG002 phase 1. If LEN is specified and greater than 0, the VCFs are decomposed, filtering sites whose max allele length is greater than LEN. [default: off]
+`-V` specify a set of VCFs to produce with SPEC = `REF:DELIM[:LEN][,REF:DELIM:[LEN]]*` the paths matching ^REF are used as a reference, while the sample haplotype are derived from path names, e.g. when `DELIM=#` and with `-V chm13:#`, a path named `HG002#1#ctg` would be assigned to sample HG002 phase 1. If LEN is specified and greater than 0, the VCFs are decomposed, filtering sites whose max allele length is greater than LEN. [default: off]
 
--o, --output-dir PATH       output directory
+`-o, --output-dir PATH` output directory
 
-### Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p 
+### Check pairwise identity of input genomes
+
+Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set `s`.
 
 !!! terminal "code"
 
@@ -213,11 +244,12 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
         ```
 
 
-### Construct pangenome graph for 4Sim genomes with -k 1000, -p 96
+### Construct pangenome graph for 4Sim genomes with `-s 1000`, `-p 96`
 
 !!! terminal "code"
 
      ```bash
+     # Load module
      module purge
      module load pggb/0.5.3-Miniconda3
      
@@ -225,7 +257,7 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
      pggb -i 4Sim.fa -s 1000 -p 96 -n 4 -t 24 -S -m -o 4Sim_1K96 -V 'NC_017518:#'
      ```
 
-### Executing `pggb` as a [SLURM](https://github.com/SchedMD/slurm) Job
+### Executing pggb as a [SLURM](https://github.com/SchedMD/slurm) job
 Executing shell scripts in the NeSI environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previously explained script as below to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
 
 The following is a SLURM script (`pggb_4Sim.sl`) for 3 PGGB runs with different settings
@@ -320,7 +352,7 @@ The job can be submitted using the `sbatch` command as follows. Take note of the
 ### Evaluate Pangenome Graphs for 4Sim Genomes Constructed with Different Settings
 - We have employed three distinct settings to construct the pangenome graph of the 4Sim genomes. Which setting yielded the most optimal result? How can we determine this? 
 
-- download the multiqc.html file, check the Detailed ODGI stats table.
+- Download the multiqc.html file, check the Detailed ODGI stats table.
 #### 1k96
 | Sample Name                         | Length    | Nodes  | Edges  | Components | A   |C    |T    |G    |N   |
 |:-----                               |----------:|-------:|-------:|-----------:|----:|----:|----:|----:|----:|
@@ -347,10 +379,10 @@ The job can be submitted using the `sbatch` command as follows. Take note of the
 |seqwish	|2340700	|22166	|29759	|4	|1	|566559	|594741	|571836	|607564	|0|
 |smooth	|2319601	|29888	|40070	|4	|1	|566755	|599287	|562078	|591481	|0|
 
-![10k96 ODGI 1D visualization by path orientation](theme_figures/4Sim.fa.e7f7fe6.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png])
+![10k96 ODGI 1D visualization by path orientation](theme_figures/4Sim.fa.e7f7fe6.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png)
 
 
-### vg deconstruct graph to get the variations in vcf 
+### `vg deconstruct` graph to get the variations in vcf 
 <!-- 
 !!! terminal "code"
 
@@ -454,9 +486,11 @@ Iterate through all PGGB outputs using a loop.
     ```
 -->
 
-#### Use `bcftools isec` to check the overlap of the 1k96 -K 19, 1k96, -K 79
+#### Use `bcftools isec` to check the overlaps
 
-Index the VCF files:
+Here, we will compare variant calling between 1K96 with different k-mer sizes for mapping: `-K 19` (default) and `-K 79`.
+
+Firstly, index the VCF files:
 
 !!! terminal "code"
 
@@ -535,8 +569,9 @@ Compare 1K96 vs. 1K96_K79:
     less -S vg_deconstruct/isec_4Sim_1K96/0001.vcf
     ```
 
-##### Difference between 1k96 -K 19 Vs 1k96 -K 79
-![difference between 1k96 -K 19 Vs 1k96 -K 79](theme_figures/4Sim1K96_K19vsK79_specific_variation.png)
+!!! success "Difference between 1k96 -K 19 Vs 1k96 -K 79"
+    
+    ![difference between 1k96 -K 19 Vs 1k96 -K 79](theme_figures/4Sim1K96_K19vsK79_specific_variation.png)
 
 
 ### PGGE 
@@ -622,11 +657,12 @@ This pangenome graph evaluation pipeline measures the reconstruction accuracy of
     odgi paths -i $data -d -D 'AAAA' >$output/4Sim_1K96.gfa_distance
     cut -f 1,2,6 $output/4Sim_1K96.gfa_distance >$output/4Sim_1K96.gfa_distance_cut
     ```
+
 ### R script for clustering based on distance among paths of a graph, 4Sim 1k96
 
 !!! r-project "code"
 
-    Create a script named `list2dist_clustering.R` then paste the below into the script.
+    Create a script named `list2dist_clustering.R` then paste the following into the script.
 
     ```r
     #!/usr/bin/env Rscript
