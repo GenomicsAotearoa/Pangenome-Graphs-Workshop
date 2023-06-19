@@ -1,4 +1,4 @@
-# Tool & setup
+![image](https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop/assets/67666551/42d5d793-1303-4280-a8ec-751d2ca40df6)# Tool & setup
 
 ## Tools used in this pipeline
 
@@ -51,16 +51,31 @@ singularity run -B ${PWD}/data:/data ../pggb_latest.sif pggb -i /data/HLA/DRB1-3
 # Data
 For this workshop, we utilized the genomes of the bacterium Neisseria meningitidis as a representative example.
 Neisseria (N.) meningitidis, also known as the meningococcus pathogen, is the primary agent responsible for invasive meningococcal diseases such as meningitis and septicemia, causing isolated incidents, outbreaks, and epidemics worldwide. The genome of this bacterium spans approximately 2.1 to 2.4 Mb and possesses a GC content ranging from 51-52%. One striking characteristic of N. meningitidis genomes is their high recombination rate, which largely fuels the extensive genetic diversity within this species. In this workshop, we utilized five genome assemblies of N. meningitidis to assess the pangenome pipeline, covering pangenome graph construction to variant calling. 
->ASM19152v1
->
-
+>NC_017518.1 Neisseria meningitidis NZ-05/33, complete sequence, ASM19152v1,
+>NZ_CP007668.1 Neisseria meningitidis M0579 chromosome, complete genome, ASM102983v1
+>NZ_CP016680.1 Neisseria meningitidis strain M22822 chromosome, complete genome, ASM169802v1
+>NZ_CP016880.1 Neisseria meningitidis strain M07165 chromosome, ASM170367v1
+>NZ_CP020423.2 Neisseria meningitidis strain FDAARGOS_212 chromosome, complete genome,ASM207367v2
+>NC_003112.2 Neisseria meningitidis MC58, complete sequence, ASM880v1
 
 ## 
 Download the genomes assemblies from the site Genome assembly ASM19152v1 and get the file ncbi_dataset/data/GCF_000191525.1/GCF_000191525.1_ASM19152v1_genomic.fna from he zip file GCF_000191525.1.zip. Rename it as "ref.fa" to refere easily in next steps.
 In Unix environment you can use curl.
 
 ```bash
+#NC_017518.1
 curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000191525.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000191525.1.zip" -H "Accept: application/zip"
+
+curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_001029835.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_001029835.1.zip" -H "Accept: application/zip"
+
+curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_001698025.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_001698025.1.zip" -H "Accept: application/zip"
+
+curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_001703675.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_001703675.1.zip" -H "Accept: application/zip"
+
+curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_001703675.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_001703675.1.zip" -H "Accept: application/zip"
+
+curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_002073675.2/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_002073675.2.zip" -H "Accept: application/zip"
+
 ```
 
 ## Setting up your project directory
