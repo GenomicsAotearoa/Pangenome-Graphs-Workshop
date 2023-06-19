@@ -18,8 +18,8 @@
     - simuG (https://github.com/yjx1217/simuG)
     - PGGE (https://github.com/pangenome/pgge)
 
-## Running on NeSi
-PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed on Nesi as modules. We need to load each module first. 
+## Running on NeSI
+PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed on NeSI as modules. We need to load each module first. 
 ```bash
 module load pggb
 module load SAMtools
