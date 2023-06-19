@@ -1,6 +1,5 @@
-# NGS data analysis used graph as reference 
-
-In this workshop, we deploys the VG toolkit for NGS data analysis based on pangenome graph reference 
+# 7. Short reads
+NGS data analysis used graph as a reference 
 
 ## vg mapping preliminaries
 Although vg contains a number of tools for working with pangenome graphs, it is best-known for read mapping. This is ultimately what many of its users are interested in `vg` for. In fact, vg contains three mature short read mapping tools:
