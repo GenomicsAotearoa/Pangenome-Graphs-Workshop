@@ -59,7 +59,14 @@ Neisseria (N.) meningitidis, also known as the meningococcus pathogen, is the pr
  - >NC_003112.2 Neisseria meningitidis MC58, complete sequence, ASM880v1,GCF_000008805.1 
 ![image](https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop/assets/67666551/47e6195d-74ce-4f4f-ac75-40d46a7f4aff)
 
-
+| genomes                             | ASM IDs   |GCF IDs    | SEROGROUP  | Sequence type | Clonal Complex   |
+|:-----                               |----------:|----------:|-----------:|--------------:|-----------------:|
+|NC_017518.1 Neisseria meningitidis NZ-05/33	| ASM19152v1	|GCF_000191525.1	|B	|42	|ST-41/44	|
+|NC_003112.2 Neisseria meningitidis MC58    	| ASM880v1	|GCF_000008805.1 	|B	|42	|ST-41/44	|
+|NZ_CP007668.1 Neisseria meningitidis M0579  	| ASM102983v1|GCF_001029835.1		|B	|42	|ST-41/44	|
+|NZ_CP016680.1 Neisseria meningitidis strain M22822	| ASM169802v1 	|GCF_001698025.1	|B	|42	|ST-41/44	|
+|NZ_CP016880.1 Neisseria meningitidis strain M07165	| ASM170367v1	|GCF_001703675.1	|B	|42	|ST-41/44	|
+|NZ_CP020423.2 Neisseria meningitidis strain FDAARGOS_212	| ASM207367v2	|GCF_002073675.2	|B	|42	|ST-41/44	|
 
 ## 
 Download the genomes assemblies from NCBI, uncompress.
