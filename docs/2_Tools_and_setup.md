@@ -30,7 +30,7 @@ mkdir pg_workshop
 cd pg_workshop
 # Keep a note of the absolute path of your directory
 pwd
-/nesi/nobackup/nesi02659/pg_workshop
+/home/$youraccount/pg_workshop
 ```
 
 ## Preparing input data
