@@ -32,4 +32,4 @@ Participants will learn about pangenome concepts and gain practical experience b
 
 !!! quote-right "Acknowledgments"
 
-    Erik Garrison, Andrea Guarracino, Nuzla Ismail, Patrick J. Biggs, Una Ren, Michael A Black, and Joep de Ligt
+    Zoe Yang, Erik Garrison, Andrea Guarracino, Nuzla Ismail, Patrick J. Biggs, Una Ren, Michael A Black, and Joep de Ligt
