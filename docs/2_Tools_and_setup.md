@@ -29,6 +29,24 @@ module load Mash/2.3-GCC-11.3.0
 
 ```
 ## Running locally
+From https://github.com/pangenome/pggb, you can find the details about installing pggb with Docker, Singularity, bioconda, guix, or by manually building its dependencies.
+### Singularity
+Many managed HPCs utilize Singularity as a secure alternative to docker. Fortunately, docker images can be run through Singularity seamlessly.
+First pull the docker file and create a Singularity SIF image from the dockerfile. This might take a few minutes.
+```bash
+singularity pull docker://ghcr.io/pangenome/pggb:latest
+```
+Next clone the pggb repo and cd into it
+```bash
+git clone --recursive https://github.com/pangenome/pggb.git
+cd pggb
+```
+Finally, run pggb from the Singularity image. For Singularity to be able to read and write files to a directory on the host operating system, we need to 'bind' that directory using the -B option and pass the pggb command as an argument.
+```bash
+singularity run -B ${PWD}/data:/data ../pggb_latest.sif pggb -i /data/HLA/DRB1-3123.fa.gz -p 70 -s 3000 -G 2000 -n 10 -t 16 -v -V 'gi|568815561:#' -o /data/out -M -m
+```
+
+
 
 # Data
 ## Setting up your project directory
