@@ -55,15 +55,18 @@ Neisseria (N.) meningitidis, also known as the meningococcus pathogen, is the pr
 |NC_017518.1 Neisseria meningitidis NZ-05/33	| ASM19152v1	|GCF_000191525.1	|B	|42	|ST-41/44	|
 |NC_003112.2 Neisseria meningitidis MC58    	| ASM880v1	|GCF_000008805.1 	|-	|74	|ST-32	|
 |NZ_CP007668.1 Neisseria meningitidis M0579  	| ASM102983v1|GCF_001029835.1		|B	|-	|ST-41/44	|
-|NZ_CP016680.1 Neisseria meningitidis strain M22822	| ASM169802v1 	|GCF_001698025.1	|W	|2881	|ST-175	|
 |NZ_CP016880.1 Neisseria meningitidis strain M07165	| ASM170367v1	|GCF_001703675.1	|W	|11	|ST-11	|
 |NZ_CP020423.2 Neisseria meningitidis strain FDAARGOS_212	| ASM207367v2	|GCF_002073675.2	|C	|-	|ST16521	|
 
 
 # Create a new directory in somewhere and change to that directory
+```bash
 mkdir pg_workshop
 cd pg_workshop
+```
+
 # Keep a note of the absolute path of your directory
+```bash
 pwd
 /home/$youraccount/pg_workshop
 ```
@@ -77,8 +80,6 @@ In Unix environment you can use curl.
 curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000191525.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000191525.1.zip" -H "Accept: application/zip"
 
 curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_001029835.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_001029835.1.zip" -H "Accept: application/zip"
-
-curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_001698025.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_001698025.1.zip" -H "Accept: application/zip"
 
 curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_001703675.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_001703675.1.zip" -H "Accept: application/zip"
 
