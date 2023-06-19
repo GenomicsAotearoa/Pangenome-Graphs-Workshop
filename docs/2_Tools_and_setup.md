@@ -51,8 +51,14 @@ singularity run -B ${PWD}/data:/data ../pggb_latest.sif pggb -i /data/HLA/DRB1-3
 # Data
 For this workshop, we utilized the genomes of the bacterium Neisseria meningitidis as a representative example.
 Neisseria (N.) meningitidis, also known as the meningococcus pathogen, is the primary agent responsible for invasive meningococcal diseases such as meningitis and septicemia, causing isolated incidents, outbreaks, and epidemics worldwide. The genome of this bacterium spans approximately 2.1 to 2.4 Mb and possesses a GC content ranging from 51-52%. One striking characteristic of N. meningitidis genomes is their high recombination rate, which largely fuels the extensive genetic diversity within this species. In this workshop, we utilized five genome assemblies of N. meningitidis to assess the pangenome pipeline, covering pangenome graph construction to variant calling. 
+ - >NC_017518.1 Neisseria meningitidis NZ-05/33, complete sequence, ASM19152v1,GCF_000191525.1
+ - >NZ_CP007668.1 Neisseria meningitidis M0579 chromosome, complete genome, ASM102983v1,GCF_001029835.1
+ - >NZ_CP016680.1 Neisseria meningitidis strain M22822 chromosome, complete genome, ASM169802v1,GCF_001698025.1 
+ - >NZ_CP016880.1 Neisseria meningitidis strain M07165 chromosome, ASM170367v1,GCF_001703675.1
+ - >NZ_CP020423.2 Neisseria meningitidis strain FDAARGOS_212 chromosome, complete genome, ASM207367v2,GCF_002073675.2
+ - >NC_003112.2 Neisseria meningitidis MC58, complete sequence, ASM880v1,GCF_000008805.1 
+![image](https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop/assets/67666551/47e6195d-74ce-4f4f-ac75-40d46a7f4aff)
 
-![image](https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop/assets/67666551/61442bd4-f9ba-422e-ae12-bdc0ff84b6b0)
 
 
 ## 
