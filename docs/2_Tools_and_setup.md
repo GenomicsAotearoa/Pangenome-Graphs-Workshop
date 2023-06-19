@@ -77,7 +77,43 @@ curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GC
 
 curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_002073675.2/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_002073675.2.zip" -H "Accept: application/zip"
 
-curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000008805.1 /download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000008805.1.zip" -H "Accept: application/zip"
+curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000008805.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000008805.1.zip" -H "Accept: application/zip"
+```
+
+Use slurm job to extract the .fna genomes 
+```bash
+#!/usr/bin/bash
+
+#SBATCH --account       ga03793
+#SBATCH --job-name      extract_fna
+#SBATCH --cpus-per-task 8
+#SBATCH --mem           4G
+#SBATCH --time          1:00:00
+
+data=/home/zyang/pg_test/*.zip
+
+for f in $data
+
+do
+
+x=$(basename $f .zip)
+echo ${x}
+
+unzip $x.zip
+
+cp /home/zyang/pg_test/ncbi_dataset/data/${x}/*_genomic.fna /home/zyang/pg_test/
+
+rm -rf ncbi_dataset
+
+done
+```
+
+then rm the other files 
+```bash
+rm cds_from_genomic.fna
+rm *.zip
+rm README.md
+rm slurm*.out
 ```
 
 ## Setting up your project directory
