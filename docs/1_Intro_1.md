@@ -11,7 +11,7 @@ A pangenome graph is a graphical representation of the collective genomic inform
 ### Neisseria Genome Assembly
 <p align="justify">
 Neisseria is a genus of Gram-negative bacteria that are typically found in the mucous membranes and epithelial tissues of humans and animals. There are various species of Neisseria bacteria, some of which are harmless commensals, while others can cause diseases. Two well-known pathogenic species are Neisseria meningitidis, which can cause meningitis and septicemia, and Neisseria gonorrhoeae, which is the causative agent of the sexually transmitted infection gonorrhea. Other species of Neisseria are generally considered harmless and reside as commensals in the oral and/or nasopharynx of humans.
- </p>
+</p>
 
 ### PanGenome Graph Builder [(PGGB)](https://github.com/pangenome/pggb)
 <p align="justify">
@@ -53,7 +53,7 @@ These graphs offer a wide range of capabilities. Initially, we can generate seve
 The pangenome graph evaluation is a pipeline in the pangenome graphs, which measures the reconstruction accuracy of the graph. It helps find the best pangenome graph using input data and tasks.
 </p>
 
-#### Learning Objectives
+### Learning Objectives
 
 1. Creating scripts in specific work directory in the Nesi environment.
 2. Downloading and preparing sequencing data (in fasta format). 
@@ -76,8 +76,9 @@ pwd
 ### Genome Availability 
 The National Library of Medicine is the largest library focused on biomedicine worldwide, serving as the central hub for biomedical informatics and computational biology. It has many genome assembly data and [Genome assembly ASM19152v1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000191525.1/) will be used for this workshop. 
 
----
+
 # Procedure 
+
 ### 1. Downloading and preparing assembly data file 4Sim.fa
 
 Please follow the procedure described in this [page](./preparing_data_files.md)
@@ -144,12 +145,11 @@ In `pggb`, `-i` is for specifying the sequence file. `-s` specifies the segment 
 You can run run `pggb` without parameters to get information on the meaning of each parameter. Now take a look at the files in the `output/` directory.
 We get a graph in GFA (`*.gfa`) and odgi (`*.og`) formats. These can be used downstream in many methods, including those in `vg`, like `vg giraffe`. You can visualize the GFA format graph with BandageNG, and use odgi directly on the `*.gfa` or `*.og` output. 
 
----
+
 # Executing `pggb` as a [Slurm](https://github.com/SchedMD/slurm) Job
 
-Executing shell scripts in the NeSI environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previusely explained script as below ([pggb_slurm_1K95.sh](../Scripts/pggb_slurm_1K95.sh)) to run as Slurm job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
+Executing shell scripts in the NeSI environment might not be the best way to handle larger files which will require large memory, CPU power and time. We can modify the previous command and incorporate it as a script below to run as Slurm job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
 
-<!-- To be modified to module load pggb in near future -->
 !!! terminal "code"
 
     ```bash
@@ -225,7 +225,7 @@ Slurm will also create a output log file and we can monitor it realtime using  `
     [smoothxg::(1-3)::smooth_and_lace] applying local SPOA to 3862 blocks: 78.40% @ 5.77e+01/s elapsed: 00:00:00:52 remain: 00:00:00:14
     ```
 
-When the job is completed the `seff` command will show a summary report with below details. The job has used 785.61 MB memory and taken 7 minuted and 50 seconds to complete. 
+When the job is completed the `nn_seff` command will show a summary report with below details. The job has used 785.61 MB memory and taken 7 minuted and 50 seconds to complete. 
 
 !!! terminal "code"
 
@@ -247,7 +247,100 @@ When the job is completed the `seff` command will show a summary report with bel
     Mem Efficiency:  19.2%  785.61 MB of 4.00 GB
     ```
 
-Now we can try the same script by changing the `pggb` parameters `-s`, `-p` and `-k` and compare the results. <!-- Convert this script into an admonition --> Please refer [script folder](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Scripts) for scripts. 
+Now we can try the same script by changing the `pggb` parameters `-s`, `-p` and `-k` and compare the results. The script below is an example with a change in `-p`:
+
+!!! terminal "code"
+
+    ```bash
+    #!/bin/bash -e
+    #SBATCH --account       nesi02659
+    #SBATCH --job-name      NC_017518.1_1K98
+    #SBATCH --cpus-per-task 8 
+    #SBATCH --mem           4G
+    #SBATCH --time          20:00
+    #SBATCH --output        %x_%j.out
+    #SBATCH --error         %x_%j.err
+    
+    module purge
+    module load pggb/0.5.3-Miniconda3
+    
+    
+    WD=$PWD #Working Directory 
+    data=${WD}/ASM19152v1_pgsim.fa    
+    
+    pggb -i $data -s 1000 -p 98 -n 6 -k 79 -t 24 -S -m -o output_1K98 -V 'NC_017518.1:#'  
+    ```
+
+!!! tip "Testing multiple parameters"
+
+    If you are keen on testing multiple parameters for building pangenome graphs (or any other  processes), you can do that by converting the modified parameters into an array and then submit   them as an array job or as an iterable loop. Here are examples based on the above job scripts:
+
+    === "Array"
+
+        For an array job, you will need to know how many jobs you require *a priori*. Each element in `params_array` will spawn it's own job, allowing them to be run independently, in parallel.
+
+        !!! terminal "code"
+
+            ```bash
+            #!/bin/bash -e
+            #SBATCH --account       nesi02659
+            #SBATCH --job-name      PGGB_array
+            #SBATCH --cpus-per-task 8 
+            #SBATCH --mem           4G
+            #SBATCH --time          20:00
+            #SBATCH --output        %x_%A_%a.out
+            #SBATCH --error         %x_%A_%a.err
+            #SBATCH --array         0-1
+
+            # Modules
+            module purge
+            module load pggb/0.5.3-Miniconda3
+
+            # Variables
+            wkdir=~/pg_workshop
+            data=${wkdir}/ASM191152v1_pgsim.fa
+
+            # Array
+            params_array=("-p 95 -o output_1K95" "-p 98 -o output_1K98")
+            params=${params_array[$SLURM_ARRAY_TASK_ID]}
+
+            # Run
+            pggb -i ${data} -s 1000 -n 6 -k 79 -t 24 -S -m -V 'NC_017518.1:#' ${params}
+            ```
+
+    === "Loop"
+
+        In a loop, you can iterate through `params_array` and apply the parameters sequentially. This is all performed as one job.
+
+        !!! terminal "code"
+
+            ```bash
+            #!/bin/bash -e
+            #SBATCH --account       nesi02659
+            #SBATCH --job-name      PGGB_loop
+            #SBATCH --cpus-per-task 8 
+            #SBATCH --mem           4G
+            #SBATCH --time          40:00
+            #SBATCH --output        %x_%j.out
+            #SBATCH --error         %x_%j.err
+
+            # Modules
+            module purge
+            module load pggb/0.5.3-Miniconda3
+
+            # Variables
+            wkdir=~/pg_workshop
+            data=${wkdir}/ASM191152v1_pgsim.fa
+
+            # Array
+            params_array=("-p 95 -o output_1K95" "-p 98 -o output_1K98")
+
+            # Run iterations
+            for params in ${params_array[@]}; do
+              pggb -i ${data} -s 1000 -n 6 -k 79 -t 24 -S -m -V 'NC_017518.1:#' ${params}
+            done
+            ```
+
 
 ### Understanding odgi visualizations
 We obtain a series of diagnostic images that represent the pangenome alignment. These are created with odgi viz (1D matrix) and odgi layout with odgi draw (2D graph drawings). First, the 2D layout gives us a view of the total alignment. For small graphs, we can look at the version that shows where specific paths go (`*.draw_multiqc.png`): For larger ones, the `*.draw.png` result is usually more legible.
@@ -261,9 +354,8 @@ Another key parameter is -k, which affects the behaviour of `seqwish`. This filt
 ### Decreasing mapping segment length `-s` increases sensitivity
 By setting a lower mapping segment length, which affects the behaviour of the very first step in the pipeline, `wfmash`’s mapping step (itself based on a heavily modified version of MashMap). This defaults to `-s 5000`. We can use `-s 1000` to guarantee we pick up on smaller homology segments, leading to a more complete alignment.
 
----
 # MultiQC Report
-The script generated <!-- Not sure how to deal with this... But definitely doesn't need to be in here. Maybe as an admonition with the directory structure? -->[output](https://github.com/nuzla/Pangenome-Graphs-Workshop/tree/main/Output) directory consists of a comprehensive and interactive [MutltiQC Report](https://multiqc.info/) which will describe all. Open the file `multiqc_report.html` which is in the output folder from your browser.
+The script generated a directory which contains a comprehensive and interactive [MutltiQC Report](https://multiqc.info/) which will describe all. Open the file `multiqc_report.html` which is in the output folder from your browser.
 
 _Note: To download the output folder from the Nesi environment you can first zip it using the command `zip -r output.zip output`_
 
