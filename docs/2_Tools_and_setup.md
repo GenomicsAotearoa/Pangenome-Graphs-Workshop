@@ -60,8 +60,6 @@ Neisseria (N.) meningitidis, also known as the meningococcus pathogen, is the pr
 |NZ_CP020423.2 Neisseria meningitidis strain FDAARGOS_212	| ASM207367v2	|GCF_002073675.2	|C	|-	|ST16521	|
 
 
-## Setting up your project directory
-
 # Create a new directory in somewhere and change to that directory
 mkdir pg_workshop
 cd pg_workshop
