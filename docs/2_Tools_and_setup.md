@@ -26,8 +26,8 @@ module load SAMtools
 module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
 module load Mash/2.3-GCC-11.3.0
 ......
-
 ```
+
 ## Running locally
 From https://github.com/pangenome/pggb, you can find the details about installing pggb with Docker, Singularity, bioconda, guix, or by manually building its dependencies.
 ### Singularity
@@ -46,8 +46,6 @@ Finally, run pggb from the Singularity image. For Singularity to be able to read
 singularity run -B ${PWD}/data:/data ../pggb_latest.sif pggb -i /data/HLA/DRB1-3123.fa.gz -p 70 -s 3000 -G 2000 -n 10 -t 16 -v -V 'gi|568815561:#' -o /data/out -M -m
 ```
 
-
-
 # Data
 For this workshop, we utilized the genomes of the bacterium Neisseria meningitidis as a representative example.
 Neisseria (N.) meningitidis, also known as the meningococcus pathogen, is the primary agent responsible for invasive meningococcal diseases such as meningitis and septicemia, causing isolated incidents, outbreaks, and epidemics worldwide. The genome of this bacterium spans approximately 2.1 to 2.4 Mb and possesses a GC content ranging from 51-52%. One striking characteristic of N. meningitidis genomes is their high recombination rate, which largely fuels the extensive genetic diversity within this species. In this workshop, we utilized five genome assemblies of N. meningitidis to assess the pangenome pipeline, covering pangenome graph construction to variant calling. 
@@ -60,6 +58,17 @@ Neisseria (N.) meningitidis, also known as the meningococcus pathogen, is the pr
 |NZ_CP016680.1 Neisseria meningitidis strain M22822	| ASM169802v1 	|GCF_001698025.1	|W	|2881	|ST-175	|
 |NZ_CP016880.1 Neisseria meningitidis strain M07165	| ASM170367v1	|GCF_001703675.1	|W	|11	|ST-11	|
 |NZ_CP020423.2 Neisseria meningitidis strain FDAARGOS_212	| ASM207367v2	|GCF_002073675.2	|C	|-	|ST16521	|
+
+
+## Setting up your project directory
+
+# Create a new directory in somewhere and change to that directory
+mkdir pg_workshop
+cd pg_workshop
+# Keep a note of the absolute path of your directory
+pwd
+/home/$youraccount/pg_workshop
+```
 
 ## 
 Download the genomes assemblies from NCBI, uncompress.
