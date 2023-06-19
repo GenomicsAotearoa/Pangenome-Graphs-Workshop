@@ -23,6 +23,9 @@ PGGB,ODGi,VG, circulator,Mash, SAMTools et.al. have been installed on Nesi as mo
 ```bash
 module load pggb
 module load  SAMtools
+module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
+module load Mash/2.3-GCC-11.3.0
+......
 
 ```
 ## Running locally
