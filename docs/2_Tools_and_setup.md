@@ -11,7 +11,7 @@
     
     - Variant calling for Next-Generation Sequencing (NGS) data using the VG toolkit(https://github.com/vgteam/vg)
 
-    - Mash (https://sanger-pathogens.github.io/circlator/)
+    - circlator (https://sanger-pathogens.github.io/circlator/)
     - Mash (https://github.com/marbl/Mash)
     - SAMtools (https://github.com/samtools/samtools)
     - BCFtools (https://github.com/samtools/bcftools)
