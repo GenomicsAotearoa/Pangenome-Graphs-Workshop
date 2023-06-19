@@ -1,6 +1,5 @@
-# pangenome graph construction with PGGB
-
-In this workshop, we employes PanGenome Graph Builder (PGGB) to construction the pangenome graphs
+# 4. Running PGGB
+An indtroduction to pangenome graph construction with PGGB
 
 ## How does the pggb graph build work?
 
