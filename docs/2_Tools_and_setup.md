@@ -31,7 +31,7 @@
     ### Obtaining pggb
     From https://github.com/pangenome/pggb, you can find the details about installing pggb with Docker, Singularity, bioconda, guix, or by manually building its dependencies.
     
-    ### Uisng pggb via Singularity
+    ### Using pggb via Singularity
     Many managed HPCs utilize Singularity as a secure alternative to docker. Fortunately, docker images can be run through Singularity seamlessly.
     First pull the docker file and create a Singularity SIF image from the dockerfile. This might take a few minutes.
     ```bash
