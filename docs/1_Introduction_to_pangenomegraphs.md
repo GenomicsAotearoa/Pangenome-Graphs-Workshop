@@ -1,4 +1,4 @@
-# Overview of pangenome graphs 
+# 1. Overview of pangenome graphs 
 <p align="justify">
 A pangenome is defined as the comprehensive collection of whole-genome sequences from multiple individuals within a clade, a population or a species. This collective genomic dataset can be further divided into two distinct components: the core genome, which includes genes present in all individuals at the time of analysis, and the accessory genome, consisting of genes found only in a subset of individuals (Figure 1A). 
  
