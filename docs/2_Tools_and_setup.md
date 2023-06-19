@@ -30,9 +30,8 @@
     ......
     ```
 
-!!! info ""
+??? info "Running locally"
 
-    ## Running locally
     From https://github.com/pangenome/pggb, you can find the details about installing pggb with Docker, Singularity, bioconda, guix, or by manually building its dependencies.
     ### Singularity
     Many managed HPCs utilize Singularity as a secure alternative to docker. Fortunately, docker images can be run through Singularity seamlessly.
