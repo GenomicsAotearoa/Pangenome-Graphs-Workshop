@@ -62,109 +62,73 @@
 |NZ_CP016880.1 Neisseria meningitidis strain M07165	| ASM170367v1	|GCF_001703675.1	|W	|11	|ST-11	|
 |NZ_CP020423.2 Neisseria meningitidis strain FDAARGOS_212	| ASM207367v2	|GCF_002073675.2	|C	|-	|ST16521	|
 
+??? info "How the *Neisseria meningitidis* genomes were formatted for this workshop"
 
-# Create a new directory in somewhere and change to that directory
-```bash
-mkdir pg_workshop
-cd pg_workshop
-```
+    The following code DOES NOT need to be run, but is provided here to show how the *Neisseria meningitidis* genomes
+    were downloaded and prepared for analysis.
+    
+    ```bash
+    # Create a new directory called nm_genomes and change to that directory
+    mkdir nm_genomes
+    cd nm_genomes
+    ```
+    
+    Download the genome assemblies from NCBI and uncompress.  In the Unix environment you can use the `curl` command.
 
-# Keep a note of the absolute path of your directory
-```bash
-pwd
-/home/$youraccount/pg_workshop
-```
+    ```bash
+    #NC_017518.1
+    curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000191525.1    /download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000191525.1.zip" -H "Accept: application/zip"
 
-## 
-Download the genomes assemblies from NCBI, uncompress.
-In Unix environment you can use curl.
+    # ACC NUM?
+    curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_001029835.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_001029835.1.zip" -H "Accept: application/zip"
 
-```bash
-#NC_017518.1
-curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000191525.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000191525.1.zip" -H "Accept: application/zip"
+    # ACC NUM?
+    curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_001703675.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_001703675.1.zip" -H "Accept: application/zip"
 
-curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_001029835.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_001029835.1.zip" -H "Accept: application/zip"
+    # ACC NUM?
+    curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_002073675.2/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_002073675.2.zip" -H "Accept: application/zip"
 
-curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_001703675.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_001703675.1.zip" -H "Accept: application/zip"
+    # ACC NUM?
+    curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000008805.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000008805.1.zip" -H "Accept: application/zip"
+    ```
 
-curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_002073675.2/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_002073675.2.zip" -H "Accept: application/zip"
+    On NeSI, a slurm job can be run to process the .fna genomes.  The contents of the slurm job file are as follows: 
 
-curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000008805.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000008805.1.zip" -H "Accept: application/zip"
-```
+    ```bash
+    #!/usr/bin/bash
 
-Use slurm job to extract the .fna genomes 
-```bash
-#!/usr/bin/bash
+    #SBATCH --account       nesi02659
+    #SBATCH --job-name      extract_fna
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
 
-#SBATCH --account       ga03793
-#SBATCH --job-name      extract_fna
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
+    data=$HOME/nm_genomes/*.zip
 
-data=/home/zyang/pg_test/*.zip
+    for f in $data
 
-for f in $data
+    do
 
-do
+        x=$(basename $f .zip)
+        echo ${x}
 
-x=$(basename $f .zip)
-echo ${x}
+        unzip $x.zip
 
-unzip $x.zip
+        cp $HOME/nm_genomes/ncbi_dataset/data/${x}/*_genomic.fna /home/zyang/pg_test/
 
-cp /home/zyang/pg_test/ncbi_dataset/data/${x}/*_genomic.fna /home/zyang/pg_test/
+        rm -rf ncbi_dataset
 
-rm -rf ncbi_dataset
+    done
+    ```
 
-done
-```
-
-then rm the other files 
-```bash
-rm cds_from_genomic.fna
-rm *.zip
-rm README.md
-rm slurm*.out
-```
-
-quiz? Can we cat the graph and start pangenome graph construction now? what potiential issues could be? 
-We need to check whether all the genomes are with the same start, if not, it will cause unwanted complexsity for the pangenome graph. 
-```bash
-head -10 *.fna >>head10_check
-less -S head10_check
-```
-let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minite for each sample. 
-```bash
-#!/usr/bin/bash
-
-#SBATCH --account       ga03793
-#SBATCH --job-name      restart_fna
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
-
-
-module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
-
-
-cd /home/zyang/pg_test
-data=/home/zyang/pg_test/*.fna
-
-for f in $data
-do
-
-x=$(basename $f .fna)
-echo ${x}
-
-circlator fixstart  ${x}.fna  ${x}.restart
-
-done
-```
-
-
-
-
+    Then remove the other files:
+    
+    ```bash
+    rm cds_from_genomic.fna
+    rm *.zip
+    rm README.md
+    rm slurm*.out
+    ```
 
 ## Setting up your project directory
 
