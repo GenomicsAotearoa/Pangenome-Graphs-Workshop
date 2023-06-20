@@ -1,4 +1,4 @@
-# 3. PGGB Introduction
+# 3. PGGB overview
 
 A pangenome variation graph is a kind of generic multiple sequence alignment. It lets us understand any kind of sequence variation between a collection of genomes. It shows us similarity where genomes walk through the same parts of the graph, and differences where they do not.
     
@@ -8,7 +8,7 @@ PGGB builds pangenome graphs from a set of input sequences unbiasly. The main no
 This graph can be used to study genetic diversity, gene function, and evolution. PGGB is designed to be scalable and efficient, making it suitable for large-scale genomic analyses. It is an open-source tool that can be used freely by researchers in the field of genomics.
 </p>
 
-### How does the PGGB  work?
+### How does PGGB work?
 
 PGGB generates graphs using an all-to-all alignment of input sequences (wfmash), graph induction (seqwish), and progressive normalization (smoothxg, gfaffix). After construction, PGGB generates diagnostic visualizations of the graph (odgi). A variant call report (in VCF) representing both small and large variants can be generated based on any reference genome included in the graph (vg). PGGB writes its output in GFAv1 format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits.-Scale Graph Construction: The PGGB algorithm is designed to handle large-scale genomes and can efficiently construct genome graphs containing extensive genetic variations.
 
@@ -33,7 +33,7 @@ The normalization process in PGGB involves several steps, which may vary dependi
 
 To normalize the graph and harmonize the allele representation we use `smoothxg` to apply a local MSA <!-- define: Multiple sequence alignment? --> across all parts of the graph.
 
-### key parameters
+### Key parameters
 
 https://github.com/pangenome/pggb
 The overall structure of PGGB's output graph is defined by three parameters: genome number (-n), segment length (-s), and pairwise identity (-p). 
