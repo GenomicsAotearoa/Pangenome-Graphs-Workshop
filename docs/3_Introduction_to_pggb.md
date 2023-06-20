@@ -34,10 +34,6 @@ To normalize the graph and harmonize the allele representation we use `smoothxg`
 ### Downstream
 These graphs offer a wide range of capabilities. Initially, we can generate several diagnostic visualizations derived from the graphs, providing a user-friendly way to comprehend the alignments at a broader level. Additionally, using the `PGGB` tool, we can generate variant calls by leveraging `vg deconstruct`. The graphs produced by `PGGB` serve as reference systems for aligning short reads through `vg giraffe` or long reads through `GraphAligner`. Furthermore, `odgi` allows us to utilize the graphs as reference systems to elucidate homology relationships across entire genomes.
 
-### PanGenome Graph Evaluator [(PGGE)](https://github.com/pangenome/pgge)
-<p align="justify">
-The pangenome graph evaluation is a pipeline in the pangenome graphs, which measures the reconstruction accuracy of the graph. It helps find the best pangenome graph using input data and tasks.
-</p>
 
 
 ### Learning objectives

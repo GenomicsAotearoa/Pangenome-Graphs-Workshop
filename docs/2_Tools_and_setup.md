@@ -92,7 +92,8 @@
     curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000008805.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000008805.1.zip" -H "Accept: application/zip"
     ```
 
-    On NeSI, a slurm job can be run to process the .fna genomes.  The contents of the slurm job file are as follows: 
+    On NeSI, a slurm job can be run to process the .fna genomes.  The contents of the slurm job file (`unzip_genomes.sl`) 
+    are as follows: 
 
     ```bash
     #!/usr/bin/bash
@@ -114,14 +115,20 @@
 
         unzip $x.zip
 
-        cp $HOME/nm_genomes/ncbi_dataset/data/${x}/*_genomic.fna /home/zyang/pg_test/
+        cp $HOME/nm_genomes/ncbi_dataset/data/${x}/*_genomic.fna /$HOME/nm_genomes/
 
         rm -rf ncbi_dataset
 
     done
     ```
 
-    Then remove the other files:
+    The slurm job can be run via:
+
+    ```
+    sbatch unzip_genomes.sl
+    ```
+
+    Remove unneeded files:
     
     ```bash
     rm cds_from_genomic.fna
@@ -130,61 +137,9 @@
     rm slurm*.out
     ```
 
-## Setting up your project directory
-
-
-# Create a new directory in somewhere and change to that directory
-mkdir pg_workshop
-cd pg_workshop
-# Keep a note of the absolute path of your directory
-pwd
-/home/$youraccount/pg_workshop
-```
-
-## Preparing input data
-
-### Genome Availability 
-The National Library of Medicine is the largest library focused on biomedicine worldwide, serving as the central hub for biomedical informatics and computational biology. It has many genome assembly data and [Genome assembly ASM19152v1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000191525.1/) will be used for this workshop. 
-
----
-# Procedure 
-### 1. Downloading and preparing assembly data file 4Sim.fa
-
-Please follow the procedure described in this [page](./preparing_data_files.md)
-
-### 2. Creating an index for the sequence file and check
-
-!!! terminal "code"
-
-    ```bash
-    # Use SAMtools to create the index file
-    # In NeSI environment you will have to load the command first
-    
-    module load SAMtools
-    
-    samtools faidx ASM19152v1_pgsim.fa 
-    
-    cat ASM19152v1_pgsim.fa.fai
-    ```
-
-!!! success "Output"
+    Use the `cat` command to combine genomes into a single fasta file:
 
     ```
-    NC_017518.1     2248966 64      80      81
-    NC_017518.1_SNP_5000    2248966 2277165 2248966 2248967
-    NC_017518.1_INDEL_5000  2249048 4526156 2249048 2249049
-    NC_017518.1_SNP_4000_INDEL_4000 2242147 6775238 2242147 2242148
-    NC_017518.1_SNP_4000_INDEL_4000_INV_4   2242147 9017425 2242147 2242148
-    NC_017518.1_SNP_4000_INDEL_4000_CNV_4   2415498 11259612        2415498 2415499
+    cat *_genomic.fna > 5NM.fa
     ```
-    
-As per the index this assembly consists of 6 samples described in the below table. 
 
-| Name                                | Length    | SNPs   | INDELs | INV | CNV |
-|:-----                               |----------:|-------:|-------:|----:|----:|
-|NC_017518.1 (Reference)              | 2,248,966 |     N/A|     N/A| N/A |  N/A|
-|NC_017518.1_SNP_5000                 | 2,248,966 |   5,000|       0|   0 |   0 |
-|NC_017518.1_INDEL_5000               | 2,249,048 |       0|   5,000|   0 |   0 |
-|NC_017518.1_SNP_4000_INDEL_4000      | 2,153,883 |   4,000|   4,000|   0 |   0 |
-|NC_017518.1_SNP_4000_INDEL_4000_INV_4| 2,242,147 |   4,000|   4,000|   4 |   0 |
-|NC_017518.1_SNP_4000_INDEL_4000_CNV_4| 2,415,498 |   4,000|   4,000|   0 |   4 |
