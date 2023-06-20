@@ -57,7 +57,7 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
 - pggb defaults to using the number of threads as logical processors on the system (the thread count given by getconf _NPROCESSORS_ONLN). Use -t to set an appropriate level of parallelism if you can't use all the processors on your system.
 
 
-### other parameters for executing PGGB
+### Other parameters for executing PGGB
 -S generate statistics of the seqwish and smoothxg graph
 
 -m generate MultiQC report of graphs' statistics and visualizations, automatically runs odgi stats
