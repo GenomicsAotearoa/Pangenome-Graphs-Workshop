@@ -8,7 +8,7 @@
     
     - Variant calling for Next-Generation Sequencing (NGS) data using the VG toolkit(https://github.com/vgteam/vg)
 
-    - circlator (https://sanger-pathogens.github.io/circlator/)
+    - Circlator (https://sanger-pathogens.github.io/circlator/)
     - Mash (https://github.com/marbl/Mash)
     - SAMtools (https://github.com/samtools/samtools)
     - BCFtools (https://github.com/samtools/bcftools)
@@ -51,8 +51,8 @@
 
     ### *Neisseria meningitidis* data set
     
-    For this workshop, we utilized the genomes of the bacterium Neisseria meningitidis as a representative example.
-    Neisseria (N.) meningitidis, also known as the meningococcus pathogen, is the primary agent responsible for invasive meningococcal diseases such as meningitis and septicemia, causing isolated incidents, outbreaks, and epidemics worldwide. The genome of this bacterium spans approximately 2.1 to 2.4 Mb and possesses a GC content ranging from 51-52%. One striking characteristic of N. meningitidis genomes is their high recombination rate, which largely fuels the extensive genetic diversity     within this species. In this workshop, we utilized five genome assemblies of N. meningitidis to assess the pangenome pipeline, covering pangenome graph construction to variant calling. 
+    For this workshop, we utilized the genomes of the bacterium _Neisseria meningitidis_ as a representative example.
+    _Neisseria (N.) meningitidis_, also known as the meningococcus pathogen, is the primary agent responsible for invasive meningococcal diseases such as meningitis and septicemia, causing isolated incidents, outbreaks, and epidemics worldwide. The genome of this bacterium spans approximately 2.1 to 2.4 Mb and possesses a GC content ranging from 51-52%. One striking characteristic of _N. meningitidis_ genomes is their high recombination rate, which largely fuels the extensive genetic diversity     within this species. In this workshop, we utilized five genome assemblies of _N. meningitidis_ to assess the pangenome pipeline, covering pangenome graph construction to variant calling. 
 
 | genomes                             | ASM IDs   |GCF IDs    | SEROGROUP  | Sequence type | Clonal Complex   |
 |:-----                               |----------:|----------:|-----------:|--------------:|-----------------:|
