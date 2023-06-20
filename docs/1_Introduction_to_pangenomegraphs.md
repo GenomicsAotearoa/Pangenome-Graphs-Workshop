@@ -15,13 +15,14 @@ Pangenome graphs are pangenomes stored in graph models that can capture the enti
 - Can represent inversions 
 
 
-#### **Paths are walk through the nodes of the graph** 
+#### **Paths** 
+- Paths are routes through the nodes of the graph
 - Genomes
 - Haplotypes
 - Alleles/variants 
 
 <p align="justify">
-This pipeline for pangenome graph comprises three key stages: graph construction using PGGB, graph manipulation via ODGI, and variant calling for Next-Generation Sequencing (NGS) data utilizing the VG toolkit, as shown in Figure 1C.
+This pipeline for pangenome graphs comprises three key stages: graph construction using `PGGB`, graph manipulation via `ODGI`, and variant calling for Next-Generation Sequencing (NGS) data utilizing the VG toolkit, as shown in Figure 1C.
 
 The PGGB pipeline, which operates without a reference method, builds pangenome graphs using an all-to-all whole genome alignment approach with `wfmash`. Subsequent graph induction is accomplished through `seqwish`, followed by progressive normalization implemented with `smoothxg` and `gfaffix`.
 
