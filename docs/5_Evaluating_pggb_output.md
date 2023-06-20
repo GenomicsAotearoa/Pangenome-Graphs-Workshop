@@ -1,4 +1,20 @@
 # 5. Evaluating output
+
+![ODGI Compressed 1D visualization](theme_figures/ODGI-Compressed-1D.png)
+
+![ODGI 1D visualization](theme_figures/ODGI-1D.png)
+
+![ODGI 1D visualization by path position](theme_figures/ODGI-Path-Position-1D.png)
+
+![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D.png)
+
+![ODGI 1D visualization by node depth](theme_figures/ODGI-Node-Depth-1D.png)
+
+![ODGI 1D visualization by uncalled bases](theme_figures/ODGI-Uncalled-1D.png)
+
+![ODGI 2D drawing](theme_figures/ODGI-2D.png)
+
+
 ### Evaluate Pangenome Graphs for 4Sim Genomes Constructed with Different Settings
 - We have employed three distinct settings to construct the pangenome graph of the 4Sim genomes. Which setting yielded the most optimal result? How can we determine this? 
 
