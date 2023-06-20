@@ -24,7 +24,7 @@ Participants will learn about pangenome concepts and gain practical experience b
     |[1. Intro](./1_Introduction_to_pangenomegraphs.md){ .md-button .md-button--primary }|Introduction to pangenome graphs| 45 min |
     |Break||10 min|
     |[2. Setup](./2_Tools_and_setup.md){ .md-button .md-button--primary }|Setup instructions for the tools and data used in this course | 30 min |
-    |[3. PGGB](./3_Introduction_to_pggb.md){ .md-button .md-button--primary }|Introduction the the PGGB toolkit and it's logic| 30 min |
+    |[3. PGGB](./3_Introduction_to_pggb.md){ .md-button .md-button--primary }|Introduction to the PGGB toolkit and its logic| 30 min |
     |Break||10 min|
     |[4. Running](./4_Running_pggb.md){ .md-button .md-button--primary }|Running the command to construct a graph and discuss key parameters| 45 min |
     |Lunch||45 min|
