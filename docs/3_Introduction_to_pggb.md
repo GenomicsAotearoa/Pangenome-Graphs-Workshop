@@ -1,11 +1,15 @@
 # 3. PGGB Introduction
 ## PanGenome Graph Builder [(PGGB)](https://github.com/pangenome/pggb)
 <p align="justify">
-To investigate and analyse Neisseria Bacteria the PanGenome Graph Builder has been used. PanGenome Graph Builder (PGGB) is a computational tool used in genomics research to construct pan-genome graphs from large sets of genomic data. A pan-genome is the collection of all the genes and non-coding sequences present in a species or a group of related organisms. PGGB constructs a pan-genome graph, which is a data structure that represents the entire set of genes and genetic variations in a population. This graph can be used to study genetic diversity, gene function, and evolution. PGGB is designed to be scalable and efficient, making it suitable for large-scale genomic analyses. It is an open-source tool that can be used freely by researchers in the field of genomics.
+A pangenome variation graph is a kind of generic multiple sequence alignment. It lets us understand any kind of sequence variation between a collection of genomes. It shows us similarity where genomes walk through the same parts of the graph, and differences where they do not.
+    
+PanGenome Graph Builder (PGGB) constructs a pan-genome graph, which is a data structure that represents the entire set of genes and genetic variations in a population.
+PGGB builds pangenome graphs from a set of input sequences unbiasly. The main novelty of PGGB is not simply the reference independence, but moreover its ability to capture all parts of input genomes losslessly. 
+
+This graph can be used to study genetic diversity, gene function, and evolution. PGGB is designed to be scalable and efficient, making it suitable for large-scale genomic analyses. It is an open-source tool that can be used freely by researchers in the field of genomics.
 </p>
 
-### How does the pggb graph builder work?
-The pggb algorithm facilitates the construction of these graphs by progressively integrating genetic variants into a reference genome.
+### How does the pggb  work?
 The key features and purpose of the PGGB include:  
 1.	Progressive Approach: The PGGB algorithm follows a step-by-step approach, iteratively adding genetic variants to the graph one at a time.  
 2.	Variant Integration: The tool efficiently integrates genetic variants, including single nucleotide variations (SNVs), insertions, deletions, and larger structural variations, into the graph representation.  
