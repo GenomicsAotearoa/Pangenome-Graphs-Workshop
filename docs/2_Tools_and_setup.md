@@ -2,11 +2,11 @@
 
 !!! screwdriver-wrench "Tools used for the pangenome graph pipeline"
 
-    - Graph construction using the PanGenome Graph Builder (PGGB) (https://github.com/pangenome/pggb)
+    - PanGenome Graph Builder (PGGB) (https://github.com/pangenome/pggb) for graph construction 
     
-    - Graph manipulation through the Optimized Dynamic Genome/Graph Implementation (ODGI)(https://github.com/pangenome/odgi)
+    - the Optimized Dynamic Genome/Graph Implementation (ODGI)(https://github.com/pangenome/odgi) for graph manipulation
     
-    - Variant calling for Next-Generation Sequencing (NGS) data using the VG toolkit(https://github.com/vgteam/vg)
+    - the VG toolkit(https://github.com/vgteam/vg) for variant calling
 
     - Circlator (https://sanger-pathogens.github.io/circlator/)
     - Mash (https://github.com/marbl/Mash)
