@@ -165,5 +165,5 @@
     git clone https://github.com/ZoeYang2020/dataset_for_pg_workshop
     
     # Copy the 5NM.fa dataset to your work directory
-    cp dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/5NM.fa ./
+    cp /home/<YOUR_USER_ID>/datasets_for_PangenomeGraphConstruction_pg_workshop/5NM.fa ./
     ```
