@@ -38,3 +38,12 @@ These graphs offer a wide range of capabilities. Initially, we can generate seve
 <p align="justify">
 The pangenome graph evaluation is a pipeline in the pangenome graphs, which measures the reconstruction accuracy of the graph. It helps find the best pangenome graph using input data and tasks.
 </p>
+
+
+### Learning objectives
+
+!!! quote ""
+
+    - understand what PGGB is and what steps it takes to build a graph
+    - understand the steps in PGGB normilation
+    - be aware of PGGE as a way to evaluate pangenome graph quality
