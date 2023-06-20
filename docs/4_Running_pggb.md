@@ -158,8 +158,8 @@ Inspect the index.
      module purge
      module load pggb/0.5.3-Miniconda3
      
-     # Execute pggb, set -s 1000
-     pggb -i 5NM.fa -s 1000 -p 96 -n 4 -t 24 -S -m -o 5NM_1K96 -V 'NC_017518:#'
+     # Execute pggb, set -s 1000 and -p p6
+     pggb -i 5NM.fa -s 2000 -p 96 -n 4 -t 24 -S -m -o 5NM_1K96 -V 'NC_017518.1:#'
      ```
 
 <hr>
