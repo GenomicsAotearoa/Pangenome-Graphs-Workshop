@@ -21,7 +21,9 @@ Create an index for the sequence using SAMtools and check.
     samtools faidx 5NM.fa
     ```
 
-    Inspect the index.
+Inspect the index.
+
+!!! terminal "code"
 
     ```bash
     less -S 5NM.fa.fai
@@ -37,7 +39,7 @@ Create an index for the sequence using SAMtools and check.
         NZ_CP020423.2   2244886   9166836   80      81
         ```
 
-### Executing `pggb` tool
+### Executing `pggb` 
 
 !!! terminal "code"
 
@@ -120,7 +122,7 @@ Create an index for the sequence using SAMtools and check.
 
 ## Running PGGB
 
-### Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p 
+### Use `mash triangle` to check the pairwise identity of the input genomes, which will give us some idea how to set -p 
 
 !!! terminal "code"
 
@@ -148,7 +150,7 @@ Create an index for the sequence using SAMtools and check.
 
 <b> NEEDS EXPLANATION OF OUTPUT </b>
 
-### Construct pangenome graph for 5NM genomes with -k 1000, -p 96
+### Construct pangenome graph for 5NM genomes with `-k 1000, -p 96`
 
 !!! terminal "code"
 
