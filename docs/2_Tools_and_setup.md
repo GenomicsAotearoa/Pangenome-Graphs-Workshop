@@ -92,7 +92,8 @@
     curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000008805.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000008805.1.zip" -H "Accept: application/zip"
     ```
 
-    On NeSI, a slurm job can be run to process the .fna genomes.  The contents of the slurm job file are as follows: 
+    On NeSI, a slurm job can be run to process the .fna genomes.  The contents of the slurm job file (`unzip_genomes.sl`) 
+    are as follows: 
 
     ```bash
     #!/usr/bin/bash
@@ -121,7 +122,13 @@
     done
     ```
 
-    Then remove the other files:
+    The slurm job can be run via:
+
+    ```
+    sbatch unzip_genomes.sl
+    ```
+
+    Remove unneeded files:
     
     ```bash
     rm cds_from_genomic.fna
@@ -130,7 +137,7 @@
     rm slurm*.out
     ```
 
-    Use the cat command to combine genomes into a single fasta file
+    Use the `cat` command to combine genomes into a single fasta file:
 
     ```
     cat *_genomic.fna > 5NM.fa
