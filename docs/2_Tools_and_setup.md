@@ -143,3 +143,27 @@
     cat *_genomic.fna > 5NM.fa
     ```
 
+### Setting up your project directory and download the datasets
+
+!!! terminal "code"
+
+    ```bash
+    # Create a new directory in somewhere and change to that directory
+    mkdir pg_workshop
+    cd pg_workshop
+    # Keep a note of the absolute path of your directory
+    pwd
+    ```
+    !!! success "Output"
+
+        ```
+        /home/<YOUR_USER_ID>/pg_workshop
+        ```
+    
+    ```bash
+    # Downloading and preparing datasets
+    git clone https://github.com/ZoeYang2020/dataset_for_pg_workshop
+    
+    # Copy the 5NM.fa dataset to your work directory
+    cp dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/5NM.fa ./
+    ```
