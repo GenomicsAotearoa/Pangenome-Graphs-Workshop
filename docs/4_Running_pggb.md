@@ -47,11 +47,11 @@ NeSI HPC environment is used for the analysis. Please make sure to have a NeSI a
     # Downloading and preparing datasets
     git clone https://github.com/ZoeYang2020/dataset_for_pg_workshop
     
-    # copy the 4Sim.fa dataset to your work directory
-    cp dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/4Sim.fa ./
+    # copy the 5NM.fa dataset to your work directory
+    cp dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/5NM.fa ./
     ```
 
-## Construct pangenome graph for the 4Sim genomes
+## Construct pangenome graph for the five *Neisseria meningitidis* genomes
 
 Create an index for the sequence using SAMtools and check.
 
@@ -60,13 +60,13 @@ Create an index for the sequence using SAMtools and check.
     ```bash    
     module purge
     module load SAMtools/1.16.1-GCC-11.3.0
-    samtools faidx 4Sim.fa
+    samtools faidx 5NM.fa
     ```
 
     Inspect the index.
 
     ```bash
-    less -S 4Sim.fa.fai
+    less -S 5NM.fa.fai
     ```
 
     !!! success "Output"
