@@ -28,6 +28,8 @@
 
 ### ODGI 2D drawing
 
+<img src="theme_figures/ODGI-2D-5NM.png"  width="397" height="500">
+
 ![ODGI 2D drawing](theme_figures/ODGI-2D-5NM.png)
 
 
