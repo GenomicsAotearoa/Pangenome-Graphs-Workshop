@@ -189,12 +189,9 @@ The following is a SLURM script (`pggb_5NM.sl`) for 3 PGGB runs with different s
     data=${WD}/5NM.fa  
     
     # Run PGGB
-    # 1K96
-    pggb -i $data -s 1000 -p 96 -n 4 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/5NM_1K96 -V 'NC_017518:#'
-    # 10K96
-    pggb -i $data -s 10000 -p 96 -n 4 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/5NM_10K96 -V 'NC_017518:#'
-    # 10K96_K79
-    pggb -i $data -s 1000 -p 96 -n 4 -K 79 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/5NM_1K96_K79 -V 'NC_017518:#'
+    # 2K94
+    pggb -i $data -s 2000 -p 94 -n 4 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/5NM_1K96 -V 'NC_017518.1:#'
+    
     ```
 
 The job can be submitted using the `sbatch` command as follows. Take note of the job ID for tracking the run.
