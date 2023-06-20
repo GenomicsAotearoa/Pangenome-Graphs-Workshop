@@ -204,26 +204,27 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
     module purge
     module load Mash/2.3-GCC-11.3.0
 
-    mash triangle 4Sim.fa > 4Sim.fa_mash
+    mash triangle 5NM.fa > 5NM.fa_mash
     
     # Inspect the output
-    tail 4Sim.fa_mash
+    tail 5NM.fa_mash
     ```
 
     ??? success "Output"
 
         ```
-                4
-        NC_017518
-        ST41Sim 0.0010072
-        ST154Sim        0.00121124      0.000830728
-        ST42Sim 0.00251903      0.00366686      0.00375609
+                5
+        NC_003112.2
+        NC_017518.1     0.0152404
+        NZ_CP007668.1   0.0149234       0.00635099
+        NZ_CP016880.1   0.0178909       0.0171265       0.0170111
+        NZ_CP020423.2   0.0190552       0.0194352       0.0185579       0.0106974
         ```
 
 
 <b> NEEDS EXPLANATION OF OUTPUT </b>
 
-### Construct pangenome graph for 4Sim genomes with -k 1000, -p 96
+### Construct pangenome graph for 5NM genomes with -k 1000, -p 96
 
 !!! terminal "code"
 
@@ -232,7 +233,7 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
      module load pggb/0.5.3-Miniconda3
      
      # Execute pggb, set -s 1000
-     pggb -i 4Sim.fa -s 1000 -p 96 -n 4 -t 24 -S -m -o 4Sim_1K96 -V 'NC_017518:#'
+     pggb -i 5NM.fa -s 1000 -p 96 -n 4 -t 24 -S -m -o 5NM_1K96 -V 'NC_017518:#'
      ```
 
 <hr>
@@ -243,12 +244,12 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
 Executing shell scripts in the NeSI environment might not be the best way to handle larger files which will require large memory, CPU power and time. 
 We can modify the previously explained script as below to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
 
-The following is a SLURM script (`pggb_4Sim.sl`) for 3 PGGB runs with different settings
+The following is a SLURM script (`pggb_5NM.sl`) for 3 PGGB runs with different settings
 
     ```bash
     #!/bin/bash -e     
     #SBATCH --account       nesi02659
-    #SBATCH --job-name      pggb_4Sim
+    #SBATCH --job-name      pggb_5NM
     #SBATCH --cpus-per-task 16
     #SBATCH --mem           16G
     #SBATCH --time          1:00:00
@@ -261,19 +262,19 @@ The following is a SLURM script (`pggb_4Sim.sl`) for 3 PGGB runs with different 
     
     # Variables
     WD=~/pg_workshop #Working Directory
-    data=${WD}/4Sim.fa  
+    data=${WD}/5NM.fa  
     
     # Run PGGB
     # 1K96
-    pggb -i $data -s 1000 -p 96 -n 4 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/4Sim_1K96 -V 'NC_017518:#'
+    pggb -i $data -s 1000 -p 96 -n 4 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/5NM_1K96 -V 'NC_017518:#'
     # 10K96
-    pggb -i $data -s 10000 -p 96 -n 4 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/4Sim_10K96 -V 'NC_017518:#'
+    pggb -i $data -s 10000 -p 96 -n 4 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/5NM_10K96 -V 'NC_017518:#'
     # 10K96_K79
-    pggb -i $data -s 1000 -p 96 -n 4 -K 79 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/4Sim_1K96_K79 -V 'NC_017518:#'
+    pggb -i $data -s 1000 -p 96 -n 4 -K 79 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/5NM_1K96_K79 -V 'NC_017518:#'
     ```
 
 The job can be submitted using the `sbatch` command as follows. Take note of the job ID for tracking the run.
 
     ```bash
-    sbatch pggb_4Sim.sl
+    sbatch pggb_5NM.sl
     ```
