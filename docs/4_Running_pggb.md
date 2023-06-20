@@ -158,40 +158,6 @@ Create an index for the sequence using SAMtools and check.
         Use wfmash, seqwish, smoothxg, odgi, gfaffix, and vg to build, project and display a pangenome graph.
         ```
 
-### Key parameters for executing [PGGB](https://github.com/pangenome/pggb)
-
-The overall structure of PGGB's output graph is defined by three parameters: genome number (-n), segment length (-s), and pairwise identity (-p). 
-
-Genome number (-n) is a given, but varies in ways that are difficult to infer and is thus left up to the user. Segment length defines the seed length used by the "MashMap3" homology mapper in wfmash. 
-
-The pairwise identity (-p) is the minimum allowed pairwise identity between seeds, which is estimated using a mash-type approximation based on k-mer Jaccard. Mappings are initiated from collinear chains of around 5 seeds (-l, --block-length), and extended greedily as far as possible, allowing up to -n minus 1 mappings at each query position.
-
-An additional parameter, -k, can also greatly affect graph structure by pruning matches shorter than a given threshold from the initial graph model. In effect, -k N removes any match shorter than Nbp from the initial alignment. This filter removes potentially ambiguous pairwise alignments from consideration in establishing the initial scaffold of the graph.
-
-The initial graph is defined by parameters to wfmash and seqwish. But due to the ambiguities generated across the many pairwise alignments we use as input, this graph can be locally very complex. To regularize it we orchestrate a series of graph transformations. First, with smoothxg, we "smooth" it by locally realigning sequences to each other with a traditional multiple sequence alignment (we specifically apply POA). This process repeats multiple times to smooth over any boundary effects that may occur due to binning errors near MSA boundaries. Finally, we apply gfaffix to remove forks where both alternatives have the same sequence.
-
--S generate statistics of the seqwish and smoothxg graph
-
--m generate MultiQC report of graphs' statistics and visualizations, automatically runs odgi stats
-
--V specify a set of VCFs to produce with SPEC = REF:DELIM[:LEN][,REF:DELIM:[LEN]]* the paths matching ^REF are used as a reference, while the sample haplotype are derived from path names, e.g. when DELIM=# and with '-V chm13:#', a path named HG002#1#ctg would be assigned to sample HG002 phase 1. If LEN is specified and greater than 0, the VCFs are decomposed, filtering sites whose max allele length is greater than LEN. [default: off]
-
--o, --output-dir PATH       output directory
-
-
-
-### Examples of key parameters for executing PGGB
-- Human, whole genome, 90 haplotypes:
-  - ```bash pggb -p 98 -s 50k -n 90 -k 79 ...  ```
-- 15 helicobacter genomes, 5% divergence:
-  - ```bash pggb -n 15 -k 79, and 15 at higher (10%) divergence pggb -n 15 -k 19 -P asm20 ...  ```
-- Yeast genomes, 5% divergence: pggb's defaults should work well, just set -n.
-- Aligning 9 MHC class II assemblies from vertebrate genomes (5-10% divergence):
-  - ```bash pggb -n 9 -k 29 ... ```
-- A few thousand bacterial genomes
-  - ```bash pggb -x auto -n 2146 .... In general mapping sparsification (-x auto) is a good idea when you have many hundreds to thousands of genomes. ```
-- pggb defaults to using the number of threads as logical processors on the system (the thread count given by getconf _NPROCESSORS_ONLN).
-  - Use -t to set an appropriate level of parallelism if you can't use all the processors on your system.
 
 
 ## Running PGGB
