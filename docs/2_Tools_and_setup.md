@@ -129,6 +129,23 @@
     rm README.md
     rm slurm*.out
     ```
+```bash
+#cat genomes to a single file
+cat *_genomic.fna 5NM.fa
+
+```
+
+```bash
+#cat genomes to a single file
+cat *_genomic.fna 5NM.fa
+
+build index using samtools 
+```bash
+module load SAMtools
+samtools faidx 5NM.fa
+```
+
+
 
 ## Setting up your project directory
 
