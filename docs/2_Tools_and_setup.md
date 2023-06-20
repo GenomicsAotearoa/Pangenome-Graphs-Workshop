@@ -133,6 +133,6 @@
     Use the cat command to combine genomes into a single fasta file
 
     ```
-    cat *_genomic.fna 5NM.fa
+    cat *_genomic.fna > 5NM.fa
     ```
 
