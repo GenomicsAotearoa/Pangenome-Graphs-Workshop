@@ -64,7 +64,7 @@
 
 ??? info "How the *Neisseria meningitidis* genomes were formatted for this workshop"
 
-    The following code DOES NOT need to be run, but is provided here to show how the *Neisseria meningitidis* genomes
+    The following code **DOES NOT** need to be run, but is provided here to show how the *Neisseria meningitidis* genomes
     were downloaded and prepared for analysis.
     
     ```bash
