@@ -64,7 +64,7 @@
 
 ??? info "How the *Neisseria meningitidis* genomes were formatted for this workshop"
 
-    The following code DOES NOT need to be run, but is provided here to show how the *Neisseria meningitidis* genomes
+    The following code **DOES NOT** need to be run, but is provided here to show how the *Neisseria meningitidis* genomes
     were downloaded and prepared for analysis.
     
     ```bash
@@ -77,7 +77,7 @@
 
     ```bash
     #NC_017518.1
-    curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000191525.1    /download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000191525.1.zip" -H "Accept: application/zip"
+    curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_000191525.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_000191525.1.zip" -H "Accept: application/zip"
 
     # ACC NUM?
     curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_001029835.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_001029835.1.zip" -H "Accept: application/zip"
