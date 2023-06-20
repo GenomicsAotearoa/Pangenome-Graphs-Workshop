@@ -8,9 +8,9 @@ PGGB builds pangenome graphs from a set of input sequences unbiasly. The main no
 This graph can be used to study genetic diversity, gene function, and evolution. PGGB is designed to be scalable and efficient, making it suitable for large-scale genomic analyses. It is an open-source tool that can be used freely by researchers in the field of genomics.
 </p>
 
-### How does the pggb  work?
+### How does the PGGB  work?
 
-PGGB generates graphs using an all-to-all alignment of input sequences (wfmash), graph induction (seqwish), and progressive normalization (smoothxg, gfaffix). After construction, pggb generates diagnostic visualizations of the graph (odgi). A variant call report (in VCF) representing both small and large variants can be generated based on any reference genome included in the graph (vg). pggb writes its output in GFAv1 format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits.-Scale Graph Construction: The PGGB algorithm is designed to handle large-scale genomes and can efficiently construct genome graphs containing extensive genetic variations.
+PGGB generates graphs using an all-to-all alignment of input sequences (wfmash), graph induction (seqwish), and progressive normalization (smoothxg, gfaffix). After construction, PGGB generates diagnostic visualizations of the graph (odgi). A variant call report (in VCF) representing both small and large variants can be generated based on any reference genome included in the graph (vg). PGGB writes its output in GFAv1 format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits.-Scale Graph Construction: The PGGB algorithm is designed to handle large-scale genomes and can efficiently construct genome graphs containing extensive genetic variations.
 
 #### All-to-all alignment
 
@@ -36,7 +36,7 @@ To normalize the graph and harmonize the allele representation we use `smoothxg`
 ### key parameters
 
 https://github.com/pangenome/pggb
-The overall structure of pggb's output graph is defined by three parameters: genome number (-n), segment length (-s), and pairwise identity (-p). 
+The overall structure of PGGB's output graph is defined by three parameters: genome number (-n), segment length (-s), and pairwise identity (-p). 
 
 Genome number (-n) is a given, but varies in ways that are difficult to infer and is thus left up to the user. Segment length defines the seed length used by the "MashMap3" homology mapper in wfmash. 
 
@@ -49,12 +49,13 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
 
 
 ### Examples of key parameters for executing PGGB
-- Human, whole genome, 90 haplotypes: pggb -p 98 -s 50k -n 90 -k 79 ...
-- 15 helicobacter genomes, 5% divergence: pggb -n 15 -k 79, and 15 at higher (10%) divergence pggb -n 15 -k 19 -P asm20 ...
-- Yeast genomes, 5% divergence: pggb's defaults should work well, just set -n.
-- Aligning 9 MHC class II assemblies from vertebrate genomes (5-10% divergence): pggb -n 9 -k 29 ...
-- A few thousand bacterial genomes pggb -x auto -n 2146 .... In general mapping sparsification (-x auto) is a good idea when you have many hundreds to thousands of genomes.
-- pggb defaults to using the number of threads as logical processors on the system (the thread count given by getconf _NPROCESSORS_ONLN). Use -t to set an appropriate level of parallelism if you can't use all the processors on your system.
+- Human, whole genome, 90 haplotypes: `pggb -p 98 -s 50k -n 90 -k 79 ...`
+- 15 helicobacter genomes, 5% divergence: `pggb -n 15 -k 79, and 15 at higher (10%) divergence pggb -n 15 -k 19 -P asm20 ...`
+- Yeast genomes, 5% divergence: PGGB's defaults should work well, just set -n.
+- Aligning 9 MHC class II assemblies from vertebrate genomes (5-10% divergence): `pggb -n 9 -k 29 ...`
+- A few thousand bacterial genomes `pggb -x auto -n 2146 ...`
+    - In general mapping sparsification (`-x auto`) is a good idea when you have many hundreds to thousands of genomes.
+- PGGB defaults to using the number of threads as logical processors on the system (the thread count given by getconf _NPROCESSORS_ONLN). Use -t to set an appropriate level of parallelism if you can't use all the processors on your system.
 
 
 ### Other parameters for executing PGGB
