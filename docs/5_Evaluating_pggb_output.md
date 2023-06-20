@@ -4,31 +4,31 @@
 
 ### ODGI Compressed 1D visualization
 
-![ODGI Compressed 1D visualization](theme_figures/ODGI-Compressed-1D.png)
+![ODGI Compressed 1D visualization](theme_figures/ODGI-Compressed-1D-5NM.png)
 
 ### ODGI 1D visualization
 
-![ODGI 1D visualization](theme_figures/ODGI-1D.png)
+![ODGI 1D visualization](theme_figures/ODGI-1D-5NM.png)
 
 ### ODGI 1D visualization by path position
 
-![ODGI 1D visualization by path position](theme_figures/ODGI-Path-Position-1D.png)
+![ODGI 1D visualization by path position](theme_figures/ODGI-Path-Position-1D-5NM.png)
 
 ### ODGI 1D visualization by path orientation
 
-![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D.png)
+![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NM.png)
 
 ### ODGI 1D visualization by node depth
 
-![ODGI 1D visualization by node depth](theme_figures/ODGI-Node-Depth-1D.png)
+![ODGI 1D visualization by node depth](theme_figures/ODGI-Node-Depth-1D-5NM.png)
 
 ### ODGI 1D visualization by uncalled bases
 
-![ODGI 1D visualization by uncalled bases](theme_figures/ODGI-Uncalled-1D.png)
+![ODGI 1D visualization by uncalled bases](theme_figures/ODGI-Uncalled-1D-5NM.png)
 
 ### ODGI 2D drawing
 
-![ODGI 2D drawing](theme_figures/ODGI-2D.png)
+![ODGI 2D drawing](theme_figures/ODGI-2D-5NM.png)
 
 
 ### Evaluate Pangenome Graphs for 4Sim Genomes Constructed with Different Settings
