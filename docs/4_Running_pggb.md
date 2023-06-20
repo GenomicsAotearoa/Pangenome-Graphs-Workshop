@@ -1,57 +1,45 @@
 # 4. Running PGGB
-An indtroduction to pangenome graph construction with PGGB
+An indtroduction to pangenome graph construction using PGGB.
+If you get stuck on what a concept is or command does please refer to the extensive [documentation](https://pggb.readthedocs.io/en/latest/index.html).
 
-## How does the pggb graph build work?
 
-!!! info ""
-
-    pggb builds pangenome variation graphs from a set of input sequences.
-    
-    A pangenome variation graph is a kind of generic multiple sequence alignment. It lets us understand any kind of sequence variation between a collection of genomes. It shows us similarity where genomes walk through the same parts of the graph, and differences where they do not.
-    
-    pggb generates this kind of graph using an all-to-all alignment of input sequences (wfmash), graph induction (seqwish), and progressive normalization (smoothxg, gfaffix). After construction, pggb generates diagnostic visualizations of the graph (odgi). A variant call report (in VCF) representing both small and large variants can be generated based on any reference genome included in the graph (vg). pggb writes its output in GFAv1 format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits.
-    
-    pggb has been tested at scale in the Human Pangenome Reference Consortium (HPRC) as a method to build a graph from the draft human pangenome. 
-    
-    more details can be find [(PGGB)](https://github.com/pangenome/pggb)
-    
-### Learning objectives
-
-!!! quote ""
-
+## Learning objectives
+!!! info "Objectives"
     - build pangenome graphs using pggb
     - explore pggb’s results
     - understand how parameters affect the built pangenome graphs
+    
+
+## How does graph building work in PGGB?
+
+!!! info "PGGB 101"
+
+    PBBG is a sequence graph and builds pangenome variation graphs from a set of input sequences.
+    
+    A pangenome variation graph is a kind of generic multiple sequence alignment. It lets us understand any kind of sequence variation between a collection of genomes. 
+    Regions where genomes are similar are reflected as the same PATH through the graph, NODES represent the differences/variants between genomes.
+    
+    PGGB generates this kind of graph using a series of steps that each use a particular tool. 
+    1. an all-to-all alignment of input sequences (wfmash)
+    2. graph induction (seqwish)
+    3. progressive normalization (smoothxg, gfaffix)
+    
+    By setting parameters PGGB can genrate several other outputs after construction of the graph.
+    -m PGGB generates diagnostic visualizations of the graph (odgi)
+    -V A variant call report (in VCF) representing both small and large variants in the variant graph (vg)
+    
+    PGGB writes its output in GFAv1 format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits.
+    
+    PGGB has been tested at scale in the Human Pangenome Reference Consortium (HPRC) as a method to build a graph from the draft human pangenome. 
+    More details can be find [(PGGB)](https://github.com/pangenome/pggb)
+    
+
 
 ## Getting started
-NeSI HPC environment is used for the analysis. Please make sure to have a NeSI account and you are able to login.
+NeSI HPC environment is used in this workshop for the analysis but you should be able to reproduce this environment by following the step in the (Tools and Setup)[2_Tools_and_setup.md] section. 
+The following sections assume that you have created the correct folder structure and copied over the approriate data.
 
-### Setting up your project directory and download the datasets
-
-!!! terminal "code"
-
-    ```bash
-    # Create a new directory in somewhere and change to that directory
-    mkdir pg_workshop
-    cd pg_workshop
-    # Keep a note of the absolute path of your directory
-    pwd
-    ```
-    !!! success "Output"
-
-        ```
-        /home/<YOUR_USER_ID>/pg_workshop
-        ```
-    
-    ```bash
-    # Downloading and preparing datasets
-    git clone https://github.com/ZoeYang2020/dataset_for_pg_workshop
-    
-    # copy the 4Sim.fa dataset to your work directory
-    cp dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/4Sim.fa ./
-    ```
-
-## Construct pangenome graph for the 4Sim genomes
+### Preparing and checking input sequences
 
 Create an index for the sequence using SAMtools and check.
 
@@ -60,25 +48,24 @@ Create an index for the sequence using SAMtools and check.
     ```bash    
     module purge
     module load SAMtools/1.16.1-GCC-11.3.0
-    samtools faidx 4Sim.fa
+    samtools faidx XXX.fa
     ```
 
     Inspect the index.
 
     ```bash
-    less -S 4Sim.fa.fai
+    tail XXX.fa.fai
     ```
 
     !!! success "Output"
-        
         ```
-        NC_017518       2248966 16      60      61
-        ST41Sim 2249014 2286474 2249014 2249015
-        ST154Sim        2248965 4535499 2248965 2248966
-        ST42Sim 2249050 6784474 2249050 2249051
+        XXX       2248966 16      60      61
+        YYY       2249014 2286474 2249014 2249015
+        ZZZ       2248965 4535499 2248965 2248966
+        QQQ       2249050 6784474 2249050 2249051
         ```
 
-### Executing `pggb` tool
+### Testing the PGGB tool
 
 !!! terminal "code"
 
@@ -177,8 +164,6 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
 
 -o, --output-dir PATH       output directory
 
-
-
 ### Examples of key parameters for executing PGGB
 - Human, whole genome, 90 haplotypes:
   - ```bash pggb -p 98 -s 50k -n 90 -k 79 ...  ```
@@ -192,9 +177,6 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
 - pggb defaults to using the number of threads as logical processors on the system (the thread count given by getconf _NPROCESSORS_ONLN).
   - Use -t to set an appropriate level of parallelism if you can't use all the processors on your system.
 
-
-## Running PGGB
-
 ### Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p 
 
 !!! terminal "code"
@@ -203,24 +185,33 @@ The initial graph is defined by parameters to wfmash and seqwish. But due to the
     module purge
     module load Mash/2.3-GCC-11.3.0
 
-    mash triangle 4Sim.fa > 4Sim.fa_mash
+    mash triangle XXX.fa > XXX.fa_mash
     
     # Inspect the output
-    tail 4Sim.fa_mash
+    tail XXX.fa_mash
     ```
 
     ??? success "Output"
 
         ```
-                4
-        NC_017518
-        ST41Sim 0.0010072
-        ST154Sim        0.00121124      0.000830728
-        ST42Sim 0.00251903      0.00366686      0.00375609
+                5
+        XXX
+        YYY    0.0010072
+        ZZZ    0.00121124      0.000830728
+        QQQ    0.00251903      0.00366686      0.00375609
+        RRR    
         ```
 
 
 <b> NEEDS EXPLANATION OF OUTPUT </b>
+
+## Running PGGB
+
+### Generate a pangenome graph
+We will be usign the 5 genomes to generate a pangenomegraph.
+
+
+
 
 ### Construct pangenome graph for 4Sim genomes with -k 1000, -p 96
 
