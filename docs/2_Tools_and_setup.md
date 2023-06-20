@@ -6,7 +6,7 @@
     
     - the Optimized Dynamic Genome/Graph Implementation (ODGI)(https://github.com/pangenome/odgi) for graph manipulation
     
-    - the VG toolkit(https://github.com/vgteam/vg) for variant calling
+    - the VG toolkit (https://github.com/vgteam/vg) for variant calling
 
     - Circlator (https://sanger-pathogens.github.io/circlator/)
     - Mash (https://github.com/marbl/Mash)
