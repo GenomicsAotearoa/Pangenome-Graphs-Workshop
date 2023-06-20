@@ -1,17 +1,17 @@
 # 4. Running PGGB
-An indtroduction to pangenome graph construction with PGGB
+An introduction to pangenome graph construction with PGGB
 
-## How does the pggb graph build work?
+## How does the PGGB graph build work?
 
 !!! info ""
 
-    pggb builds pangenome variation graphs from a set of input sequences.
+    PGGB builds pangenome variation graphs from a set of input sequences.
     
     A pangenome variation graph is a kind of generic multiple sequence alignment. It lets us understand any kind of sequence variation between a collection of genomes. It shows us similarity where genomes walk through the same parts of the graph, and differences where they do not.
     
-    pggb generates this kind of graph using an all-to-all alignment of input sequences (wfmash), graph induction (seqwish), and progressive normalization (smoothxg, gfaffix). After construction, pggb generates diagnostic visualizations of the graph (odgi). A variant call report (in VCF) representing both small and large variants can be generated based on any reference genome included in the graph (vg). pggb writes its output in GFAv1 format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits.
+    PGGB generates this kind of graph using an all-to-all alignment of input sequences (wfmash), graph induction (seqwish), and progressive normalization (smoothxg, gfaffix). After construction, PGGB generates diagnostic visualizations of the graph (odgi). A variant call report (in VCF) representing both small and large variants can be generated based on any reference genome included in the graph (vg). PGGB writes its output in GFAv1 format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits.
     
-    pggb has been tested at scale in the Human Pangenome Reference Consortium (HPRC) as a method to build a graph from the draft human pangenome. 
+    PGGB has been tested at scale in the Human Pangenome Reference Consortium (HPRC) as a method to build a graph from the draft human pangenome. 
     
     more details can be find [(PGGB)](https://github.com/pangenome/pggb)
     
@@ -19,12 +19,12 @@ An indtroduction to pangenome graph construction with PGGB
 
 !!! quote ""
 
-    - build pangenome graphs using pggb
-    - explore pggb’s results
+    - build pangenome graphs using PGGB
+    - explore PGGB’s results
     - understand how parameters affect the built pangenome graphs
 
 ## Getting started
-NeSI HPC environment is used for the analysis. Please make sure to have a NeSI account and you are able to login.
+NeSI HPC environment is used for the analysis. Please make sure you have a NeSI account and you are able to login.
 
 ### Setting up your project directory and download the datasets
 
@@ -47,7 +47,7 @@ NeSI HPC environment is used for the analysis. Please make sure to have a NeSI a
     # Downloading and preparing datasets
     git clone https://github.com/ZoeYang2020/dataset_for_pg_workshop
     
-    # copy the 4Sim.fa dataset to your work directory
+    # Copy the 4Sim.fa dataset to your work directory
     cp dataset_for_pg_workshop/datasets_for_PangenomeGraphConstruction_pg_workshop/4Sim.fa ./
     ```
 
@@ -159,7 +159,7 @@ Create an index for the sequence using SAMtools and check.
 
 ### Key parameters for executing [PGGB](https://github.com/pangenome/pggb)
 
-The overall structure of pggb's output graph is defined by three parameters: genome number (-n), segment length (-s), and pairwise identity (-p). 
+The overall structure of PGGB's output graph is defined by three parameters: genome number (-n), segment length (-s), and pairwise identity (-p). 
 
 Genome number (-n) is a given, but varies in ways that are difficult to infer and is thus left up to the user. Segment length defines the seed length used by the "MashMap3" homology mapper in wfmash. 
 
