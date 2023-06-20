@@ -28,8 +28,7 @@
 
 ### ODGI 2D drawing
 
-<img src="theme_figures/ODGI-2D-5NM.png"  width="397" height="500">
-
+![ODGI 2D visualization](theme_figures/ODGI-2D-5NM-small.png)
 
 ### Evaluate Pangenome Graphs for 4Sim Genomes Constructed with Different Settings
 - We have employed three distinct settings to construct the pangenome graph of the 4Sim genomes. Which setting yielded the most optimal result? How can we determine this? 
