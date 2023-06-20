@@ -1,7 +1,6 @@
 # 3. PGGB Introduction
 
-!!! info "PanGenome Graph Builder [(PGGB)](https://github.com/pangenome/pggb)"
-<p align="justify">
+!!! info "PanGenome Graph Builder-PGGB"
 A pangenome variation graph is a kind of generic multiple sequence alignment. It lets us understand any kind of sequence variation between a collection of genomes. It shows us similarity where genomes walk through the same parts of the graph, and differences where they do not.
     
 PanGenome Graph Builder (PGGB) constructs a pan-genome graph, which is a data structure that represents the entire set of genes and genetic variations in a population.
