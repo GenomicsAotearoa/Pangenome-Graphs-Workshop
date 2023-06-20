@@ -78,7 +78,7 @@ note that one of the samples is completely inverted relative to the others.**
 head -10 *.fna >>head10_check
 less -S head10_check
 ```
-let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minite for each sample. 
+let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample. 
 ```bash
 #!/usr/bin/bash
 
