@@ -6,7 +6,7 @@ A pangenome is defined as the comprehensive collection of whole-genome sequences
 </p>
 
 ![bacterial-pangenome](theme_figures/bacterial-pangenome-small.png)
-<center><small>bacterial-pangenome</small></center>
+<center><small>bacterial pangenome</small></center>
 
 ## What's pangenome graph
 <p align="justify">
