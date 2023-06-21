@@ -28,6 +28,8 @@ Pangenome graphs are pangenomes stored in graph models that can capture the enti
 - Haplotypes
 - Alleles/variants 
 
+
+
 <p align="justify">
 This pipeline for pangenome graphs comprises three key stages: graph construction using `PGGB`, graph manipulation via `ODGI`, and variant calling for Next-Generation Sequencing (NGS) data utilizing the VG toolkit, as shown in Figure 1C.
 
