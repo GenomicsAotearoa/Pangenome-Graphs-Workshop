@@ -10,17 +10,17 @@ A pangenome is defined as the comprehensive collection of whole-genome sequences
 Pangenome graphs are pangenomes stored in graph models that can capture the entire genetic variation among genomes in a population or of a set of related organisms (Figure 1B). There are three components of a variation graph: Nodes, edges and paths.
 </p>
 
-#### **Nodes**
+## **Nodes**
 - DNA segments, which can be any length 
 
 
-#### **Edges** 
+## **Edges** 
 - Describe the possible ways of walking through the nodes
 - Connect pairs of node strands
 - Can represent inversions 
 
 
-#### **Paths** 
+## **Paths** 
 - Paths are routes through the nodes of the graph
 - Genomes
 - Haplotypes
