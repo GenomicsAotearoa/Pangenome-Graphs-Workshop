@@ -1,37 +1,39 @@
-# 1. Overview of pangenome graphs 
+# Overview of pangenome graphs 
+
+## What's pangenome 
 <p align="justify">
 A pangenome is defined as the comprehensive collection of whole-genome sequences from multiple individuals within a clade, a population or a species. This collective genomic dataset can be further divided into two distinct components: the core genome, which includes genes present in all individuals at the time of analysis, and the accessory genome, consisting of genes found only in a subset of individuals. 
 </p>
 
 ![bacterial-pangenome](theme_figures/bacterial-pangenome-small.png)
 
-
+## What's pangenome graph
 <p align="justify">
 Pangenome graphs are pangenomes stored in graph models that can capture the entire genetic variation among genomes in a population or of a set of related organisms (Figure 1B). There are three components of a variation graph: Nodes, edges and paths.
 </p>
 
 ![bacterial-pangenome](theme_figures/pangenome-graph-small.png)
 
-## **Nodes**
+### **Nodes**
 - DNA segments, which can be any length 
 
 
-## **Edges** 
+### **Edges** 
 - Describe the possible ways of walking through the nodes
 - Connect pairs of node strands
 - Can represent inversions 
 
 
-## **Paths** 
+### **Paths** 
 - Paths are routes through the nodes of the graph
 - Genomes
 - Haplotypes
 - Alleles/variants 
 
 
-
+## overview of the Overview of pangenome graph pipeline
 <p align="justify">
-This pipeline for pangenome graphs comprises three key stages: graph construction using `PGGB`, graph manipulation via `ODGI`, and variant calling for Next-Generation Sequencing (NGS) data utilizing the VG toolkit, as shown in Figure 1C.
+This pipeline for pangenome graphs comprises three key stages: graph construction using `PGGB`, graph manipulation via `ODGI`, and variant calling for Next-Generation Sequencing (NGS) data utilizing the VG toolkit.
 
 The PGGB pipeline, which operates without a reference method, builds pangenome graphs using an all-to-all whole genome alignment approach with `wfmash`. Subsequent graph induction is accomplished through `seqwish`, followed by progressive normalization implemented with `smoothxg` and `gfaffix`.
 
@@ -43,6 +45,6 @@ Lastly, the VG toolkit is harnessed for NGS data analysis against the graph, whi
 
 </p>
 
-![image](./theme_figures/Fig.1_overview%20of%20pangenome%20graph%20pipeline.png)
+![image](theme_figures/pangenome_graph_pipeline_small.png)
 
 <center><small>Overview of the pangenome graph workflow</small></center>
