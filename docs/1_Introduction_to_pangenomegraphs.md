@@ -1,4 +1,4 @@
-# Overview of pangenome graphs 
+
 
 ## What's pangenome 
 <p align="justify">
@@ -31,7 +31,7 @@ Pangenome graphs are pangenomes stored in graph models that can capture the enti
 - Alleles/variants 
 
 
-## overview of the Overview of pangenome graph pipeline
+## Overview of pangenome graph pipeline
 <p align="justify">
 This pipeline for pangenome graphs comprises three key stages: graph construction using `PGGB`, graph manipulation via `ODGI`, and variant calling for Next-Generation Sequencing (NGS) data utilizing the VG toolkit.
 
