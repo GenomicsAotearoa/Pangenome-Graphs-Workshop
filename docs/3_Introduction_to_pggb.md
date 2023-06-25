@@ -45,13 +45,18 @@ The normalization process in PGGB involves several steps, which may vary dependi
 4.	Graph Refinement: The normalization process also involves refining the graph structure by resolving inconsistencies, correcting errors, and improving the overall quality of the graph representation. This may include resolving conflicts between nodes and edges, addressing mismatches, and ensuring the graph accurately reflects the underlying genetic variations.
 ![bacterial-pangenome](theme_figures/PGGB_workflow_5_small.png)
 
+
+
 #### Multiqc and graphstatistics 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_6_small.png)
+
 
 
 ### PGGB workflow 
 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_7_small.png)
+
+
 
 ### Key parameters
 
