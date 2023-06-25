@@ -12,6 +12,8 @@ This graph can be used to study genetic diversity, gene function, and evolution.
 
 PGGB generates graphs using an all-to-all alignment of input sequences (wfmash), graph induction (seqwish), and progressive normalization (smoothxg, gfaffix). After construction, PGGB generates diagnostic visualizations of the graph (odgi). A variant call report (in VCF) representing both small and large variants can be generated based on any reference genome included in the graph (vg). PGGB writes its output in GFAv1 format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits.-Scale Graph Construction: The PGGB algorithm is designed to handle large-scale genomes and can efficiently construct genome graphs containing extensive genetic variations.
 
+
+#### input fasta file 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_1_small.png)
 
 #### All-to-all alignment
