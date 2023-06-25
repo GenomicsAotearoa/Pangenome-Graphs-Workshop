@@ -27,6 +27,7 @@ We begin with an alignment with `wfmash`. This compares all sequences to each ot
 
 Refers to the process of constructing the genome graph by progressively integrating genetic variants into a reference genome.
 These base-level alignments are converted into a graph with `seqwish`. A filter is applied to remove short matches, which anchors the graph on confident longer exact matches.
+
 ![bacterial-pangenome](theme_figures/PGGB_workflow_3_small.png)
 
 #### Normalizing the graph by SMOOTHXG and GFAFix
