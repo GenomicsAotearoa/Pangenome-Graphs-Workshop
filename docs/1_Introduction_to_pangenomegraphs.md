@@ -1,25 +1,12 @@
 ## What's pangenome 
+<p align="justify">
 A pangenome is defined as the comprehensive collection of whole-genome sequences from multiple individuals within a clade, a population or a species. This collective genomic dataset can be 
 further divided into two distinct components: the core genome, which includes genes present in all individuals at the time of analysis, and the accessory genome, consisting of genes found 
 only in a subset of individuals. 
-
+</p>
 ![bacterial-pangenome](theme_figures/bacterial-pangenome-small.png)
 <center><small>bacterial pangenome</small></center>
 
-
-
-
-
-!!! info "Running the pggb pipeline on NeSI"
-
-    PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed on NeSI as modules. We need to load each module first.  
-    ```bash
-    module load pggb
-    module load SAMtools
-    module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
-    module load Mash/2.3-GCC-11.3.0
-    ......
-    ```
 
 
 ## What's Pangenome graph 
@@ -28,6 +15,8 @@ Pangenome graphs are pangenomes stored in graph models that can capture the enti
 </p>
 
 ![bacterial-pangenome](theme_figures/pangenome-graph-small.png)
+
+
 
 ### **Nodes**
 - DNA segments, which can be any length 
