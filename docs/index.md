@@ -4,7 +4,6 @@
 This repository includes sample datasets and scripts, which are utilized for the construction of pangenome graphs. 
 It provides a walkthrough of each step executed within the NeSI environment (we do include pointers to running locally but these are not stress tested).
 
-
 <center>
 ![image](./theme_figures/Genomegraphs_theme_figure130NM2D_20230703_small.png)
 </center>
