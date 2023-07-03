@@ -5,7 +5,8 @@ This repository includes sample datasets and scripts, which are utilized for the
 It provides a walkthrough of each step executed within the NeSI environment (we do include pointers to running locally but these are not stress tested).
 
 <center>
-![image](./theme_figures/Genome20%graphs4.jpeg).
+![image](theme_figures/Genome20%graphs4.jpeg).
+![bacterial-pangenome](theme_figures/bacterial-pangenome-small.png).
 </center>
 
 ## Learning Objectives
