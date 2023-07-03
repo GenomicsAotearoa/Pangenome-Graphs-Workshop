@@ -6,7 +6,7 @@ A pangenome is defined as the comprehensive collection of whole-genome sequences
 ![bacterial-pangenome](theme_figures/bacterial-pangenome-small.png)
 <center><small>bacterial pangenome</small></center>
 
-!!! info "What's pangenome graph" 
+## What's Pangenome graph 
 <p align="justify">
 Pangenome graphs are pangenomes stored in graph models that can capture the entire genetic variation among genomes in a population or of a set of related organisms (Figure 1B). There are three components of a variation graph: Nodes, edges and paths.
 </p>
