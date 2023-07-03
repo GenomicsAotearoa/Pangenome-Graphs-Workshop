@@ -6,7 +6,6 @@ only in a subset of individuals.
 </p>
 
 ![bacterial-pangenome](theme_figures/bacterial-pangenome-small.png).
-<center><small>bacterial pangenome</small></center>
 
 
 
