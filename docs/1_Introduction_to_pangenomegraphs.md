@@ -6,6 +6,18 @@ A pangenome is defined as the comprehensive collection of whole-genome sequences
 ![bacterial-pangenome](theme_figures/bacterial-pangenome-small.png)
 <center><small>bacterial pangenome</small></center>
 
+!!! info "Running the pggb pipeline on NeSI"
+
+    PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed on NeSI as modules. We need to load each module first.  
+    ```bash
+    module load pggb
+    module load SAMtools
+    module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
+    module load Mash/2.3-GCC-11.3.0
+    ......
+    ```
+
+
 ## What's Pangenome graph 
 <p align="justify">
 Pangenome graphs are pangenomes stored in graph models that can capture the entire genetic variation among genomes in a population or of a set of related organisms (Figure 1B). There are three components of a variation graph: Nodes, edges and paths.
