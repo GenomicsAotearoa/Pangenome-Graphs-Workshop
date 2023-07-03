@@ -6,6 +6,20 @@ A pangenome is defined as the comprehensive collection of whole-genome sequences
 ![bacterial-pangenome](theme_figures/bacterial-pangenome-small.png)
 <center><small>bacterial pangenome</small></center>
 
+
+
+!!! info "What's pangenome"
+
+    A pangenome is defined as the comprehensive collection of whole-genome sequences from multiple individuals within a clade, a population or a species. This collective genomic dataset can be 
+    further divided into two distinct components: the core genome, which includes genes present in all individuals at the time of analysis, and the accessory genome, consisting of genes found 
+    only in a subset of individuals. 
+
+    ![bacterial-pangenome](theme_figures/bacterial-pangenome-small.png)
+
+
+
+
+
 !!! info "Running the pggb pipeline on NeSI"
 
     PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed on NeSI as modules. We need to load each module first.  
