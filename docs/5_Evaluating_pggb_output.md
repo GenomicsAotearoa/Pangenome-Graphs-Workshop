@@ -1,4 +1,7 @@
 # 5. Evaluating output
+When we run PGGB, the ‘odgi stats -S’ option was used to generate statistics for the seqwish and smoothxg graph and ‘multiqc -m’ option was used on to generate a MultiQC report of the graphs’ statistics and visualizations. All the related results can be found in the multiqc report(.html)
+
+
 
 ## Multiqc output
 
