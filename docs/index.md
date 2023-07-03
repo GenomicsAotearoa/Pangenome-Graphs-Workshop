@@ -8,8 +8,6 @@ It provides a walkthrough of each step executed within the NeSI environment (we 
 ![image](./theme_figures/Genome20%graphs4.jpeg).
 </center>
 
-![bacterial-pangenome](theme_figures/bacterial-pangenome-small.png).
-
 
 ## Learning Objectives
 Participants will learn about pangenome concepts and gain practical experience building and analyzing pangenome graphs. They will apply these methods to complex research questions that require understanding the relationships between multiple genomes or accounting for variability when analyzing new genomes. By the end of the course, participants will have a strong understanding of pangenome methods based on whole genome assemblies.
