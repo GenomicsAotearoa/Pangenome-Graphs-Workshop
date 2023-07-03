@@ -6,7 +6,7 @@ It provides a walkthrough of each step executed within the NeSI environment (we 
 
 
 <center>
-![image](./theme_figures/Genome%20graphs4.jpeg)
+![image](./theme_figures/Genomegraphs_theme_figure130NM2D_20230703_small.png)
 </center>
 
 ## Learning Objectives
