@@ -4,29 +4,31 @@ When we ran PGGB, the 'odgi stats -S' option was utilized to generate statistics
 
 ## Pangenome graph visualization using ODGI 
 
-!!! info "ODGI Compressed 1D visualization"
+### ODGI Compressed 1D visualization
+!!! info ""
   
 ![ODGI Compressed 1D visualization](theme_figures/ODGI-Compressed-1D-5NM.png)
 
 This image shows a 1D rendering of the built pangenome graph. The graph nodes are arranged from left to right, forming the pangenome sequence. Summarization of path coverage across all paths. Dark blue means highest coverage. Dark red means lowest coverage. The path names are placed on the left. The black lines under the paths are the links, which represent the graph topology.
 
-
-!!! info "ODGI 1D visualization"
+### ODGI 1D visualization
+!!! info ""
  
 ![ODGI 1D visualization](theme_figures/ODGI-1D-5NM.png)
 
 This image shows a 1D rendering of the built pangenome graph. The graph nodes are arranged from left to right, forming the pangenome sequence. The colored bars represent the paths versus the pangenome sequence in a binary matrix. The path names are placed on the left. The black lines under the paths are the links, which represent the graph topology.
 
 
-
-!!! info "ODGI 1D visualization by path position"
+### ODGI 1D visualization by path position
+!!! info ""
 
 
 ![ODGI 1D visualization by path position](theme_figures/ODGI-Path-Position-1D-5NM.png)
 
 This shows a 1D rendering of the built pangenome graph where the paths are colored according to their nucleotide position. Light grey means a low path position, black is the highest path position.
 
-!!! info "ODGI 1D visualization by path orientation"
+### ODGI 1D visualization by path orientation
+!!! info ""
 
 ![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NM.png)
 This image shows a 1D rendering of the built pangenome graph where the paths are colored by orientation. Forward is black, reverse is red.
@@ -36,14 +38,15 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
 
     The orientation of the last path is almost exactly the reverse of the second to last one, right? Do you think it's possible that the last path of the genome was submitted as its reverse complement? 
 
-
-!!! info "1D visualization by node depth"
+### 1D visualization by node depth
+!!! info ""
 
 ![ODGI 1D visualization by node depth](theme_figures/ODGI-Node-Depth-1D-5NM.png)
 This shows a 1D rendering of the built pangenome graph where the paths are colored according to path depth. Using the Spectra color palette with 4 levels of path depths, white indicates no depth, while grey, red, and yellow indicate depth 1, 2, and greater than or equal to 3, respectively.
 
 
 ### ODGI 1D visualization by uncalled bases
+!!! info ""
 
 ![ODGI 1D visualization by uncalled bases](theme_figures/ODGI-Uncalled-1D-5NM.png)
 This shows a 1D rendering of the built pangenome graph where the paths are colored according to the coverage of uncalled bases. The lighter the green, the higher the 'N' content of a node is.
