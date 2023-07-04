@@ -29,8 +29,9 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
 ![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NM.png)
 
 
+??? info "What happened for the last path compared to the rest paths"
 
-??? info "Running the pggb workflow locally"
+    ### *Neisseria meningitidis* data set
 
 
 
