@@ -28,7 +28,9 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
 
 ![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NM.png)
 
-??? info "what happend to the last path compmare the the rest paths" 
+
+
+??? info "Running the pggb workflow locally"
 
 
 
