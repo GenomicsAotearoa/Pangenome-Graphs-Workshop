@@ -29,9 +29,9 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
 ![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NM.png)
 
  
-??? info "What happened for the last path compared to the rest paths"
+??? info "What makes the last path different compared to the other paths?"
 
-    The orientation of the last path is almost exacetly reverse as the second last, right? Do you think is it possible that the last path of genome was submitted as its reverse complement? 
+    The orientation of the last path is almost exactly the reverse of the second to last one, right? Do you think it's possible that the last path of the genome was submitted as its reverse complement? 
 
 
 ### ODGI 1D visualization by node depth
