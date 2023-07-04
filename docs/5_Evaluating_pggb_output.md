@@ -11,16 +11,27 @@ This image shows a 1D rendering of the built pangenome graph. The graph nodes ar
 
 
 ### ODGI 1D visualization
+This image shows a 1D rendering of the built pangenome graph. The graph nodes are arranged from left to right, forming the pangenome sequence. The colored bars represent the paths versus the pangenome sequence in a binary matrix. The path names are placed on the left. The black lines under the paths are the links, which represent the graph topology.
 
 ![ODGI 1D visualization](theme_figures/ODGI-1D-5NM.png)
 
+
+
 ### ODGI 1D visualization by path position
+This shows a 1D rendering of the built pangenome graph where the paths are colored according to their nucleotide position. Light grey means a low path position, black is the highest path position.
 
 ![ODGI 1D visualization by path position](theme_figures/ODGI-Path-Position-1D-5NM.png)
 
+
+
 ### ODGI 1D visualization by path orientation
+This image shows a 1D rendering of the built pangenome graph where the paths are colored by orientation. Forward is black, reverse is red.
 
 ![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NM.png)
+
+??? what happend to the last path compmare the the rest paths 
+
+
 
 ### ODGI 1D visualization by node depth
 
