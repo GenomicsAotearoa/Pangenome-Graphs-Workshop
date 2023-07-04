@@ -38,6 +38,43 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
 
     The orientation of the last path is almost exactly the reverse of the second to last one, right? Do you think it's possible that the last path of the genome was submitted as its reverse complement? 
 
+
+
+## Circlator
+
+**As bacterial genomes are circular, if we can fix the start of the input genomes for pangenome graph constrcution, this may help to exclude the unneccessary complexity in the grph **
+
+let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample. 
+```bash
+#!/usr/bin/bash
+
+#SBATCH --account       ga03793
+#SBATCH --job-name      restart_fna
+#SBATCH --cpus-per-task 8
+#SBATCH --mem           4G
+#SBATCH --time          1:00:00
+
+module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
+
+cd /home/zyang/pg_test
+data=/home/zyang/pg_test/*.fna
+
+for f in $data
+do
+
+x=$(basename $f .fna)
+echo ${x}
+
+circlator fixstart  ${x}.fna  ${x}.restart
+
+done
+```
+
+
+
+
+    
+
 ### 1D visualization by node depth
 !!! info ""
 
@@ -53,16 +90,16 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 
 
 ### ODGI 2D drawing
+!!! info ""
 
 ![ODGI 2D visualization](theme_figures/ODGI-2D-5NM-small.png)
 
 
 
-### Evaluate Pangenome Graphs for 4Sim Genomes Constructed with Different Settings
-- We have employed three distinct settings to construct the pangenome graph of the 4Sim genomes. Which setting yielded the most optimal result? How can we determine this? 
+### Check the statistics statistics for both the seqwish and smoothxg graphs
+!!! info ""
 
-- Download the multiqc.html file, check the Detailed ODGI stats table.
-#### 1k96
+#### 5NM 2k94
 | Sample Name                         | Length    | Nodes  | Edges  | Components | A   |C    |T    |G    |N   |
 |:-----                               |----------:|-------:|-------:|-----------:|----:|----:|----:|----:|----:|
 |seqwish	|2280344	|22216	|29823	|4	|1	|551639	|578590	|557450	|592665	|0|
@@ -74,21 +111,14 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 #### 1k96,-K79
 
 
-| Sample Name                         | Length    | Nodes  | Edges  | Components | A   |C    |T    |G    |N   |
-|:-----                               |----------:|-------:|-------:|-----------:|----:|----:|----:|----:|----:|
-|seqwish	|2279905	|22209	|29812	|4	|1	|551588	|578459	|557291	|592567	|0|
-|smooth	|2261401	|29976	|40199	|4	|1	|553049	|580469	|547460	|580423	|0|
+| Sample Name                         | Length    | Nodes  | Edges  |Paths       |Components | A   |C    |T    |G    |N   |
+|:-----                               |----------:|-------:|-------:|------------|-----------:|----:|----:|----:|----:|----:|
+|seqwish	|3165112	|123218	|166072	|5	|1	|786941	|789388	|784867	|803816	|100|
+|smooth	  |2926040	|246217	|332089	|5	|1	|735148	|742974	|726837	|720981 |100|
 
 
-![1k96K79 ODGI 1D visualization by path orientation](theme_figures/4Sim.fa.f958389.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png)
 
-#### 10k96
-| Sample Name                         | Length    | Nodes  | Edges  | Components | A   |C    |T    |G    |N   |
-|:-----                               |----------:|-------:|-------:|-----------:|----:|----:|----:|----:|----:|
-|seqwish	|2340700	|22166	|29759	|4	|1	|566559	|594741	|571836	|607564	|0|
-|smooth	|2319601	|29888	|40070	|4	|1	|566755	|599287	|562078	|591481	|0|
 
-![10k96 ODGI 1D visualization by path orientation](theme_figures/4Sim.fa.e7f7fe6.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png)
 
 ## Circlator
 
