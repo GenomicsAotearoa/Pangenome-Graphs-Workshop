@@ -7,6 +7,7 @@ When we ran PGGB, the 'odgi stats -S' option was utilized to generate statistics
 !!! info "ODGI Compressed 1D visualization"
   
 ![ODGI Compressed 1D visualization](theme_figures/ODGI-Compressed-1D-5NM.png)
+
     This image shows a 1D rendering of the built pangenome graph. The graph nodes are arranged from left to right, forming the pangenome sequence. Summarization of path coverage across all paths. Dark blue means highest coverage. Dark red means lowest coverage. The path names are placed on the left. The black lines under the paths are the links, which represent the graph topology.
 
 
