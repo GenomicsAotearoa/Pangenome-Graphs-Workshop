@@ -13,7 +13,6 @@ When we ran PGGB, the 'odgi stats -S' option was utilized to generate statistics
 !!! info "ODGI 1D visualization"
  
     This image shows a 1D rendering of the built pangenome graph. The graph nodes are arranged from left to right, forming the pangenome sequence. The colored bars represent the paths versus the pangenome sequence in a binary matrix. The path names are placed on the left. The black lines under the paths are the links, which represent the graph topology.
-
 ![ODGI 1D visualization](theme_figures/ODGI-1D-5NM.png)
 
 
@@ -21,9 +20,7 @@ When we ran PGGB, the 'odgi stats -S' option was utilized to generate statistics
 !!! info "ODGI 1D visualization by path position"
 
     This shows a 1D rendering of the built pangenome graph where the paths are colored according to their nucleotide position. Light grey means a low path position, black is the highest path position.
-
 ![ODGI 1D visualization by path position](theme_figures/ODGI-Path-Position-1D-5NM.png)
-
 
 
 !!! info "ODGI 1D visualization by path orientation"
@@ -37,7 +34,7 @@ When we ran PGGB, the 'odgi stats -S' option was utilized to generate statistics
     The orientation of the last path is almost exactly the reverse of the second to last one, right? Do you think it's possible that the last path of the genome was submitted as its reverse complement? 
 
 
-### ODGI 1D visualization by node depth
+!!! info "1D visualization by node depth"
 
 ![ODGI 1D visualization by node depth](theme_figures/ODGI-Node-Depth-1D-5NM.png)
 
