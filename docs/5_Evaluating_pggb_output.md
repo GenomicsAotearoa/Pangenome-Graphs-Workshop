@@ -1,13 +1,12 @@
 # 5. Evaluating output
-When we run PGGB, the ‘odgi stats -S’ option was used to generate statistics for the seqwish and smoothxg graph and ‘multiqc -m’ option was used on to generate a MultiQC 
-report of the graphs’ statistics and visualizations. All the related results can be found in the multiqc report(.html)
+When we ran PGGB, the 'odgi stats -S' option was utilized to generate statistics for both the seqwish and smoothxg graphs and the 'multiqc -m' option was employed to generate a MultiQC report, providing comprehensive statistics and visualizations of the graphs. All pertinent results can be located in the MultiQC report, which is saved in HTML format.
 
 
 
-## Multiqc output
+## Pangenome graph visualization using ODGI 
 
 ### ODGI Compressed 1D visualization
-
+This image shows a 1D rendering of the built pangenome graph. The graph nodes are arranged from left to right, forming the pangenome sequence. Summarization of path coverage across all paths. Dark blue means highest coverage. Dark red means lowest coverage. The path names are placed on the left. The black lines under the paths are the links, which represent the graph topology.
 ![ODGI Compressed 1D visualization](theme_figures/ODGI-Compressed-1D-5NM.png)
 
 ### ODGI 1D visualization
