@@ -2,7 +2,6 @@
 When we ran PGGB, the 'odgi stats -S' option was utilized to generate statistics for both the seqwish and smoothxg graphs and the 'multiqc -m' option was employed to generate a MultiQC report, providing comprehensive statistics and visualizations of the graphs. All pertinent results can be located in the MultiQC report, which is saved in HTML format.
 
 
-
 ## Pangenome graph visualization using ODGI 
 
 ### ODGI Compressed 1D visualization
@@ -29,7 +28,7 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
 
 ![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NM.png)
 
-??? what happend to the last path compmare the the rest paths 
+??? info "what happend to the last path compmare the the rest paths" 
 
 
 
