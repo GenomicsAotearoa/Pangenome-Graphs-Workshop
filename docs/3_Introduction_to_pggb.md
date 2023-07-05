@@ -1,5 +1,6 @@
 # 3. PGGB overview
 !!! info ""
+
 PGGB is a reference-free pangenome graph constuction method. It constructs pangenome graphs by employing all-to-all whole genome alignments with wfmash, graph induction via seqwish, and progressive normalization using smoothxg and gfaffix. 
 PGGB is designed to be scalable and efficient, making it suitable for large-scale genomic analyses. It is an open-source tool that can be used freely by researchers in the field of genomics.
 
