@@ -99,11 +99,11 @@ The overall structure of PGGB's output graph is defined by three parameters: gen
 ### Examples of key parameters for executing PGGB
 !!! info ""
 
-- - Human, whole genome, 90 haplotypes: `pggb -p 98 -s 50k -n 90 -k 79 ...`
-- - 15 helicobacter genomes, 5% divergence: `pggb -n 15 -k 79, and 15 at higher (10%) divergence pggb -n 15 -k 19 -P asm20 ...`
-- - Yeast genomes, 5% divergence: PGGB's defaults should work well, just set -n.
-- - Aligning 9 MHC class II assemblies from vertebrate genomes (5-10% divergence): `pggb -n 9 -k 29 ...`
-- - A few thousand bacterial genomes `pggb -x auto -n 2146 ...`
-    - In general mapping sparsification (`-x auto`) is a good idea when you have many hundreds to thousands of genomes.
-- - PGGB defaults to using the number of threads as logical processors on the system (the thread count given by getconf _NPROCESSORS_ONLN). Use -t to set an appropriate level of parallelism if you can't use all the processors on your system.
+- Human, whole genome, 90 haplotypes: `pggb -p 98 -s 50k -n 90 -k 79 ...`
+- 15 helicobacter genomes, 5% divergence: `pggb -n 15 -k 79, and 15 at higher (10%) divergence pggb -n 15 -k 19 -P asm20 ...`
+- Yeast genomes, 5% divergence: PGGB's defaults should work well, just set -n.
+- Aligning 9 MHC class II assemblies from vertebrate genomes (5-10% divergence): `pggb -n 9 -k 29 ...`
+- A few thousand bacterial genomes `pggb -x auto -n 2146 ...`
+  - In general mapping sparsification (`-x auto`) is a good idea when you have many hundreds to thousands of genomes.
+- PGGB defaults to using the number of threads as logical processors on the system (the thread count given by getconf _NPROCESSORS_ONLN). Use -t to set an appropriate level of parallelism if you can't use all the processors on your system.
 
