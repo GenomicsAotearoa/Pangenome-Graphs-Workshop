@@ -45,6 +45,7 @@
     
     head 5NM*.gfa |less -S 
     ```
+        ??? success "Output"
         ```bash 
         H       VN:Z:1.0
         S       1       ATCCGCCCGACCAAGAAGGCATTTTGGAACTACACATCCGCAGGCGCAAAAACGGTGTCTGCTCGGAAATGATTTTCGGCAGCGAACCCAAAGTCAAAGAAAAAGGCATCGTCCG
@@ -57,14 +58,11 @@
         L       4       +       5       +       0M
         S       5       CCATCGGACGCTTGGACATCAACACCAGCGGACTTCTGATTCT
         ```
-    ??? success "what does L, S mean"
-
-
     ```bash
     
     tail 5NM*.gfa |less -S 
     ```
-    ??? success "what does P mean"
+    ??? success "output"
         ```bash 
         S       246216  G
         L       246216  +       246135  +       0M
@@ -77,6 +75,10 @@
         P       NZ_CP016880.1   2+,133478+,133479+,133481+,133482+,133483+,133485+,133486+,133488+,133489+,133490+,133492+,133493+,133495+,
         P       NZ_CP020423.2   3+,175915+,175916+,175918+,175919+,175921+,175922+,175924+,175925+,175926+,175928+,175929+,175931+,175932+,
         ```
+    ??? success "what does S, L, P mean"
+
+
+
 
 
 ## Pangenome graph visualization using ODGI 
