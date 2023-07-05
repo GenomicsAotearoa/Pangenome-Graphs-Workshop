@@ -45,7 +45,6 @@
     
     head 5NM*.gfa |less -S 
     ```
-    ??? success "what does L, S mean"
         ```bash 
         H       VN:Z:1.0
         S       1       ATCCGCCCGACCAAGAAGGCATTTTGGAACTACACATCCGCAGGCGCAAAAACGGTGTCTGCTCGGAAATGATTTTCGGCAGCGAACCCAAAGTCAAAGAAAAAGGCATCGTCCG
@@ -58,6 +57,8 @@
         L       4       +       5       +       0M
         S       5       CCATCGGACGCTTGGACATCAACACCAGCGGACTTCTGATTCT
         ```
+    ??? success "what does L, S mean"
+
 
     ```bash
     
