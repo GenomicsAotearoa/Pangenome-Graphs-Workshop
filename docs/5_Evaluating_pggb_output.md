@@ -1,6 +1,6 @@
 # 5. Evaluating output
 - When we ran PGGB, the 'odgi stats -S' option was utilized to generate statistics for both the seqwish and smoothxg graphs and the 'multiqc -m' option was employed to generate a MultiQC report, providing comprehensive statistics and visualizations of the graphs. All pertinent results can be located in the MultiQC report, which is saved in HTML format.
-- the output folder contains all the PGGB related results including .sooth.final.og and all related visulization figures, .final.smooth.gfa (a graphical fragment assembly file), variation of graph in vcf file et.al.
+- The output folder contains all the PGGB-related results, including the .smooth.final.og and all associated visualization figures. It also includes .final.smooth.gfa (a Graphical Fragment Assembly file), as well as variations of the graph presented in a VCF (Variant Call Format) file
 
 ## check the files 
 !!! terminal "code"
@@ -36,14 +36,6 @@
         multiqc_data
         multiqc_report.html
         ```
-
-
-
-
-
-
-
-
 
 
 ## Pangenome graph visualization using ODGI 
