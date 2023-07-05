@@ -42,7 +42,7 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
 
 ## Circlator
 
-**As bacterial genomes are circular, if we can fix the start of the input genomes for pangenome graph constrcution, this may help to exclude the unneccessary complexity in the grph **
+**Bacterial genomes are typically circular, so establishing a fixed starting point for each input genome during pangenome graph construction could reduce unnecessary complexity within the graph. Once the genomes are aligned with the same starting point, we can build their index using samtools faidx and proceed with constructing the pangenome graph. I encourage you to experiment with this approach after this workshop to see how effectively it functions.**
 ??? info ""
 
     let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample. 
@@ -75,11 +75,8 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
 ### ODGI 1D visualization by path orientation for the 5NM after start point being fixed
 !!! info ""
 
-![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NM.png)
-This image shows a 1D rendering of the built pangenome graph where the paths are colored by orientation. Forward is black, reverse is red."
-
-
-
+![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NMres.png)
+This image shows a 1D rendering of the built pangenome graph where the paths are colored by orientation. Forward is black, reverse is red.
 
 
 
