@@ -242,7 +242,7 @@ submit the script using the `sbatch` command as follows. Take note of the job ID
         NC_003112.2     1056    >85452>85455    G       A       60      .       AC=1;AF=0.25;AN=4;AT=>85452>85454>85455,>85452>85453>85455;NS=4;LV=0    GT      0       0       1       0
 
         ```
-
+### check the complex variation in vcf files
 !!! terminal "code"
 
     ```bash
