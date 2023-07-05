@@ -8,8 +8,8 @@
     ```bash
     
     cd  /home/<YOUR_USER_ID>/pg_workshop/5NM_2k94
-    ls 
     
+    ls  
     ??? success "Output"
         ```bash 
         5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.06-20-2023_01:31:34.log
