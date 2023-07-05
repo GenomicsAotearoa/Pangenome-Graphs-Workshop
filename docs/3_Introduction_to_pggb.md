@@ -87,23 +87,23 @@ The overall structure of PGGB's output graph is defined by three parameters: gen
 ### Other parameters for executing PGGB
 !!! info ""
 
--S generate statistics of the seqwish and smoothxg graph
+- -S generate statistics of the seqwish and smoothxg graph
 
--m generate MultiQC report of graphs' statistics and visualizations, automatically runs odgi stats
+- -m generate MultiQC report of graphs' statistics and visualizations, automatically runs odgi stats
 
--V specify a set of VCFs to produce with SPEC = REF:DELIM[:LEN][,REF:DELIM:[LEN]]* the paths matching ^REF are used as a reference, while the sample haplotype are derived from path names, e.g. when DELIM=# and with '-V chm13:#', a path named HG002#1#ctg would be assigned to sample HG002 phase 1. If LEN is specified and greater than 0, the VCFs are decomposed, filtering sites whose max allele length is greater than LEN. [default: off]
+- -V specify a set of VCFs to produce with SPEC = REF:DELIM[:LEN][,REF:DELIM:[LEN]]* the paths matching ^REF are used as a reference, while the sample haplotype are derived from path names, e.g. when DELIM=# and with '-V chm13:#', a path named HG002#1#ctg would be assigned to sample HG002 phase 1. If LEN is specified and greater than 0, the VCFs are decomposed, filtering sites whose max allele length is greater than LEN. [default: off]
 
--o, --output-dir PATH       output directory
+- -o, --output-dir PATH       output directory
 
 
 ### Examples of key parameters for executing PGGB
 !!! info ""
 
-- Human, whole genome, 90 haplotypes: `pggb -p 98 -s 50k -n 90 -k 79 ...`
-- 15 helicobacter genomes, 5% divergence: `pggb -n 15 -k 79, and 15 at higher (10%) divergence pggb -n 15 -k 19 -P asm20 ...`
-- Yeast genomes, 5% divergence: PGGB's defaults should work well, just set -n.
-- Aligning 9 MHC class II assemblies from vertebrate genomes (5-10% divergence): `pggb -n 9 -k 29 ...`
-- A few thousand bacterial genomes `pggb -x auto -n 2146 ...`
+- - Human, whole genome, 90 haplotypes: `pggb -p 98 -s 50k -n 90 -k 79 ...`
+- - 15 helicobacter genomes, 5% divergence: `pggb -n 15 -k 79, and 15 at higher (10%) divergence pggb -n 15 -k 19 -P asm20 ...`
+- - Yeast genomes, 5% divergence: PGGB's defaults should work well, just set -n.
+- - Aligning 9 MHC class II assemblies from vertebrate genomes (5-10% divergence): `pggb -n 9 -k 29 ...`
+- - A few thousand bacterial genomes `pggb -x auto -n 2146 ...`
     - In general mapping sparsification (`-x auto`) is a good idea when you have many hundreds to thousands of genomes.
-- PGGB defaults to using the number of threads as logical processors on the system (the thread count given by getconf _NPROCESSORS_ONLN). Use -t to set an appropriate level of parallelism if you can't use all the processors on your system.
+- - PGGB defaults to using the number of threads as logical processors on the system (the thread count given by getconf _NPROCESSORS_ONLN). Use -t to set an appropriate level of parallelism if you can't use all the processors on your system.
 
