@@ -52,7 +52,7 @@ An example run to obtain VCF files from GFA.
         ```
 
 
-!!! terminal "code"
+??? terminal "code"
 
     ```bash
     #use vg deconstruct the graph into VCF based on the first path NC_003112.2
@@ -66,4 +66,36 @@ An example run to obtain VCF files from GFA.
     bcftools stats 5NM_2k94aep2.vcf > 5NM_2k94aep2.vcf_stats
     ```
 
+!!! terminal "code"
+The following is a SLURM script to deconstruct graph into vcf files  
+
+    ```bash
+    #!/usr/bin/bash
+
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      deconstruct_gfa
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+
+    module purge
+    module load vg/1.46.0
+    module load BCFtools/1.15.1-GCC-11.3.0
+
+
+    #use vg deconstruct the graph into VCF based on the first path NC_003112.2
+    vg deconstruct -p NC_003112.2 -a -e ./5NM_2k94.gfa > 5NM_2k94aep1.vcf
+    bcftools stats 5NM_2k94aep1.vcf > 5NM_2k94aep1.vcf_stats
+
+
+    #use vg deconstruct the graph into VCF based on the second path NC_017518.1
+    vg deconstruct -p NC_017518.1 -a -e ./5NM_2k94.gfa > 5NM_2k94aep2.vcf
+    bcftools stats 5NM_2k94aep2.vcf > 5NM_2k94aep2.vcf_stats
+
     
+    ```
+submit the script using the `sbatch` command as follows. Take note of the job ID for tracking the run.
+
+    ```bash
+    sbatch vg_decon.sl
+    ```
