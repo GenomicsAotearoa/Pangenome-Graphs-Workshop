@@ -169,7 +169,7 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 This shows a 1D rendering of the built pangenome graph where the paths are colored according to the coverage of uncalled bases. The lighter the green, the higher the 'N' content of a node is.
 
 
-### ODGI 2D drawingq
+### ODGI 2D drawing 
 !!! info ""
 
 ![ODGI 2D visualization](theme_figures/ODGI-2D-5NM-small.png)
