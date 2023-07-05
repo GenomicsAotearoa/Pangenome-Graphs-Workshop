@@ -57,12 +57,15 @@ An example run to obtain VCF files from GFA.
     ```bash
     #use vg deconstruct the graph into VCF based on the first path NC_003112.2
     vg deconstruct -p NC_003112.2 -a -e ./5NM_2k94.gfa > 5NM_2k94aep1.vcf
+    #use bcftools stats to check the statistics for the vcf file 
     bcftools stats 5NM_2k94aep1.vcf > 5NM_2k94aep1.vcf_stats
     ```
 
     ```bash
     #use vg deconstruct the graph into VCF based on the second path NC_017518.1
     vg deconstruct -p NC_017518.1 -a -e ./5NM_2k94.gfa > 5NM_2k94aep2.vcf
+    
+    #use bcftools stats to check the statistics for the vcf file 
     bcftools stats 5NM_2k94aep2.vcf > 5NM_2k94aep2.vcf_stats
     ```
 
@@ -99,3 +102,76 @@ submit the script using the `sbatch` command as follows. Take note of the job ID
     ```bash
     sbatch vg_decon.sl
     ```
+
+### check the vcf files
+
+!!! terminal "code"
+
+    ```bash
+    #check the vcf statistics  
+    less -S 5NM_2k94aep1.vcf_stats
+    ```
+    ??? success "Output"
+        
+        ```
+        # This file was produced by bcftools stats (1.15.1+htslib-1.15.1) and can be plotted using plot-vcfstats.
+        # The command line was: bcftools stats  5NM_2k94aep1.vcf
+        #
+        # Definition of sets:
+        # ID    [2]id   [3]tab-separated file names
+        ID      0       5NM_2k94aep1.vcf
+        # SN, Summary numbers:
+        #   number of records   .. number of data rows in the VCF
+        #   number of no-ALTs   .. reference-only sites, ALT is either "." or identical to REF
+        #   number of SNPs      .. number of rows with a SNP
+        #   number of MNPs      .. number of rows with a MNP, such as CC>TT
+        #   number of indels    .. number of rows with an indel
+        #   number of others    .. number of rows with other type, for example a symbolic allele or
+        #                          a complex substitution, such as ACT>TCGA
+        #   number of multiallelic sites     .. number of rows with multiple alternate alleles
+        #   number of multiallelic SNP sites .. number of rows with multiple alternate alleles, all SNPs
+        #
+        #   Note that rows containing multiple types will be counted multiple times, in each
+        #   counter. For example, a row with a SNP and an indel increments both the SNP and
+        #   the indel counter.
+        #
+        # SN    [2]id   [3]key  [4]value
+        SN      0       number of samples:      4
+        SN      0       number of records:      75538
+        SN      0       number of no-ALTs:      0
+        SN      0       number of SNPs: 66088
+        SN      0       number of MNPs: 6948
+        SN      0       number of indels:       3284
+        SN      0       number of others:       968
+        SN      0       number of multiallelic sites:   3705
+        SN      0       number of multiallelic SNP sites:       1344
+        # TSTV, transitions/transversions:
+        # TSTV  [2]id   [3]ts   [4]tv   [5]ts/tv        [6]ts (1st ALT) [7]tv (1st ALT) [8]ts/tv (1st ALT)
+        ```
+
+
+!!! terminal "code"
+
+    ```bash
+    #check the vcf statistics  
+    less -S 5NM_2k94aep2.vcf_stats
+    ```
+    ??? success "Output"
+        
+        ```
+        #only show the number of each type of variations
+        SN      0       number of samples:      4
+        SN      0       number of records:      76867
+        SN      0       number of no-ALTs:      0
+        SN      0       number of SNPs: 67338
+        SN      0       number of MNPs: 7119
+        SN      0       number of indels:       3311
+        SN      0       number of others:       957
+        SN      0       number of multiallelic sites:   3758
+        SN      0       number of multiallelic SNP sites:       1335
+
+        ```
+
+
+
+
