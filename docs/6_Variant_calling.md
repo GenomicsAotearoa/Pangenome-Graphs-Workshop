@@ -2,6 +2,8 @@
 
 ## From graphs to VCFs
 
+-V 'NC_017518.1:#
+
 
 ### `vg deconstruct` graph to get the variations in vcf 
 <!-- 
