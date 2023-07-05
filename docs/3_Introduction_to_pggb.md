@@ -1,12 +1,8 @@
 # 3. PGGB overview
+!!! info ""
+PGGB is a reference-free pangenome graph constuction method. It constructs pangenome graphs by employing all-to-all whole genome alignments with wfmash, graph induction via seqwish, and progressive normalization using smoothxg and gfaffix. 
+PGGB is designed to be scalable and efficient, making it suitable for large-scale genomic analyses. It is an open-source tool that can be used freely by researchers in the field of genomics.
 
-A pangenome variation graph is a kind of generic multiple sequence alignment. It lets us understand any kind of sequence variation between a collection of genomes. It shows us similarity where genomes walk through the same parts of the graph, and differences where they do not.
-    
-PanGenome Graph Builder (PGGB) constructs a pan-genome graph, which is a data structure that represents the entire set of genes and genetic variations in a population.
-PGGB builds pangenome graphs from a set of input sequences unbiasly. The main novelty of PGGB is not simply the reference independence, but moreover its ability to capture all parts of input genomes losslessly. 
-
-This graph can be used to study genetic diversity, gene function, and evolution. PGGB is designed to be scalable and efficient, making it suitable for large-scale genomic analyses. It is an open-source tool that can be used freely by researchers in the field of genomics.
-</p>
 
 ### How does PGGB work?
 !!! info ""
