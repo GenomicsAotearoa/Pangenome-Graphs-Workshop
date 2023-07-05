@@ -1,5 +1,49 @@
 # 5. Evaluating output
-When we ran PGGB, the 'odgi stats -S' option was utilized to generate statistics for both the seqwish and smoothxg graphs and the 'multiqc -m' option was employed to generate a MultiQC report, providing comprehensive statistics and visualizations of the graphs. All pertinent results can be located in the MultiQC report, which is saved in HTML format.
+- When we ran PGGB, the 'odgi stats -S' option was utilized to generate statistics for both the seqwish and smoothxg graphs and the 'multiqc -m' option was employed to generate a MultiQC report, providing comprehensive statistics and visualizations of the graphs. All pertinent results can be located in the MultiQC report, which is saved in HTML format.
+- the output folder contains all the PGGB related results including .sooth.final.og and all related visulization figures, .final.smooth.gfa (a graphical fragment assembly file), variation of graph in vcf file et.al.
+
+## check the files 
+!!! terminal "code"
+
+    ```bash
+    
+    cd  /home/<YOUR_USER_ID>/pg_workshop/5NM_2k94
+    ls 
+    
+    ??? success "Output"
+        ```bash 
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.06-20-2023_01:31:34.log
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.06-20-2023_01:31:34.params.yml
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.gfa
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.NC_017518.1.vcf
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.NC_017518.1.vcf.stats
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.lay
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.lay.draw_multiqc.png
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.lay.draw.png
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.lay.tsv
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.stats.yaml
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.viz_depth_multiqc.png
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.viz_inv_multiqc.png
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.viz_multiqc.png
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.viz_O_multiqc.png
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.viz_pos_multiqc.png
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.viz_uncalled_multiqc.png
+        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.fix.affixes.tsv.gz
+        5NM.fa.37e9cb5.417fcdf.seqwish.og.stats.yaml
+        5NM.fa.37e9cb5.alignments.wfmash.paf
+        multiqc_config.yaml
+        multiqc_data
+        multiqc_report.html
+        ```
+
+
+
+
+
+
+
+
 
 
 ## Pangenome graph visualization using ODGI 
