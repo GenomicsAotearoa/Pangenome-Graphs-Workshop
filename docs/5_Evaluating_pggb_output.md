@@ -71,12 +71,14 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
   done
   ```
 
-??? info "rebuild the "
+### ODGI 1D visualization by path orientation for the 5NM after start point being fixed
+!!! info ""
+
+![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NM.png)
+This image shows a 1D rendering of the built pangenome graph where the paths are colored by orientation. Forward is black, reverse is red."
 
 
 
-
-    
 
 ### 1D visualization by node depth
 !!! info ""
