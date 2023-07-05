@@ -40,7 +40,7 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
 
 ??? info "how to fix this?"
 
-    ## Circlator
+    #### Circlator
     **Bacterial genomes are typically circular, so establishing a fixed starting point for each input genome during pangenome graph construction could reduce unnecessary complexity within the graph. Once the genomes are aligned with the same starting point, we can build their index using samtools faidx and proceed with constructing the pangenome graph. I encourage you to experiment with this approach after this workshop to see how effectively it functions.**
 
     let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample. 
@@ -99,7 +99,7 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 
 
 
-### Check the statistics statistics for both the seqwish and smoothxg graphs
+## Check the statistics statistics for both the seqwish and smoothxg graphs
 !!! info ""
 
 #### 5NM 2k94
