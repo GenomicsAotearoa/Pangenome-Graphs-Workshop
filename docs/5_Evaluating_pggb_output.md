@@ -95,6 +95,8 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 
 ![ODGI 2D visualization](theme_figures/ODGI-2D-5NM-small.png)
 
+??? info "Why does the 2D graph display as three large bubbles?"
+    **The genome of Neisseria meningitidis is highly recombinant, and this recombination is a significant driver of the extensive genetic diversity within the species. The bubbles highlighted on the graph suggest inverted regions, potentially indicating the presence of recombination hotspots*
 
 
 ## Check the statistics statistics for both the seqwish and smoothxg graphs
@@ -107,6 +109,11 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 |seqwish	|3165112	|123218	|166072	|5	|1	|786941	|789388	|784867	|803816	|100|
 |smooth	  |2926040	|246217	|332089	|5	|1	|735148	|742974	|726837	|720981 |100|
 
+#### 5NMres 2k94
 
+| Sample Name                         | Length    | Nodes  | Edges  |Paths       |Components | A   |C    |T    |G    |N   |
+|:-----                               |----------:|-------:|-------:|------------|-----------:|----:|----:|----:|----:|----:|
+|seqwish	|3149202	|122783	|165485	|5	|1	|781160	|799964	|784119	|783859	|100|
+|smooth	  |2901970	|244973	|330346	|5	|1	|722268	|722956	|729066	|727580 |100|
 
 
