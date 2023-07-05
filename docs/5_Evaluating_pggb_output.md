@@ -10,6 +10,7 @@
     cd  /home/<YOUR_USER_ID>/pg_workshop/5NM_2k94
     
     ls  
+    ```
     ??? success "Output"
         ```bash 
         5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.06-20-2023_01:31:34.log
@@ -37,6 +38,45 @@
         multiqc_report.html
         ```
 
+
+## check the .gfa file 
+!!! terminal "code"
+
+    ```bash
+    
+    head 5NM*.gfa |less -S 
+    ```
+    ??? success "what does L, S mean"
+        ```bash 
+        H       VN:Z:1.0
+        S       1       ATCCGCCCGACCAAGAAGGCATTTTGGAACTACACATCCGCAGGCGCAAAAACGGTGTCTGCTCGGAAATGATTTTCGGCAGCGAACCCAAAGTCAAAGAAAAAGGCATCGTCCG
+        L       1       +       4       +       0M
+        S       2       CGAAATTGTTTCTTTGTCCGTTTGCGATGTTTTTTAGCTTTGGGGCAGTCGAGAATCACGCCGCTCGTTCGGCTTGTGTAACTGATGTTTTTATGCCCCCTTATCTAACAGGGGG
+        L       2       +       133478  +       0M
+        S       3       TCCATTGGGGCAAGGCCGCCGCGCCGACCGGTTTGGCTTCCCACACTTCCCCCTTTGCCGCCAATGCGGCAAACCATTTGGACTGGAGCTGGGTTTTCTCCAGTTTGGGCAGCAA
+        L       3       +       175915  +       0M
+        S       4       G
+        L       4       +       5       +       0M
+        S       5       CCATCGGACGCTTGGACATCAACACCAGCGGACTTCTGATTCT
+        ```
+
+```bash
+    
+    tail 5NM*.gfa |less -S 
+    ```
+    ??? success "what does P mean"
+        ```bash 
+        S       246216  G
+        L       246216  +       246135  +       0M
+        L       246216  +       246217  +       0M
+        S       246217  GAC
+        L       246217  +       246136  +       0M
+        P       NC_003112.2     85316+,85318+,85319+,85321+,85322+,85323+,85325+,85327+,85328+,85330+,85331+,85333+,85334+,85336+,85337+,85
+        P       NC_017518.1     85316+,85317+,85319+,85320+,85322+,85323+,85325+,85326+,85328+,85329+,85331+,85332+,85334+,85335+,85337+,85
+        P       NZ_CP007668.1   1+,4+,5+,6+,8+,9+,11+,12+,14+,15+,17+,18+,20+,21+,23+,25+,26+,27+,29+,31+,32+,34+,35+,37+,38+,39+,41+,43+,4
+        P       NZ_CP016880.1   2+,133478+,133479+,133481+,133482+,133483+,133485+,133486+,133488+,133489+,133490+,133492+,133493+,133495+,
+        P       NZ_CP020423.2   3+,175915+,175916+,175918+,175919+,175921+,175922+,175924+,175925+,175926+,175928+,175929+,175931+,175932+,
+        ```
 
 ## Pangenome graph visualization using ODGI 
 
