@@ -5,6 +5,7 @@
 - To decompose the graph into a VCF file, we need to choose one path as a reference for comparison with the others (any path can serve as this reference)
 - In fact, during the pangenome graph construction process, when the parameter -V 'NC_017518.1:#' is activated, the output file includes the VCF based on the NC_017518.1 reference.
 
+
 ### `vg deconstruct` graph to get the variations in vcf 
 <!-- 
 !!! terminal "code"
