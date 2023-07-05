@@ -45,7 +45,7 @@
     
     head 5NM*.gfa |less -S 
     ```
-    ??? success "output"
+    ??? success "Output"
         ```bash 
         H       VN:Z:1.0
         S       1       ATCCGCCCGACCAAGAAGGCATTTTGGAACTACACATCCGCAGGCGCAAAAACGGTGTCTGCTCGGAAATGATTTTCGGCAGCGAACCCAAAGTCAAAGAAAAAGGCATCGTCCG
