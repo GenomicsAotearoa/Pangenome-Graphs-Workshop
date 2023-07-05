@@ -38,12 +38,10 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
 
     The orientation of the last path is almost exactly the reverse of the second to last one, right? Do you think it's possible that the last path of the genome was submitted as its reverse complement? 
 
+??? info "how to fix this?"
 
-
-## Circlator
-
-**Bacterial genomes are typically circular, so establishing a fixed starting point for each input genome during pangenome graph construction could reduce unnecessary complexity within the graph. Once the genomes are aligned with the same starting point, we can build their index using samtools faidx and proceed with constructing the pangenome graph. I encourage you to experiment with this approach after this workshop to see how effectively it functions.**
-??? info ""
+    ## Circlator
+    **Bacterial genomes are typically circular, so establishing a fixed starting point for each input genome during pangenome graph construction could reduce unnecessary complexity within the graph. Once the genomes are aligned with the same starting point, we can build their index using samtools faidx and proceed with constructing the pangenome graph. I encourage you to experiment with this approach after this workshop to see how effectively it functions.**
 
     let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample. 
     ```bash
@@ -70,6 +68,8 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
 
   done
   ```
+
+
 
 
 ### ODGI 1D visualization by path orientation for the 5NM after start point being fixed
