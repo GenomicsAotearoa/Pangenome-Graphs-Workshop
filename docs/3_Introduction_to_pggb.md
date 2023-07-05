@@ -1,4 +1,4 @@
-# PGGB
+# Introduction to PGGB
 
 ## Variation graph and PGGB 
 !!! info ""
@@ -6,7 +6,6 @@
 - Variation graphs offer a compact representation of genetic variation across a population in the form of bidirected DNA sequence graphs, encompassing large-scale SVs like inversions and duplications. 
 - PGGB, the the PanGenome Graph Builder, is a reference-free pangenome graph constuction method. PGGB builds pangenome graphs from a set of input sequences unbiasly. 
 - The main novelty of PGGB is not simply the reference independence, but moreover its ability to capture all parts of input genomes losslessly.
-- PGGB is designed to be scalable and efficient, making it suitable for large-scale genomic analyses. It is an open-source tool that can be used freely by researchers in the field of genomics.
 
 
 ## How does PGGB work?
@@ -14,8 +13,8 @@
 
 - PGGB generates graphs using an all-to-all alignment of input sequences (wfmash), graph induction (seqwish), and progressive normalization (smoothxg, gfaffix). 
 - After construction, PGGB generates diagnostic visualizations of the graph (odgi). 
-- A variant call report (in VCF) representing both small and large variants can be generated based on any reference genome included in the graph (vg). 
-- PGGB writes its output in GFAv1 format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits
+- A variant call report (in VCF) representing both small and large variants can be generated based on any reference genome included in the graph. 
+- PGGB writes its output in GFAv1(.gfa) format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits
 - Scale Graph Construction: The PGGB algorithm is designed to handle large-scale genomes and can efficiently construct genome graphs containing extensive genetic variations.
 
 
