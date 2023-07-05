@@ -58,17 +58,16 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
     cd /home/zyang/pg_test
     data=/home/zyang/pg_test/*.fna
 
-   for f in $data
-   do
+    for f in $data
+    do
 
-   x=$(basename $f .fna)
-   echo ${x}
+    x=$(basename $f .fna)
+    echo ${x}
 
-   circlator fixstart  ${x}.fna  ${x}.restart
+    circlator fixstart  ${x}.fna  ${x}.restart
 
-  done
-  ```
-
+    done
+    ```
 
 
 
