@@ -56,14 +56,14 @@ An example run to obtain VCF files from GFA.
 
     ```bash
     #use vg deconstruct the graph into VCF based on the first path NC_003112.2
-    vg deconstruct -p NC_003112.2 -a -e ./5NM_2k96.gfa > 5NM_2k96aep1.vcf
-    bcftools stats 5NM_2k96aep1.vcf > 5NM_2k96aep1.vcf_stats
+    vg deconstruct -p NC_003112.2 -a -e ./5NM_2k94.gfa > 5NM_2k94aep1.vcf
+    bcftools stats 5NM_2k94aep1.vcf > 5NM_2k94aep1.vcf_stats
     ```
 
     ```bash
     #use vg deconstruct the graph into VCF based on the second path NC_017518.1
-    vg deconstruct -p NC_017518.1 -a -e ./5NM_2k96.gfa > 5NM_2k96aep2.vcf
-    bcftools stats 5NM_2k96aep2.vcf > 5NM_2k96aep2.vcf_stats
+    vg deconstruct -p NC_017518.1 -a -e ./5NM_2k94.gfa > 5NM_2k94aep2.vcf
+    bcftools stats 5NM_2k94aep2.vcf > 5NM_2k94aep2.vcf_stats
     ```
 
     
