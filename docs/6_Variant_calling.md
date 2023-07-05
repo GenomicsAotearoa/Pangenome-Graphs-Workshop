@@ -177,7 +177,7 @@ submit the script using the `sbatch` command as follows. Take note of the job ID
 !!! terminal "code"
 
     ```bash
-    #check the vcf statistics  
+    #check the vcf 
     head -100 5NM_2k94aep1.vcf |less -s 
     ```
     ??? success "Output"
@@ -243,4 +243,64 @@ submit the script using the `sbatch` command as follows. Take note of the job ID
 
         ```
 
+!!! terminal "code"
 
+    ```bash
+    #check complex variation  
+    awk 'length($4) > 2' 5NM_2k94aep1.vcf |head -100 |less -S 
+    ```
+??? success "Output"
+        
+        ```
+        ##INFO=<ID=AC,Number=A,Type=Integer,Description="Total number of alternate alleles in called genotypes">
+        ##INFO=<ID=NS,Number=1,Type=Integer,Description="Number of samples with data">
+        ##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+        ##INFO=<ID=LV,Number=1,Type=Integer,Description="Level in the snarl tree (0=top level)">
+        ##INFO=<ID=PS,Number=1,Type=String,Description="ID of variant corresponding to parent snarl">
+        ##INFO=<ID=AT,Number=R,Type=String,Description="Allele Traversal as path in graph">
+        #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  NC_017518.1     NZ_CP007668.1   NZ_CP016880.1   NZ_CP020423.2
+        NC_003112.2     1166    >85479>85482    TCT     TG      60      .       AC=4;AF=1;AN=4;AT=>85479>85481>85482,>85479>85480>85482;NS=4;LV=0       GT      1       1       1       1
+        NC_003112.2     1188    >85490>85493    CGT     GAC     60      .       AC=4;AF=1;AN=4;AT=>85490>85492>85493,>85490>85491>85493;NS=4;LV=0       GT      1       1       1       1
+        NC_003112.2     1197    >85493>85496    GAC     TTT     60      .       AC=4;AF=1;AN=4;AT=>85493>85495>85496,>85493>85494>85496;NS=4;LV=0       GT      1       1       1       1
+        NC_003112.2     1288    >85548>85550    TCG     T       60      .       AC=2;AF=0.5;AN=4;AT=>85548>85549>85550,>85548>85550;NS=4;LV=0   GT      0       0       1       1
+        NC_003112.2     1461    >85601>85604    TGTGAAGAATTCA   CGTAAAGAACTCG   60      .       AC=4;AF=1;AN=4;AT=>85601>85603>85604,>85601>85602>85604;NS=4;LV=0       GT      1       1       1       1
+        NC_003112.2     2421    >85870>85879    CCTTGTTTTCAATGCTTCGGCACGCGGAACAGTGTATCACGCGCCGCCGACCGAATTCCTTCGGGATTGCGTCCAAAAA CT,CCTTGTTTTCAATGCTTCGGCACGCGGAACAGTGTATCACGCGCCGCCGACCGGATTTCTTCGGGATTGCGTCCAAAAA      60      .       AC=2,2
+        NC_003112.2     2522    >85895>85898    TGA     CCC     60      .       AC=2;AF=0.5;AN=4;AT=>85895>85897>85898,>85895>85896>85898;NS=4;LV=0     GT      0       0       1       1
+        NC_003112.2     2531    >85901>85904    CCC     CG      60      .       AC=2;AF=0.5;AN=4;AT=>85901>85903>85904,>85901>85902>85904;NS=4;LV=0     GT      0       0       1       1
+        NC_003112.2     3725    >86007>86010    AAC     GGT     60      .       AC=2;AF=0.5;AN=4;AT=>86007>86008>86010,>86007>86009>86010;NS=4;LV=0     GT      0       0       1       1
+        NC_003112.2     4158    >86067>86069    CTTTT   C       60      .       AC=4;AF=1;AN=4;AT=>86067>86068>86069,>86067>86069;NS=4;LV=0     GT      1       1       1       1
+        NC_003112.2     4174    >86077>86081    CCGG    CA,CGG  60      .       AC=2,2;AF=0.5,0.5;AN=4;AT=>86077>86079>86080>86081,>86077>86078>86081,>86077>86080>86081;NS=4;LV=0      GT      2       2       1       1
+        NC_003112.2     4497    >86125>86128    GGG     AAC     60      .       AC=1;AF=0.25;AN=4;AT=>86125>86126>86128,>86125>86127>86128;NS=4;LV=0    GT      0       0       1       0
+        NC_003112.2     5425    >86315>86318    GTCT    CAAC    60      .       AC=2;AF=0.5;AN=4;AT=>86315>86316>86318,>86315>86317>86318;NS=4;LV=0     GT      1       1       0       0
+        NC_003112.2     5713    >86384>86387    ATTGGTCGATGCCATT        CTTGGTCGATGCCATC        60      .       AC=3;AF=0.75;AN=4;AT=>86384>86385>86387,>86384>86386>86387;NS=4;LV=0    GT      1       1       1       0
+        NC_003112.2     6244    >86433>86436    TTT     CAA     60      .       AC=4;AF=1;AN=4;AT=>86433>86435>86436,>86433>86434>86436;NS=4;LV=0       GT      1       1       1       1
+        NC_003112.2     6266    >86436>86438    TTT     T       60      .       AC=4;AF=1;AN=4;AT=>86436>86437>86438,>86436>86438;NS=4;LV=0     GT      1       1       1       1
+        NC_003112.2     6654    >86555>86557    ATGTCTTTCACCACAGCTTCCGCATCGGCGGCAA      A       60      .       AC=4;AF=1;AN=4;AT=>86555>86556>86557,>86555>86557;NS=4;LV=0     GT      1       1       1       1
+        NC_003112.2     8852    >86833>86835    GTATAGTGAATTAACAAAAATCGGGACAAGGCGGCGAAGCCGCAGACAGTACAGATAGTACAGAACCGATTCACTTGGTGCTTCAGCACCTTAGAGAATCGTTCTCTTTGAGCTAAGGCGAGGCAATACCGTACTGGTTTTTGTTAATCCACTA      G       60      .       AC=3;A
+        NC_003112.2     9305    >86883>86885    CCC     C       60      .       AC=4;AF=1;AN=4;AT=>86883>86884>86885,>86883>86885;NS=4;LV=0     GT      1       1       1       1
+        NC_003112.2     9316    >86888>86891    CCC     ATT     60      .       AC=4;AF=1;AN=4;AT=>86888>86890>86891,>86888>86889>86891;NS=4;LV=0       GT      1       1       1       1
+        NC_003112.2     9341    >86904>86906    TCCGC   T       60      .       AC=4;AF=1;AN=4;AT=>86904>86905>86906,>86904>86906;NS=4;LV=0     GT      1       1       1       1
+        NC_003112.2     11685   >87208>87211    CGCG    ATTT    60      .       AC=2;AF=0.5;AN=4;AT=>87208>87209>87211,>87208>87210>87211;NS=4;LV=0     GT      1       1       0       0
+        NC_003112.2     13080   >87342>87372    AAAATGCCCCGCACCGTCTTTGCCGACCCAGTCGCAACACGGTTCGCCCTGCGACGTTTTGGCGGCAATCGCCTGAAAAATCGGCTTGACCGCATCCCAA            GAAATGTCCCGCACCATCCCTGCCGACCCAATCGCAACACGGCTCACCTTGAGGGGTTTTCGCAGCAATCGCCTGGAAAATCGGTT
+        NC_003112.2     13473   >87464>87469    ATTA    GCCC,ATCC       60      .       AC=2,2;AF=0.5,0.5;AN=4;AT=>87464>87466>87467>87469,>87464>87465>87468>87469,>87464>87466>87468>87469;NS=4;LV=0  GT      2       2       1       1
+        NC_003112.2     13849   >87531>87538    CAG     TGG,CGA 60      .       AC=2,1;AF=0.5,0.25;AN=4;AT=>87531>87533>87535>87537>87538,>87531>87532>87534>87537>87538,>87531>87533>87534>87536>87538;NS=4;LV=0       GT      2       0
+        NC_003112.2     14058   >87606>87613    GGTC    GAGA,AGTA       60      .       AC=2,1;AF=0.5,0.25;AN=4;AT=>87606>87607>87610>87612>87613,>87606>87607>87608>87611>87613,>87606>87609>87610>87611>87613;NS=4;LV=0       GT      2
+        NC_003112.2     14113   >87643>87846    AATTTGTGTATAAGTGGTGGAAAAAATGAGATTTGCGGGTAAATCTCACAATATTTCAGTCAGATAACTTTGGATTGCTTGTGTATAAGTAAACTTTCGGATGGGGATACGTAACGGAAACCTGTACCGCGTCATTCCCACGAACCTACATTCCGTCATTCCCACGAAAGTGGGAATGATGAAATTTTGA
+        NC_003112.2     14291   >87652>87654    ATGAAATTTTGAGTTTTAGGAATTTATCGGGAGCAACAGAAACCGCTCCGCCGTCATTCCCGCGCAGGCGGGAATCTAGAACGTAAAATCTAAAGAAACCGTGTTGTAACGGCAGACCGATGCCGTCATTCCCGCGCAGGCGGGAATCTAGACCATTGGACAGCGGCAATATTCAAAGATTATCTGAAAG
+        NC_003112.2     14598   >87660>87663    AGAACA  GTCGGT  60      .       AC=2;AF=1;AN=2;AT=>87660>87662>87663,>87660>87661>87663;NS=2;LV=1;PS=>87643>87846       GT      .       .       1       1
+        NC_003112.2     14635   >87690>87692    GAGA    G       60      .       AC=2;AF=1;AN=2;AT=>87690>87691>87692,>87690>87692;NS=2;LV=1;PS=>87643>87846     GT      .       .       1       1
+        NC_003112.2     14797   >87719>87722    AGAATA  GTCGGT  60      .       AC=2;AF=1;AN=2;AT=>87719>87720>87722,>87719>87721>87722;NS=2;LV=1;PS=>87643>87846       GT      .       .       1       1
+        NC_003112.2     14828   >87743>87746    AAG     TTT     60      .       AC=2;AF=1;AN=2;AT=>87743>87745>87746,>87743>87744>87746;NS=2;LV=1;PS=>87643>87846       GT      .       .       1       1
+        NC_003112.2     14834   >87749>87751    GGGA    G       60      .       AC=2;AF=1;AN=2;AT=>87749>87750>87751,>87749>87751;NS=2;LV=1;PS=>87643>87846     GT      .       .       1       1
+        NC_003112.2     15023   >87770>87776    CCC     C,CTGCC,CCGCC   60      .               AC=1,1,1;AF=0.333333,0.333333,0.333333;AN=3;AT=>87770>87774>87776,>87770>87776,>87770>87771>87773>87774>87776,>87770>87772>87773>87774>87776;NS=3;LV=1
+        NC_003112.2     15060   >87784>87787    GGTG    GAA     60      .       AC=3;AF=1;AN=3;AT=>87784>87786>87787,>87784>87785>87787;NS=3;LV=1;PS=>87643>87846       GT      1       .       1       1
+        NC_003112.2     15064   >87787>87790    CGG     CA      60      .       AC=3;AF=1;AN=3;AT=>87787>87789>87790,>87787>87788>87790;NS=3;LV=1;PS=>87643>87846       GT      1       .       1       1
+        NC_003112.2     15074   >87795>87797    TCGGA   T       60      .       AC=3;AF=1;AN=3;AT=>87795>87796>87797,>87795>87797;NS=3;LV=1;PS=>87643>87846     GT      1       .       1       1
+        NC_003112.2     16456   >87941>88094    TTTGGAATTTCAATGCCTCAAGAATTTATCGGAAAAAACCAAAACCCTTCCGCCGTCATTCCCACGAAAGTGGGAATCTAGAAATGAAAAGCAGCAGGCATTTATCGGAAATGACCGAAACTGAACGGACTGGATTCCCGCTTTTGCGGGAATGACGGCGACAGGGTTGCTGTTATAGTGGATGAACAAA
+        NC_003112.2     16475   >87961>87963    AAGAAT  A       60      .       AC=3;AF=1;AN=3;AT=>87961>87962>87963,>87961>87963;NS=3;LV=1;PS=>87941>88094     GT      .       1       1       1
+        NC_003112.2     16485   >87966>87968    CGGA    C       60      .       AC=3;AF=1;AN=3;AT=>87966>87967>87968,>87966>87968;NS=3;LV=1;PS=>87941>88094     GT      .       1       1       1
+        NC_003112.2     16499   >87977>87979    ACCC    A       60      .       AC=3;AF=1;AN=3;AT=>87977>87978>87979,>87977>87979;NS=3;LV=1;PS=>87941>88094     GT      .       1       1       1
+        NC_003112.2     16507   >87979>87981    GCCG    G       60      .       AC=3;AF=1;AN=3;AT=>87979>87980>87981,>87979>87981;NS=3;LV=1;PS=>87941>88094     GT      .       1       1       1
+        NC_003112.2     16537   >87987>87990    AAA     TTT     60      .       AC=3;AF=1;AN=3;AT=>87987>87989>87990,>87987>87988>87990;NS=3;LV=1;PS=>87941>88094       GT      .       1       1       1
+
+        ```
