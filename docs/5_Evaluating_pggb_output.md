@@ -43,32 +43,35 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
 ## Circlator
 
 **As bacterial genomes are circular, if we can fix the start of the input genomes for pangenome graph constrcution, this may help to exclude the unneccessary complexity in the grph **
+??? info ""
 
-let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample. 
-```bash
-#!/usr/bin/bash
+    let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample. 
+    ```bash
+    #!/usr/bin/bash
 
-#SBATCH --account       ga03793
-#SBATCH --job-name      restart_fna
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      restart_fna
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
 
-module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
+    module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
 
-cd /home/zyang/pg_test
-data=/home/zyang/pg_test/*.fna
+    cd /home/zyang/pg_test
+    data=/home/zyang/pg_test/*.fna
 
-for f in $data
-do
+   for f in $data
+   do
 
-x=$(basename $f .fna)
-echo ${x}
+   x=$(basename $f .fna)
+   echo ${x}
 
-circlator fixstart  ${x}.fna  ${x}.restart
+   circlator fixstart  ${x}.fna  ${x}.restart
 
-done
-```
+  done
+  ```
+
+??? info "rebuild the "
 
 
 
