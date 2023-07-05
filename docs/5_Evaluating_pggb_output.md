@@ -60,7 +60,7 @@
         S       5       CCATCGGACGCTTGGACATCAACACCAGCGGACTTCTGATTCT
         ```
 
-```bash
+    ```bash
     
     tail 5NM*.gfa |less -S 
     ```
