@@ -1,4 +1,6 @@
-# 3. What's PGGB? 
+# PGGB
+
+## Variation graph and PGGB 
 !!! info ""
 
 - Variation graphs offer a compact representation of genetic variation across a population in the form of bidirected DNA sequence graphs, encompassing large-scale SVs like inversions and duplications. 
@@ -7,7 +9,7 @@
 - PGGB is designed to be scalable and efficient, making it suitable for large-scale genomic analyses. It is an open-source tool that can be used freely by researchers in the field of genomics.
 
 
-### How does PGGB work?
+## How does PGGB work?
 !!! info ""
 
 - PGGB generates graphs using an all-to-all alignment of input sequences (wfmash), graph induction (seqwish), and progressive normalization (smoothxg, gfaffix). 
@@ -17,12 +19,12 @@
 - Scale Graph Construction: The PGGB algorithm is designed to handle large-scale genomes and can efficiently construct genome graphs containing extensive genetic variations.
 
 
-#### input fasta file 
+### input fasta file 
 !!! info ""
 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_1_small.png)
 
-#### All-to-all alignment
+### All-to-all alignment
 !!! info ""
 
 Generally, refers to the process of aligning all sequences in a given set against each other, rather than aligning them to a single reference sequence.
@@ -30,7 +32,7 @@ We begin with an alignment with `wfmash`. This compares all sequences to each ot
 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_2_small.png)
 
-#### Inducing the graph
+### Inducing the graph
 !!! info ""
 
 Refers to the process of constructing the genome graph by progressively integrating genetic variants into a reference genome.
@@ -38,12 +40,12 @@ These base-level alignments are converted into a graph with `seqwish`. A filter 
 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_3_small.png)
 
-#### Normalizing the graph by SMOOTHXG and GFAfix
+### Normalizing the graph by SMOOTHXG and GFAfix
 !!! info ""
 
 This process aims to optimize the structure and representation of the genome graph by resolving redundant or overlapping elements. This step is typically performed after the initial construction of the graph.
 
-##### SMOOTHXG
+#### SMOOTHXG
 !!! info ""
 
 Through a series of passes over the pangenome, SMOOTHXG reshapes the graph to reduce local complexity and underalignment. This resolves key problems encountered in earlier attempts to implement all-vs-all alignment based graph construction, which typically resulted in very complex, looping, graph motifs at small scales, and redundancy caused by match filtering.
@@ -52,7 +54,7 @@ The normalization process in PGGB involves several steps, which may vary dependi
 2.	Edge Optimization: Edges represent connections between nodes. During normalization, the edges are optimized to minimize redundancy and improve the efficiency of the graph. This can include merging or repositioning edges to create a more streamlined and accurate representation of the genome.  
 ![bacterial-pangenome](theme_figures/PGGB_workflow_4_small.png)
 
-##### gfafix
+#### gfafix
 !!! info ""
 
 3.	Compact Representation: Normalization aims to reduce the overall size of the graph by compacting the representation. This can involve compressing repetitive regions or simplifying complex structures while preserving the essential information and variant representation.
@@ -61,14 +63,14 @@ The normalization process in PGGB involves several steps, which may vary dependi
 
 
 
-#### Multiqc and graph statistics
+### Multiqc and graph statistics
 !!! info ""
 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_6_small.png)
 
 
 
-### PGGB workflow
+## PGGB workflow
 !!! info ""
 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_7_small.png)
