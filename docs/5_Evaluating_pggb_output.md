@@ -103,16 +103,6 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 !!! info ""
 
 #### 5NM 2k94
-| Sample Name                         | Length    | Nodes  | Edges  | Components | A   |C    |T    |G    |N   |
-|:-----                               |----------:|-------:|-------:|-----------:|----:|----:|----:|----:|----:|
-|seqwish	|2280344	|22216	|29823	|4	|1	|551639	|578590	|557450	|592665	|0|
-|smooth	|2261163	|29965	|40179	|4	|1	|548754	|574693	|551650	|586066	|0|
-
-![1k96 ODGI 1D visualization by path orientation](theme_figures/4Sim.fa.97e7156.417fcdf.7659dc8.smooth.final.og.viz_inv_multiqc.png)
-
-
-#### 1k96,-K79
-
 
 | Sample Name                         | Length    | Nodes  | Edges  |Paths       |Components | A   |C    |T    |G    |N   |
 |:-----                               |----------:|-------:|-------:|------------|-----------:|----:|----:|----:|----:|----:|
@@ -121,46 +111,4 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 
 
 
-
-
-## Circlator
-
-**NB: this material below was moved from Section 2. Motivate this stuff by inspecting the 1D graph of inversions, and
-note that one of the samples is completely inverted relative to the others.**
-
-!!! question "Exercises"
-
-    - Can we cat the graph and start pangenome graph construction now? 
-    - What potiential issues could there be? 
-    - We need to check whether all the genomes are with the same start. If not, it will cause unwanted complexsity for the pangenome graph. 
-    
-```bash
-head -10 *.fna >>head10_check
-less -S head10_check
-```
-let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample. 
-```bash
-#!/usr/bin/bash
-
-#SBATCH --account       ga03793
-#SBATCH --job-name      restart_fna
-#SBATCH --cpus-per-task 8
-#SBATCH --mem           4G
-#SBATCH --time          1:00:00
-
-module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
-
-cd /home/zyang/pg_test
-data=/home/zyang/pg_test/*.fna
-
-for f in $data
-do
-
-x=$(basename $f .fna)
-echo ${x}
-
-circlator fixstart  ${x}.fna  ${x}.restart
-
-done
-```
 
