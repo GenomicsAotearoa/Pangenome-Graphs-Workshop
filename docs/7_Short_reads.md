@@ -116,18 +116,29 @@ Build the index.
 
 ## Map NGS reads to graph 
 
+Map reads back to reference pangenome graph
 !!! terminal "code"
 
     ```bash
-    mkdir /home/zyang/pg_workshop/graph_NGS/graph_based_mapping
+    # Modules
+    module purge
+    module load vg/1.46.0
+
+
+     # Map reads
+    vg map -t 8 -d 5NM_256_chopped -f NMI138_S5_R1_P.fastq.gz -f NMI138_S5_R1_P.fastq.gz -N NMI138  > NM138.vgmap_5NM.gam
+
+    # Output mapping statistics
+    vg stats -a NM138.vgmap_5NM.gam > /NM138.vgmap_4Sim_stats 
+ 
     ```
 
-Map reads back to reference pangenome graph as an array job.
-
+Map reads back to reference pangenome graph as a slurm job.
 !!! terminal "code"
 
     ```bash
     #!/bin/bash -e
+
     #SBATCH --account       nesi02659
     #SBATCH --job-name      vgmap_5e_4Sim
     #SBATCH --cpus-per-task 24
@@ -135,35 +146,29 @@ Map reads back to reference pangenome graph as an array job.
     #SBATCH --time          01:00:00
     #SBATCH --error         %x_%j.err
     #SBATCH --output        %x_%j.out
-    #SBATCH --array         0-5
 
     # Modules
     module purge
     module load vg/1.46.0
 
     # Variables
-    wkdir=~/pg_workshop/graph_NGS
-    read_folder=${wkdir}/simu_NGS_data
-    output_folder=${wkdir}/graph_based_mapping
-    index=${wkdir}/refs/4Sim_1K96_256.gcsa
+    wkdir=~/pg_test/graph_NGS
+    index=${wkdir}/5NM_256_chopped.gcsa
     index_prefix=${index%%.gcsa}
 
-    mkdir -p ${output_folder}
-
-    # Array
-    file_array=(${read_folder}/*R1.fq.gz)
-    file=${file_array[$SLURM_ARRAY_TASK_ID]}
-    read_prefix=$(basename ${file} .R1.fq.gz)
-    read2=$(echo ${file} | sed -e 's/R1.fq.gz/R2.fq.gz/')
-
     # Map reads
-    vg map -t $SLURM_CPUS_PER_TASK -d ${index_prefix} -f ${file} -f ${read2} -N ${read_prefix} > ${output_folder}/${read_prefix}.vgmap_4Sim.gam
+    vg map -t $SLURM_CPUS_PER_TASK -d ${index_prefix} -f NMI138_S5_R1_P.fastq.gz -f NMI138_S5_R2_P.fastq.gz -N NMI138 > NM138.vgmap_5NM.gam
 
     # Output mapping statistics
-    vg stats -a ${output_folder}/${read_prefix}.vgmap_4Sim.gam > ${output_folder}/${read_prefix}.vgmap_4Sim_stats
+    vg stats -a NM138.vgmap_5NM.gam > NM138.vgmap_5NM_stats
+  
     ```
-
 <!-- 3 min per read pair -->
+
+
+
+
+
 
 ## Genotying known variants 
 
