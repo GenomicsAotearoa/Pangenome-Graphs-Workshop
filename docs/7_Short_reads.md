@@ -27,6 +27,7 @@ we use vg map in this workshop
 !!! terminal "code"
 
     ```bash
+    
     mkdir graph_NGS
     
     #copy graph to the graph reference (.gfa file) to work direvtory graph_NGS 
