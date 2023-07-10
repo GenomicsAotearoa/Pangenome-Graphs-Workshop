@@ -32,9 +32,8 @@ we use vg map in this workshop
     #copy graph to the graph reference (.gfa file) to work direvtory graph_NGS 
     cp /home/$your_home_dir/pg_workshop/5NM*.gfa ./home/$your_home_dir/pg_workshop/graph_NGS/5NM.gfa
 
-
-    #cd /home/$your_home_dir/pg_workshop/graph_NGS
-
+    cd /home/$your_home_dir/pg_workshop/graph_NGS
+    ```
 
 Load the necessary modules for an example run.
 !!! terminal "code"
@@ -70,7 +69,7 @@ Build the index.
     vg index -b temp_dir -g 5NM_256_chopped.gcsa -x 5NM_256_chopped.xg -g 5NM_256_chopped.gcsa -k 16 5NM_256_chopped.vg
     ```
 
-!!! terminal "code"
+??? terminal "code"
 
     ```bash
     #run a slurm job for this, it takes ~10 mins based on the following setting 
@@ -116,7 +115,7 @@ Build the index.
 
 ## Map NGS reads to graph 
 
-Map reads back to reference pangenome graph
+Map reads back to graph reference
 !!! terminal "code"
 
     ```bash
@@ -133,14 +132,14 @@ Map reads back to reference pangenome graph
  
     ```
 
-Map reads back to reference pangenome graph as a slurm job.
-!!! terminal "code"
+Map reads back to graph reference as a slurm job.
+??? terminal "code"
 
     ```bash
     #!/bin/bash -e
 
     #SBATCH --account       nesi02659
-    #SBATCH --job-name      vgmap_5e_4Sim
+    #SBATCH --job-name      vgmap_5e_5NM
     #SBATCH --cpus-per-task 24
     #SBATCH --mem           4G
     #SBATCH --time          01:00:00
@@ -154,7 +153,7 @@ Map reads back to reference pangenome graph as a slurm job.
     # Variables
     wkdir=~/pg_test/graph_NGS
     index=${wkdir}/5NM_256_chopped.gcsa
-    index_prefix=${index%%.gcsa}
+    index_prefix=${index%%.gcsa
 
     # Map reads
     vg map -t $SLURM_CPUS_PER_TASK -d ${index_prefix} -f NMI138_S5_R1_P.fastq.gz -f NMI138_S5_R2_P.fastq.gz -N NMI138 > NM138.vgmap_5NM.gam
@@ -164,9 +163,6 @@ Map reads back to reference pangenome graph as a slurm job.
   
     ```
 <!-- 3 min per read pair -->
-
-
-
 
 
 
