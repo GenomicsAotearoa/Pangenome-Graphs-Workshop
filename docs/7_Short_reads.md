@@ -183,7 +183,21 @@ Generate snarls of graph.
 
 Perform genotyping.
 
+
 !!! terminal "code"
+
+    ```bash
+    # Calculate support reads
+    vg pack -t 8 -x 5NM_256_chopped.xg -g NM138.vgmap_5NM.gam -o NM138_vgmap_5NM_256_chopped.pack
+
+    # Call variants using the same coordinates and include reference calls for comparison
+    vg call -t 8 -m 3,10 5NM_256_chopped.xg -k NM138_vgmap_5NM_256_chopped.pack -r 5NM_256_chopped.snarls -a > NM138.vgmap_5NM_256.pack_allR10S3.vcf
+    
+    ```
+
+
+
+??? terminal "code"
 
     ```bash
     #!/bin/bash -e
