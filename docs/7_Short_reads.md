@@ -22,7 +22,6 @@ we use vg map in this workshop
     - Variant calling for NGS data against genome graph 
 
 
-
 ## Build index for graph
 
 !!! terminal "code"
@@ -30,11 +29,11 @@ we use vg map in this workshop
     ```bash
     mkdir graph_NGS
     
-    # copy graph to the graph reference (.gfa file) to work direvtory graph_NGS 
+    #copy graph to the graph reference (.gfa file) to work direvtory graph_NGS 
     cp /home/$your_home_dir/pg_workshop/5NM*.gfa ./home/$your_home_dir/pg_workshop/graph_NGS/5NM.gfa
 
 
-    #cd ./home/$your_home_dir/pg_workshop/graph_NGS
+    #cd /home/$your_home_dir/pg_workshop/graph_NGS
 
 
 Load the necessary modules for an example run.
@@ -60,8 +59,7 @@ Build the index.
     #small graph is ok without prunning, complex graph will need to prune first before generating index
     #Build xg and gcsa index
     vg index -b ${temp_dir} -t 4 -x 5NM_256.xg -g 5NM_256.gcsa -k 16 5NM_256.vg
-    ??? you may have run out of temporary disk space at temp_dir
-
+    ### you may have run out of temporary disk space at temp_dir
 
     ### pruning: use -M if pruning fails
     vg prune -u -m node-mapping.tmp -t 4 -k 24 5NM_256.vg > 5NM_256_chopped.vg
@@ -71,6 +69,50 @@ Build the index.
     
     vg index -b temp_dir -g 5NM_256_chopped.gcsa -x 5NM_256_chopped.xg -g 5NM_256_chopped.gcsa -k 16 5NM_256_chopped.vg
     ```
+
+!!! terminal "code"
+
+    ```bash
+    #run a slurm job for this, it takes ~10 mins based on the following setting 
+
+    
+    #!/bin/bash
+
+    #SBATCH --account       nesi02659
+    #SBATCH --job-name      build_index_for_5NMGraph
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           16G
+    #SBATCH --time          1:00:00
+    #SBATCH --error         %x_%j.err
+    #SBATCH --output        %x_%j.out
+
+    # Modules
+    module purge
+    module load vg/1.46.0
+
+    # Variables
+    #cd /home/zyang/pg_workshop/graph_NGS
+    data=5NM.gfa
+    mkdir -p temp_dir
+
+    # Convert graph into 256 bp chunks, saving as vg format
+    vg mod -X 256 5NM.gfa > 5NM_256.vg
+
+    #small graph is ok without prunning
+    # Build xg and gcsa index
+    #vg index -b ${temp_dir} -t $cpus-per-task -x 5NM_256.xg -g 5NM_256.gcsa -k 16 5NM_256.vg
+
+    #complex graph will need to prune first before generating index
+    ### pruning: use -M if pruning fails
+    vg prune -u -m node-mapping.tmp -t 8 -k 24 5NM_256.vg > 5NM_256_chopped.vg
+
+    vg index 5NM_256_chopped.vg -x 5NM_256_chopped.xg
+    ### gcsa index
+    vg index -b temp_dir -t 8 -x 5NM_256_chopped.xg -g 5NM_256_chopped.gcsa -k 16 5NM_256_chopped.vg
+
+    ```
+
+
 
 ## Map NGS reads to graph 
 
