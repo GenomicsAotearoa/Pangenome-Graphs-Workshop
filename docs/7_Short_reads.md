@@ -177,7 +177,7 @@ Generate snarls of graph.
     module purge
     module load vg/1.46.0
 
-    vg snarls -t 2 5NM_256_chopped.xg > 5NM_256_chopped.xg.snarls
+    vg snarls -t 2 5NM_256.xg > 5NM_256.xg.snarls
     
     ```
 
@@ -188,10 +188,10 @@ Perform genotyping.
 
     ```bash
     # Calculate support reads
-    vg pack -t 8 -x 5NM_256_chopped.xg -g NM138.vgmap_5NM.gam -o NM138_vgmap_5NM_256_chopped.pack
+    vg pack -t 8 -x 5NM_256.xg -g NM138.vgmap_5NM.gam -o NM138_vgmap_5NM_256.pack
 
     # Call variants using the same coordinates and include reference calls for comparison
-    vg call -t 8 -m 3,10 5NM_256_chopped.xg -k NM138_vgmap_5NM_256_chopped.pack -r 5NM_256_chopped.snarls -a > NM138.vgmap_5NM_256.pack_allR10S3.vcf
+    vg call -t 8 -m 3,10 5NM_256.xg -k NM138_vgmap_5NM_256.pack -r 5NM_256.xg.snarls -a > NM138.vgmap_5NM_256.pack_allR10S3.vcf
     
     ```
 
@@ -213,26 +213,16 @@ Perform genotyping.
     module purge 
     module load vg/1.46.0
 
-    # Variables
-    wkdir=~/pg_workshop/graph_NGS
-    gam_dir=${wkdir}/graph_based_mapping
-    out_dir=${wkdir}/vgmap_12e_sim4_allR10S3_typing
+    vg index 5NM_256.vg -x 5NM_256.xg
 
-    mkdir -p ${out_dir}
-
-    xg=${wkdir}/refs/4Sim_1K96_256.xg
-    snarls=${wkdir}/refs/4Sim_1K96_256.xg.snarls
-
-    # Array
-    file_array=(${gam_dir}/*.gam)
-    file=${file_array[$SLURM_ARRAY_TASK_ID]}
-    prefix=$(basename ${file} .wgsim_er0.005.vgmap_4Sim.gam)
+    vg snarls -t 2 5NM_256.xg > 5NM_256.xg.snarls
 
     # Calculate support reads
-    vg pack -t $SLURM_CPUS_PER_TASK -x ${xg} -g ${file} -o ${out_dir}/${prefix}.vgmap_sim4_256_aln.pack
+    vg pack -t 8 -x 5NM_256.xg -g NM138.vgmap_5NM.gam -o NM138_vgmap_5NM_256.pack
 
     # Call variants using the same coordinates and include reference calls for comparison
-    vg call -t $SLURM_CPUS_PER_TASK -m 3,10 ${xg} -k ${out_dir}/${prefix}.vgmap_sim4_256_aln.pack -r $  {snarls} -a > ${out_dir}/${prefix}.vgmap_sim4_256_aln.pack_allR10S3.vcf
+    vg call -t 8 -m 3,10 5NM_256.xg -k NM138_vgmap_5NM_256.pack -r 5NM_256.xg.snarls -a > NM138.vgmap_5NM_256.pack_allR10S3.vcf
+  
     ```
 
 <!-- 3-5 min per input -->
