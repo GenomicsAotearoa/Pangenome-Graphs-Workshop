@@ -21,154 +21,55 @@ we use vg map in this workshop
     - Map NGS data to graph using vg map
     - Variant calling for NGS data against genome graph 
 
-## Simulate NGS read data
 
-We will use `wgsim` from SAMtools to simulate 2 $\times$ 150 bp NGS data (based on 5 genomes) with an error rate of 0.005.
-
-!!! terminal "code"
-
-    ```bash
-    mkdir ~/pg_workshop/graph_NGS
-    cd graph_NGS
-    mkdir simu_NGS_data
-    ```
-The script for simulation NGS data
-
-!!! terminal "code"
-
-    === "Loop"
-
-        ```bash
-        #!/bin/bash -e
-        #SBATCH --account       nesi02659
-        #SBATCH --job-name      5.simulate_NGS
-        #SBATCH --cpus-per-task 2
-        #SBATCH --mem           4G
-        #SBATCH --time          30:00
-        #SBATCH --error         %x_%j.err
-        #SBATCH --output        %x_%j.out
-
-        # Modules
-        module purge
-        module load SAMtools/1.16.1-GCC-11.3.0
-
-        # Variables
-        wkdir=~/pg_workshop
-        input_folder=${wkdir}/dataset_for_pg_workshop/12_genomes_for_NGS_simulation
-        output_folder=${wkdir}/graph_NGS/simu_NGS_data
-
-        mkdir -p ${output_folder}
-
-        # Run
-        for input in ${input_folder}/*_6k.fa; do
-          # Set prefix
-          prefix=$(basename ${input} .fa)
-          # Simulate reads
-          wgsim -N 1000000 -1 150 -2 150  -e 0.005 -r 0 -R 0 -X 0 \
-            ${input} \
-            ${output_folder}/${prefix}.wgsim_er0.005.R1.fq \
-            ${output_folder}/${prefix}.wgsim_er0.005.R2.fq
-          # Compress reads
-          gzip ${output_folder}/${prefix}.wgsim_er0.005.R*.fq
-        done
-        ```
-
-    === "Array"
-
-        ```bash
-        #!/bin/bash -e
-        #SBATCH --account       nesi02659
-        #SBATCH --job-name      5.simulate_NGS
-        #SBATCH --cpus-per-task 2
-        #SBATCH --mem           4G
-        #SBATCH --time          05:00
-        #SBATCH --error         %x_%j_%a.err
-        #SBATCH --output        %x_%j_%a.out
-        #SBATCH --array         0-5
-
-        # Modules
-        module purge
-        module load SAMtools/1.16.1-GCC-11.3.0
-
-        # Variables
-        wkdir=~/pg_workshop
-        input_folder=${wkdir}/dataset_for_pg_workshop/12_genomes_for_NGS_simulation
-        output_folder=${wkdir}/graph_NGS/simu_NGS_data
-
-        mkdir -p ${output_folder}
-
-        # Array
-        input_array=(${input_folder}/*_6k.fa)
-        input=${input_array[$SLURM_ARRAY_TASK_ID]}
-        prefix=$(basename ${input} .fa)
-
-        # Simulate reads
-        wgsim -N 1000000 -1 150 -2 150  -e 0.005 -r 0 -R 0 -X 0 \
-          ${input} \
-          ${output_folder}/${prefix}.wgsim_er0.005.R1.fq \
-          ${output_folder}/${prefix}.wgsim_er0.005.R2.fq
-
-        # Compress reads
-        gzip ${output_folder}/${prefix}.wgsim_er0.005.R*.fq
-        ```
 
 ## Build index for graph
 
-Copy a reference (4Sim_1K96.gfa) into the NGS read directory.
-
 !!! terminal "code"
 
     ```bash
-    mkdir refs
+    mkdir graph_NGS
     
-    # copy graph to the refs work direvtory 
-    cp /home/zyang/pg_workshop/vg_deconstruct/4Sim_1K96.gfa /home/zyang/pg_workshop/graph_NGS/refs
-    
-    #make tem_dir
-    mkdir /home/zyang/pg_workshop/graph_NGS/refs/temp_dir
+    # copy graph to the graph reference (.gfa file) to work direvtory graph_NGS 
+    cp /home/$your_home_dir/pg_workshop/5NM*.gfa ./home/$your_home_dir/pg_workshop/graph_NGS/5NM.gfa
+
+
+    #cd ./home/$your_home_dir/pg_workshop/graph_NGS
+
+
+Load the necessary modules for an example run.
+!!! terminal "code"
+
+    ```bash
+    module purge
+    module load vg/1.46.0
     ```
+
 
 Build the index.
 
 !!! terminal "code"
 
     ```bash
-    #!/bin/bash
-    
-    #SBATCH --account       nesi02659
-    #SBATCH --job-name      build_index_for_4SimGraph
-    #SBATCH --cpus-per-task 8
-    #SBATCH --mem           4G
-    #SBATCH --time          1:00:00
-    #SBATCH --error         %x_%j.err
-    #SBATCH --output        %x_%j.out
-    
-    # Modules
-    module purge
-    module load vg/1.46.0
-    
-    # Variables
-    cd ~/pg_workshop/graph_NGS/refs
-    data=4Sim_1K96.gfa
-    temp_dir=temp_dir
-    prefix=$(basename ${data} .gfa)
-
+   
     mkdir -p ${temp_dir}
-
+    
     # Convert graph into 256 bp chunks, saving as vg format
-    vg mod -X 256 ${prefix}.gfa > ${prefix}_256.vg
+    vg mod -X 256 5NM.gfa > 5NM_256.vg
 
-    # Build xg and gcsa index
-    vg index -b ${temp_dir} -t $SLURM_CPUS_PER_TASK -x ${prefix}_256.xg -g ${prefix}_256.gcsa -k 16 ${prefix}_256.vg
-    
     #small graph is ok without prunning, complex graph will need to prune first before generating index
-    
+    #Build xg and gcsa index
+    vg index -b ${temp_dir} -t 4 -x 5NM_256.xg -g 5NM_256.gcsa -k 16 5NM_256.vg
+    ??? you may have run out of temporary disk space at temp_dir
+
+
     ### pruning: use -M if pruning fails
-    #vg prune -u -m node-mapping.tmp -t 48 -k 24 ${x}_256.vg > ${x}_256_chopped.vg
+    vg prune -u -m node-mapping.tmp -t 4 -k 24 5NM_256.vg > 5NM_256_chopped.vg
     
-    #vg index ${x}_256_chopped.vg -x ${x}_256_chopped.xg
-    ### gcsa index
-    #vg index -b $tem_dir -t 48  -g ${x}_256_chopped.gcsa  ${x}_256_chopped.vg
+    vg index 5NM_256_chopped.vg -x 5NM_256_chopped.xg
+    ### gcsa index, it takes .......
+    
+    vg index -b temp_dir -g 5NM_256_chopped.gcsa -x 5NM_256_chopped.xg -g 5NM_256_chopped.gcsa -k 16 5NM_256_chopped.vg
     ```
 
 ## Map NGS reads to graph 
