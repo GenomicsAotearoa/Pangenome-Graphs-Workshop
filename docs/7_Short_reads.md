@@ -169,24 +169,16 @@ Map reads back to graph reference as a slurm job.
 
 ## Genotying known variants 
 
-!!! terminal "code"
-
-    ```bash
-    mkdir ~/pg_workshop/graph_NGS/vgmap_12e_sim4_allR10S3_typing
-    ```
-
 Generate snarls of graph.
 
 !!! terminal "code"
 
     ```bash
-    cd ~/pg_workshop/graph_NGS/refs
-
+    module purge
     module load vg/1.46.0
 
-    vg snarls -t 2 4Sim_1K96_256.xg > 4Sim_1K96_256.xg.snarls
-
-    cd ../
+    vg snarls -t 2 5NM_256_chopped.xg > 5NM_256_chopped.xg.snarls
+    
     ```
 
 Perform genotyping.
@@ -196,13 +188,12 @@ Perform genotyping.
     ```bash
     #!/bin/bash -e
     #SBATCH --account       nesi02659
-    #SBATCH --job-name      5e_vgmap_genotying
+    #SBATCH --job-name      5NM_vgmap_genotying
     #SBATCH --cpus-per-task 24
     #SBATCH --mem           4G
     #SBATCH --time          01:00:00
     #SBATCH --error         %x_%j.err
     #SBATCH --output        %x_%j.out
-    #SBATCH --array         0-5
 
     # Modules
     module purge 
