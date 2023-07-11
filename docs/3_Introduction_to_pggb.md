@@ -39,7 +39,7 @@ These base-level alignments are converted into a graph with `seqwish`. A filter 
 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_3_small.png)
 
-### Normalizing the graph with `smoothxg` and `gfafix`
+### Normalizing the graph with smoothxg and gfafix
 !!! info ""
 
 This process aims to optimize the structure and representation of the genome graph by resolving redundant or overlapping elements. This step is typically performed after the initial construction of the graph.
