@@ -1,18 +1,18 @@
 # 2. Tools & setup
 
 !!! screwdriver-wrench "Tools used for the pangenome graph pipeline"
-    - PanGenome Graph Builder (PGGB) for graph construction (https://github.com/pangenome/pggb) 
-    - the Optimized Dynamic Genome/Graph Implementation (ODGI) for graph manipulation (https://github.com/pangenome/odgi) 
-    - the VG toolkit for variant calling of NGS against pangenome graph reference (https://github.com/vgteam/vg) 
-    - Mash triangle to estimated the pairwise distances distance among genomes (https://github.com/marbl/Mash)
-    - Circlator to fix the start point of genomes (https://sanger-pathogens.github.io/circlator/)
-    - SAMtools (https://github.com/samtools/samtools)
-    - BCFtools (https://github.com/samtools/bcftools)
+    - The PanGenome Graph Builder (PGGB) is used for graph construction (https://github.com/pangenome/pggb).
+    - The Optimized Dynamic Genome/Graph Implementation (ODGI) is employed for graph manipulation (https://github.com/pangenome/odgi).
+    - The VG Toolkit is utilized for variant calling with NGS against a pangenome graph reference (https://github.com/vgteam/vg).
+    - Mash is used to estimate pairwise distances among genomes (https://github.com/marbl/Mash).
+    - Circlator is employed to fix the starting point of genomes (https://sanger-pathogens.github.io/circlator/).
+    - SAMtools is used to build an index of input FASTA files (https://github.com/samtools/samtools).
+    - BCFtools is used to check the statistics of VCF files (https://github.com/samtools/bcftools).
 
 
 !!! info "Running the pggb pipeline on NeSI"
 
-    PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed on NeSI as modules. We need to load each module first.  
+    PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed as modules on NeSI. We must first load each module for use.  
     ```bash
     module load pggb/0.5.3-Miniconda3
     module load SAMtools
