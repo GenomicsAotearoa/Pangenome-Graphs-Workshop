@@ -5,7 +5,7 @@
 <p align="justify">
 A pangenome is defined as the comprehensive collection of whole-genome sequences from multiple individuals within a clade, a population or a species. 
 
-This collective genomic dataset can be further divided into two distinct components: the core genome, which includes genes present in all individuals at the time of analysis, and the accessory genome, consisting of genes found  only in a subset of individuals. 
+This collective genomic dataset can be further divided into two distinct components: the core genome, which includes regions present in all individuals at the time of analysis, and the accessory genome, consisting of regions only found in a subset of individuals. 
 </p>
 
 ![bacterial-pangenome](theme_figures/bacterial-pangenome-small.png).
