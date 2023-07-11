@@ -38,7 +38,9 @@
         multiqc_report.html
         ```
 
-## check the .gfa file. (Graphical Fragment Assembly) GFA is a file format commonly used to represent assembly graphs or sequence variation graphs
+## check the .gfa file. 
+- (Graphical Fragment Assembly) GFA is a file format commonly used to represent assembly graphs or sequence variation graphs
+- 
 !!! terminal "code"
 
     ```bash
