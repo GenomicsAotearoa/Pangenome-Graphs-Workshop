@@ -4,16 +4,16 @@
 !!! info ""
 
 - Variation graphs offer a compact representation of genetic variation across a population in the form of bidirected DNA sequence graphs, encompassing large-scale SVs like inversions and duplications. 
-- PGGB, the the PanGenome Graph Builder, is a reference-free pangenome graph constuction method. PGGB builds pangenome graphs from a set of input sequences unbiasly. 
+- PGGB, the the PanGenome Graph Builder, is a reference-free pangenome graph constuction method. PGGB builds pangenome graphs from a set of input sequences. 
 - The main novelty of PGGB  is not just that it doesn't rely on a reference, but more importantly, it can accurately and fully capture every part of the input genomes.
 
 
 ## How does PGGB work?
 !!! info ""
 
-- PGGB generates graphs using an all-to-all alignment of input sequences (wfmash), graph induction (seqwish), and progressive normalization (smoothxg, gfaffix). 
-- After construction, PGGB generates diagnostic visualizations of the graph (odgi). 
-- A variant call report (in VCF) representing both small and large variants can be generated based on any reference genome included in the graph. 
+- PGGB generates graphs using an all-to-all alignment of input sequences (`wfmash`), graph induction (`seqwish`), and progressive normalization (`smoothxg`, `gfaffix`). 
+- After construction, PGGB generates diagnostic visualizations of the graph (`odgi`). 
+- A variant call report (in Variant Call Format - VCF) representing both small and large variants can be generated based on any reference genome included in the graph. 
 - PGGB writes its output in GFAv1(.gfa) format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits
 - Scale Graph Construction: The PGGB algorithm is designed to handle large-scale genomes and can efficiently construct genome graphs containing extensive genetic variations.
 
@@ -26,15 +26,15 @@
 ### All-to-all alignment
 !!! info ""
 
-Generally, refers to the process of aligning all sequences in a given set against each other, rather than aligning them to a single reference sequence.
-PGGB begins with an alignment with `wfmash` for the input gemomes. This compares all sequences to each other and finds the best N mappings for each. It produces base-level alignments.
+"All-to-all alignment" refers to the process of aligning all sequences in a given set against each other, rather than aligning them to a single reference sequence.
+PGGB begins with an alignment using `wfmash` to align the input genomes. This compares all sequences to each other and finds the best `N` mappings for each. It produces base-level alignments.
 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_2_small.png)
 
 ### Inducing the graph
 !!! info ""
 
-Refers to the process of constructing the genome graph by progressively integrating genetic variants into a reference genome.
+"Graph induction" refers to the process of constructing the genome graph by progressively integrating genetic variants into a reference genome.
 These base-level alignments are converted into a graph with `seqwish`. A filter is applied to remove short matches, which anchors the graph on confident longer exact matches.
 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_3_small.png)
