@@ -4,7 +4,7 @@
 ![bacterial-pangenome](theme_figures/Genomegraphs_theme_figure130NM2D_20230703_small.png).
 
 ## Learning Objectives
-Participants will learn about pangenome concepts and gain practical experience building and analyzing pangenome graphs. They will apply these methods to complex research questions that require understanding the relationships between multiple genomes or accounting for variability when analyzing new genomes. By the end of the course, participants will have a strong understanding of pangenome methods based on whole genome assemblies.
+Participants will learn about pangenome concepts and gain practical experience building and analyzing pangenome graphs.  By the end of the course, participants will have a strong understanding of pangenome methods based on whole genome assemblies. They can apply these methods to complex research questions that require understanding the relationships between multiple genomes or accounting for variability when analyzing new genomes.
 
 
 !!! rectangle-list "Content"
