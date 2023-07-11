@@ -89,6 +89,15 @@
 
 This image shows a 1D rendering of the built pangenome graph. The graph nodes are arranged from left to right, forming the pangenome sequence. Summarization of path coverage across all paths. Dark blue means highest coverage. Dark red means lowest coverage. The path names are placed on the left. The black lines under the paths are the links, which represent the graph topology.
 
+!!! terminal "code"
+
+    ```bash
+    #ODGI Compressed 1D visualization 
+    odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_O_multiqc_1.png -x 1500 -y 500 -a 10 -O -I Consensus_
+    ls  
+    ```
+
+
 ### ODGI 1D visualization
 !!! info ""
  
@@ -175,6 +184,18 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 
 ??? info "Why does the 2D graph display as three large bubbles?"
     **The genome of Neisseria meningitidis is highly recombinant, and this recombination is a significant driver of the extensive genetic diversity within the species. The bubbles highlighted on the graph suggest inverted regions, potentially indicating the presence of recombination hotspots*
+
+!!! terminal "code"
+
+    ```bash
+    #visulize graph into 2D using odgi 
+    #compute the layout first
+    #odgi layout -i graph.og -o graph.layout.lay -P -t 16
+
+    #get the image
+    odgi draw -i graph.og -c graph.layout.lay -p graph.2D.png
+    ls  
+    ```
 
 
 ## Check the statistics statistics for both the seqwish and smoothxg graphs
