@@ -62,7 +62,7 @@ Pangenome graphs represent pangenomes using graph models, effectively capturing 
 - The PGGB pipeline, which operates without a reference method, builds pangenome graphs using an all-to-all whole genome alignment approach with `wfmash`. Subsequent graph induction is accomplished through `seqwish`, followed by progressive normalization implemented with `smoothxg` and `gfaffix`.
 - ODGI is employed for various graph manipulation tasks, including visualization and the extraction of distances between paths within the graph. This feature enables further phylogenetic analysis.
 - By using the pangenome graph created with PGGB, it is possible to concurrently identify a variety of genetic variations. These include structural variations (SVs), rearrangements, and smaller variants such as single nucleotide polymorphisms (SNPs) and insertions/deletions, which can be identified through the `vg deconstruction` process.
-- The VG toolkit is harnessed for NGS data analysis against the graph, which includes tasks like read mapping and variant calling.
+- The VG toolkit is utilized for NGS data analysis against the graph, including tasks such as read mapping and variant calling.
 
 
 
