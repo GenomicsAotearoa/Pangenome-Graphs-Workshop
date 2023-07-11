@@ -18,7 +18,7 @@
 - Scale Graph Construction: The PGGB algorithm is designed to handle large-scale genomes and can efficiently construct genome graphs containing extensive genetic variations.
 
 
-### input fasta file 
+### Input fasta file 
 !!! info ""
 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_1_small.png)
