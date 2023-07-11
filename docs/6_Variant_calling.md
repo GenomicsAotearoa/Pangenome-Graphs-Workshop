@@ -56,6 +56,9 @@ An example run to obtain VCF files from GFA.
 
     ```bash
     #use vg deconstruct the graph into VCF based on the first path NC_003112.2
+    #-e, --path-traversals    Only consider traversals that correspond to paths in the graph.
+    #-a, --all-snarls         Process all snarls, including nested snarls (by default only top-level snarls reported).
+    
     vg deconstruct -p NC_003112.2 -a -e ./5NM_2k94.gfa > 5NM_2k94aep1.vcf
     #use bcftools stats to check the statistics for the vcf file 
     bcftools stats 5NM_2k94aep1.vcf > 5NM_2k94aep1.vcf_stats
