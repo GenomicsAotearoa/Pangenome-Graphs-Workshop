@@ -148,7 +148,7 @@ Inspect the index.
         ```
 
 
-<b> NEEDS EXPLANATION OF OUTPUT </b>
+<b>The lower triangle represents the pairwise distances between the 5NM genomes. We can observe that the largest paired distance is 0.0190552, which is approximately 0.02. Considering that lower values indicate better alignment, we are going to use an alignment threshold of -p 94 for constructing the pangenome graph. </b>
 
 ### Construct pangenome graph for 5NM genomes with `-k 1000, -p 96`
 
@@ -158,8 +158,8 @@ Inspect the index.
      module purge
      module load pggb/0.5.3-Miniconda3
      
-     # Execute pggb, set -s 1000 and -p p6
-     pggb -i 5NM.fa -s 2000 -p 96 -n 4 -t 24 -S -m -o 5NM_1K96 -V 'NC_017518.1:#'
+     # Execute pggb, set -s 2000 and -p 94
+     pggb -i 5NM.fa -s 2000 -p 94 -n 4 -t 24 -S -m -o 5NM_2K94 -V 'NC_017518.1:#'
      ```
 
 <hr>
@@ -196,7 +196,7 @@ The following is a SLURM script (`pggb_5NM_2k94.sl`) for PGGB with -k 2000, and 
     
     ```
 
-The job can be submitted using the `sbatch` command as follows. Take note of the job ID for tracking the run.
+The job can be submitted using the `sbatch` command as follows. Take a note of the job ID for tracking the run.
 
     ```bash
     sbatch pggb_5NM.sl
