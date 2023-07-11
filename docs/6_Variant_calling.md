@@ -52,7 +52,7 @@ An example run to obtain VCF files from GFA.
         ```
 
 
-??? terminal "code"
+!!! terminal "code"
 
     ```bash
     #use vg deconstruct the graph into VCF based on the first path NC_003112.2
@@ -72,7 +72,7 @@ An example run to obtain VCF files from GFA.
     bcftools stats 5NM_2k94aep2.vcf > 5NM_2k94aep2.vcf_stats
     ```
 
-!!! terminal "code"
+??? terminal "code"
 The following is a SLURM script to deconstruct graph into vcf files  
 
     ```bash
