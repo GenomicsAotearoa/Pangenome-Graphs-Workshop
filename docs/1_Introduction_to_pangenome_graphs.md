@@ -1,4 +1,4 @@
-## What is a pangenome 
+## What is a pangenome? 
 !!! info ""
 
 
@@ -12,7 +12,7 @@ This collective genomic dataset can be further divided into two distinct compone
 
 
 
-## What is a Pangenome graph 
+## What is a pangenome graph? 
 !!! info ""
 
 
