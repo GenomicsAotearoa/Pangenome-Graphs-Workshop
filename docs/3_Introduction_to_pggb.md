@@ -5,7 +5,7 @@
 
 - Variation graphs offer a compact representation of genetic variation across a population in the form of bidirected DNA sequence graphs, encompassing large-scale SVs like inversions and duplications. 
 - PGGB, the the PanGenome Graph Builder, is a reference-free pangenome graph constuction method. PGGB builds pangenome graphs from a set of input sequences unbiasly. 
-- The main novelty of PGGB is not simply the reference independence, but moreover its ability to capture all parts of input genomes losslessly.
+- The main novelty of PGGB  is not just that it doesn't rely on a reference, but more importantly, it can accurately and fully capture every part of the input genomes.
 
 
 ## How does PGGB work?
