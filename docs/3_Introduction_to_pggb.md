@@ -1,4 +1,4 @@
-# Introduction to PGGB
+# 3. Introduction to PGGB
 
 ## Variation graph and PGGB 
 !!! info ""
