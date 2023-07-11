@@ -1,4 +1,4 @@
-## What's pangenome 
+## What is a pangenome 
 !!! info ""
 
 
@@ -12,7 +12,7 @@ This collective genomic dataset can be further divided into two distinct compone
 
 
 
-## What's Pangenome graph 
+## What is a Pangenome graph 
 !!! info ""
 
 
@@ -47,7 +47,7 @@ Pangenome graphs are pangenomes stored in graph models that can capture the enti
 - Alleles/variants 
 
 
-## Overview of pangenome graph pipeline
+## Overview of a pangenome graph construction pipeline
 !!! info ""
 
 ![image](theme_figures/pangenome_graph_pipeline_small.png)
@@ -55,7 +55,7 @@ Pangenome graphs are pangenomes stored in graph models that can capture the enti
 
 
 
-
+- The pipeline above is based on the popular **P**an**g**enome **G**raph **B**uilder (PGGB) software.
 - This pipeline for pangenome graphs comprises three key stages: graph construction using `PGGB`, graph manipulation via `ODGI`, and variant calling for Next-Generation Sequencing (NGS) data utilizing the VG toolkit.
 - The PGGB pipeline, which operates without a reference method, builds pangenome graphs using an all-to-all whole genome alignment approach with `wfmash`. Subsequent graph induction is accomplished through `seqwish`, followed by progressive normalization implemented with `smoothxg` and `gfaffix`.
 - ODGI is employed for various graph manipulation tasks, including visualization and the extraction of distances between paths within the graph. This feature enables further phylogenetic analysis.
