@@ -6,12 +6,6 @@
 ## Learning Objectives
 Participants will learn about pangenome concepts and gain practical experience building and analyzing pangenome graphs. They will apply these methods to complex research questions that require understanding the relationships between multiple genomes or accounting for variability when analyzing new genomes. By the end of the course, participants will have a strong understanding of pangenome methods based on whole genome assemblies.
 
-1. Construct graphs using the PanGenome Graph Builder (PGGB)
-    - https://github.com/pangenome/pggb
-3. Manipulate graphs using the Optimized Dynamic Genome/Graph Implementation (ODGI)
-    - https://github.com/pangenome/odgi
-5. Variant calling and inspection using the VG toolkit
-    - https://github.com/vgteam/vg
 
 !!! rectangle-list "Content"
     | **Lesson**                                        | **Overview** |  **Time**  |
