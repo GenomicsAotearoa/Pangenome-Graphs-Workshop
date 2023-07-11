@@ -99,7 +99,7 @@ An example run to obtain VCF files from GFA.
 
     
     ```
-submit the script using the `sbatch` command as follows. Take note of the job ID for tracking the run.
+??? infor "submit the script using the `sbatch` command as follows. Take note of the job ID for tracking the run."
 
     ```bash
     sbatch vg_decon.sl
