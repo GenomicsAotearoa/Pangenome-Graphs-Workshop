@@ -36,10 +36,9 @@ Participants will learn about pangenome concepts and gain practical experience b
 
 
 
-!!! quote-right "Acknowledgments"
+!!! quote-right "Attribution notice"
 
-    Zoe Yang, Erik Garrison, Andrea Guarracino, Nuzla Ismail, Patrick J. Biggs, Una Ren, Michael A Black, and Joep de Ligt
-
+- The workshop material was collaboratively prepared by Zoe Yang, Nuzla Ismail, Dinindu Senanayake, Jian Sheng Boey, Patrick J. Biggs, Michael A Black, and Joep de Ligt
 
 ## Further reading and Extracurricular materials
 After this course you might want to learn more about pangenome graphs and start using them in your own research, below are some great resources to help with that.
