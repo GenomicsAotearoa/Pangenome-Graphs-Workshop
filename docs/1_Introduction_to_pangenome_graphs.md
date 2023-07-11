@@ -57,7 +57,7 @@ Pangenome graphs represent pangenomes using graph models, effectively capturing 
 
 
 
-- The pipeline above is based on the popular **P**an**g**enome **G**raph **B**uilder (PGGB) software.
+- The pipeline above is based on the popular Pangenome Graph Builder (PGGB) software.
 - This pipeline for pangenome graphs comprises three key stages: graph construction using `PGGB`, graph manipulation via `ODGI`, and variant calling for Next-Generation Sequencing (NGS) data utilizing the VG toolkit.
 - The PGGB pipeline, which operates without a reference method, builds pangenome graphs using an all-to-all whole genome alignment approach with `wfmash`. Subsequent graph induction is accomplished through `seqwish`, followed by progressive normalization implemented with `smoothxg` and `gfaffix`.
 - ODGI is employed for various graph manipulation tasks, including visualization and the extraction of distances between paths within the graph. This feature enables further phylogenetic analysis.
