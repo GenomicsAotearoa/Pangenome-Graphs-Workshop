@@ -1,5 +1,5 @@
 
-# Unlock the Power of Pangenome Graphs in Bioinformatics
+# Unlock the Power of Pangenome Graphs
 
 ![bacterial-pangenome](theme_figures/Genomegraphs_theme_figure130NM2D_20230703_small.png).
 
