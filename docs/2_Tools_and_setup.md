@@ -19,10 +19,13 @@
     module load Mash/2.3-GCC-11.3.0
     module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
     module load vg/1.46.0
-    ......
     ```
 
 ??? info "Running the pggb workflow locally"
+
+    The following code **DOES NOT** need to be run if you working on NeSI, but is 
+    provided here to show how to work through the workshop material on a non-NeSI 
+    system (e.g., if you are running the code on your own computer).
 
     ### Obtaining pggb
     From https://github.com/pangenome/pggb, you can find the details about installing pggb with Docker, Singularity, bioconda, guix, or by manually building its dependencies.
@@ -38,7 +41,7 @@
     git clone --recursive https://github.com/pangenome/pggb.git
     cd pggb
     ```
-    Finally, run pggb from the Singularity image. For Singularity to be able to read and write files to a directory on the host     operating system, we need to 'bind' that directory using the -B option and pass the pggb command as an argument.
+    Finally, run pggb from the Singularity image. For Singularity to be able to read and write files to a directory on the host operating system, we need to 'bind' that directory using the -B option and pass the pggb command as an argument.
     ```bash
     singularity run -B ${PWD}/data:/data ../pggb_latest.sif pggb -i /data/HLA/DRB1-3123.fa.gz -p 70 -s 3000 -G 2000 -n 10 -t 16 -v -V 'gi|568815561:#' -o /data/out -M -m
     ```
