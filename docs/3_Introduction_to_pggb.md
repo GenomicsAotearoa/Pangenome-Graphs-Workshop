@@ -27,7 +27,7 @@
 !!! info ""
 
 Generally, refers to the process of aligning all sequences in a given set against each other, rather than aligning them to a single reference sequence.
-We begin with an alignment with `wfmash`. This compares all sequences to each other and finds the best N mappings for each. It produces base-level alignments.
+PGGB begins with an alignment with `wfmash` for the input gemomes. This compares all sequences to each other and finds the best N mappings for each. It produces base-level alignments.
 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_2_small.png)
 
