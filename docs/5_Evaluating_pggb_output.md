@@ -38,7 +38,7 @@
         multiqc_report.html
         ```
 
-## check the .gfa file 
+## check the .gfa file. (Graphical Fragment Assembly) GFA is a file format commonly used to represent assembly graphs or sequence variation graphs
 !!! terminal "code"
 
     ```bash
@@ -77,7 +77,6 @@
         ```
     ??? success "what does S, L, P mean"
     **S means DNA segments, L means links between notes, and P means paths**
-
 
 
 
