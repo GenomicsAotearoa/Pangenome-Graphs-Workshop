@@ -29,6 +29,7 @@ Participants in this course will gain an understanding of pangenome concepts and
 
 - The workshop material was collaboratively prepared by Zoe Yang, Nuzla Ismail, Dinindu Senanayake, Jian Sheng Boey, Patrick J. Biggs, Mik Black, and Joep de Ligt
 
+
 ## Further reading and Extracurricular materials
 After this course you might want to learn more about pangenome graphs and start using them in your own research, below are some great resources to help with that.
 
