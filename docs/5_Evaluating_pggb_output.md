@@ -221,12 +221,11 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 ??? info "Why does the 2D graph display as three large bubbles?"
     **The genome of Neisseria meningitidis is highly recombinant, and this recombination is a significant driver of the extensive genetic diversity within the species. The bubbles highlighted on the graph suggest inverted regions, potentially indicating the presence of recombination hotspots*
 
-??? terminal "code"
+??? info "how to generate graph 2D visualization using odgi"
 
     ```bash
-    #visulize graph into 2D using odgi 
     #compute the layout first
-    #odgi layout -i graph.og -o graph.layout.lay -P -t 16
+    odgi layout -i graph.og -o graph.layout.lay -P -t 16
 
     #get the image
     odgi draw -i graph.og -c graph.layout.lay -p graph.2D.png 
