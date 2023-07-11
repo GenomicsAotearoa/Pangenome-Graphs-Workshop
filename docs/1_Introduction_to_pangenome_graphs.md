@@ -1,3 +1,5 @@
+# 1. Introduction to pangenome graphs
+
 ## What is a pangenome? 
 !!! info ""
 
