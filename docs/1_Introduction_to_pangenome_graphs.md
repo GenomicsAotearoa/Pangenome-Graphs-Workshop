@@ -19,7 +19,7 @@ This collective genomic dataset can be further divided into two distinct compone
 
 
 <p align="justify">
-Pangenome graphs are pangenomes stored in graph models that can capture the entire genetic variation among genomes in a population or of a set of related organisms. There are three components of a variation graph: Nodes, edges and paths.
+Pangenome graphs are pangenomes stored in graph models that can capture the entire genetic variation among genomes in a population or of a set of related organisms. There are three components of a variation graph: Nodes, edges and paths..
 </p>
 
 ![bacterial-pangenome](theme_figures/pangenome-graph-small.png)
