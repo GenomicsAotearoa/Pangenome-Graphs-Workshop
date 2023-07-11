@@ -1,28 +1,24 @@
 # 2. Tools & setup
 
 !!! screwdriver-wrench "Tools used for the pangenome graph pipeline"
-
-    - PanGenome Graph Builder (PGGB) (https://github.com/pangenome/pggb) for graph construction 
-    
-    - the Optimized Dynamic Genome/Graph Implementation (ODGI)(https://github.com/pangenome/odgi) for graph manipulation
-    
-    - the VG toolkit (https://github.com/vgteam/vg) for variant calling
-
-    - Circlator (https://sanger-pathogens.github.io/circlator/)
-    - Mash (https://github.com/marbl/Mash)
+    - PanGenome Graph Builder (PGGB) for graph construction (https://github.com/pangenome/pggb) 
+    - the Optimized Dynamic Genome/Graph Implementation (ODGI) for graph manipulation (https://github.com/pangenome/odgi) 
+    - the VG toolkit for variant calling of NGS against pangenome graph reference (https://github.com/vgteam/vg) 
+    - Mash triangle to estimated the pairwise distances distance among genomes (https://github.com/marbl/Mash)
+    - Circlator to fix the start point of genomes (https://sanger-pathogens.github.io/circlator/)
     - SAMtools (https://github.com/samtools/samtools)
     - BCFtools (https://github.com/samtools/bcftools)
-    - simuG (https://github.com/yjx1217/simuG)
-    - PGGE (https://github.com/pangenome/pgge)
+
 
 !!! info "Running the pggb pipeline on NeSI"
 
     PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed on NeSI as modules. We need to load each module first.  
     ```bash
-    module load pggb
+    module load pggb/0.5.3-Miniconda3
     module load SAMtools
-    module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
     module load Mash/2.3-GCC-11.3.0
+    module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
+    module load vg/1.46.0
     ......
     ```
 
