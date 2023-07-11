@@ -26,7 +26,7 @@ Inspect the index.
 !!! terminal "code"
 
     ```bash
-    less -S 5NM.fa.fai
+    more 5NM.fa.fai
     ```
 
     !!! success "Output"
@@ -133,7 +133,7 @@ Inspect the index.
     mash triangle 5NM.fa > 5NM.fa_mash
     
     # Inspect the output
-    tail 5NM.fa_mash
+    more 5NM.fa_mash
     ```
 
     ??? success "Output"
