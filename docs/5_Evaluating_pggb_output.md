@@ -110,8 +110,7 @@ This image shows a 1D rendering of the built pangenome graph. The graph nodes ar
 
     ```bash
     #ODGI Compressed 1D visualization 
-    odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_multiqc_1.png -x 1500 -y 500 -a 10 -I Consensus_
-    ls  
+    odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_multiqc_1.png -x 1500 -y 500 -a 10 -I Consensus_  
     ```
 
 
@@ -127,8 +126,7 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 
     ```bash
     #ODGI Compressed 1D visualization 
-    odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_pos_multiqc_1.png -x 1500 -y 500 -a 10 -u -d -I Consensus_
-    ls  
+    odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_pos_multiqc_1.png -x 1500 -y 500 -a 10 -u -d -I Consensus_ 
     ```
 
 
@@ -143,7 +141,6 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
     ```bash
     #ODGI Compressed 1D visualization 
     odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_inv_multiqc_1.png -x 1500 -y 500 -a 10 -z -I Consensus_
-    ls  
     ```
  
 ??? info "What makes the last path different compared to the other paths?"
@@ -199,7 +196,6 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
     ```bash
     #ODGI Compressed 1D visualization 
     odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_depth_multiqc_1.png -x 1500 -y 500 -a 10 -m -I Consensus_ 
-    ls  
     ```
 
 
@@ -214,7 +210,6 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
     ```bash
     #ODGI Compressed 1D visualization 
     odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_uncalled_multiqc_1.png -x 1500 -y 500 -a 10 -N -I Consensus_ 
-    ls  
     ```
 
 
@@ -226,7 +221,7 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 ??? info "Why does the 2D graph display as three large bubbles?"
     **The genome of Neisseria meningitidis is highly recombinant, and this recombination is a significant driver of the extensive genetic diversity within the species. The bubbles highlighted on the graph suggest inverted regions, potentially indicating the presence of recombination hotspots*
 
-!!! terminal "code"
+??? terminal "code"
 
     ```bash
     #visulize graph into 2D using odgi 
@@ -234,8 +229,7 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
     #odgi layout -i graph.og -o graph.layout.lay -P -t 16
 
     #get the image
-    odgi draw -i graph.og -c graph.layout.lay -p graph.2D.png
-    ls  
+    odgi draw -i graph.og -c graph.layout.lay -p graph.2D.png 
     ```
 
 
