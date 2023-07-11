@@ -44,7 +44,7 @@ These base-level alignments are converted into a graph with `seqwish`. A filter 
 
 This process aims to optimize the structure and representation of the genome graph by resolving redundant or overlapping elements. This step is typically performed after the initial construction of the graph.
 
-#### `smoothxg`
+#### smoothxg
 !!! info ""
 
 Through a series of passes over the pangenome, `smoothxg` reshapes the graph to reduce local complexity and underalignment. This resolves key problems encountered in earlier attempts to implement all-vs-all alignment based graph construction, which typically resulted in very complex, looping, graph motifs at small scales, and redundancy caused by match filtering.
@@ -53,7 +53,7 @@ The normalization process in PGGB involves several steps, which may vary dependi
 2.	Edge Optimization: Edges represent connections between nodes. During normalization, the edges are optimized to minimize redundancy and improve the efficiency of the graph. This can include merging or repositioning edges to create a more streamlined and accurate representation of the genome.  
 ![bacterial-pangenome](theme_figures/PGGB_workflow_4_small.png)
 
-#### `gfafix`
+#### gfafix
 !!! info ""
 
 3.	Compact Representation: Normalization aims to reduce the overall size of the graph by compacting the representation. This can involve compressing repetitive regions or simplifying complex structures while preserving the essential information and variant representation.
@@ -62,7 +62,7 @@ The normalization process in PGGB involves several steps, which may vary dependi
 
 
 
-### Multiqc and graph statistics
+### MultiQC and graph statistics
 !!! info ""
 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_6_small.png)
