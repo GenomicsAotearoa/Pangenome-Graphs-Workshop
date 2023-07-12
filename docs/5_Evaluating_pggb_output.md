@@ -235,14 +235,14 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 ## Check the statistics statistics for both the seqwish and smoothxg graphs
 !!! info ""
 
-#### 5NM 2k94
+#### 5NM 2K94
 
 | Sample Name                         | Length    | Nodes  | Edges  |Paths       |Components | A   |C    |T    |G    |N   |
 |:-----                               |----------:|-------:|-------:|------------|-----------:|----:|----:|----:|----:|----:|
 |seqwish	|3165112	|123218	|166072	|5	|1	|786941	|789388	|784867	|803816	|100|
 |smooth	  |2926040	|246217	|332089	|5	|1	|735148	|742974	|726837	|720981 |100|
 
-#### 5NMres 2k94
+#### 5NMres 2K94
 
 | Sample Name                         | Length    | Nodes  | Edges  |Paths       |Components | A   |C    |T    |G    |N   |
 |:-----                               |----------:|-------:|-------:|------------|-----------:|----:|----:|----:|----:|----:|
