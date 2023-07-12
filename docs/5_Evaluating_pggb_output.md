@@ -7,7 +7,7 @@
 
     ```bash
     
-    cd  /home/<YOUR_USER_ID>/pg_workshop/5NM_2k94
+    cd  ~/pg_workshop/5NM_2k94
     
     ls  
     ```
