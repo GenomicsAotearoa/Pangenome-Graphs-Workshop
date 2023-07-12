@@ -20,7 +20,7 @@ Set up directory for VG and GFA files.
     mkdir -p vg_deconstruct
 
     #copy the gfa file to the directory
-    cp ./5NM_2k94/5NM*.gfa ./vg_deconstruct/5NM_2k94.fa
+    cp ./5NM_2K94/5NM*.gfa ./vg_deconstruct/5NM_2k94.fa
     cd ./vg_deconstruct
     ```
     
