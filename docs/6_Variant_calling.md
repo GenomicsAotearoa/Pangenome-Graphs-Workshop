@@ -39,7 +39,7 @@ An example run to obtain VCF files from GFA.
 
     ```bash
     #check the paths in the graph using tail, which depends on the number of genomes. We have five input genomes for the 5NM dataset. 
-    tail -5 5NM_2k94.gfa
+    tail -5 5NM_2k94.gfa | less -S
     ```
     !!! success "Output"
         
