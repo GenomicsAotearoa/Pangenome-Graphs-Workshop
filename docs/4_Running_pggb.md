@@ -4,7 +4,7 @@
 
 !!! quote ""
 
-    - build pangenome graphs using PGGB
+    Build pangenome graphs using PGGB
 
 
 ## Getting started
@@ -123,7 +123,7 @@ Inspect the index.
 
 ## Running PGGB
 
-### Use `mash triangle` to check the pairwise identity of the input genomes, which will give us some idea how to set -p 
+### Use `mash triangle` to check the pairwise identity of the input genomes, which will give us some idea how to set `-p` 
 
 !!! terminal "code"
 
@@ -149,9 +149,9 @@ Inspect the index.
         ```
 
 
-<b>The lower triangle represents the pairwise distances between the 5NM genomes. We can observe that the largest paired distance is 0.0190552, which is approximately 0.02. Considering that lower values indicate better alignment, we are going to use an alignment threshold of -p 94 for constructing the pangenome graph. </b>
+<b>The lower triangle represents the pairwise distances between the 5NM genomes. We can observe that the largest paired distance is 0.0190552, which is approximately 0.02. Considering that lower values indicate better alignment, we are going to use an alignment threshold of `-p 94` for constructing the pangenome graph. </b>
 
-### Construct pangenome graph for 5NM genomes with `-k 1000, -p 96`
+### Construct pangenome graph for 5NM genomes with `-k 1000`, `-p 96`
 
 !!! terminal "code"
 
