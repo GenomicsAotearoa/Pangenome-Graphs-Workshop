@@ -201,5 +201,5 @@ and `-p 94`
 The job can be submitted using the `sbatch` command as follows. Take a note of the job ID for tracking the run.
 
     ```bash
-    sbatch pggb_5NM.sl
+    sbatch pggb_5NM_2k94.sl
     ```
