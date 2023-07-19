@@ -111,12 +111,12 @@ The VG toolkit is utilized for NGS data analysis against the graph, including ta
 ## Key components of this pipeline
 !!! info ""
 
--  graph construction using the PGGB tool,
--  graph manipulation using ODGI,
--  variant calling for NGS data using the VG toolkit. 
+-  Graph construction using the PGGB
+-  Graph manipulation using ODGI
+-  Variant calling for NGS data using the VG toolkit 
 
 <p align="justify">
-It provide an efficient and integrated approach to pangenome analysis. 
+It provides an efficient and integrated approach to pangenome analysis. 
 </p>
 
 
