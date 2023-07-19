@@ -67,6 +67,7 @@
 |NZ_CP016880.1 Neisseria meningitidis strain M07165	| ASM170367v1	|GCF_001703675.1	|W	|11	|ST-11	|
 |NZ_CP020423.2 Neisseria meningitidis strain FDAARGOS_212	| ASM207367v2	|GCF_002073675.2	|C	|-	|ST16521	|
 
+
 ??? info "How the *Neisseria meningitidis* genomes were formatted for this workshop"
 
     The following code **DOES NOT** need to be run, but is provided here to show how the *Neisseria meningitidis* genomes
@@ -149,7 +150,40 @@
     ```
 
 
+??? info "Fix the start point of the input genomes?"
 
+    #### Circlator
+    **Bacterial genomes are typically circular, so establishing a fixed starting point for each input genome during pangenome graph construction could reduce unnecessary complexity within the graph. Once the genomes are aligned with the same starting point, we can build their index using samtools faidx and proceed with constructing the pangenome graph. I encourage you to experiment with this approach after this workshop to see how effectively it functions.**
+
+    let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample. 
+    ```bash
+    #!/usr/bin/bash
+
+    #SBATCH --account       ga03793
+    #SBATCH --job-name      restart_fna
+    #SBATCH --cpus-per-task 8
+    #SBATCH --mem           4G
+    #SBATCH --time          1:00:00
+
+    module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
+
+    cd /home/zyang/pg_test
+    data=/home/zyang/pg_test/*.fna
+
+    for f in $data
+    do
+
+    x=$(basename $f .fna)
+    echo ${x}
+
+    circlator fixstart  ${x}.fna  ${x}.restart
+
+    done
+    ```
+
+
+??? info "ODGI 1D visualization by path orientation for the 5NM after start point being fixed"
+![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NMres.png)
 
 
 
