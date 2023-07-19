@@ -56,19 +56,19 @@ Pangenome graphs represent pangenomes using graph models, effectively capturing 
 
 
 <p align="justify">
-The PGGB pipeline, is a reference free method. It builds pangenome graphs using an all-to-all whole genome alignment approach with wfmash. seqwish is emplyed to induce graph, followed by progressive normalization with smoothxg and gfaffix.
+The PGGB pipeline is a reference-free method. It builds pangenome graphs using an all-to-all whole genome alignment approach with wfmash. Seqwish is employed to induce the graph, followed by progressive normalization with smoothxg and gfaffix.
 </p>
 
 ![PGGB](theme_figures/Pipeline_step1_small.png)
 
 
 
-### **graph manipulation using ODGI**
+### **graph manipulation using ODGI and multiQC report**
 !!! info ""
-</p>
-- Optimized Dynamic Genome/graph Implementation(ODGI) is employed for various graph manipulation tasks, such as visualization
-- MultiQC is employed to generate a report including statistics of the seqwish induced graph, and the final graph, different visualizations of the final graph 
-</p>
+
+- The Optimized Dynamic Genome/graph Implementation (ODGI) is used for various graph manipulation tasks, including visualization.
+- MultiQC is used to generate a report, which includes statistics of the seqwish-induced graph, the final graph, and various visualizations of the final graph.
+
 
 ![ODGI](theme_figures/Pipeline_step2_small.png)
 
@@ -78,7 +78,7 @@ The PGGB pipeline, is a reference free method. It builds pangenome graphs using 
 !!! info ""
 
 <p align="justify">
-Optimized Dynamic Genome/graph Implementation(ODGI) is employed for various graph manipulation tasks, including visualization and the extraction of distances between paths within the graph. The distance enables further phylogenetic analysis.
+We use ODGi to extract distances between paths within the graph, enabling further phylogenetic analysis.
 </p>
 
 ![ODGI](theme_figures/Pipeline_step3_small.png)
@@ -88,7 +88,7 @@ Optimized Dynamic Genome/graph Implementation(ODGI) is employed for various grap
 !!! info ""
 
 <p align="justify">
-By using the pangenome graph created with PGGB, it is possible to concurrently identify a variety of genetic variations. These include structural variations (SVs), rearrangements, and smaller variants such as single nucleotide polymorphisms (SNPs) and insertions/deletions, which can be identified through vg deconstruct the process
+By using the pangenome graph created with PGGB, it is possible to concurrently identify a variety of genetic variations. These include structural variations (SVs), rearrangements, and smaller variants such as single nucleotide polymorphisms (SNPs) and insertions/deletions. These can be identified through the process of vg deconstruction.
 </p>
 
 
@@ -107,7 +107,9 @@ The VG toolkit is utilized for NGS data analysis against the graph, including ta
 
 
 
-
+<p align="justify">
+Pangenome graph pipeline with PGGB. The pipeline includes graph construction using the PGGB tool, graph manipulation using ODGI, and variant calling for NGS data using the VG toolkit. The overview demonstrates an efficient and integrated approach to pangenome analysis. 
+</p>
 
 
 
