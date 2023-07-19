@@ -57,8 +57,7 @@ Pangenome graphs represent pangenomes using graph models, effectively capturing 
 The PGGB pipeline, is a reference free method. It builds pangenome graphs using an all-to-all whole genome alignment approach with wfmash. seqwish is emplyed to induce graph, followed by progressive normalization with smoothxg and gfaffix.
 
 </p>
-![image](theme_figures/Pipeline_step1_small.png)
-
+![PGGB](theme_figures/Pipeline_step1_small.png).
 
 
 
