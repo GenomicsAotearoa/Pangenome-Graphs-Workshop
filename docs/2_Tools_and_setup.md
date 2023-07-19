@@ -12,7 +12,7 @@
 
 !!! info "Running the pggb pipeline on NeSI"
 
-    PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed as modules on NeSI. We must first load each module for use.  
+    PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed as modules on NeSI. We need to load each module for use. However, please don't load the modules right now; we will load each one when necessary. 
     ```bash
     module load pggb/0.5.3-Miniconda3
     module load SAMtools
