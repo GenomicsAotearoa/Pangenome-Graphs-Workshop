@@ -63,17 +63,50 @@ The PGGB pipeline, is a reference free method. It builds pangenome graphs using 
 
 
 
+### **graph manipulation using ODGI**
+!!! info ""
+</p>
+- Optimized Dynamic Genome/graph Implementation(ODGI) is employed for various graph manipulation tasks, such as visualization
+- MultiQC is employed to generate a report including statistics of the seqwish induced graph, and the final graph, different visualizations of the final graph 
+</p>
+
+![ODGI](theme_figures/Pipeline_step2_small.png)
 
 
+
+### **Obtain distance for phylogenetic analysis**
 !!! info ""
 
-![image](theme_figures/pangenome_graph_pipeline_small.png)
-- The pipeline above is based on the popular Pangenome Graph Builder (PGGB) software.
-- This pipeline for pangenome graphs comprises three key stages: graph construction using `PGGB`, graph manipulation via `ODGI`, and variant calling for Next-Generation Sequencing (NGS) data utilizing the VG toolkit.
-- The PGGB pipeline, which operates without a reference method, builds pangenome graphs using an all-to-all whole genome alignment approach with `wfmash`. Subsequent graph induction is accomplished through `seqwish`, followed by progressive normalization implemented with `smoothxg` and `gfaffix`.
-- ODGI is employed for various graph manipulation tasks, including visualization and the extraction of distances between paths within the graph. This feature enables further phylogenetic analysis.
-- By using the pangenome graph created with PGGB, it is possible to concurrently identify a variety of genetic variations. These include structural variations (SVs), rearrangements, and smaller variants such as single nucleotide polymorphisms (SNPs) and insertions/deletions, which can be identified through the `vg deconstruction` process.
-- The VG toolkit is utilized for NGS data analysis against the graph, including tasks such as read mapping and variant calling.
+<p align="justify">
+Optimized Dynamic Genome/graph Implementation(ODGI) is employed for various graph manipulation tasks, including visualization and the extraction of distances between paths within the graph. The distance enables further phylogenetic analysis.
+</p>
+
+![ODGI](theme_figures/Pipeline_step3_small.png)
+
+
+### **Varaint calling**
+!!! info ""
+
+<p align="justify">
+By using the pangenome graph created with PGGB, it is possible to concurrently identify a variety of genetic variations. These include structural variations (SVs), rearrangements, and smaller variants such as single nucleotide polymorphisms (SNPs) and insertions/deletions, which can be identified through vg deconstruct the process
+</p>
+
+
+![ODGI](theme_figures/Pipeline_step4_small.png)
+
+
+### **NGS data analysis against graph**
+!!! info ""
+
+<p align="justify">
+The VG toolkit is utilized for NGS data analysis against the graph, including tasks such as read mapping and variant calling
+</p>
+
+
+![ODGI](theme_figures/Pipeline_step5_small.png)
+
+
+
 
 
 
