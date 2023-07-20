@@ -195,7 +195,6 @@
 
 ??? info "Fix the start point of the 5NM genomes "
 
-
 One tricky aspect is finding a region that is present in all the genomes and is oriented in the same direction. 
 The mauve alignment of the 5NM genomes 
 ![5NM_Mauve](theme_figures/5NM_marve.png)
