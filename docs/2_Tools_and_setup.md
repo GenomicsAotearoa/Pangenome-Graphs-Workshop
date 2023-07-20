@@ -195,19 +195,19 @@
 
 ??? info "Fix the start point of the 5NM genomes "
 
-One tricky aspect is finding a region that is present in all the genomes and is oriented in the same direction. 
-The mauve alignment of the 5NM genomes 
-![5NM_Mauve](theme_figures/5NM_marve.png)
+    #### Circlator
+    **One tricky aspect is finding a region that is present in all the genomes and is oriented in the same direction**
+    The mauve alignment of the 5NM genomes 
+    ![5NM_Mauve](theme_figures/5NM_marve.png)
 
-The Mauve alignment after attempting to fix the start point using the first 50 lines of genome one. 
-![5NM_Mauve](theme_figures/5NMre1_marve.png)
+    The Mauve alignment after attempting to fix the start point using the first 50 lines of genome one. 
+    ![5NM_Mauve](theme_figures/5NMre1_marve.png)
 
-The Mauve alignment after fixing the start point using the first 50 lines of the second genome, which has been aligned with the first 50 lines of genome one.
-![5NM_Mauve](theme_figures/5NMre2_marve.png)
+    The Mauve alignment after fixing the start point using the first 50 lines of the second genome, which has been aligned with the first 50 lines of genome one.
+    ![5NM_Mauve](theme_figures/5NMre2_marve.png)
 
 
 
-    
 
 ### Setting up your project directory and downloading the dataset
 
@@ -228,9 +228,10 @@ The Mauve alignment after fixing the start point using the first 50 lines of the
         ```
     
     ```bash
-    # Download the dataset we'll use for the workshop
+    # To be simply, we have renamed the 5NMfs.fa to 5NM.fa for this workshop. Please download the dataset.  
+    
     git clone https://github.com/ZoeYang2020/dataset_for_pg_workshop
     
-    # Copy the 5NM.fa dataset to your working directory
+    # Copy the 5NM.fa and  dataset to your working directory
     cp $PWD/dataset_for_pg_workshop/5NM.fa .
     ```
