@@ -28,7 +28,10 @@ Participants in this course will gain an understanding of pangenome concepts and
 !!! quote-right "Attribution notice"
 
 - The workshop material was collaboratively prepared by Zoe Yang, Nuzla Ismail, Dinindu Senanayake, Jian Sheng Boey, Patrick J. Biggs, Mik Black, and Joep de Ligt
+- The development of this workshop is supported by Genomics Aotearoa Genome Graphs project to Mik Black and Joep de Ligt
 
+!!! quote-right "Acknowledgments"
+- We extend our sincere appreciation to Assistant Professor Erik Garrison and his team at the University of Tennessee Health Science Center for their valuable guidance, suggestions, and feedback during the development of the pangenome graph pipeline.
 
 ## Further reading and Extracurricular materials
 After this course you might want to learn more about pangenome graphs and start using them in your own research, below are some great resources to help with that.
