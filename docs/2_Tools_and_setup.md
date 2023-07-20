@@ -193,7 +193,7 @@
     ```
 
 
-??? info "Fix the start point of the 5NM genomes "
+??? info "Fix the start point of the 5NM genomes"
 
     #### Circlator
     **One tricky aspect is finding a region that is present in all the genomes and is oriented in the same direction**
@@ -205,7 +205,6 @@
 
     The Mauve alignment after fixing the start point using the first 50 lines of the second genome, which has been aligned with the first 50 lines of genome one.
     ![5NM_Mauve](theme_figures/5NMre2_marve.png)
-
 
 
 
