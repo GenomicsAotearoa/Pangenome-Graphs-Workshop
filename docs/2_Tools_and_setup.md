@@ -193,9 +193,13 @@
     ```
 
 
+??? info "Fix the start point of the 5NM genomes "
 
-??? info "The process to fix the start point of the 5NM genomes "
-![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NMres.png)
+![5NM_Mauve](theme_figures/5NM_marve.png).
+
+![5NM_Mauve](theme_figures/5NMre1_marve.png).
+
+![5NM_Mauve](theme_figures/5NMre2_marve.png).
 
 
 
