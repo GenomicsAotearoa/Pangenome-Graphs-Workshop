@@ -5,6 +5,7 @@
     - The Optimized Dynamic Genome/Graph Implementation (ODGI) is employed for graph manipulation (https://github.com/pangenome/odgi).
     - The VG Toolkit is utilized for variant calling with NGS against a pangenome graph reference (https://github.com/vgteam/vg).
     - Mash is used to estimate pairwise distances among genomes (https://github.com/marbl/Mash).
+    - ProgressiveMauve is utilized to verify the alignment of genomes (https://darlinglab.org/mauve/user-guide/progressivemauve.html)
     - Circlator is employed to fix the starting point of genomes (https://sanger-pathogens.github.io/circlator/).
     - SAMtools is used to build an index of input FASTA files (https://github.com/samtools/samtools).
     - BCFtools is used to check the statistics of VCF files (https://github.com/samtools/bcftools).
@@ -153,7 +154,7 @@
 ??? info "Fix the start point of the input genomes?"
 
     #### Circlator
-    **Bacterial genomes are typically circular, so establishing a fixed starting point for each input genome during pangenome graph construction could reduce unnecessary complexity within the graph. Once the genomes are aligned with the same starting point, we can build their index using samtools faidx and proceed with constructing the pangenome graph. I encourage you to experiment with this approach after this workshop to see how effectively it functions.**
+    **Bacterial genomes are typically circular, so establishing a fixed starting point for each input genome during pangenome graph construction could reduce unnecessary complexity within the graph. Once the genomes are aligned with the same starting point, we can build their index using samtools faidx and proceed with constructing the pangenome graph. I encourage you to experiment with this approach after this workshop to see how effectively it functions. Please note that it may be necessary to try different regions as a starting point to ensure that all genomes are fixed with the same initial region.**
 
     let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample. 
     ```bash
@@ -169,20 +170,31 @@
 
     cd /home/zyang/pg_test
     data=/home/zyang/pg_test/*.fna
-
+    
+    #For some dataset, we may have to try different start point to make sure all genomes being fixed with the same region. 
+    start_region=start_region.fa
+    
+    
     for f in $data
     do
 
     x=$(basename $f .fna)
     echo ${x}
-
-    circlator fixstart  ${x}.fna  ${x}.restart
+    
+    circlator fixstart --genes_fa  start_region  ${x}.fna  ${x}.restart
 
     done
     ```
+   
+    Use the `cat` command to combine genomes into a single fasta file:
+
+    ```
+    cat *_genomic.restart.fasta > 5NMfs.fa
+    ```
 
 
-??? info "ODGI 1D visualization by path orientation for the 5NM after start point being fixed"
+
+??? info "The process to fix the start point of the 5NM genomes "
 ![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NMres.png)
 
 
