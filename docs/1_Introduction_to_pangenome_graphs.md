@@ -116,7 +116,7 @@ The VG toolkit is utilized for NGS data analysis against the graph, including ta
 -  Variant calling for NGS data using the VG toolkit 
 
 <p align="justify">
-It provides an efficient and integrated approach to pangenome analysis. 
+It provides an efficient and integrated approach for pangenome analysis. 
 </p>
 
 
