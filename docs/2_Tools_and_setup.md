@@ -52,8 +52,8 @@
     ### *Neisseria meningitidis* data set
     
     In this workshop, we use the bacterium _Neisseria (N.) meningitidis_ as our model organism.
- - Known as the meningococcus pathogen, _N. meningitidis_ is the main cause of invasive meningococcal diseases(IMD), such as meningitis and septicemia, leading to isolated cases, outbreaks, and epidemics around the globe.
- - Different capsular polysaccharides divide the meningococci into at least 12 serogroups, of which six groups (A, B, C, W, X, and Y) are responsible for most IMD.
+ - Bacteria called _N. meningitidis_ cause meningococcal disease(IMD). About 1 in 10 people have these bacteria in the back of their nose and throat without being ill. This is called being ‘a carrier.’ Sometimes the bacteria invade the body and cause IMD.
+ - Different capsular polysaccharides divide the meningococci into at least 12 serogroups, of which six groups (A, B, C, W, X, and Y) are responsible for most disease.
  - The genome of this bacterium spans approximately 2.1 to 2.4 Mb and possesses a GC content ranging from 51-52%.
  - A notable trait of _N. meningitidis_ genomes is their high recombination rate, which contributes significantly to the substantial genetic diversity found in this species.
  - Throughout this workshop, we use five genome assemblies of _N. meningitidis_ to evaluate the pangenome pipeline, from the construction of the pangenome graph to the calling of variants.
