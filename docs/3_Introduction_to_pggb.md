@@ -17,11 +17,15 @@ https://www.bioworld.com/articles/696850-pangenome-gives-more-panoramic-view-of-
 ## How does PGGB work?
 !!! info ""
 
-- PGGB generates graphs using an all-to-all alignment of input sequences (`wfmash`), graph induction (`seqwish`), and progressive normalization (`smoothxg`, `gfaffix`). 
-- After construction, PGGB generates diagnostic visualizations of the graph (`odgi`). 
-- A variant call report (in Variant Call Format - VCF) representing both small and large variants can be generated based on any reference genome included in the graph. 
-- PGGB writes its output in GFAv1(.gfa) format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits. **.gfa file is the new data structure for graph references**
-- Scale Graph Construction: The PGGB algorithm is designed to handle large-scale genomes and can efficiently construct genome graphs containing extensive genetic variations.
+- **PGGB** generates graphs using an all-to-all alignment of input sequences (`wfmash`), graph induction (`seqwish`), and progressive normalization (`smoothxg`, `gfaffix`).
+
+- **Scalable  Graph Construction**: The PGGB algorithm is designed to handle large-scale genomes and can efficiently construct genome graphs containing extensive genetic variations.
+  
+- After construction, PGGB generates diagnostic visualizations of the graph (`odgi`).
+
+- PGGB writes its output in **GFAv1(.gfa)** format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits. **.gfa file is the new data structure for graph references**
+
+- A variant call report (in Variant Call Format - VCF) representing both small and large variants can be generated **based on any reference genome** included in the graph.
 
 
 ### Input fasta file 
@@ -32,7 +36,7 @@ https://www.bioworld.com/articles/696850-pangenome-gives-more-panoramic-view-of-
 ### All-to-all alignment
 !!! info ""
 
-"All-to-all alignment" refers to the process of aligning all sequences in a given set against each other, rather than aligning them to a single reference sequence.
+**All-to-all alignment** refers to the process of aligning all sequences in a given set against each other, rather than aligning them to a single reference sequence.
 PGGB begins with an alignment using `wfmash` to align the input genomes. This compares all sequences to each other and finds the best `N` mappings for each. It produces base-level alignments.
 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_2_small.png)
@@ -40,7 +44,7 @@ PGGB begins with an alignment using `wfmash` to align the input genomes. This co
 ### Inducing the graph
 !!! info ""
 
-"Graph induction" refers to the process of constructing the genome graph by progressively integrating genetic variants into a reference genome.
+**Graph induction** refers to the process of constructing the genome graph by progressively integrating genetic variants into a reference genome.
 These base-level alignments are converted into a graph with `seqwish`. A filter is applied to remove short matches, which anchors the graph on confident longer exact matches.
 
 ![bacterial-pangenome](theme_figures/PGGB_workflow_3_small.png)
@@ -55,15 +59,15 @@ This process aims to optimize the structure and representation of the genome gra
 
 Through a series of passes over the pangenome, `smoothxg` reshapes the graph to reduce local complexity and underalignment. This resolves key problems encountered in earlier attempts to implement all-vs-all alignment based graph construction, which typically resulted in very complex, looping, graph motifs at small scales, and redundancy caused by match filtering.
 The normalization process in PGGB involves several steps, which may vary depending on the specific implementation or version of the tool. Here are some common steps involved in normalizing the graph:  
-1.  Removal of Redundant Nodes: During the construction of the genome graph, it is possible that some nodes become redundant due to overlapping or repetitive sequences. Normalization involves identifying and removing these redundant nodes, streamlining the graph structure.  
-2.	Edge Optimization: Edges represent connections between nodes. During normalization, the edges are optimized to minimize redundancy and improve the efficiency of the graph. This can include merging or repositioning edges to create a more streamlined and accurate representation of the genome.  
+1.  **Removal of Redundant Nodes**: During the construction of the genome graph, it is possible that some nodes become redundant due to overlapping or repetitive sequences. Normalization involves identifying and removing these redundant nodes, streamlining the graph structure.  
+2.	**Edge Optimization**: Edges represent connections between nodes. During normalization, the edges are optimized to minimize redundancy and improve the efficiency of the graph. This can include merging or repositioning edges to create a more streamlined and accurate representation of the genome.  
 ![bacterial-pangenome](theme_figures/PGGB_workflow_4_small.png)
 
 #### gfafix
 !!! info ""
 
-3.	Compact Representation: Normalization aims to reduce the overall size of the graph by compacting the representation. This can involve compressing repetitive regions or simplifying complex structures while preserving the essential information and variant representation.
-4.	Graph Refinement: The normalization process also involves refining the graph structure by resolving inconsistencies, correcting errors, and improving the overall quality of the graph representation. This may include resolving conflicts between nodes and edges, addressing mismatches, and ensuring the graph accurately reflects the underlying genetic variations.
+3.	**Compact Representation**: Normalization aims to reduce the overall size of the graph by compacting the representation. This can involve compressing repetitive regions or simplifying complex structures while preserving the essential information and variant representation.
+4.	**Graph Refinement**: The normalization process also involves refining the graph structure by resolving inconsistencies, correcting errors, and improving the overall quality of the graph representation. This may include resolving conflicts between nodes and edges, addressing mismatches, and ensuring the graph accurately reflects the underlying genetic variations.
 ![bacterial-pangenome](theme_figures/PGGB_workflow_5_small.png)
 
 
