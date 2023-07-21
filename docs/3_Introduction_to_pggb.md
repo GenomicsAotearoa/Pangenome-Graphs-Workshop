@@ -4,6 +4,7 @@
 !!! info ""
 
 ![Variation graphs](theme_figures/example_of_Graph_reference_small.png)
+https://www.bioworld.com/articles/696850-pangenome-gives-more-panoramic-view-of-human-diversity?v=preview
 
 - Variation graphs offer a compact representation of genetic variation across a population in the form of bidirected DNA sequence graphs, encompassing large-scale SVs like inversions and duplications.
 
