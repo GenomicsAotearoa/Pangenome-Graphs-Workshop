@@ -231,5 +231,5 @@
     git clone https://github.com/ZoeYang2020/dataset_for_pg_workshop
     
     # Copy the 5NM.fa and  dataset to your working directory
-    cp $PWD/dataset_for_pg_workshop/5NM.fa .
+    cp $PWD/dataset_for_pg_workshop/5NM.fa
     ```
