@@ -19,7 +19,7 @@
 - PGGB generates graphs using an all-to-all alignment of input sequences (`wfmash`), graph induction (`seqwish`), and progressive normalization (`smoothxg`, `gfaffix`). 
 - After construction, PGGB generates diagnostic visualizations of the graph (`odgi`). 
 - A variant call report (in Variant Call Format - VCF) representing both small and large variants can be generated based on any reference genome included in the graph. 
-- PGGB writes its output in GFAv1(.gfa) format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits. **gfa file is the new data structure for graph references**
+- PGGB writes its output in GFAv1(.gfa) format, which can be used as input by numerous "genome graph" and pangenome tools, such as the vg and odgi toolkits. **.gfa file is the new data structure for graph references**
 - Scale Graph Construction: The PGGB algorithm is designed to handle large-scale genomes and can efficiently construct genome graphs containing extensive genetic variations.
 
 
