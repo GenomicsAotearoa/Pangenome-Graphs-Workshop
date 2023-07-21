@@ -52,9 +52,9 @@
     ### *Neisseria meningitidis* data set
     
     In this workshop, we use the bacterium _Neisseria (N.) meningitidis_ as our model organism.
- - Known as the meningococcus pathogen, _N. meningitidis_ is the main cause of invasive meningococcal diseases, such as meningitis and septicemia, leading to isolated cases, outbreaks, and epidemics around the globe.
+ - Known as the meningococcus pathogen, _N. meningitidis_ is the main cause of invasive meningococcal diseases(IMD), such as meningitis and septicemia, leading to isolated cases, outbreaks, and epidemics around the globe.
+ - Different capsular polysaccharides divide the meningococci into at least 12 serogroups, of which six groups (A, B, C, W, X, and Y) are responsible for most IMD.
  - The genome of this bacterium spans approximately 2.1 to 2.4 Mb and possesses a GC content ranging from 51-52%.
- - This bacterium has a genome size of roughly 2.1 to 2.4 Mb, with a GC content between 51-52%.
  - A notable trait of _N. meningitidis_ genomes is their high recombination rate, which contributes significantly to the substantial genetic diversity found in this species.
  - Throughout this workshop, we use five genome assemblies of _N. meningitidis_ to evaluate the pangenome pipeline, from the construction of the pangenome graph to the calling of variants.
 
