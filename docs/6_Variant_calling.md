@@ -99,8 +99,10 @@ An example run to obtain VCF files from GFA.
 
     
     ```
-    !!! terminal "submit the script using the `sbatch` command as follows. Take note of the job ID for tracking the run."
-
+    !!! terminal "code"
+        
+        - submit the Slurm script 
+        
         ```bash
         sbatch vg_decon.sl
         ```
