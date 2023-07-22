@@ -10,8 +10,9 @@ A pangenome is defined as the comprehensive collection of whole-genome sequences
 This collective genomic dataset can be further divided into two distinct components: the core genome, which includes regions present in all individuals at the time of analysis, and the accessory genome, consisting of regions only found in a subset of individuals. 
 </p>
 
+<center>
 ![bacterial-pangenome](theme_figures/bacterial-pangenome-small.png).
-
+</center>
 
 
 ## What is a pangenome graph? 
