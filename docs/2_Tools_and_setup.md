@@ -114,9 +114,7 @@
     data=$HOME/nm_genomes/*.zip
 
     for f in $data
-
     do
-
         x=$(basename $f .zip)
         echo ${x}
 
@@ -125,7 +123,6 @@
         cp $HOME/nm_genomes/ncbi_dataset/data/${x}/*_genomic.fna /$HOME/nm_genomes/
 
         rm -rf ncbi_dataset
-
     done
     ```
 
