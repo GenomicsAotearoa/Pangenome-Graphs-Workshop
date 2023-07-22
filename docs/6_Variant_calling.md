@@ -72,12 +72,12 @@ An example run to obtain VCF files from GFA.
     bcftools stats 5NM_2k94aep2.vcf > 5NM_2k94aep2.vcf_stats
     ```
 
-??? infor "The following is a SLURM script to deconstruct graph into vcf files"  
+!!! terminal-2 "Slurm script to deconstruct graph into vcf files"  
 
     ```bash
     #!/usr/bin/bash
 
-    #SBATCH --account       ga03793
+    #SBATCH --account       nesi02659
     #SBATCH --job-name      deconstruct_gfa
     #SBATCH --cpus-per-task 8
     #SBATCH --mem           4G
@@ -99,11 +99,11 @@ An example run to obtain VCF files from GFA.
 
     
     ```
-??? infor "submit the script using the `sbatch` command as follows. Take note of the job ID for tracking the run."
+    !!! terminal "submit the script using the `sbatch` command as follows. Take note of the job ID for tracking the run."
 
-    ```bash
-    sbatch vg_decon.sl
-    ```
+        ```bash
+        sbatch vg_decon.sl
+        ```
 
 ## check the vcf files
 
