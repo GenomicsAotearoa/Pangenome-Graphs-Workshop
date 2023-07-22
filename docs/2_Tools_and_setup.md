@@ -69,7 +69,7 @@
 |NZ_CP020423.2 Neisseria meningitidis strain FDAARGOS_212	| ASM207367v2	|GCF_002073675.2	|C	|-	|ST16521	|
 
 
-??? info "How the *Neisseria meningitidis* genomes were formatted for this workshop"
+??? circle-info "How the *Neisseria meningitidis* genomes were formatted for this workshop"
 
     The following code **DOES NOT** need to be run, but is provided here to show how the *Neisseria meningitidis* genomes
     were downloaded and prepared for analysis.
@@ -151,16 +151,17 @@
     ```
 
 
-??? info "Fix the start point of the input genomes?"
+??? screwdriver-wrench "Fix the start point of the input genomes?"
 
     #### Circlator
-    **Bacterial genomes are typically circular, so establishing a fixed starting point for each input genome during pangenome graph construction could reduce unnecessary complexity within the graph. Once the genomes are aligned with the same starting point, we can build their index using samtools faidx and proceed with constructing the pangenome graph. I encourage you to experiment with this approach after this workshop to see how effectively it functions. Please note that it may be necessary to try different regions as a starting point to ensure that all genomes are fixed with the same initial region.**
+
+    Bacterial genomes are typically circular, so establishing a fixed starting point for each input genome during pangenome graph construction could reduce unnecessary complexity within the graph. Once the genomes are aligned with the same starting point, we can build their index using samtools faidx and proceed with constructing the pangenome graph. I encourage you to experiment with this approach after this workshop to see how effectively it functions. Please note that it may be necessary to try different regions as a starting point to ensure that all genomes are fixed with the same initial region.
 
     let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample. 
     ```bash
     #!/usr/bin/bash
 
-    #SBATCH --account       ga03793
+    #SBATCH --account       nesi02659
     #SBATCH --job-name      restart_fna
     #SBATCH --cpus-per-task 8
     #SBATCH --mem           4G
@@ -193,7 +194,7 @@
     ```
 
 
-??? info "Fix the start point of the 5NM genomes"
+??? screwdriver-wrench "Fix the start point of the 5NM genomes"
 
     **One tricky aspect is finding a region that is present in all the genomes and is oriented in the same direction**
     The mauve alignment of the 5NM genomes 
