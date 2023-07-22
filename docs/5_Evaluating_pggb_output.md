@@ -77,8 +77,8 @@
         P       NZ_CP016880.1   2+,133478+,133479+,133481+,133482+,133483+,133485+,133486+,133488+,133489+,133490+,133492+,133493+,133495+,
         P       NZ_CP020423.2   3+,175915+,175916+,175918+,175919+,175921+,175922+,175924+,175925+,175926+,175928+,175929+,175931+,175932+,
         ```
-    ??? success "what does S, L, P mean"
-        **S means DNA segments, L means links between notes, and P means paths**
+    ??? clipboard-question "what does S, L, P mean"
+        `S` means DNA segments, `L` means links between notes, and `P` means paths
 
 
 
