@@ -31,7 +31,9 @@ https://www.bioworld.com/articles/696850-pangenome-gives-more-panoramic-view-of-
 ### Input fasta file 
 !!! info ""
 
+<center>
 ![bacterial-pangenome](theme_figures/PGGB_workflow_1_small.png)
+</center>
 
 ### All-to-all alignment
 !!! info ""
@@ -39,7 +41,9 @@ https://www.bioworld.com/articles/696850-pangenome-gives-more-panoramic-view-of-
 **All-to-all alignment** refers to the process of aligning all sequences in a given set against each other, rather than aligning them to a single reference sequence.
 PGGB begins with an alignment using `wfmash` to align the input genomes. This compares all sequences to each other and finds the best `N` mappings for each. It produces base-level alignments.
 
+<center>
 ![bacterial-pangenome](theme_figures/PGGB_workflow_2_small.png)
+</center>
 
 ### Inducing the graph
 !!! info ""
@@ -47,7 +51,9 @@ PGGB begins with an alignment using `wfmash` to align the input genomes. This co
 **Graph induction** refers to the process of constructing the genome graph by progressively integrating genetic variants into a reference genome.
 These base-level alignments are converted into a graph with `seqwish`. A filter is applied to remove short matches, which anchors the graph on confident longer exact matches.
 
+<center>
 ![bacterial-pangenome](theme_figures/PGGB_workflow_3_small.png)
+</center>
 
 ### Normalizing the graph with smoothxg and gfafix
 !!! info ""
