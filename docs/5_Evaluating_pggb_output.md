@@ -143,44 +143,45 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
     odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_inv_multiqc_1.png -x 1500 -y 500 -a 10 -z -I Consensus_
     ```
  
-??? info "What makes the last path different compared to the other paths?"
+??? clipboard-question "What makes the last path different compared to the other paths?"
 
     The orientation of the last path is almost exactly the reverse of the second to last one, right? Do you think it's possible that the last path of the genome was submitted as its reverse complement? 
 
-??? info "how to fix this?"
+??? clipboard-question "how to fix this?"
 
     #### Circlator
     **Bacterial genomes are typically circular, so establishing a fixed starting point for each input genome during pangenome graph construction could reduce unnecessary complexity within the graph. Once the genomes are aligned with the same starting point, we can build their index using samtools faidx and proceed with constructing the pangenome graph. I encourage you to experiment with this approach after this workshop to see how effectively it functions.**
 
-    let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample. 
-    ```bash
-    #!/usr/bin/bash
+    !!! terminal-2 "let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample"
 
-    #SBATCH --account       ga03793
-    #SBATCH --job-name      restart_fna
-    #SBATCH --cpus-per-task 8
-    #SBATCH --mem           4G
-    #SBATCH --time          1:00:00
+         ```bash
+         #!/bin/bash -e
+     
+         #SBATCH --account       nesi02659
+         #SBATCH --job-name      restart_fna
+         #SBATCH --cpus-per-task 8
+         #SBATCH --mem           4G
+         #SBATCH --time          1:00:00
+     
+         module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
+     
+         cd /home/zyang/pg_test
+         data=/home/zyang/pg_test/*.fna
+     
+         for f in $data
+         do
+     
+         x=$(basename $f .fna)
+         echo ${x}
+     
+         circlator fixstart  ${x}.fna  ${x}.restart
+     
+         done
+         ```
 
-    module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
 
-    cd /home/zyang/pg_test
-    data=/home/zyang/pg_test/*.fna
-
-    for f in $data
-    do
-
-    x=$(basename $f .fna)
-    echo ${x}
-
-    circlator fixstart  ${x}.fna  ${x}.restart
-
-    done
-    ```
-
-
-??? info "ODGI 1D visualization by path orientation for the 5NM after start point being fixed"
-![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NMres.png)
+!!! success "ODGI 1D visualization by path orientation for the 5NM after start point being fixed"
+    ![ODGI 1D visualization by path orientation](theme_figures/ODGI-Path-Orientation-1D-5NMres.png)
 
 
 
