@@ -117,6 +117,5 @@ The overall structure of PGGB's output graph is defined by three parameters: gen
 - 15 helicobacter genomes, 5% divergence: `pggb -p 90 -n 15 -k 79 ....`
 - Yeast genomes, 5% divergence: PGGB's defaults should work well, just set -n.
 - Aligning 9 Major Histocompatibility Complex (MHC) class II assemblies from vertebrate genomes (5-10% divergence): `pggb -p 90 -n 9 -k 29 ...`
-- A few thousand bacterial genomes `pggb -x auto -n 2146 ...`
-  - In general mapping sparsification **(`-x auto`)** is a good idea when you have many hundreds to thousands of genomes.
+- A few thousand bacterial genomes `pggb -x auto -n 2146 ...`. In general mapping sparsification **(`-x auto`)** is a good idea when you have many hundreds to thousands of genomes.
 
