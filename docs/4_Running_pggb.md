@@ -171,8 +171,7 @@ Inspect the index.
 Executing shell scripts in the NeSI environment might not be the best way to handle larger files which will require large memory, CPU power and time. 
 We can modify the previously explained script as below to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
 
-The following is a SLURM script (`pggb_5NM_2k94.sl`) for PGGB with `-k 2000`,
-and `-p 94` 
+!!! terminal-2 "The following is a SLURM script (`pggb_5NM_2k94.sl`) for PGGB with `-k 2000` and `-p 94`"
 
     ```bash
     #!/bin/bash -e     
@@ -198,7 +197,7 @@ and `-p 94`
     
     ```
 
-The job can be submitted using the `sbatch` command as follows. Take a note of the job ID for tracking the run.
+!!! terminal-2 "The job can be submitted using the `sbatch` command as follows. Take a note of the job ID for tracking the run."
 
     ```bash
     sbatch pggb_5NM_2k94.sl
