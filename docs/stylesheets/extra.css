@@ -1,7 +1,27 @@
+.banner {
+    height: 30px;       /* Height of the banner */
+    position: sticky;   /* Follows as you scroll */
+    top: 0;             /* Absolute top of page */
+    left: 0;
+    width: 100%;
+    z-index: 1;         /* Tells the renderer "this is important", otherwise Admonition and Code Blocks will render into it */
+    text-align: center;
+    background-color: black;
+}
+
+.md-header {
+    top: 30px;          /* This setting prevents the Material header from imposing into the space of the banner! */
+}
+
+
+.md-content {
+  --md-typeset-a-color: #2596be;
+}
+
 :root {
 
   /* Default color shades */
-  --md-default-fg-color:               #44449c;
+  --md-default-fg-color:               #15166d;
   --md-default-fg-color--light:        #1a0206;
   --md-default-fg-color--lighter:      rgb(11,33,57,0.5);
   --md-default-fg-color--lightest:     rgb(11,33,57,0.1);
@@ -13,7 +33,7 @@
 */
 
   /* Primary color shades */
-  --md-primary-fg-color:               #44449c;
+  --md-primary-fg-color:               #15166d;
   --md-primary-fg-color--light:        rgb(35,171,227);
   --md-primary-fg-color--dark:         rgb(11,33,57);
   /*
@@ -29,22 +49,6 @@
   --md-accent-bg-color:                rgb(210,227,235);
   --md-accent-bg-color--light:         rgb(210,227,235,0.5);
 }
-
-.banner {
-    height: 30px;       /* Height of the banner */
-    position: sticky;   /* Follows as you scroll */
-    top: 0;             /* Absolute top of page */
-    left: 0;
-    width: 100%;
-    z-index: 1;         /* Tells the renderer "this is important", otherwise Admonition and Code Blocks will render into it */
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.87);
-}
-
-.md-header {
-    top: 30px;          /* This setting prevents the Material header from imposing into the space of the banner! */
-}
-
 
 :root {
     --md-admonition-icon--pied-piper: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M244 246c-3.2-2-6.3-2.9-10.1-2.9-6.6 0-12.6 3.2-19.3 3.7l1.7 4.9zm135.9 197.9c-19 0-64.1 9.5-79.9 19.8l6.9 45.1c35.7 6.1 70.1 3.6 106-9.8-4.8-10-23.5-55.1-33-55.1zM340.8 177c6.6 2.8 11.5 9.2 22.7 22.1 2-1.4 7.5-5.2 7.5-8.6 0-4.9-11.8-13.2-13.2-23 11.2-5.7 25.2-6 37.6-8.9 68.1-16.4 116.3-52.9 146.8-116.7C548.3 29.3 554 16.1 554.6 2l-2 2.6c-28.4 50-33 63.2-81.3 100-31.9 24.4-69.2 40.2-106.6 54.6l-6.3-.3v-21.8c-19.6 1.6-19.7-14.6-31.6-23-18.7 20.6-31.6 40.8-58.9 51.1-12.7 4.8-19.6 10-25.9 21.8 34.9-16.4 91.2-13.5 98.8-10zM555.5 0l-.6 1.1-.3.9.6-.6zm-59.2 382.1c-33.9-56.9-75.3-118.4-150-115.5l-.3-6c-1.1-13.5 32.8 3.2 35.1-31l-14.4 7.2c-19.8-45.7-8.6-54.3-65.5-54.3-14.7 0-26.7 1.7-41.4 4.6 2.9 18.6 2.2 36.7-10.9 50.3l19.5 5.5c-1.7 3.2-2.9 6.3-2.9 9.8 0 21 42.8 2.9 42.8 33.6 0 18.4-36.8 60.1-54.9 60.1-8 0-53.7-50-53.4-60.1l.3-4.6 52.3-11.5c13-2.6 12.3-22.7-2.9-22.7-3.7 0-43.1 9.2-49.4 10.6-2-5.2-7.5-14.1-13.8-14.1-3.2 0-6.3 3.2-9.5 4-9.2 2.6-31 2.9-21.5 20.1L15.9 298.5c-5.5 1.1-8.9 6.3-8.9 11.8 0 6 5.5 10.9 11.5 10.9 8 0 131.3-28.4 147.4-32.2 2.6 3.2 4.6 6.3 7.8 8.6 20.1 14.4 59.8 85.9 76.4 85.9 24.1 0 58-22.4 71.3-41.9 3.2-4.3 6.9-7.5 12.4-6.9.6 13.8-31.6 34.2-33 43.7-1.4 10.2-1 35.2-.3 41.1 26.7 8.1 52-3.6 77.9-2.9 4.3-21 10.6-41.9 9.8-63.5l-.3-9.5c-1.4-34.2-10.9-38.5-34.8-58.6-1.1-1.1-2.6-2.6-3.7-4 2.2-1.4 1.1-1 4.6-1.7 88.5 0 56.3 183.6 111.5 229.9 33.1-15 72.5-27.9 103.5-47.2-29-25.6-52.6-45.7-72.7-79.9zm-196.2 46.1v27.2l11.8-3.4-2.9-23.8zm-68.7-150.4l24.1 61.2 21-13.8-31.3-50.9zm84.4 154.9l2 12.4c9-1.5 58.4-6.6 58.4-14.1 0-1.4-.6-3.2-.9-4.6-26.8 0-36.9 3.8-59.5 6.3z"/></svg>')
@@ -74,11 +78,11 @@
 }
 .md-typeset .desktop-download-24 > .admonition-title,
 .md-typeset .desktop-download-24 > summary {
-  background-color: rgba(70,130,180, 0.1);
+  background-color: rgba(88, 173, 243, 0.473);
 }
 .md-typeset .desktop-download-24 > .admonition-title::before,
 .md-typeset .desktop-download-24 > summary::before {
-  background-color: rgb(70,130,180);
+  background-color: rgb(33, 53, 161);
   -webkit-mask-image: var(--md-admonition-icon--desktop-download-24);
           mask-image: var(--md-admonition-icon--desktop-download-24);
 }
@@ -354,7 +358,7 @@
   }
   .md-typeset .rectangle-list > .admonition-title,
   .md-typeset .rectangle-list > summary {
-    background-color: rgba(14, 130, 238, 0.63);
+    background-color: rgba(36, 141, 238, 0.63);
   }
   .md-typeset .rectangle-list > .admonition-title::before,
   .md-typeset .rectangle-list > summary::before {
@@ -516,7 +520,7 @@
   }
   .md-typeset .file-code > .admonition-title,
   .md-typeset .file-code > summary {
-    background-color: rgba(252, 207, 9, 0.151);
+    background-color: rgba(252, 207, 9, 0.479);
   }
   .md-typeset .file-code > .admonition-title::before,
   .md-typeset .file-code > summary::before {
@@ -603,15 +607,16 @@
   }
   .md-typeset .admonition.circle-info,
   .md-typeset details.circle-info {
-    border-color: rgb(238, 156, 131);
+    border-color: rgb(55, 52, 238);
   }
   .md-typeset .circle-info > .admonition-title,
   .md-typeset .circle-info > summary {
-    background-color: rgba(240, 199, 19, 0.459);
+    color:rgb(230, 230, 236);
+    background-color: rgba(9, 23, 143, 0.959);
   }
   .md-typeset .circle-info > .admonition-title::before,
   .md-typeset .circle-info > summary::before {
-    background-color: rgb(235, 98, 80);
+    background-color: rgb(217, 235, 117);
     -webkit-mask-image: var(--md-admonition-icon--circle-info);
             mask-image: var(--md-admonition-icon--circle-info);
   }
@@ -639,15 +644,15 @@
   }
   .md-typeset .admonition.quote-right,
   .md-typeset details.quote-right {
-    border-color: rgb(211, 241, 190);
+    border-color: rgb(243, 226, 170);
   }
   .md-typeset .quote-right > .admonition-title,
   .md-typeset .quote-right > summary {
-    background-color: rgba(205, 231, 176, 0.459);
+    background-color: rgba(237, 240, 62, 0.459);
   }
   .md-typeset .quote-right > .admonition-title::before,
   .md-typeset .quote-right > summary::before {
-    background-color: rgb(87, 172, 62);
+    background-color: rgb(252, 165, 4);
     -webkit-mask-image: var(--md-admonition-icon--quote-right);
             mask-image: var(--md-admonition-icon--quote-right);
   }
@@ -680,11 +685,11 @@
   }
   .md-typeset .table > .admonition-title,
   .md-typeset .table > summary {
-    background-color: rgba(205, 231, 176, 0.459);
+    background-color: rgba(232, 235, 91, 0.459);
   }
   .md-typeset .table > .admonition-title::before,
   .md-typeset .table > summary::before {
-    background-color: rgb(87, 172, 62);
+    background-color: rgb(241, 134, 47);
     -webkit-mask-image: var(--md-admonition-icon--table);
             mask-image: var(--md-admonition-icon--table);
   }
@@ -724,3 +729,301 @@
     -webkit-mask-image: var(--md-admonition-icon--file-export);
             mask-image: var(--md-admonition-icon--file-export);
   }
+
+:root {
+    --md-admonition-icon--keybase: url('data:image/svg+xml;charset=utf-9,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M286.17 419a18 18 0 1 0 18 18 18 18 0 0 0-18-18zm111.92-147.6c-9.5-14.62-39.37-52.45-87.26-73.71q-9.1-4.06-18.38-7.27a78.43 78.43 0 0 0-47.88-104.13c-12.41-4.1-23.33-6-32.41-5.77-.6-2-1.89-11 9.4-35L198.66 32l-5.48 7.56c-8.69 12.06-16.92 23.55-24.34 34.89a51 51 0 0 0-8.29-1.25c-41.53-2.45-39-2.33-41.06-2.33-50.61 0-50.75 52.12-50.75 45.88l-2.36 36.68c-1.61 27 19.75 50.21 47.63 51.85l8.93.54a214 214 0 0 0-46.29 35.54C14 304.66 14 374 14 429.77v33.64l23.32-29.8a148.6 148.6 0 0 0 14.56 37.56c5.78 10.13 14.87 9.45 19.64 7.33 4.21-1.87 10-6.92 3.75-20.11a178.29 178.29 0 0 1-15.76-53.13l46.82-59.83-24.66 74.11c58.23-42.4 157.38-61.76 236.25-38.59 34.2 10.05 67.45.69 84.74-23.84.72-1 1.2-2.16 1.85-3.22a156.09 156.09 0 0 1 2.8 28.43c0 23.3-3.69 52.93-14.88 81.64-2.52 6.46 1.76 14.5 8.6 15.74 7.42 1.57 15.33-3.1 18.37-11.15C429 443 434 414 434 382.32c0-38.58-13-77.46-35.91-110.92zM142.37 128.58l-15.7-.93-1.39 21.79 13.13.78a93 93 0 0 0 .32 19.57l-22.38-1.34a12.28 12.28 0 0 1-11.76-12.79L107 119c1-12.17 13.87-11.27 13.26-11.32l29.11 1.73a144.35 144.35 0 0 0-7 19.17zm148.42 172.18a10.51 10.51 0 0 1-14.35-1.39l-9.68-11.49-34.42 27a8.09 8.09 0 0 1-11.13-1.08l-15.78-18.64a7.38 7.38 0 0 1 1.34-10.34l34.57-27.18-14.14-16.74-17.09 13.45a7.75 7.75 0 0 1-10.59-1s-3.72-4.42-3.8-4.53a7.38 7.38 0 0 1 1.37-10.34L214 225.19s-18.51-22-18.6-22.14a9.56 9.56 0 0 1 1.74-13.42 10.38 10.38 0 0 1 14.3 1.37l81.09 96.32a9.58 9.58 0 0 1-1.74 13.44zM187.44 419a18 18 0 1 0 18 18 18 18 0 0 0-18-18z"/></svg>')
+  }
+  .md-typeset .admonition.keybase,
+  .md-typeset details.keybase {
+    border-color: rgb(243, 234, 103);
+  }
+  .md-typeset .keybase > .admonition-title,
+  .md-typeset .keybase > summary {
+    background-color: rgba(233, 208, 95, 0.459);
+  }
+  .md-typeset .keybase > .admonition-title::before,
+  .md-typeset .keybase > summary::before {
+    background-color: rgb(168, 86, 9);
+    -webkit-mask-image: var(--md-admonition-icon--keybase);
+            mask-image: var(--md-admonition-icon--keybase);
+  }
+:root {
+    --md-admonition-icon--book-atlas: url('data:image/svg+xml;charset=utf-9,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 96C0 43 43 0 96 0H384h32c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32v64c17.7 0 32 14.3 32 32s-14.3 32-32 32H384 96c-53 0-96-43-96-96V96zM64 416c0 17.7 14.3 32 32 32H352V384H96c-17.7 0-32 14.3-32 32zM247.4 283.8c-3.7 3.7-6.2 4.2-7.4 4.2s-3.7-.5-7.4-4.2c-3.8-3.7-8-10-11.8-18.9c-6.2-14.5-10.8-34.3-12.2-56.9h63c-1.5 22.6-6 42.4-12.2 56.9c-3.8 8.9-8 15.2-11.8 18.9zm42.7-9.9c7.3-18.3 12-41.1 13.4-65.9h31.1c-4.7 27.9-21.4 51.7-44.5 65.9zm0-163.8c23.2 14.2 39.9 38 44.5 65.9H303.5c-1.4-24.7-6.1-47.5-13.4-65.9zM368 192a128 128 0 1 0 -256 0 128 128 0 1 0 256 0zM145.3 208h31.1c1.4 24.7 6.1 47.5 13.4 65.9c-23.2-14.2-39.9-38-44.5-65.9zm31.1-32H145.3c4.7-27.9 21.4-51.7 44.5-65.9c-7.3 18.3-12 41.1-13.4 65.9zm56.1-75.8c3.7-3.7 6.2-4.2 7.4-4.2s3.7 .5 7.4 4.2c3.8 3.7 8 10 11.8 18.9c6.2 14.5 10.8 34.3 12.2 56.9h-63c1.5-22.6 6-42.4 12.2-56.9c3.8-8.9 8-15.2 11.8-18.9z"/></svg>')
+  }
+  .md-typeset .admonition.book-atlas,
+  .md-typeset details.book-atlas {
+    border-color: rgb(243, 234, 103);
+  }
+  .md-typeset .book-atlas > .admonition-title,
+  .md-typeset .book-atlas > summary {
+    background-color: rgba(247, 231, 160, 0.719);
+  }
+  .md-typeset .book-atlas > .admonition-title::before,
+  .md-typeset .book-atlas > summary::before {
+    background-color: rgb(168, 86, 9);
+    -webkit-mask-image: var(--md-admonition-icon--book-atlas);
+            mask-image: var(--md-admonition-icon--book-atlas);
+  }
+
+:root {
+    --md-admonition-icon--copyright: url('data:image/svg+xml;charset=utf-9,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM199.4 312.6c-31.2-31.2-31.2-81.9 0-113.1s81.9-31.2 113.1 0c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9c-50-50-131-50-181 0s-50 131 0 181s131 50 181 0c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0c-31.2 31.2-81.9 31.2-113.1 0z"/></svg>')
+  }
+  .md-typeset .admonition.copyright,
+  .md-typeset details.copyright {
+    border-color: rgb(177, 235, 138);
+  }
+  .md-typeset .copyright > .admonition-title,
+  .md-typeset .copyright > summary {
+    background-color: rgba(84, 226, 55, 0.459);
+  }
+  .md-typeset .copyright > .admonition-title::before,
+  .md-typeset .copyright > summary::before {
+    background-color: rgb(3, 139, 3);
+    -webkit-mask-image: var(--md-admonition-icon--copyright);
+            mask-image: var(--md-admonition-icon--copyright);
+  }
+
+:root {
+    --md-admonition-icon--clipboard-question: url('data:image/svg+xml;charset=utf-9,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M192 0c-41.8 0-77.4 26.7-90.5 64H64C28.7 64 0 92.7 0 128V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H282.5C269.4 26.7 233.8 0 192 0zm0 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM105.8 229.3c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L216 328.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V314.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H158.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM160 416a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>')
+  }
+  .md-typeset .admonition.clipboard-question,
+  .md-typeset details.clipboard-question {
+    border-color: rgb(206, 153, 236);
+  }
+  .md-typeset .clipboard-question > .admonition-title,
+  .md-typeset .clipboard-question > summary {
+    background-color: rgba(203, 203, 243, 0.726);
+  }
+  .md-typeset .clipboard-question > .admonition-title::before,
+  .md-typeset .clipboard-question > summary::before {
+    background-color: rgba(17, 6, 66, 0.712);
+    -webkit-mask-image: var(--md-admonition-icon--clipboard-question);
+            mask-image: var(--md-admonition-icon--clipboard-question);
+  }
+
+:root {
+    --md-admonition-icon--filter: url('data:image/svg+xml;charset=utf-9,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>')
+  }
+  .md-typeset .admonition.filter,
+  .md-typeset details.filter {
+    border-color: rgb(243, 234, 103);
+  }
+  .md-typeset .filter > .admonition-title,
+  .md-typeset .filter > summary {
+    background-color: rgba(233, 208, 95, 0.459);
+  }
+  .md-typeset .filter > .admonition-title::before,
+  .md-typeset .filter > summary::before {
+    background-color: rgb(168, 86, 9);
+    -webkit-mask-image: var(--md-admonition-icon--filter);
+            mask-image: var(--md-admonition-icon--filter);
+  }
+
+:root {
+    --md-admonition-icon--user-secret: url('data:image/svg+xml;charset=utf-9,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 16c-6.7 0-10.8-2.8-15.5-6.1C201.9 5.4 194 0 176 0c-30.5 0-52 43.7-66 89.4C62.7 98.1 32 112.2 32 128c0 14.3 25 27.1 64.6 35.9c-.4 4-.6 8-.6 12.1c0 17 3.3 33.2 9.3 48H45.4C38 224 32 230 32 237.4c0 1.7 .3 3.4 1 5l38.8 96.9C28.2 371.8 0 423.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7c0-58.5-28.2-110.4-71.7-143L415 242.4c.6-1.6 1-3.3 1-5c0-7.4-6-13.4-13.4-13.4H342.7c6-14.8 9.3-31 9.3-48c0-4.1-.2-8.1-.6-12.1C391 155.1 416 142.3 416 128c0-15.8-30.7-29.9-78-38.6C324 43.7 302.5 0 272 0c-18 0-25.9 5.4-32.5 9.9c-4.8 3.3-8.8 6.1-15.5 6.1zm56 208H267.6c-16.5 0-31.1-10.6-36.3-26.2c-2.3-7-12.2-7-14.5 0c-5.2 15.6-19.9 26.2-36.3 26.2H168c-22.1 0-40-17.9-40-40V169.6c28.2 4.1 61 6.4 96 6.4s67.8-2.3 96-6.4V184c0 22.1-17.9 40-40 40zm-88 96l16 32L176 480 128 288l64 32zm128-32L272 480 240 352l16-32 64-32z"/></svg>')
+  }
+  .md-typeset .admonition.user-secret,
+  .md-typeset details.user-secret {
+    border-color: rgb(30, 202, 14);
+  }
+  .md-typeset .user-secret > .admonition-title,
+  .md-typeset .user-secret > summary {
+    background-color: rgba(20, 122, 46, 0.459);
+  }
+  .md-typeset .user-secret > .admonition-title::before,
+  .md-typeset .user-secret > summary::before {
+    background-color: rgb(204, 87, 19);
+    -webkit-mask-image: var(--md-admonition-icon--user-secret);
+            mask-image: var(--md-admonition-icon--user-secret);
+  }
+
+:root {
+  --md-admonition-icon--terminal-2: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 41.4 86.6zM288 416H576c17.7 0 32 14.3 32 32s-14.3 32-32 32H288c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg>')
+}
+.md-typeset .admonition.terminal-2,
+.md-typeset details.terminal-2 {
+  border-color: rgb(105,105,105);
+}
+.md-typeset .terminal-2 > .admonition-title,
+.md-typeset .terminal-2 > summary {
+  color:rgb(35, 35, 37);
+  background-color: rgba(194, 197, 192, 0.664);
+}
+.md-typeset .terminal-2 > .admonition-title::before,
+.md-typeset .terminal-2 > summary::before {
+  background-color: rgb(9, 209, 26);
+  -webkit-mask-image: var(--md-admonition-icon--terminal-2);
+          mask-image: var(--md-admonition-icon--terminal-2);
+}
+
+:root {
+  --md-admonition-icon--backward: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M459.5 440.6c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4L288 214.3V256v41.7L459.5 440.6zM256 352V256 128 96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4l-192 160C4.2 237.5 0 246.5 0 256s4.2 18.5 11.5 24.6l192 160c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V352z"/></svg>')
+}
+.md-typeset .admonition.backward,
+.md-typeset details.backward {
+  border-color: rgb(105,105,105);
+}
+.md-typeset .backward > .admonition-title,
+.md-typeset .backward > summary {
+  color:rgb(255, 255, 255);
+  background-color: rgba(32, 31, 25, 0.74);
+}
+.md-typeset .backward > .admonition-title::before,
+.md-typeset .backward > summary::before {
+  background-color: rgb(231, 209, 86);
+  -webkit-mask-image: var(--md-admonition-icon--backward);
+          mask-image: var(--md-admonition-icon--backward);
+}
+
+:root {
+  --md-admonition-icon--surprise: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm176.4-80a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm128 32a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM256 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>')
+}
+.md-typeset .admonition.surprise,
+.md-typeset details.surprise {
+  border-color: rgb(105,105,105);
+}
+.md-typeset .surprise > .admonition-title,
+.md-typeset .surprise > summary {
+  color:rgb(35, 35, 37);
+  background-color: rgba(247, 203, 10, 0.815);
+}
+.md-typeset .surprise > .admonition-title::before,
+.md-typeset .surprise > summary::before {
+  background-color: rgb(209, 22, 9);
+  -webkit-mask-image: var(--md-admonition-icon--surprise);
+          mask-image: var(--md-admonition-icon--surprise);
+}
+
+:root {
+  --md-admonition-icon--mg-glass-location: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM288 176c0-44.2-35.8-80-80-80s-80 35.8-80 80c0 48.8 46.5 111.6 68.6 138.6c6 7.3 16.8 7.3 22.7 0c22.1-27 68.6-89.8 68.6-138.6zm-112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>')
+}
+.md-typeset .admonition.mg-glass-location,
+.md-typeset details.mg-glass-location {
+  border-color: rgb(105,105,105);
+}
+.md-typeset .mg-glass-location > .admonition-title,
+.md-typeset .mg-glass-location > summary {
+  color:rgb(35, 35, 37);
+  background-color: rgba(185, 108, 216, 0.486);
+}
+.md-typeset .mg-glass-location > .admonition-title::before,
+.md-typeset .mg-glass-location > summary::before {
+  background-color: rgb(28, 5, 131);
+  -webkit-mask-image: var(--md-admonition-icon--mg-glass-location);
+          mask-image: var(--md-admonition-icon--mg-glass-location);
+}
+
+:root {
+  --md-admonition-icon--flushed: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM256 0a256 256 0 1 0 0 512A256 256 0 1 0 256 0zM160.4 248a24 24 0 1 0 0-48 24 24 0 1 0 0 48zm216-24a24 24 0 1 0 -48 0 24 24 0 1 0 48 0zM192 336c-13.3 0-24 10.7-24 24s10.7 24 24 24H320c13.3 0 24-10.7 24-24s-10.7-24-24-24H192zM160 176a48 48 0 1 1 0 96 48 48 0 1 1 0-96zm0 128a80 80 0 1 0 0-160 80 80 0 1 0 0 160zm144-80a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm128 0a80 80 0 1 0 -160 0 80 80 0 1 0 160 0z"/></svg>')
+}
+.md-typeset .admonition.flushed,
+.md-typeset details.flushed {
+  border-color: rgb(105,105,105);
+}
+.md-typeset .flushed > .admonition-title,
+.md-typeset .flushed > summary {
+  color:rgb(35, 35, 37);
+  background-color: rgba(231, 198, 52, 0.815);
+}
+.md-typeset .flushed > .admonition-title::before,
+.md-typeset .flushed > summary::before {
+  background-color: rgb(148, 87, 7);
+  -webkit-mask-image: var(--md-admonition-icon--flushed);
+          mask-image: var(--md-admonition-icon--flushed);
+}
+
+:root {
+  --md-admonition-icon--truck-medical: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 48C0 21.5 21.5 0 48 0H368c26.5 0 48 21.5 48 48V96h50.7c17 0 33.3 6.7 45.3 18.7L589.3 192c12 12 18.7 28.3 18.7 45.3V256v32 64c17.7 0 32 14.3 32 32s-14.3 32-32 32H576c0 53-43 96-96 96s-96-43-96-96H256c0 53-43 96-96 96s-96-43-96-96H48c-26.5 0-48-21.5-48-48V48zM416 256H544V237.3L466.7 160H416v96zM160 464a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm368-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM176 80v48l-48 0c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h48v48c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V192h48c8.8 0 16-7.2 16-16V144c0-8.8-7.2-16-16-16H240V80c0-8.8-7.2-16-16-16H192c-8.8 0-16 7.2-16 16z"/></svg>')
+}
+.md-typeset .admonition.truck-medical,
+.md-typeset details.truck-medical {
+  border-color: rgb(105,105,105);
+}
+.md-typeset .truck-medical > .admonition-title,
+.md-typeset .truck-medical > summary {
+  color:rgb(35, 35, 37);
+  background-color: rgba(221, 211, 166, 0.815);
+}
+.md-typeset .truck-medical > .admonition-title::before,
+.md-typeset .truck-medical > summary::before {
+  background-color: rgb(209, 22, 9);
+  -webkit-mask-image: var(--md-admonition-icon--truck-medical);
+          mask-image: var(--md-admonition-icon--truck-medical);
+}
+
+:root {
+  --md-admonition-icon--tags: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M345 39.1L472.8 168.4c52.4 53 52.4 138.2 0 191.2L360.8 472.9c-9.3 9.4-24.5 9.5-33.9 .2s-9.5-24.5-.2-33.9L438.6 325.9c33.9-34.3 33.9-89.4 0-123.7L310.9 72.9c-9.3-9.4-9.2-24.6 .2-33.9s24.6-9.2 33.9 .2zM0 229.5V80C0 53.5 21.5 32 48 32H197.5c17 0 33.3 6.7 45.3 18.7l168 168c25 25 25 65.5 0 90.5L277.3 442.7c-25 25-65.5 25-90.5 0l-168-168C6.7 262.7 0 246.5 0 229.5zM144 144a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>')
+}
+.md-typeset .admonition.tags,
+.md-typeset details.tags {
+  border-color: rgb(105,105,105);
+}
+.md-typeset .tags > .admonition-title,
+.md-typeset .tags > summary {
+  color:rgb(35, 35, 37);
+  background-color: rgba(216, 202, 79, 0.815);
+}
+.md-typeset .tags > .admonition-title::before,
+.md-typeset .tags > summary::before {
+  background-color: rgb(240, 139, 8);
+  -webkit-mask-image: var(--md-admonition-icon--tags);
+          mask-image: var(--md-admonition-icon--tags);
+}
+
+:root {
+  --md-admonition-icon--three-users: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 24C0 10.7 10.7 0 24 0H616c13.3 0 24 10.7 24 24s-10.7 24-24 24H24C10.7 48 0 37.3 0 24zM0 488c0-13.3 10.7-24 24-24H616c13.3 0 24 10.7 24 24s-10.7 24-24 24H24c-13.3 0-24-10.7-24-24zM83.2 160a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM32 320c0-35.3 28.7-64 64-64h96c12.2 0 23.7 3.4 33.4 9.4c-37.2 15.1-65.6 47.2-75.8 86.6H64c-17.7 0-32-14.3-32-32zm461.6 32c-10.3-40.1-39.6-72.6-77.7-87.4c9.4-5.5 20.4-8.6 32.1-8.6h96c35.3 0 64 28.7 64 64c0 17.7-14.3 32-32 32H493.6zM391.2 290.4c32.1 7.4 58.1 30.9 68.9 61.6c3.5 10 5.5 20.8 5.5 32c0 17.7-14.3 32-32 32h-224c-17.7 0-32-14.3-32-32c0-11.2 1.9-22 5.5-32c10.5-29.7 35.3-52.8 66.1-60.9c7.8-2.1 16-3.1 24.5-3.1h96c7.4 0 14.7 .8 21.6 2.4zm44-130.4a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM321.6 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"/></svg>')
+}
+.md-typeset .admonition.three-users,
+.md-typeset details.three-users {
+  border-color: rgb(105,105,105);
+}
+.md-typeset .three-users > .admonition-title,
+.md-typeset .three-users > summary {
+  color:rgb(35, 35, 37);
+  background-color: rgba(213, 111, 238, 0.562);
+}
+.md-typeset .three-users > .admonition-title::before,
+.md-typeset .three-users > summary::before {
+  background-color: rgb(80, 20, 177);
+  -webkit-mask-image: var(--md-admonition-icon--three-users);
+          mask-image: var(--md-admonition-icon--three-users);
+}
+
+:root {
+  --md-admonition-icon--scale-balance: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M384 32H512c17.7 0 32 14.3 32 32s-14.3 32-32 32H398.4c-5.2 25.8-22.9 47.1-46.4 57.3V448H512c17.7 0 32 14.3 32 32s-14.3 32-32 32H320 128c-17.7 0-32-14.3-32-32s14.3-32 32-32H288V153.3c-23.5-10.3-41.2-31.6-46.4-57.3H128c-17.7 0-32-14.3-32-32s14.3-32 32-32H256c14.6-19.4 37.8-32 64-32s49.4 12.6 64 32zm55.6 288H584.4L512 195.8 439.6 320zM512 416c-62.9 0-115.2-34-126-78.9c-2.6-11 1-22.3 6.7-32.1l95.2-163.2c5-8.6 14.2-13.8 24.1-13.8s19.1 5.3 24.1 13.8l95.2 163.2c5.7 9.8 9.3 21.1 6.7 32.1C627.2 382 574.9 416 512 416zM126.8 195.8L54.4 320H199.3L126.8 195.8zM.9 337.1c-2.6-11 1-22.3 6.7-32.1l95.2-163.2c5-8.6 14.2-13.8 24.1-13.8s19.1 5.3 24.1 13.8l95.2 163.2c5.7 9.8 9.3 21.1 6.7 32.1C242 382 189.7 416 126.8 416S11.7 382 .9 337.1z"/></svg>')
+}
+.md-typeset .admonition.scale-balance,
+.md-typeset details.scale-balance {
+  border-color: rgb(105,105,105);
+}
+.md-typeset .scale-balance > .admonition-title,
+.md-typeset .scale-balance > summary {
+  color:rgb(35, 35, 37);
+  background-color: rgba(145, 229, 159, 0.815);
+}
+.md-typeset .scale-balance > .admonition-title::before,
+.md-typeset .scale-balance > summary::before {
+  background-color: rgb(8, 121, 74);
+  -webkit-mask-image: var(--md-admonition-icon--scale-balance);
+          mask-image: var(--md-admonition-icon--scale-balance);
+}
+
+
+:root {
+  --md-admonition-icon--html5: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 32l34.9 395.8L191.5 480l157.6-52.2L384 32H0zm308.2 127.9H124.4l4.1 49.4h175.6l-13.6 148.4-97.9 27v.3h-1.1l-98.7-27.3-6-75.8h47.7L138 320l53.5 14.5 53.7-14.5 6-62.2H84.3L71.5 112.2h241.1l-4.4 47.7z"/></svg>')
+}
+.md-typeset .admonition.html5,
+.md-typeset details.html5 {
+  border-color: rgb(105,105,105);
+}
+.md-typeset .html5 > .admonition-title,
+.md-typeset .html5 > summary {
+  color:rgb(35, 35, 37);
+  background-color: rgba(221, 211, 166, 0.815);
+}
+.md-typeset .html5 > .admonition-title::before,
+.md-typeset .html5 > summary::before {
+  background-color: rgb(209, 22, 9);
+  -webkit-mask-image: var(--md-admonition-icon--html5);
+          mask-image: var(--md-admonition-icon--html5);
+}
