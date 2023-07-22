@@ -6,7 +6,7 @@
 ![Variation graphs](theme_figures/example_of_Graph_reference_small.png)
 https://www.bioworld.com/articles/696850-pangenome-gives-more-panoramic-view-of-human-diversity?v=preview
 
-- Variation graphs offer a compact representation of genetic variation across a population in the form of bidirected DNA sequence graphs, encompassing large-scale SVs like inversions and duplications.
+- Variation graphs provide a compact representation of genetic variation across a population in the form of bidirected DNA sequence graphs, and they can encompass large-scale structural variants (SVs) such as inversions and duplications.
 
 - PGGB, the the PanGenome Graph Builder, is a reference-free pangenome graph constuction method. PGGB builds pangenome graphs from a set of input sequences.
 
@@ -93,9 +93,9 @@ The overall structure of PGGB's output graph is defined by three parameters: gen
 
 - `-n` : Genome number.
 - `-s` : Segment length defines the seed length used by the "MashMap3" homology mapper in wfmash.
-- `-p` : The pairwise identity (-p) is the minimum allowed pairwise identity between seeds.
+- `-p` : The pairwise identity (-p) is the minimum allowed pairwise identity between seeds. **default, 90**
 
-- `-k` : An additional parameter, can also greatly affect graph structure by pruning matches shorter than a given threshold from the initial graph model. In effect, -k N removes any match shorter than Nbp from the initial alignment. This filter removes potentially ambiguous pairwise alignments from consideration in establishing the initial scaffold of the graph.
+- `-k` : An additional parameter, can also greatly affect graph structure by pruning matches shorter than a given threshold from the initial graph model. In effect, **-k N removes any match shorter than Nbp** from the initial alignment. This filter removes potentially ambiguous pairwise alignments from consideration in establishing the initial scaffold of the graph. **default 19**
 
 
 ### Other parameters for executing PGGB
@@ -105,7 +105,7 @@ The overall structure of PGGB's output graph is defined by three parameters: gen
 
 - `-m` : Generates MultiQC report of graphs' statistics and visualizations, automatically runs odgi stats
 
-- `-V` : Specify a set of VCFs to produce with SPEC = REF:DELIM[:LEN][,REF:DELIM:[LEN]]* the paths matching ^REF are used as a reference, while the sample haplotype are derived from path names, e.g. when DELIM=# and with '-V chm13:#', a path named HG002#1#ctg would be assigned to sample HG002 phase 1. If LEN is specified and greater than 0, the VCFs are decomposed, filtering sites whose max allele length is greater than LEN. [default: off]
+- `-V` : Specify a path to generate a VCF from the graph. 
 
 - `-o`, `--output-dir PATH` : Output directory
 
@@ -114,10 +114,9 @@ The overall structure of PGGB's output graph is defined by three parameters: gen
 !!! info ""
 
 - Human, whole genome, 90 haplotypes: `pggb -p 98 -s 50k -n 90 -k 79 ...`
-- 15 helicobacter genomes, 5% divergence: `pggb -n 15 -k 79, and 15 at higher (10%) divergence pggb -n 15 -k 19 -P asm20 ...`
+- 15 helicobacter genomes, 5% divergence: `pggb -p 90 -n 15 -k 79 ....`
 - Yeast genomes, 5% divergence: PGGB's defaults should work well, just set -n.
-- Aligning 9 MHC class II assemblies from vertebrate genomes (5-10% divergence): `pggb -n 9 -k 29 ...`
+- Aligning 9 Major Histocompatibility Complex (MHC) class II assemblies from vertebrate genomes (5-10% divergence): `pggb -p 90 -n 9 -k 29 ...`
 - A few thousand bacterial genomes `pggb -x auto -n 2146 ...`
-  - In general mapping sparsification (`-x auto`) is a good idea when you have many hundreds to thousands of genomes.
-- PGGB defaults to using the number of threads as logical processors on the system (the thread count given by getconf _NPROCESSORS_ONLN). Use -t to set an appropriate level of parallelism if you can't use all the processors on your system.
+  - In general mapping sparsification **(`-x auto`)** is a good idea when you have many hundreds to thousands of genomes.
 
