@@ -208,6 +208,8 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 ![ODGI 1D visualization by uncalled bases](theme_figures/ODGI-Uncalled-1D-5NM.png)
 This shows a 1D rendering of the built pangenome graph where the paths are colored according to the coverage of uncalled bases. The lighter the green, the higher the 'N' content of a node is.
 
+!!! terminal "code"
+
     ```bash
     #ODGI Compressed 1D visualization 
     odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_uncalled_multiqc_1.png -x 1500 -y 500 -a 10 -N -I Consensus_ 
