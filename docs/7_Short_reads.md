@@ -253,10 +253,11 @@ Perform genotyping.
     
     ```
 
-??? terminal "code"
+??? terminal-2 "Slurm script"
 
     ```bash
     #!/bin/bash -e
+    
     #SBATCH --account       nesi02659
     #SBATCH --job-name      5.call_novel_variant
     #SBATCH --cpus-per-task 24
