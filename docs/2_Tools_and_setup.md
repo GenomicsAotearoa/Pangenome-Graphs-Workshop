@@ -103,7 +103,7 @@
     are as follows: 
 
     ```bash
-    #!/usr/bin/bash
+    #!/bin/bash -e
 
     #SBATCH --account       nesi02659
     #SBATCH --job-name      extract_fna
@@ -159,7 +159,7 @@
 
     let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample. 
     ```bash
-    #!/usr/bin/bash
+    #!/bin/bash -e 
 
     #SBATCH --account       nesi02659
     #SBATCH --job-name      restart_fna
