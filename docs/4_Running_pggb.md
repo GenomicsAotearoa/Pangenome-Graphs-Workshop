@@ -160,10 +160,10 @@ Inspect the index.
      module load pggb/0.5.3-Miniconda3
      
      # Execute pggb, set -s 2000 and -p 94
-     pggb -i 5NM.fa -s 2000 -p 94 -n 5 -t 16 -S -m -o 5NM_2K94 -V 'NC_017518.1:#'
+     pggb -i 5NM.fa -s 2000 -p 94 -n 5 -t 16 -S -m -o 5NM_2Kb94 -V 'NC_017518.1:#'
 
       # let's Execute pggb again, using the same setting -s 2000 and -p 94, but increase -k to 35
-     pggb -i 5NM.fa -s 2000 -p 94 -n 5 -t 16 -S -m -k 35-o 5NM_2K94_k35 -V 'NC_017518.1:#'
+     pggb -i 5NM.fa -s 2000 -p 94 -n 5 -t 16 -S -m -k 35-o 5NM_2Kb94_k35 -V 'NC_017518.1:#'
      
      ```
 
@@ -175,7 +175,7 @@ Inspect the index.
 Executing shell scripts in the NeSI environment might not be the best way to handle larger files which will require large memory, CPU power and time. 
 We can modify the previously explained script as below to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
 
-!!! terminal-2 "The following is a SLURM script (`pggb_5NM_2k94.sl`) for PGGB with `-k 2000` and `-p 94`"
+!!! terminal-2 "The following is a SLURM script (`pggb_5NM_2k94.sl`) for PGGB with `-s 2000` and `-p 94`"
 
     ```bash
     #!/bin/bash -e     
@@ -197,7 +197,7 @@ We can modify the previously explained script as below to run as SLURM job. Note
     
     # Run PGGB
     # 2K94
-    pggb -i $data -s 2000 -p 94 -n 5 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/5NM_2K94 -V 'NC_017518.1:#'
+    pggb -i $data -s 2000 -p 94 -n 5 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/5NM_2Kb94 -V 'NC_017518.1:#'
     
     ```
 
