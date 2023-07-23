@@ -161,6 +161,10 @@ Inspect the index.
      
      # Execute pggb, set -s 2000 and -p 94
      pggb -i 5NM.fa -s 2000 -p 94 -n 4 -t 24 -S -m -o 5NM_2K94 -V 'NC_017518.1:#'
+
+      # let's Execute pggb again, using the same setting -s 2000 and -p 94 for the 5NM.fa
+     pggb -i 5NM.fa -s 2000 -p 94 -n 4 -t 24 -S -m -o 5NM_2K94_2 -V 'NC_017518.1:#'
+     
      ```
 
 <hr>
