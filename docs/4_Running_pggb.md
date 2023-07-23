@@ -149,7 +149,8 @@ Inspect the index.
         ```
 
 
-<b>The lower triangle represents the pairwise distances between the 5NM genomes. We can observe that the largest paired distance is 0.0190552, which is approximately 0.02. Considering that lower values indicate better alignment, we are going to use an alignment threshold of `-p 94` for constructing the pangenome graph. </b>
+<b>The lower triangle represents the pairwise distances between the 5NM genomes. We can observe that the largest paired distance is 0.0190552, which is approximately 0.02. Considering that lower values indicate better alignment, we are going to use an alignment threshold of `-p 94` for constructing the pangenome graph. </b> 
+
 **Please keep in mind that for each dataset, we may need to test different settings to find a relatively good setting.**
 
 ### Construct pangenome graph for 5NM genomes with `-s 2000`, `-p 94`
