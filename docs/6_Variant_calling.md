@@ -283,7 +283,8 @@ An example run to obtain VCF files from GFA.
 
 ## Extract distance among paths
 
-   !!! terminal "code"
+!!! terminal "code"
+
    ```bash
   
    odgi paths -i 5NM_2Kb94.gfa -d -D 'AAAA' >5NM_2Kb94.gfa_similarity
