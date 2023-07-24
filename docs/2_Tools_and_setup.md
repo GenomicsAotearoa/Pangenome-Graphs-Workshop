@@ -10,7 +10,7 @@
     - SAMtools is used to build an index of input FASTA files (https://github.com/samtools/samtools).
     - BCFtools is used to check the statistics of VCF files (https://github.com/samtools/bcftools).
 
-??? info "Other Tools might be useful for the pangenome graph"
+??? info "Other Tools might be useful for pangenome graphs"
 
     - The Minigraph-Cactus Pangenome Pipeline (https://github.com/ComparativeGenomicsToolkit/cactus/blob/master/doc/pangenome.md).
     - gfaestus, which can be used for graph visualization (https://github.com/chfi/gfaestus)
