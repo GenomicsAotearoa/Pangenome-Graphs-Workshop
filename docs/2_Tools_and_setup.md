@@ -11,6 +11,7 @@
     - BCFtools is used to check the statistics of VCF files (https://github.com/samtools/bcftools).
 
 ??? screwdriver-wrench "Other Tools might be useful for the pangenome graph"
+
    - The Minigraph-Cactus Pangenome Pipeline (https://github.com/ComparativeGenomicsToolkit/cactus/blob/master/doc/pangenome.md).
    - gfaestus, which can be used for graph visualization (https://github.com/chfi/gfaestus)
    - SequenceTubeMap for tube map visualization of genomic sequence graphs (https://github.com/vgteam/sequenceTubeMap)
