@@ -109,7 +109,7 @@
     On NeSI, a slurm job can be run to process the .fna genomes.  The contents of the slurm job file (`unzip_genomes.sl`) 
     are as follows: 
 
-    ```bash
+    ```bash linenums="1"
     #!/bin/bash -e
 
     #SBATCH --account       nesi02659
@@ -162,7 +162,8 @@
     Bacterial genomes are typically circular, so establishing a fixed starting point for each input genome during pangenome graph construction could reduce unnecessary complexity within the graph. Once the genomes are aligned with the same starting point, we can build their index using samtools faidx and proceed with constructing the pangenome graph. I encourage you to experiment with this approach after this workshop to see how effectively it functions. Please note that it may be necessary to try different regions as a starting point to ensure that all genomes are fixed with the same initial region.
 
     let's fix the start for all genome using circlator, submit a slurm job. It takes less than one minute for each sample. 
-    ```bash
+
+    ```bash linenums="1"
     #!/bin/bash -e 
 
     #SBATCH --account       nesi02659
