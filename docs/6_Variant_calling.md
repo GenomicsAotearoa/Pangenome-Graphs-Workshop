@@ -289,42 +289,47 @@ An example run to obtain VCF files from GFA.
     cut -f 1,2,6 5NM_2Kb94.gfa_similarity>5NM_2Kb94.gfa_similarity_cut
 
     ```
+!!! terminal "code"
 
-   ```bash
+    ```bash
+  
+    #Using R for distanc clustering
+    module purge
+    module load R/4.0.1-gimkl-2020a
+    R
+    ```
+!!! r-project "code"
+    
+    ```r
+    library(reshape)
+    library(ape)
  
-   #Using R for distanc clustering
-   module load R/4.0.1-gimkl-2020a
-   R
-   library(reshape)
-   library(ape)
-
-   # read in the data
-   dat=read.csv("./5NM_2Kb94.gfa_similarity_cut",sep="\t")
-   dat
-   # use reshape's cast function to change to matrix
-   m <- cast(dat, group.a ~ group.b)
-   m
-   # set the row names
-   rownames(m) <- m[,1]
-   rownames(m)
-
-
-   # change the matrix to a distance matrix
-   d <- dist(m)
-   d
-
-   # do hierarchical clustering
-   h <- hclust(d)
-
-   h
-   # plot the dendrogram
-   #plot(h)
-
-   # use ape's as phylo function
-   tree <- as.phylo(h)
-   # export as newick for viewing in figtree
-   write.tree(phy=tree, file = '5NM_2Kb94_distance.tree')
-
-   ```
+    # read in the data
+    dat=read.csv("./5NM_2Kb94.gfa_similarity_cut",sep="\t")
+    dat
+    # use reshape's cast function to change to matrix
+    m <- cast(dat, group.a ~ group.b)
+    m
+    # set the row names
+    rownames(m) <- m[,1]
+    rownames(m)
+ 
+ 
+    # change the matrix to a distance matrix
+    d <- dist(m)
+    d
+ 
+    # do hierarchical clustering
+    h <- hclust(d)
+ 
+    h
+    # plot the dendrogram
+    #plot(h)
+ 
+    # use ape's as phylo function
+    tree <- as.phylo(h)
+    # export as newick for viewing in figtree
+    write.tree(phy=tree, file = '5NM_2Kb94_distance.tree')
+    ```
 
 
