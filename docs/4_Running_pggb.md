@@ -179,7 +179,7 @@ We can modify the previously explained script as below to run as SLURM job. Note
 
 !!! terminal-2 "The following is a SLURM script (`pggb_5NM_2k94.sl`) for PGGB with `-s 2000` and `-p 94`"
 
-    ```bash
+    ```bash linenums="1"
     #!/bin/bash -e     
     #SBATCH --account       nesi02659
     #SBATCH --job-name      pggb_5NM
