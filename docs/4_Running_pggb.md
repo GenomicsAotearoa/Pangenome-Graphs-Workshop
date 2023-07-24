@@ -153,7 +153,7 @@ Inspect the index.
 
 **Please keep in mind that for each dataset, we may need to test different settings to find a relatively good setting.**
 
-### Construct pangenome graph for 5NM genomes with `-s 2000`, `-p 94`
+### Construct pangenome graph for 5NM genomes with `-s 2000`, `-p 94`, `-k 19  or -k 35`
 
 !!! terminal "code"
 
