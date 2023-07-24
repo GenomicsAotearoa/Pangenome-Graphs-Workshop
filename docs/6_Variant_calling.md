@@ -59,61 +59,28 @@ An example run to obtain VCF files from GFA.
     #use vg deconstruct the graph into VCF based on the first path NC_003112.2
     #-e, --path-traversals    Only consider traversals that correspond to paths in the graph.
     #-a, --all-snarls         Process all snarls, including nested snarls (by default only top-level snarls reported).
-
+    #-H, --path-sep SEP       Obtain alt paths from the set of paths, assuming a path name hierarchy (e.g. SEP='#' and sample#phase#contig)
+    
     #vg deconstruct for the 5NM_2Kb94.gfa using the path NC_003112.2 as reference 
-    vg deconstruct -p NC_003112.2 -a -e ./5NM_2Kb94.gfa > 5NM_2Kb94aep1.vcf
+    vg deconstruct -p NC_003112.2 -a -e -H AAAA ./5NM_2Kb94.gfa > 5NM_2Kb94aep1.vcf
     #use bcftools stats to check the statistics for the vcf file 
     bcftools stats 5NM_2Kb94aep1.vcf > 5NM_2Kb94aep1.vcf_stats
 
 
     #vg deconstruct for the 5NM_2Kb94_k35.gfa
-    vg deconstruct -p NC_003112.2 -a -e ./5NM_2Kb94_k35.gfa > 5NM_2Kb94_k35aep1.vcf
+    vg deconstruct -p NC_003112.2 -a -e -H AAAA ./5NM_2Kb94_k35.gfa > 5NM_2Kb94_k35aep1.vcf
     #use bcftools stats to check the statistics for the vcf file 
     bcftools stats 5NM_2Kb94_k35aep1.vcf > 5NM_2Kb94_k35aep1.vcf_stats    
     ```
 
     ```bash
     #use vg deconstruct the graph into VCF based on the second path NC_017518.1
-    vg deconstruct -p NC_017518.1 -a -e ./5NM_2Kb94.gfa > 5NM_2Kb94aep2.vcf
+    vg deconstruct -p NC_017518.1 -a -e -H AAAA ./5NM_2Kb94.gfa > 5NM_2Kb94aep2.vcf
     
     #use bcftools stats to check the statistics for the vcf file 
     bcftools stats 5NM_2Kb94aep2.vcf > 5NM_2Kb94aep2.vcf_stats
     ```
 
-!!! terminal-2 "Slurm script to deconstruct graph into vcf files"  
-
-    ```bash
-    #!/usr/bin/bash
-
-    #SBATCH --account       nesi02659
-    #SBATCH --job-name      deconstruct_gfa
-    #SBATCH --cpus-per-task 8
-    #SBATCH --mem           4G
-    #SBATCH --time          1:00:00
-
-    module purge
-    module load vg/1.46.0
-    module load BCFtools/1.15.1-GCC-11.3.0
-
-
-    #use vg deconstruct the graph into VCF based on the first path NC_003112.2
-    vg deconstruct -p NC_003112.2 -a -e ./5NM_2Kb94.gfa > 5NM_2Kb94aep1.vcf
-    bcftools stats 5NM_2Kb94aep1.vcf > 5NM_2Kb94aep1.vcf_stats
-
-
-    #use vg deconstruct the graph into VCF based on the second path NC_017518.1
-    vg deconstruct -p NC_017518.1 -a -e ./5NM_2Kb94.gfa > 5NM_2Kb94aep2.vcf
-    bcftools stats 5NM_2Kb94aep2.vcf > 5NM_2Kb94aep2.vcf_stats
-
-    
-    ```
-    !!! terminal "code"
-        
-        - submit the Slurm script 
-        
-        ```bash
-        sbatch vg_decon.sl
-        ```
 
 ## check the vcf files
 
@@ -313,3 +280,48 @@ An example run to obtain VCF files from GFA.
 
     bcftools isec 5NM_2Kb94aep1.vcf.gz 5NM_2Kb94_k35aep1.vcf.gz -p isec_5NM_2Kb94diff_k
     ```
+
+## Extract distance among paths
+
+   !!! terminal "code"
+   ```bash
+   odgi paths -i 5NM_2Kb94.gfa -d -D 'AAAA' >5NM_2Kb94.gfa_similarity
+   cut -f 1,2,6 5NM_2Kb94.gfa_similarity>5NM_2Kb94.gfa_similarity_cut
+   ```
+
+   ```bash
+   #Using R for distanc clustering
+   module load R/4.0.1-gimkl-2020a
+   R
+   library(reshape)
+   library(ape)
+
+   # read in the data
+   dat=read.csv("./5NM_2Kb94.gfa_similarity_cut",sep="\t")
+   dat
+   # use reshape's cast function to change to matrix
+   m <- cast(dat, group.a ~ group.b)
+   m
+   # set the row names
+   rownames(m) <- m[,1]
+   rownames(m)
+
+
+   # change the matrix to a distance matrix
+   d <- dist(m)
+   d
+
+   # do hierarchical clustering
+   h <- hclust(d)
+
+   h
+   # plot the dendrogram
+   #plot(h)
+
+   # use ape's as phylo function
+   tree <- as.phylo(h)
+   # export as newick for viewing in figtree
+   write.tree(phy=tree, file = '5NM_2Kb94_distance.tree') 
+   ```
+
+
