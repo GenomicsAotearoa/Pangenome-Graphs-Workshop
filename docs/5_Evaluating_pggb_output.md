@@ -192,7 +192,7 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
     odgi draw -i graph.og -c graph.layout.lay -p graph.2D.png 
     ```
 
-??? Generate graph 2D visualization using gfaestus
+??? "Generate graph 2D visualization using gfaestus"
     
     https://github.com/chfi/gfaestus
     once you have it installed, you can use the following common to generate a graph 2D visulization 
