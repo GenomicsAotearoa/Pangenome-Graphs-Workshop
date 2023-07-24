@@ -300,7 +300,7 @@ An example run to obtain VCF files from GFA.
     ```
 !!! r-project "code"
     
-    ```r
+    ```r linenums="1"
     library(reshape)
     library(ape)
  
