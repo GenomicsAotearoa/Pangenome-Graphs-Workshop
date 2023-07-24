@@ -1,4 +1,4 @@
-# 7. Short reads
+# Short reads
 NGS data analysis used graph as a reference 
 
 ## vg mapping preliminaries
