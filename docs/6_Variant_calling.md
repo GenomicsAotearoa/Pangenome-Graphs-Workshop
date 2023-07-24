@@ -271,25 +271,28 @@ An example run to obtain VCF files from GFA.
     
     !!! terminal "code"
 
-    ```bash
-    bcftools view 5NM_2Kb94aep1.vcf  -Oz -o 5NM_2Kb94aep1.vcf.gz
-    bcftools view 5NM_2Kb94_k35aep1.vcf -Oz -o 5NM_2Kb94_k35aep1.vcf.gz
+        ```bash
+        bcftools view 5NM_2Kb94aep1.vcf  -Oz -o 5NM_2Kb94aep1.vcf.gz
+        bcftools view 5NM_2Kb94_k35aep1.vcf -Oz -o 5NM_2Kb94_k35aep1.vcf.gz
 
-    bcftools index 5NM_2Kb94aep1.vcf.gz 
-    bcftools index 5NM_2Kb94_k35aep1.vcf.gz
+        bcftools index 5NM_2Kb94aep1.vcf.gz 
+        bcftools index 5NM_2Kb94_k35aep1.vcf.gz
 
-    bcftools isec 5NM_2Kb94aep1.vcf.gz 5NM_2Kb94_k35aep1.vcf.gz -p isec_5NM_2Kb94diff_k
-    ```
+        bcftools isec 5NM_2Kb94aep1.vcf.gz 5NM_2Kb94_k35aep1.vcf.gz -p isec_5NM_2Kb94diff_k
+        ```
 
 ## Extract distance among paths
 
    !!! terminal "code"
    ```bash
+  
    odgi paths -i 5NM_2Kb94.gfa -d -D 'AAAA' >5NM_2Kb94.gfa_similarity
    cut -f 1,2,6 5NM_2Kb94.gfa_similarity>5NM_2Kb94.gfa_similarity_cut
+
    ```
 
    ```bash
+ 
    #Using R for distanc clustering
    module load R/4.0.1-gimkl-2020a
    R
@@ -321,7 +324,8 @@ An example run to obtain VCF files from GFA.
    # use ape's as phylo function
    tree <- as.phylo(h)
    # export as newick for viewing in figtree
-   write.tree(phy=tree, file = '5NM_2Kb94_distance.tree') 
+   write.tree(phy=tree, file = '5NM_2Kb94_distance.tree')
+
    ```
 
 
