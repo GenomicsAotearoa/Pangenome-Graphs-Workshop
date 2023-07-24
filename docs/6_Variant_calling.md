@@ -267,30 +267,28 @@ An example run to obtain VCF files from GFA.
     
             ```
 
-??? "bcftools isec to check the difference for 5NM based on two settings, -S 2000 -p 94 -k 19 and -S 2000 -p 94 -k 35"
+??? terminal-2 "bcftools isec to check the difference for 5NM based on two settings, -S 2000 -p 94 -k 19 and -S 2000 -p 94 -k 35"
     
-    !!! terminal "code"
+    ```bash
+    bcftools view 5NM_2Kb94aep1.vcf  -Oz -o 5NM_2Kb94aep1.vcf.gz
+    bcftools view 5NM_2Kb94_k35aep1.vcf -Oz -o 5NM_2Kb94_k35aep1.vcf.gz
 
-        ```bash
-        bcftools view 5NM_2Kb94aep1.vcf  -Oz -o 5NM_2Kb94aep1.vcf.gz
-        bcftools view 5NM_2Kb94_k35aep1.vcf -Oz -o 5NM_2Kb94_k35aep1.vcf.gz
+    bcftools index 5NM_2Kb94aep1.vcf.gz 
+    bcftools index 5NM_2Kb94_k35aep1.vcf.gz
 
-        bcftools index 5NM_2Kb94aep1.vcf.gz 
-        bcftools index 5NM_2Kb94_k35aep1.vcf.gz
-
-        bcftools isec 5NM_2Kb94aep1.vcf.gz 5NM_2Kb94_k35aep1.vcf.gz -p isec_5NM_2Kb94diff_k
-        ```
+    bcftools isec 5NM_2Kb94aep1.vcf.gz 5NM_2Kb94_k35aep1.vcf.gz -p isec_5NM_2Kb94diff_k
+    ```
 
 ## Extract distance among paths
 
 !!! terminal "code"
 
-   ```bash
-  
-   odgi paths -i 5NM_2Kb94.gfa -d -D 'AAAA' >5NM_2Kb94.gfa_similarity
-   cut -f 1,2,6 5NM_2Kb94.gfa_similarity>5NM_2Kb94.gfa_similarity_cut
+    ```bash
 
-   ```
+    odgi paths -i 5NM_2Kb94.gfa -d -D 'AAAA' >5NM_2Kb94.gfa_similarity
+    cut -f 1,2,6 5NM_2Kb94.gfa_similarity>5NM_2Kb94.gfa_similarity_cut
+
+    ```
 
    ```bash
  
