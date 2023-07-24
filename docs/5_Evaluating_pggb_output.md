@@ -196,7 +196,12 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
     
     https://github.com/chfi/gfaestus
     once you have it installed, you can use the following common to generate a graph 2D visulization 
+    
+    ```bash
     gfaestus ${x}.gfa ${x}.gfa.tsv
+    ```
+
+    ![2D visulizatio by gfaestus ](theme_figures/5NM_2k94_gfaestus.png)
 
 
 
