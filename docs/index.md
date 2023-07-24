@@ -22,8 +22,6 @@ Participants in this course will gain an understanding of pangenome concepts and
     |[5. Evaluate](./5_Evaluating_pggb_output.md){ .md-button .md-button--primary }|Evaluating the constructed graph through MultiQC reports| 60 min |
     |Break||10 min|
     |[6. Variants](./6_Variant_calling.md){ .md-button .md-button--primary }|Extracting variants from a graph| 45 min |
-    |Break||10 min|
-    |[7. Short reads](./7_Short_reads.md){ .md-button .md-button--primary }|Mapping short reads against a pangenome graph| 60 min |
 
 
 
