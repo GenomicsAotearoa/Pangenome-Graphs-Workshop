@@ -149,7 +149,9 @@ Inspect the index.
         ```
 
 
-<b>The lower triangle represents the pairwise distances between the 5NM genomes. We can observe that the largest paired distance is 0.0190552, which is approximately 0.02. Considering that lower values indicate better alignment, we are going to use an alignment threshold of `-p 94` for constructing the pangenome graph. </b>
+<b>The lower triangle represents the pairwise distances between the 5NM genomes. We can observe that the largest paired distance is 0.0190552, which is approximately 0.02. Considering that lower values indicate better alignment, we are going to use an alignment threshold of `-p 94` for constructing the pangenome graph. </b> 
+
+**Please keep in mind that for each dataset, we may need to test different settings to find a relatively good setting.**
 
 ### Construct pangenome graph for 5NM genomes with `-s 2000`, `-p 94`
 
@@ -160,7 +162,11 @@ Inspect the index.
      module load pggb/0.5.3-Miniconda3
      
      # Execute pggb, set -s 2000 and -p 94
-     pggb -i 5NM.fa -s 2000 -p 94 -n 4 -t 24 -S -m -o 5NM_2K94 -V 'NC_017518.1:#'
+     pggb -i 5NM.fa -s 2000 -p 94 -n 5 -t 16 -S -m -o 5NM_2Kb94 -V 'NC_017518.1:#'
+
+      # let's Execute pggb again, using the same setting -s 2000 and -p 94, but increase -k to 35
+     pggb -i 5NM.fa -s 2000 -p 94 -n 5 -t 16 -S -m -k 35 -o 5NM_2Kb94_k35 -V 'NC_017518.1:#'
+     
      ```
 
 <hr>
@@ -171,7 +177,7 @@ Inspect the index.
 Executing shell scripts in the NeSI environment might not be the best way to handle larger files which will require large memory, CPU power and time. 
 We can modify the previously explained script as below to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
 
-!!! terminal-2 "The following is a SLURM script (`pggb_5NM_2k94.sl`) for PGGB with `-k 2000` and `-p 94`"
+!!! terminal-2 "The following is a SLURM script (`pggb_5NM_2k94.sl`) for PGGB with `-s 2000` and `-p 94`"
 
     ```bash
     #!/bin/bash -e     
@@ -193,7 +199,7 @@ We can modify the previously explained script as below to run as SLURM job. Note
     
     # Run PGGB
     # 2K94
-    pggb -i $data -s 2000 -p 94 -n 4 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/5NM_2K94 -V 'NC_017518.1:#'
+    pggb -i $data -s 2000 -p 94 -n 5 -t $SLURM_CPUS_PER_TASK -S -m -o $WD/5NM_2Kb94 -V 'NC_017518.1:#'
     
     ```
 
