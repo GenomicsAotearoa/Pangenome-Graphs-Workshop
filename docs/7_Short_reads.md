@@ -125,7 +125,8 @@ Map reads back to graph reference
     module load vg/1.46.0
 
 
-     # Map reads
+    # Map reads
+    #SAMN13450731 is the NCBI record for NMI138 
     vg map -t 8 -d 5NM_256_chopped -f NMI138_S5_R1_P.fastq.gz -f NMI138_S5_R1_P.fastq.gz -N NMI138  > NM138.vgmap_5NM.gam
 
     # Output mapping statistics
