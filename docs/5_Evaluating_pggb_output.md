@@ -14,26 +14,26 @@
     ```
     ??? success "Output"
         ```bash 
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.06-20-2023_01:31:34.log
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.06-20-2023_01:31:34.params.yml
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.gfa
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.NC_017518.1.vcf
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.NC_017518.1.vcf.stats
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.lay
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.lay.draw_multiqc.png
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.lay.draw.png
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.lay.tsv
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.stats.yaml
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.viz_depth_multiqc.png
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.viz_inv_multiqc.png
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.viz_multiqc.png
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.viz_O_multiqc.png
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.viz_pos_multiqc.png
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.final.og.viz_uncalled_multiqc.png
-        5NM.fa.37e9cb5.417fcdf.e2ae00b.smooth.fix.affixes.tsv.gz
-        5NM.fa.37e9cb5.417fcdf.seqwish.og.stats.yaml
-        5NM.fa.37e9cb5.alignments.wfmash.paf
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.07-24-2023_10:49:02.log         
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.07-24-2023_10:49:02.params.yml  
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.gfa                       
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.NC_017518.1.vcf           
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.NC_017518.1.vcf.stats     
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og                        
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.lay                    
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.lay.draw_multiqc.png   
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.lay.draw.png           
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.lay.tsv                
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.stats.yaml             
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.viz_depth_multiqc.png
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.viz_inv_multiqc.png
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.viz_multiqc.png
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.viz_O_multiqc.png
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.viz_pos_multiqc.png
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.viz_uncalled_multiqc.png
+        5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.fix.affixes.tsv.gz
+        5NM.fa.fefc7f5.417fcdf.seqwish.og.stats.yaml
+        5NM.fa.fefc7f5.alignments.wfmash.paf
         multiqc_config.yaml
         multiqc_data
         multiqc_report.html
@@ -95,7 +95,7 @@ This image shows a 1D rendering of the built pangenome graph. The graph nodes ar
 !!! terminal-2 "ODGI Compressed 1D visualization "
 
     ```bash
-    odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_O_multiqc_1.png -x 1500 -y 500 -a 10 -O -I Consensus_  
+    odgi viz -i ./5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og -o ./5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.viz_O_multiqc_1.png -x 1500 -y 500 -a 10 -O -I Consensus_  
     ```
 
 
@@ -109,7 +109,7 @@ This image shows a 1D rendering of the built pangenome graph. The graph nodes ar
 !!! terminal-2 "ODGI Compressed 1D visualization"
 
     ```bash
-    odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_multiqc_1.png -x 1500 -y 500 -a 10 -I Consensus_  
+    odgi viz -i ./5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og -o ./5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.viz_multiqc_1.png -x 1500 -y 500 -a 10 -I Consensus_  
     ```
 
 
@@ -124,7 +124,7 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 !!! terminal-2 "ODGI Compressed 1D visualization"
 
     ```bash
-    odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_pos_multiqc_1.png -x 1500 -y 500 -a 10 -u -d -I Consensus_ 
+    odgi viz -i ./5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og -o ./5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.viz_pos_multiqc_1.png -x 1500 -y 500 -a 10 -u -d -I Consensus_ 
     ```
 
 
@@ -137,7 +137,7 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
 !!! terminal-2 "ODGI Compressed 1D visualization"
 
     ```bash
-    odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_inv_multiqc_1.png -x 1500 -y 500 -a 10 -z -I Consensus_
+    odgi viz -i ./5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og -o ./5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.viz_inv_multiqc_1.png -x 1500 -y 500 -a 10 -z -I Consensus_
     ```
  
 
@@ -151,7 +151,7 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 !!! terminal "ODGI Compressed 1D visualization "
 
     ```bash
-    odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_depth_multiqc_1.png -x 1500 -y 500 -a 10 -m -I Consensus_ 
+    odgi viz -i ./5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og -o ./5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.viz_depth_multiqc_1.png -x 1500 -y 500 -a 10 -m -I Consensus_ 
     ```
 
 
@@ -167,7 +167,7 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 
     ```bash
     #ODGI Compressed 1D visualization 
-    odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_uncalled_multiqc_1.png -x 1500 -y 500 -a 10 -N -I Consensus_ 
+    odgi viz -i ./5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og -o ./5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.viz_uncalled_multiqc_1.png -x 1500 -y 500 -a 10 -N -I Consensus_ 
     ```
 
 
