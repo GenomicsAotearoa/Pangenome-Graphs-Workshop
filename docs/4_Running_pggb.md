@@ -40,6 +40,41 @@ Inspect the index.
         NZ_CP020423.2   2244886   9166836   80      81
         ```
 
+
+
+
+## Running PGGB
+
+### Use `mash triangle` to check the pairwise identity of the input genomes, which will give us some idea how to set `-p` 
+
+!!! terminal "code"
+
+    ```bash
+    module purge
+    module load Mash/2.3-GCC-11.3.0
+
+    mash triangle 5NM.fa > 5NM.fa_mash
+    
+    # Inspect the output
+    more 5NM.fa_mash
+    ```
+
+    ??? success "Output"
+
+        ```
+                5
+        NC_003112.2
+        NC_017518.1     0.0152404
+        NZ_CP007668.1   0.0149234       0.00635099
+        NZ_CP016880.1   0.0178909       0.0171265       0.0170111
+        NZ_CP020423.2   0.0190552       0.0194352       0.0185579       0.0106974
+        ```
+
+
+<b>The lower triangle represents the pairwise distances between the 5NM genomes. We can observe that the largest paired distance is 0.0190552, which is approximately 0.02. Considering that lower values indicate better alignment, we are going to use an alignment threshold of `-p 94` for constructing the pangenome graph. </b> 
+
+**Please keep in mind that for each dataset, we may need to test different settings to find a relatively good setting.**
+
 ### Executing `pggb` 
 
 !!! terminal "code"
@@ -118,40 +153,6 @@ Inspect the index.
         
         Use wfmash, seqwish, smoothxg, odgi, gfaffix, and vg to build, project and display a pangenome graph.
         ```
-
-
-
-## Running PGGB
-
-### Use `mash triangle` to check the pairwise identity of the input genomes, which will give us some idea how to set `-p` 
-
-!!! terminal "code"
-
-    ```bash
-    module purge
-    module load Mash/2.3-GCC-11.3.0
-
-    mash triangle 5NM.fa > 5NM.fa_mash
-    
-    # Inspect the output
-    more 5NM.fa_mash
-    ```
-
-    ??? success "Output"
-
-        ```
-                5
-        NC_003112.2
-        NC_017518.1     0.0152404
-        NZ_CP007668.1   0.0149234       0.00635099
-        NZ_CP016880.1   0.0178909       0.0171265       0.0170111
-        NZ_CP020423.2   0.0190552       0.0194352       0.0185579       0.0106974
-        ```
-
-
-<b>The lower triangle represents the pairwise distances between the 5NM genomes. We can observe that the largest paired distance is 0.0190552, which is approximately 0.02. Considering that lower values indicate better alignment, we are going to use an alignment threshold of `-p 94` for constructing the pangenome graph. </b> 
-
-**Please keep in mind that for each dataset, we may need to test different settings to find a relatively good setting.**
 
 ### Construct pangenome graph for 5NM genomes with `-s 2000`, `-p 94`, `-k 19  or -k 35`
 
