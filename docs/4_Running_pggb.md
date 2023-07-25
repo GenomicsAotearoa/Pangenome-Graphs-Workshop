@@ -82,8 +82,10 @@ Inspect the index.
     ```bash
     module purge
     module load pggb/0.5.3-Miniconda3
+    ```
+    - Execute `pggb --help` to check the command list of PGGB.
 
-    # Execute `pggb --help` to check the command list of PGGB.
+    ```
     pggb --help
     ```
     
@@ -161,14 +163,16 @@ Inspect the index.
      ```bash
      module purge
      module load pggb/0.5.3-Miniconda3
-     
-     # Execute pggb, set -s 2000 and -p 94
-     pggb -i 5NM.fa -s 2000 -p 94 -n 5 -t 16 -S -m -o 5NM_2Kb94 -V 'NC_017518.1:#'
-
-      # let's Execute pggb again, using the same setting -s 2000 and -p 94, but increase -k to 35
-     pggb -i 5NM.fa -s 2000 -p 94 -n 5 -t 16 -S -m -k 35 -o 5NM_2Kb94_k35 -V 'NC_017518.1:#'
-     
      ```
+     
+    - Execute `pggb`, set `-s 2000` and `-p 94`
+    ```
+     pggb -i 5NM.fa -s 2000 -p 94 -n 5 -t 16 -S -m -o 5NM_2Kb94 -V 'NC_017518.1:#'
+    ```
+    - let's Execute pggb again, using the same setting `-s 2000` and `-p 94`, but increase `-k` to `35`
+    ```
+    pggb -i 5NM.fa -s 2000 -p 94 -n 5 -t 16 -S -m -k 35 -o 5NM_2Kb94_k35 -V 'NC_017518.1:#'
+    ```
 
 <hr>
 ### Extened learning: Running `pggb` as a [Slurm](https://github.com/SchedMD/slurm) Job
