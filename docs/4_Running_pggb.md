@@ -171,12 +171,12 @@ Inspect the index.
      ```
 
 <hr>
-### Extened learning: Running `pggb` as a [SLURM](https://github.com/SchedMD/slurm) Job
+### Extened learning: Running `pggb` as a [Slurm](https://github.com/SchedMD/slurm) Job
 
 !!! warning "Please do NOT run the code below, this is an example for power users"
 
-Executing shell scripts in the NeSI environment might not be the best way to handle larger files which will require large memory, CPU power and time. 
-We can modify the previously explained script as below to run as SLURM job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
+Executing shell scripts in a HPC  might not be the best way to handle larger files which will require large memory, CPU power and time. 
+We can modify the previously explained script as below to run as Slurm job. Note the additional parameters specified by `#SBATCH` which will indicate maximum resource limitations. 
 
 !!! terminal-2 "The following is a SLURM script (`pggb_5NM_2k94.sl`) for PGGB with `-s 2000` and `-p 94`"
 
