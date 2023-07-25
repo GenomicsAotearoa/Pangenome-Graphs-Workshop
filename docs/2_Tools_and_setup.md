@@ -18,19 +18,16 @@
     - ......
 
 
-!!! info "Running the pggb pipeline on NeSI"
+!!! info "Software stack for pggb pipeline"
 
-    PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed as modules on NeSI. We need to load each module for use. 
+    All of the required software is pre-installed and configured as modules. We will load them as needed  
     
-    - **Please don't load the modules right now**; we will load each one when necessary. 
-
-    ```bash
-    module load pggb/0.5.3-Miniconda3
-    module load SAMtools
-    module load Mash/2.3-GCC-11.3.0
-    module load Circlator/1.5.5-gimkl-2022a-Python-3.10.5
-    module load vg/1.46.0
-    ```
+    - pggb/0.5.3-Miniconda3
+    - SAMtools
+    - Mash/2.3-GCC-11.3.0
+    - Circlator/1.5.5-gimkl-2022a-Python-3.10.5
+    - vg/1.46.0
+    
 
 ??? info "Running the pggb workflow locally"
 
