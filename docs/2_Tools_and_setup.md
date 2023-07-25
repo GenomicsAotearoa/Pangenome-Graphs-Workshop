@@ -20,7 +20,10 @@
 
 !!! info "Running the pggb pipeline on NeSI"
 
-    PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed as modules on NeSI. We need to load each module for use. However, please don't load the modules right now; we will load each one when necessary. 
+    PGGB, ODGi, VG, circulator, Mash, SAMTools et.al. have been installed as modules on NeSI. We need to load each module for use. 
+    
+    - **Please don't load the modules right now**; we will load each one when necessary. 
+
     ```bash
     module load pggb/0.5.3-Miniconda3
     module load SAMtools
@@ -216,13 +219,16 @@
 ### Setting up your project directory and downloading the dataset
 
 !!! terminal "code"
-
+    - Create a new directory under your home folder and change to that directory.
     ```bash
-    # Create a new directory under your home folder and change to that directory.
-    # This will be your "working directory" for the workshop.
     mkdir ~/pg_workshop
+    ```
+    ```
     cd ~/pg_workshop
-    # Keep a note of the absolute path of your working directory
+    ```
+    - `~/pg_workshop` will be your working directory
+    - Keep a note of the absolute path of your working directory
+    ```
     pwd
     ```
     !!! success "Output"
@@ -230,12 +236,12 @@
         ```
         /home/<YOUR_USER_ID>/pg_workshop
         ```
-    
-    ```bash
-    # To be simply, we have renamed the 5NMfs.fa to 5NM.fa for this workshop. Please download the dataset.  
-    
+    - Please download the dataset. 
+    ```bash    
     git clone https://github.com/ZoeYang2020/dataset_for_pg_workshop
+    ```
     
-    # Copy the 5NM.fa and  dataset to your working directory
-    cp $PWD/dataset_for_pg_workshop/5NM.fa
+    - Copy the 5NM.fa and  dataset to your working directory (To keep the filenames simple, we have renamed the 5NMfs.fa to 5NM.fa for this workshop)
+    ```
+    cp ./dataset_for_pg_workshop/5NM.fa ./
     ```
