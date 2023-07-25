@@ -7,7 +7,7 @@
 
     ```bash
     
-    cd  ~/pg_workshop/5NM_2K94
+    cd  ~/pg_workshop/5NM_2Kb94
     
     ls  
     ```
