@@ -19,6 +19,8 @@ Create an index for the sequence using SAMtools and check.
     ```bash    
     module purge
     module load SAMtools/1.16.1-GCC-11.3.0
+    ```
+    ```bash
     samtools faidx 5NM.fa
     ```
 
@@ -52,10 +54,13 @@ Inspect the index.
     ```bash
     module purge
     module load Mash/2.3-GCC-11.3.0
-
+    ```
+    ```bash
     mash triangle 5NM.fa > 5NM.fa_mash
-    
-    # Inspect the output
+    ```
+
+    - Inspect the output
+    ```bash
     more 5NM.fa_mash
     ```
 
@@ -164,7 +169,7 @@ Inspect the index.
      module purge
      module load pggb/0.5.3-Miniconda3
      ```
-     
+
     - Execute `pggb`, set `-s 2000` and `-p 94`
     ```
     pggb -i 5NM.fa -s 2000 -p 94 -n 5 -t 16 -S -m -o 5NM_2Kb94 -V 'NC_017518.1:#'
