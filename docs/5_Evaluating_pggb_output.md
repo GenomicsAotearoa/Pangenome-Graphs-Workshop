@@ -92,10 +92,9 @@
 
 This image shows a 1D rendering of the built pangenome graph. The graph nodes are arranged from left to right, forming the pangenome sequence. Summarization of path coverage across all paths. Dark blue means highest coverage. Dark red means lowest coverage. The path names are placed on the left. The black lines under the paths are the links, which represent the graph topology.
 
-!!! terminal "code"
+!!! terminal-2 "ODGI Compressed 1D visualization "
 
     ```bash
-    #ODGI Compressed 1D visualization 
     odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_O_multiqc_1.png -x 1500 -y 500 -a 10 -O -I Consensus_  
     ```
 
@@ -107,10 +106,9 @@ This image shows a 1D rendering of the built pangenome graph. The graph nodes ar
 
 This image shows a 1D rendering of the built pangenome graph. The graph nodes are arranged from left to right, forming the pangenome sequence. The colored bars represent the paths versus the pangenome sequence in a binary matrix. The path names are placed on the left. The black lines under the paths are the links, which represent the graph topology.
 
-!!! terminal "code"
+!!! terminal-2 "ODGI Compressed 1D visualization"
 
     ```bash
-    #ODGI Compressed 1D visualization 
     odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_multiqc_1.png -x 1500 -y 500 -a 10 -I Consensus_  
     ```
 
@@ -123,10 +121,9 @@ This image shows a 1D rendering of the built pangenome graph. The graph nodes ar
 
 This shows a 1D rendering of the built pangenome graph where the paths are colored according to their nucleotide position. Light grey means a low path position, black is the highest path position.
 
-!!! terminal "code"
+!!! terminal-2 "ODGI Compressed 1D visualization"
 
     ```bash
-    #ODGI Compressed 1D visualization 
     odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_pos_multiqc_1.png -x 1500 -y 500 -a 10 -u -d -I Consensus_ 
     ```
 
@@ -137,10 +134,9 @@ This shows a 1D rendering of the built pangenome graph where the paths are color
 ![ODGI 1D visualization by path orientation](theme_figures/5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.viz_inv_multiqc.png)
 This image shows a 1D rendering of the built pangenome graph where the paths are colored by orientation. Forward is black, reverse is red.
 
-!!! terminal "code"
+!!! terminal-2 "ODGI Compressed 1D visualization"
 
     ```bash
-    #ODGI Compressed 1D visualization 
     odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_inv_multiqc_1.png -x 1500 -y 500 -a 10 -z -I Consensus_
     ```
  
@@ -152,10 +148,9 @@ This image shows a 1D rendering of the built pangenome graph where the paths are
 ![ODGI 1D visualization by node depth](theme_figures/5NM.fa.fefc7f5.417fcdf.e2ae00b.smooth.final.og.viz_depth_multiqc.png)
 This shows a 1D rendering of the built pangenome graph where the paths are colored according to path depth. Using the Spectra color palette with 4 levels of path depths, white indicates no depth, while grey, red, and yellow indicate depth 1, 2, and greater than or equal to 3, respectively.
 
-!!! terminal "code"
+!!! terminal "ODGI Compressed 1D visualization "
 
     ```bash
-    #ODGI Compressed 1D visualization 
     odgi viz -i ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og -o ./5NM.fa.44bbb23.417fcdf.74b0801.smooth.final.og.viz_depth_multiqc_1.png -x 1500 -y 500 -a 10 -m -I Consensus_ 
     ```
 
