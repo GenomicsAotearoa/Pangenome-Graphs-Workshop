@@ -8,7 +8,8 @@
     ```bash
     
     cd  ~/pg_workshop/5NM_2Kb94
-    
+    ```
+    ```
     ls  
     ```
     ??? success "Output"
