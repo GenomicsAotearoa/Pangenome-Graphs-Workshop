@@ -18,7 +18,7 @@
     - ......
 
 
-!!! info "Software stack for pggb pipeline"
+!!! circle-info "Software stack for pggb pipeline"
 
     All of the required software is pre-installed and configured as modules. We will load them as needed  
     
@@ -29,7 +29,7 @@
     - vg/1.46.0
     
 
-??? info "Running the pggb workflow locally"
+??? circle-info "Running the pggb workflow locally"
 
     The following code **DOES NOT** need to be run if you working on NeSI, but is 
     provided here to show how to work through the workshop material on a non-NeSI 
