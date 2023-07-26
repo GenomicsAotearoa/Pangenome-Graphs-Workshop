@@ -1,0 +1,912 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Pangenome-Graphs-Workshop/1_Introduction_to_pangenome_graphs/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../2_Tools_and_setup/">
+      
+      <link rel="icon" href="../theme_figures/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+    
+    
+      
+        <title>1. Introduction to pangenome graphs - Pangenome Graphs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-introduction-to-pangenome-graphs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+<!-- Custom Banner -->
+<div class="banner">
+    <p style="color:rgb(250, 246, 246); display:inline;font-size: 160%;">This repository is in the early stages of development (Beta Version)</p>
+</div>
+
+<!-- Original Header -->
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Pangenome Graphs" class="md-header__button md-logo" aria-label="Pangenome Graphs" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pangenome Graphs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. Introduction to pangenome graphs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_3" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_3">
+            
+              <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Pangenome-Graphs-Workshop
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Pangenome Graphs" class="md-nav__button md-logo" aria-label="Pangenome Graphs" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    Pangenome Graphs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Pangenome-Graphs-Workshop
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          1. Introduction to pangenome graphs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        1. Introduction to pangenome graphs
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-pangenome" class="md-nav__link">
+    What is a pangenome?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-pangenome-graph" class="md-nav__link">
+    What is a pangenome graph?
+  </a>
+  
+    <nav class="md-nav" aria-label="What is a pangenome graph?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodes" class="md-nav__link">
+    Nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edges" class="md-nav__link">
+    Edges
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paths" class="md-nav__link">
+    Paths
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-a-pangenome-graph-construction-pipeline" class="md-nav__link">
+    Overview of a pangenome graph construction pipeline
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview of a pangenome graph construction pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pangenome-concstruction-by-pangenome-graph-builder-pggb" class="md-nav__link">
+    Pangenome concstruction by Pangenome Graph Builder (PGGB)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graph-manipulation-using-odgi-and-multiqc-report" class="md-nav__link">
+    graph manipulation using ODGI and multiQC report
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtain-distance-for-phylogenetic-analysis" class="md-nav__link">
+    Obtain distance for phylogenetic analysis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#varaint-calling" class="md-nav__link">
+    Varaint calling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ngs-data-analysis-against-graph" class="md-nav__link">
+    NGS data analysis against graph
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-components-of-this-pipeline" class="md-nav__link">
+    Key components of this pipeline
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_Tools_and_setup/" class="md-nav__link">
+        2. Tools & setup
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_Introduction_to_pggb/" class="md-nav__link">
+        3. Introduction to PGGB
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_Running_pggb/" class="md-nav__link">
+        4. Running PGGB
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_Evaluating_pggb_output/" class="md-nav__link">
+        5. Evaluating output
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_Variant_calling/" class="md-nav__link">
+        6. Variant calling
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          Supplementary
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Supplementary
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/supplementary_1/" class="md-nav__link">
+        NeSI HPC Auth.Factors Setup & Jupyter Login
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/supplementary_2/" class="md-nav__link">
+        Jupyter Virtual Desktop
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/supplementary_3_Short_reads/" class="md-nav__link">
+        Short reads
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-pangenome" class="md-nav__link">
+    What is a pangenome?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-pangenome-graph" class="md-nav__link">
+    What is a pangenome graph?
+  </a>
+  
+    <nav class="md-nav" aria-label="What is a pangenome graph?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodes" class="md-nav__link">
+    Nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edges" class="md-nav__link">
+    Edges
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paths" class="md-nav__link">
+    Paths
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-a-pangenome-graph-construction-pipeline" class="md-nav__link">
+    Overview of a pangenome graph construction pipeline
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview of a pangenome graph construction pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pangenome-concstruction-by-pangenome-graph-builder-pggb" class="md-nav__link">
+    Pangenome concstruction by Pangenome Graph Builder (PGGB)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graph-manipulation-using-odgi-and-multiqc-report" class="md-nav__link">
+    graph manipulation using ODGI and multiQC report
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtain-distance-for-phylogenetic-analysis" class="md-nav__link">
+    Obtain distance for phylogenetic analysis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#varaint-calling" class="md-nav__link">
+    Varaint calling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ngs-data-analysis-against-graph" class="md-nav__link">
+    NGS data analysis against graph
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-components-of-this-pipeline" class="md-nav__link">
+    Key components of this pipeline
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="1-introduction-to-pangenome-graphs">1. Introduction to pangenome graphs<a class="headerlink" href="#1-introduction-to-pangenome-graphs" title="Permanent link">&para;</a></h1>
+<h2 id="what-is-a-pangenome">What is a pangenome?<a class="headerlink" href="#what-is-a-pangenome" title="Permanent link">&para;</a></h2>
+<div class="admonition info"></div>
+<p align="justify">
+A pangenome is defined as the comprehensive collection of whole-genome sequences from multiple individuals within a clade, a population or a species. 
+
+This collective genomic dataset can be further divided into two distinct components: the core genome, which includes regions present in all individuals at the time of analysis, and the accessory genome, consisting of regions only found in a subset of individuals. 
+</p>
+
+<p><center>
+<a class="glightbox" href="../theme_figures/bacterial-pangenome-small.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="bacterial-pangenome" src="../theme_figures/bacterial-pangenome-small.png" /></a>.
+</center></p>
+<h2 id="what-is-a-pangenome-graph">What is a pangenome graph?<a class="headerlink" href="#what-is-a-pangenome-graph" title="Permanent link">&para;</a></h2>
+<div class="admonition info"></div>
+<p align="justify">
+Pangenome graphs represent pangenomes using graph models, effectively capturing the complete genetic variation across the input genomes. These graphs consist of three components: nodes, edges, and paths.
+</p>
+
+<p><a class="glightbox" href="../theme_figures/pangenome-graph-small.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="bacterial-pangenome" src="../theme_figures/pangenome-graph-small.png" /></a></p>
+<h3 id="nodes"><strong>Nodes</strong><a class="headerlink" href="#nodes" title="Permanent link">&para;</a></h3>
+<div class="admonition info"></div>
+<ul>
+<li>DNA segments, which can be any length </li>
+</ul>
+<h3 id="edges"><strong>Edges</strong><a class="headerlink" href="#edges" title="Permanent link">&para;</a></h3>
+<div class="admonition info"></div>
+<ul>
+<li>Describe the possible ways of walking through the nodes</li>
+<li>Connect pairs of node strands</li>
+<li>Can represent inversions </li>
+</ul>
+<h3 id="paths"><strong>Paths</strong><a class="headerlink" href="#paths" title="Permanent link">&para;</a></h3>
+<div class="admonition info"></div>
+<ul>
+<li>Paths are routes through the nodes of the graph</li>
+<li>Genomes</li>
+<li>Haplotypes</li>
+<li>Alleles/variants </li>
+</ul>
+<h2 id="overview-of-a-pangenome-graph-construction-pipeline">Overview of a pangenome graph construction pipeline<a class="headerlink" href="#overview-of-a-pangenome-graph-construction-pipeline" title="Permanent link">&para;</a></h2>
+<h3 id="pangenome-concstruction-by-pangenome-graph-builder-pggb"><strong>Pangenome concstruction by Pangenome Graph Builder (PGGB)</strong><a class="headerlink" href="#pangenome-concstruction-by-pangenome-graph-builder-pggb" title="Permanent link">&para;</a></h3>
+<div class="admonition info"></div>
+<p align="justify">
+The PGGB pipeline is a reference-free method. It builds pangenome graphs using an all-to-all whole genome alignment approach with wfmash. Seqwish is employed to induce the graph, followed by progressive normalization with smoothxg and gfaffix.
+</p>
+
+<p><a class="glightbox" href="../theme_figures/Pipeline_step1_small.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="PGGB" src="../theme_figures/Pipeline_step1_small.png" /></a></p>
+<h3 id="graph-manipulation-using-odgi-and-multiqc-report"><strong>graph manipulation using ODGI and multiQC report</strong><a class="headerlink" href="#graph-manipulation-using-odgi-and-multiqc-report" title="Permanent link">&para;</a></h3>
+<div class="admonition info"></div>
+<ul>
+<li>The Optimized Dynamic Genome/graph Implementation (ODGI) is used for various graph manipulation tasks, including visualization.</li>
+<li>MultiQC is used to generate a report, which includes statistics of the seqwish-induced graph, the final graph, and various visualizations of the final graph.</li>
+</ul>
+<p><a class="glightbox" href="../theme_figures/Pipeline_step2_small.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ODGI" src="../theme_figures/Pipeline_step2_small.png" /></a></p>
+<h3 id="obtain-distance-for-phylogenetic-analysis"><strong>Obtain distance for phylogenetic analysis</strong><a class="headerlink" href="#obtain-distance-for-phylogenetic-analysis" title="Permanent link">&para;</a></h3>
+<div class="admonition info"></div>
+<p align="justify">
+We use ODGi to extract distances between paths within the graph, enabling further phylogenetic analysis.
+</p>
+
+<p><a class="glightbox" href="../theme_figures/Pipeline_step3_small.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ODGI" src="../theme_figures/Pipeline_step3_small.png" /></a></p>
+<h3 id="varaint-calling"><strong>Varaint calling</strong><a class="headerlink" href="#varaint-calling" title="Permanent link">&para;</a></h3>
+<div class="admonition info"></div>
+<p align="justify">
+By using the pangenome graph created with PGGB, it is possible to concurrently identify a variety of genetic variations. These include structural variations (SVs), rearrangements, and smaller variants such as single nucleotide polymorphisms (SNPs) and insertions/deletions. These can be identified through the process of vg deconstruction.
+</p>
+
+<p><a class="glightbox" href="../theme_figures/Pipeline_step4_small.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ODGI" src="../theme_figures/Pipeline_step4_small.png" /></a></p>
+<h3 id="ngs-data-analysis-against-graph"><strong>NGS data analysis against graph</strong><a class="headerlink" href="#ngs-data-analysis-against-graph" title="Permanent link">&para;</a></h3>
+<div class="admonition info"></div>
+<p align="justify">
+The VG toolkit is utilized for NGS data analysis against the graph, including tasks such as read mapping and variant calling
+</p>
+
+<p><a class="glightbox" href="../theme_figures/Pipeline_step5_small.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ODGI" src="../theme_figures/Pipeline_step5_small.png" /></a></p>
+<h2 id="key-components-of-this-pipeline">Key components of this pipeline<a class="headerlink" href="#key-components-of-this-pipeline" title="Permanent link">&para;</a></h2>
+<div class="admonition info"></div>
+<ul>
+<li>Graph construction using the PGGB</li>
+<li>Graph manipulation using ODGI</li>
+<li>Variant calling for NGS data using the VG toolkit </li>
+</ul>
+<p align="justify">
+It provides an efficient and integrated approach for pangenome analysis. 
+</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../2_Tools_and_setup/" class="md-footer__link md-footer__link--next" aria-label="Next: 2. Tools &amp; setup" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                2. Tools & setup
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Pangenome Graphs workshop material is licensed under a <a rel="noopener" target="_blank" href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html">GNU General Public License v2.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../javascripts/mathjax.js"></script>
+        
+      
+        
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        
+      
+        
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>

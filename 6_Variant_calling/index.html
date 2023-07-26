@@ -1,0 +1,1040 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Pangenome-Graphs-Workshop/6_Variant_calling/">
+      
+      
+        <link rel="prev" href="../5_Evaluating_pggb_output/">
+      
+      
+        <link rel="next" href="../Supplementary/supplementary_1/">
+      
+      <link rel="icon" href="../theme_figures/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+    
+    
+      
+        <title>6. Variant calling - Pangenome Graphs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-variant-calling" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+<!-- Custom Banner -->
+<div class="banner">
+    <p style="color:rgb(250, 246, 246); display:inline;font-size: 160%;">This repository is in the early stages of development (Beta Version)</p>
+</div>
+
+<!-- Original Header -->
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Pangenome Graphs" class="md-header__button md-logo" aria-label="Pangenome Graphs" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pangenome Graphs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              6. Variant calling
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_3" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_3">
+            
+              <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Pangenome-Graphs-Workshop
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Pangenome Graphs" class="md-nav__button md-logo" aria-label="Pangenome Graphs" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    Pangenome Graphs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Pangenome-Graphs-Workshop
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_Introduction_to_pangenome_graphs/" class="md-nav__link">
+        1. Introduction to pangenome graphs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_Tools_and_setup/" class="md-nav__link">
+        2. Tools & setup
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_Introduction_to_pggb/" class="md-nav__link">
+        3. Introduction to PGGB
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_Running_pggb/" class="md-nav__link">
+        4. Running PGGB
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_Evaluating_pggb_output/" class="md-nav__link">
+        5. Evaluating output
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          6. Variant calling
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        6. Variant calling
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vg-deconstruct-graph-to-get-the-variations-in-vcf" class="md-nav__link">
+    vg deconstruct graph to get the variations in vcf
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-the-vcf-files" class="md-nav__link">
+    check the vcf files
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extract-distance-among-paths" class="md-nav__link">
+    Extract distance among paths
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          Supplementary
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Supplementary
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/supplementary_1/" class="md-nav__link">
+        NeSI HPC Auth.Factors Setup & Jupyter Login
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/supplementary_2/" class="md-nav__link">
+        Jupyter Virtual Desktop
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/supplementary_3_Short_reads/" class="md-nav__link">
+        Short reads
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vg-deconstruct-graph-to-get-the-variations-in-vcf" class="md-nav__link">
+    vg deconstruct graph to get the variations in vcf
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-the-vcf-files" class="md-nav__link">
+    check the vcf files
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extract-distance-among-paths" class="md-nav__link">
+    Extract distance among paths
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="6-variant-calling">6. Variant calling<a class="headerlink" href="#6-variant-calling" title="Permanent link">&para;</a></h1>
+<div class="admonition info"></div>
+<ul>
+<li>To detect both small and large variants among paths from the pangenome graph, we utilized the Variation Graph (VG) toolkit to deconstruct these variants into VCF files.</li>
+<li>To decompose the graph into a VCF file, we need to choose one path as a reference for comparison with the others (any path can serve as this reference)</li>
+<li>In fact, during the pangenome graph construction process, when the parameter -V 'NC_017518.1:#' is activated, the output file includes the VCF based on the NC_017518.1 reference.</li>
+</ul>
+<h2 id="vg-deconstruct-graph-to-get-the-variations-in-vcf"><code>vg deconstruct</code> graph to get the variations in vcf<a class="headerlink" href="#vg-deconstruct-graph-to-get-the-variations-in-vcf" title="Permanent link">&para;</a></h2>
+<div class="admonition info"></div>
+<p>Set up directory for VG and GFA files.</p>
+<div class="admonition terminal">
+<p class="admonition-title">code</p>
+<ul>
+<li>
+<p>Return to working directory
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~/pg_workshop
+</code></pre></div></p>
+</li>
+<li>
+<p>Create VG directory
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>vg_deconstruct
+</code></pre></div></p>
+</li>
+<li>
+<p>Copy the gfa file to the directory
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cp<span class="w"> </span>./5NM_2Kb94/5NM*.gfa<span class="w"> </span>./vg_deconstruct/5NM_2Kb94.gfa
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>cp<span class="w"> </span>./5NM_2Kb94_k35/5NM*.gfa<span class="w"> </span>././vg_deconstruct/5NM_2Kb94_k35.gfa
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">cd</span><span class="w"> </span>./vg_deconstruct
+</code></pre></div></p>
+</li>
+</ul>
+</div>
+<p>Load the necessary modules for an example run.</p>
+<div class="admonition terminal">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>module<span class="w"> </span>purge
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>module<span class="w"> </span>load<span class="w"> </span>vg/1.46.0
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>module<span class="w"> </span>load<span class="w"> </span>BCFtools/1.15.1-GCC-11.3.0
+</code></pre></div>
+</div>
+<p>An example run to obtain VCF files from GFA.</p>
+<div class="admonition terminal">
+<p class="admonition-title">code</p>
+<ul>
+<li>check the paths in the graph using tail, which depends on the number of genomes. We have five input genomes for the 5NM dataset. 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>tail<span class="w"> </span>-5<span class="w"> </span>5NM_2Kb94.gfa<span class="w"> </span><span class="p">|</span><span class="w"> </span>less<span class="w"> </span>-Sail<span class="w"> </span>-5<span class="w"> </span>5NM_2k94.gfa<span class="w"> </span><span class="p">|</span><span class="w"> </span>less<span class="w"> </span>-S
+</code></pre></div></li>
+</ul>
+<div class="admonition success">
+<p class="admonition-title">Output</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>P       NC_003112.2     85316+,85318+,85319+,85321+,85322+,85323+,85325+,85327+,85328+,85330+,85331+,85333+,85334+,85336+,85337+,85
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>P       NC_017518.1     85316+,85317+,85319+,85320+,85322+,85323+,85325+,85326+,85328+,85329+,85331+,85332+,85334+,85335+,85337+,85
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>P       NZ_CP007668.1   1+,4+,5+,6+,8+,9+,11+,12+,14+,15+,17+,18+,20+,21+,23+,25+,26+,27+,29+,31+,32+,34+,35+,37+,38+,39+,41+,43+,4
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>P       NZ_CP016880.1   2+,133478+,133479+,133481+,133482+,133483+,133485+,133486+,133488+,133489+,133490+,133492+,133493+,133495+,
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>P       NZ_CP020423.2   3+,175915+,175916+,175918+,175919+,175921+,175922+,175924+,175925+,175926+,175928+,175929+,175931+,175932+, 81
+</code></pre></div>
+</div>
+</div>
+<div class="admonition terminal">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">#use vg deconstruct the graph into VCF based on the first path NC_003112.2</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">#-e, --path-traversals    Only consider traversals that correspond to paths in the graph.</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1">#-a, --all-snarls         Process all snarls, including nested snarls (by default only top-level snarls reported).</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1">#-H, --path-sep SEP       Obtain alt paths from the set of paths, assuming a path name hierarchy (e.g. SEP=&#39;#&#39; and sample#phase#contig)</span>
+</code></pre></div>
+<ul>
+<li>
+<p>vg deconstruct for the 5NM_2Kb94.gfa using the path NC_003112.2 as reference 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>vg<span class="w"> </span>deconstruct<span class="w"> </span>-p<span class="w"> </span>NC_003112.2<span class="w"> </span>-a<span class="w"> </span>-e<span class="w"> </span>-H<span class="w"> </span>AAAA<span class="w"> </span>./5NM_2Kb94.gfa<span class="w"> </span>&gt;<span class="w"> </span>5NM_2Kb94aep1.vcf
+</code></pre></div></p>
+</li>
+<li>
+<p>use bcftools stats to check the statistics for the vcf file 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>bcftools stats 5NM_2Kb94aep1.vcf &gt; 5NM_2Kb94aep1.vcf_stats
+</code></pre></div></p>
+</li>
+<li>
+<p>vg deconstruct for the 5NM_2Kb94_k35.gfa
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vg<span class="w"> </span>deconstruct<span class="w"> </span>-p<span class="w"> </span>NC_003112.2<span class="w"> </span>-a<span class="w"> </span>-e<span class="w"> </span>-H<span class="w"> </span>AAAA<span class="w"> </span>./5NM_2Kb94_k35.gfa<span class="w"> </span>&gt;<span class="w"> </span>5NM_2Kb94_k35aep1.vcf
+</code></pre></div></p>
+</li>
+<li>
+<p>use bcftools stats to check the statistics for the vcf file 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>bcftools stats 5NM_2Kb94_k35aep1.vcf &gt; 5NM_2Kb94_k35aep1.vcf_stats    
+</code></pre></div></p>
+</li>
+<li>
+<p>use vg deconstruct the graph into VCF based on the second path NC_017518.1
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>vg deconstruct -p NC_017518.1 -a -e -H AAAA ./5NM_2Kb94.gfa &gt; 5NM_2Kb94aep2.vcf
+</code></pre></div></p>
+</li>
+<li>
+<p>use bcftools stats to check the statistics for the vcf file 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>bcftools<span class="w"> </span>stats<span class="w"> </span>5NM_2Kb94aep2.vcf<span class="w"> </span>&gt;<span class="w"> </span>5NM_2Kb94aep2.vcf_stats
+</code></pre></div></p>
+</li>
+</ul>
+</div>
+<h2 id="check-the-vcf-files">check the vcf files<a class="headerlink" href="#check-the-vcf-files" title="Permanent link">&para;</a></h2>
+<div class="admonition terminal-2">
+<p class="admonition-title">check the statistics of vcf files</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>less<span class="w"> </span>-S<span class="w"> </span>5NM_2Kb94aep1.vcf_stats
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a># This file was produced by bcftools stats (1.15.1+htslib-1.15.1) and can be plotted using plot-vcfstats.
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a># The command line was: bcftools stats  5NM_2Kb94aep1.vcf
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>#
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a># Definition of s  ets:
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a># ID    [2]id   [3]tab-separated file names
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>ID      0       5NM_2Kb94aep1.vcf
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a># SN, Summary numbers:
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>#   number of records   .. number of data rows in the VCF
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>#   number of no-ALTs   .. reference-only sites, ALT is either &quot;.&quot; or identical to REF
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>#   number of SNPs      .. number of rows with a SNP
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>#   number of MNPs      .. number of rows with a MNP, such as CC&gt;TT
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>#   number of indels    .. number of rows with an indel
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>#   number of others    .. number of rows with other type, for example a symbolic allele or
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>#                          a complex substitution, such as ACT&gt;TCGA
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>#   number of multiallelic sites     .. number of rows with multiple alternate alleles
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>#   number of multiallelic SNP sites .. number of rows with multiple alternate alleles, all SNPs
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a># 
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>#   Note that rows containing multiple types will be counted multiple times, in each
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>#   counter. For example, a row with a SNP and an indel increments both the SNP and
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>#   the indel counter.
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a># 
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a># SN    [2]id   [3]key  [4]value
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>SN      0       number of samples:      4
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>SN      0       number of records:      76185
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>SN      0       number of no-ALTs:      0
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>SN      0       number of SNPs: 66461
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>SN      0       number of MNPs: 7044
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>SN      0       number of indels:       3458
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>SN      0       number of others:       995
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>SN      0       number of multiallelic sites:   3735
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a>SN      0       number of multiallelic SNP sites:       1350
+</code></pre></div>
+</details>
+</div>
+<p><br></p>
+<div class="admonition terminal-2">
+<p class="admonition-title">check the statistics of vcf files</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>less<span class="w"> </span>-S<span class="w"> </span>5NM_2Kb94_k35aep1.vcf_stats
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>#only show the number of each type of variations
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>SN      0       number of samples:      4
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>SN      0       number of records:      74293
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>SN      0       number of no-ALTs:      0
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>SN      0       number of SNPs: 64666
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>SN      0       number of MNPs: 6963
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>SN      0       number of indels:       3428
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>SN      0       number of others:       1031
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>SN      0       number of multiallelic sites:   3798
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>SN      0       number of multiallelic SNP sites:       1290
+</code></pre></div>
+</details>
+</div>
+<p><br></p>
+<div class="admonition terminal-2">
+<p class="admonition-title">Inspect the vcf files</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>head<span class="w"> </span>-100<span class="w"> </span>5NM_2Kb94aep1.vcf<span class="w"> </span><span class="p">|</span>less<span class="w"> </span>-s<span class="w"> </span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>##fileformat=VCFv4.2
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>##FORMAT=&lt;ID=GT,Number=1,Type=String,Description=&quot;Genotype&quot;&gt;
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>##INFO=&lt;ID=AC,Number=A,Type=Integer,Description=&quot;Total number of alternate alleles in called genotypes&quot;&gt;
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>##INFO=&lt;ID=AF,Number=A,Type=Float,Description=&quot;Estimated allele frequency in the range (0,1]&quot;&gt;
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>##INFO=&lt;ID=NS,Number=1,Type=Integer,Description=&quot;Number of samples with data&quot;&gt;
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>##INFO=&lt;ID=AN,Number=1,Type=Integer,Description=&quot;Total number of alleles in called genotypes&quot;&gt;
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>##INFO=&lt;ID=LV,Number=1,Type=Integer,Description=&quot;Level in the snarl tree (0=top level)&quot;&gt;
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>##INFO=&lt;ID=PS,Number=1,Type=String,Description=&quot;ID of variant corresponding to parent snarl&quot;&gt;
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>##INFO=&lt;ID=AT,Number=R,Type=String,Description=&quot;Allele Traversal as path in graph&quot;&gt;
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>##contig=&lt;ID=NC_003112.2,length=2272360&gt;
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  NC_017518.1     NZ_CP007668.1   NZ_CP016880.1   NZ_CP020423.2
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>NC_003112.2     152     &gt;1&gt;4    C       T       60      .       AC=2;AF=0.5;AN=4;AT=&gt;1&gt;3&gt;4,&gt;1&gt;2&gt;4;NS=4;LV=0     GT      1       1       0       0
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>NC_003112.2     510     &gt;4&gt;7    A       G       60      .       AC=2;AF=0.5;AN=4;AT=&gt;4&gt;6&gt;7,&gt;4&gt;5&gt;7;NS=4;LV=0     GT      0       0       1       1
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>NC_003112.2     558     &gt;7&gt;10   A       G       60      .       AC=2;AF=0.5;AN=4;AT=&gt;7&gt;9&gt;10,&gt;7&gt;8&gt;10;NS=4;LV=0   GT      0       0       1       1
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>NC_003112.2     954     &gt;10&gt;13  G       A       60      .       AC=2;AF=0.5;AN=4;AT=&gt;10&gt;11&gt;13,&gt;10&gt;12&gt;13;NS=4;LV=0       GT      1       1       0       0
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>NC_003112.2     1139    &gt;13&gt;16  A       G       60      .       AC=1;AF=0.25;AN=4;AT=&gt;13&gt;14&gt;16,&gt;13&gt;15&gt;16;NS=4;LV=0      GT      0       0       1       0
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>NC_003112.2     1411    &gt;16&gt;19  G       A       60      .       AC=2;AF=0.5;AN=4;AT=&gt;16&gt;18&gt;19,&gt;16&gt;17&gt;19;NS=4;LV=0       GT      1       1       0       0
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>NC_003112.2     1539    &gt;19&gt;22  T       C       60      .       AC=2;AF=0.5;AN=4;AT=&gt;19&gt;21&gt;22,&gt;19&gt;20&gt;22;NS=4;LV=0       GT      1       1       0       0
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>NC_003112.2     1561    &gt;22&gt;25  A       G       60      .       AC=4;AF=1;AN=4;AT=&gt;22&gt;23&gt;25,&gt;22&gt;24&gt;25;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>NC_003112.2     1630    &gt;25&gt;28  G       C       60      .       AC=4;AF=1;AN=4;AT=&gt;25&gt;26&gt;28,&gt;25&gt;27&gt;28;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>NC_003112.2     1674    &gt;28&gt;31  T       C       60      .       AC=4;AF=1;AN=4;AT=&gt;28&gt;29&gt;31,&gt;28&gt;30&gt;31;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>NC_003112.2     1781    &gt;31&gt;34  A       G       60      .       AC=4;AF=1;AN=4;AT=&gt;31&gt;32&gt;34,&gt;31&gt;33&gt;34;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>NC_003112.2     1809    &gt;34&gt;36  AT      A       60      .       AC=4;AF=1;AN=4;AT=&gt;34&gt;35&gt;36,&gt;34&gt;36;NS=4;LV=0    GT      1       1       1       1
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>NC_003112.2     1819    &gt;36&gt;38  AT      A       60      .       AC=4;AF=1;AN=4;AT=&gt;36&gt;37&gt;38,&gt;36&gt;38;NS=4;LV=0    GT      1       1       1       1
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>NC_003112.2     1894    &gt;38&gt;41  G       C       60      .       AC=4;AF=1;AN=4;AT=&gt;38&gt;39&gt;41,&gt;38&gt;40&gt;41;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a>NC_003112.2     1909    &gt;41&gt;44  A       G       60      .       AC=4;AF=1;AN=4;AT=&gt;41&gt;42&gt;44,&gt;41&gt;43&gt;44;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a>NC_003112.2     1974    &gt;44&gt;47  A       G       60      .       AC=4;AF=1;AN=4;AT=&gt;44&gt;45&gt;47,&gt;44&gt;46&gt;47;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a>NC_003112.2     2069    &gt;47&gt;50  A       G       60      .       AC=4;AF=1;AN=4;AT=&gt;47&gt;48&gt;50,&gt;47&gt;49&gt;50;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a>NC_003112.2     2073    &gt;50&gt;53  T       C       60      .       AC=2;AF=0.5;AN=4;AT=&gt;50&gt;51&gt;53,&gt;50&gt;52&gt;53;NS=4;LV=0       GT      0       0       1       1
+<a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a>NC_003112.2     2079    &gt;53&gt;56  T       C       60      .       AC=4;AF=1;AN=4;AT=&gt;53&gt;54&gt;56,&gt;53&gt;55&gt;56;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a>NC_003112.2     2084    &gt;56&gt;59  AT      GG      60      .       AC=4;AF=1;AN=4;AT=&gt;56&gt;57&gt;59,&gt;56&gt;58&gt;59;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a>NC_003112.2     2089    &gt;59&gt;62  T       C       60      .       AC=4;AF=1;AN=4;AT=&gt;59&gt;60&gt;62,&gt;59&gt;61&gt;62;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a>NC_003112.2     2099    &gt;62&gt;64  A       AC      60      .       AC=4;AF=1;AN=4;AT=&gt;62&gt;64,&gt;62&gt;63&gt;64;NS=4;LV=0    GT      1       1       1       1
+<a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a>NC_003112.2     2178    &gt;64&gt;67  G       A       60      .       AC=4;AF=1;AN=4;AT=&gt;64&gt;65&gt;67,&gt;64&gt;66&gt;67;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a>NC_003112.2     2200    &gt;67&gt;70  A       G       60      .       AC=4;AF=1;AN=4;AT=&gt;67&gt;68&gt;70,&gt;67&gt;69&gt;70;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-36" name="__codelineno-18-36" href="#__codelineno-18-36"></a>NC_003112.2     2290    &gt;70&gt;73  C       T       60      .       AC=4;AF=1;AN=4;AT=&gt;70&gt;71&gt;73,&gt;70&gt;72&gt;73;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-37" name="__codelineno-18-37" href="#__codelineno-18-37"></a>NC_003112.2     2359    &gt;73&gt;76  T       C       60      .       AC=4;AF=1;AN=4;AT=&gt;73&gt;74&gt;76,&gt;73&gt;75&gt;76;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-38" name="__codelineno-18-38" href="#__codelineno-18-38"></a>NC_003112.2     2362    &gt;76&gt;79  C       T       60      .       AC=4;AF=1;AN=4;AT=&gt;76&gt;77&gt;79,&gt;76&gt;78&gt;79;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-39" name="__codelineno-18-39" href="#__codelineno-18-39"></a>NC_003112.2     2392    &gt;79&gt;84  CG      AG,AA   60      .       AC=2,2;AF=0.5,0.5;AN=4;AT=&gt;79&gt;80&gt;82&gt;84,&gt;79&gt;81&gt;82&gt;84,&gt;79&gt;81&gt;83&gt;84;NS=4;LV=0      GT      2       2       1       1
+<a id="__codelineno-18-40" name="__codelineno-18-40" href="#__codelineno-18-40"></a>NC_003112.2     2491    &gt;84&gt;87  G       A       60      .       AC=2;AF=0.5;AN=4;AT=&gt;84&gt;85&gt;87,&gt;84&gt;86&gt;87;NS=4;LV=0       GT      0       0       1       1
+<a id="__codelineno-18-41" name="__codelineno-18-41" href="#__codelineno-18-41"></a>NC_003112.2     2494    &gt;87&gt;90  T       C       60      .       AC=2;AF=0.5;AN=4;AT=&gt;87&gt;88&gt;90,&gt;87&gt;89&gt;90;NS=4;LV=0       GT      0       0       1       1
+<a id="__codelineno-18-42" name="__codelineno-18-42" href="#__codelineno-18-42"></a>NC_003112.2     2503    &gt;90&gt;93  A       C       60      .       AC=4;AF=1;AN=4;AT=&gt;90&gt;91&gt;93,&gt;90&gt;92&gt;93;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-43" name="__codelineno-18-43" href="#__codelineno-18-43"></a>NC_003112.2     2507    &gt;93&gt;96  G       A       60      .       AC=4;AF=1;AN=4;AT=&gt;93&gt;94&gt;96,&gt;93&gt;95&gt;96;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-44" name="__codelineno-18-44" href="#__codelineno-18-44"></a>NC_003112.2     2515    &gt;96&gt;99  T       C       60      .       AC=4;AF=1;AN=4;AT=&gt;96&gt;97&gt;99,&gt;96&gt;98&gt;99;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-45" name="__codelineno-18-45" href="#__codelineno-18-45"></a>NC_003112.2     2520    &gt;99&gt;101 CA      C       60      .       AC=4;AF=1;AN=4;AT=&gt;99&gt;100&gt;101,&gt;99&gt;101;NS=4;LV=0 GT      1       1       1       1
+<a id="__codelineno-18-46" name="__codelineno-18-46" href="#__codelineno-18-46"></a>NC_003112.2     2523    &gt;101&gt;106        CC      CAA,CAG 60      .       AC=3,1;AF=0.75,0.25;AN=4;AT=&gt;101&gt;102&gt;106,&gt;101&gt;103&gt;105&gt;106,&gt;101&gt;103&gt;104&gt;106;NS=4;LV=0    GT      2       1       1       1
+</code></pre></div>
+</details>
+</div>
+<p><br></p>
+<div class="admonition terminal-2">
+<p class="admonition-title">check the complex variation in vcf files</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>awk<span class="w"> </span><span class="s1">&#39;length($4) &gt; 2&#39;</span><span class="w"> </span>5NM_2Kb94aep1.vcf<span class="w"> </span><span class="p">|</span>head<span class="w"> </span>-100<span class="w"> </span><span class="p">|</span>less<span class="w"> </span>-S<span class="w"> </span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code>```
+##INFO=&lt;ID=AC,Number=A,Type=Integer,Description=&quot;Total number of alternate alleles in called genotypes&quot;&gt;
+##INFO=&lt;ID=NS,Number=1,Type=Integer,Description=&quot;Number of samples with data&quot;&gt;
+##INFO=&lt;ID=AN,Number=1,Type=Integer,Description=&quot;Total number of alleles in called genotypes&quot;&gt;
+##INFO=&lt;ID=LV,Number=1,Type=Integer,Description=&quot;Level in the snarl tree (0=top level)&quot;&gt;
+##INFO=&lt;ID=PS,Number=1,Type=String,Description=&quot;ID of variant corresponding to parent snarl&quot;&gt;
+##INFO=&lt;ID=AT,Number=R,Type=String,Description=&quot;Allele Traversal as path in graph&quot;&gt;
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  NC_017518.1     NZ_CP007668.1   NZ_CP016880.1   NZ_CP020423.2
+NC_003112.2     3441    &gt;250&gt;600        CCAACCTCGCCAAAGTCCGCAAACAAGTAACTGCTTTGTGCAATAAATACCCCGTTTACGGCGCGTAAGCCTTTTTAAAAATATTCCGCCAAGCAATCCAATGCCGCCTGAAATCTCATAATGTTTCAGGCGGAAACCTTTGCAAAAATCCCCAAAATCCCCTAAATTCCCACCAAG
+NC_003112.2     4164    &gt;392&gt;397        GCG     AAG,AAA 60      .       AC=1,1;AF=0.5,0.5;AN=2;AT=&gt;392&gt;393&gt;395&gt;397,&gt;392&gt;394&gt;395&gt;397,&gt;392&gt;394&gt;396&gt;397;NS=2;LV=1;PS=&gt;250&gt;600      GT      2       1       .       .
+NC_003112.2     4178    &gt;397&gt;402        ATCAAGAAAAACGGC AT,ACAAAGAAAAACGGC      60      .       AC=1,1;AF=0.5,0.5;AN=2;AT=&gt;397&gt;398&gt;399&gt;401&gt;402,&gt;397&gt;398&gt;402,&gt;397&gt;400&gt;401&gt;402;NS=2;LV=1;PS=&gt;250&gt;600      GT      2       1
+NC_003112.2     4394    &gt;426&gt;431        TTG     TTA,CAG 60      .       AC=1,1;AF=0.5,0.5;AN=2;AT=&gt;426&gt;428&gt;429&gt;431,&gt;426&gt;428&gt;430&gt;431,&gt;426&gt;427&gt;429&gt;431;NS=2;LV=1;PS=&gt;250&gt;600      GT      2       1       .       .
+NC_003112.2     4918    &gt;518&gt;520        TCC     T       60      .       AC=1;AF=0.5;AN=2;AT=&gt;518&gt;519&gt;520,&gt;518&gt;520;NS=2;LV=1;PS=&gt;250&gt;600 GT      1       0       .       .
+NC_003112.2     5116    &gt;529&gt;553        TCCCGTCATTCCCGCGCAGGCGGGAATCTAGGTTTGTCGGCACGGAAACTTATCGGGTAAAACGGTTTCTTTAGATTTTACGTTCTAGATTCCCGCCTGCGCGGGAATGACGATGAAAAGATTGTTGTCGCTTCGGATAAATTTTTGTCGCGTTGGGTTCTAGATTCCCGCCTGCGC
+NC_003112.2     5441    &gt;553&gt;556        TCCCC   T,TCCC  60      .       AC=1,1;AF=0.5,0.5;AN=2;AT=&gt;553&gt;554&gt;555&gt;556,&gt;553&gt;556,&gt;553&gt;555&gt;556;NS=2;LV=1;PS=&gt;250&gt;600  GT      2       1       .       .
+NC_003112.2     6462    &gt;600&gt;603        ACT     AA      60      .       AC=3;AF=0.75;AN=4;AT=&gt;600&gt;602&gt;603,&gt;600&gt;601&gt;603;NS=4;LV=0        GT      1       0       1       1
+NC_003112.2     8056    &gt;938&gt;1174       AGCTGCGCCGCCAGCGTGCAGAACGCCGCAACGTACAGGGACAAGTCAACTTCAAGCTCGATAGCGGTGAGAAAAGTGGCAAAATCATCGCCGAATTGGAACACGCTTCGTTTGCCTATGGCGGCAAAGTCATTATGGACAAATTCTCCGCTATCTTGCAGCGCGGCGACAAAATCG
+NC_003112.2     40957   &gt;1264&gt;1267      CACCCAGTTGCGCCAAAGCTGCGCCATCCCGCTC      TACACAGTTACGCCAAAGTTGCGCCATCCCGCTT      60      .       AC=2;AF=0.5;AN=4;AT=&gt;1264&gt;1266&gt;1267,&gt;1264&gt;1265&gt;1267;NS=4;LV=0   GT      0       0
+NC_003112.2     42763   &gt;1445&gt;1450      TGG     CAA,CAG 60      .       AC=2,1;AF=0.5,0.25;AN=4;AT=&gt;1445&gt;1447&gt;1449&gt;1450,&gt;1445&gt;1446&gt;1448&gt;1450,&gt;1445&gt;1446&gt;1449&gt;1450;NS=4;LV=0     GT      2       0       1       1
+NC_003112.2     42797   &gt;1465&gt;1470      CGCG    CATA,TGCG       60      .       AC=2,1;AF=0.5,0.25;AN=4;AT=&gt;1465&gt;1466&gt;1469&gt;1470,&gt;1465&gt;1466&gt;1467&gt;1470,&gt;1465&gt;1468&gt;1469&gt;1470;NS=4;LV=0     GT      0       2       1       1
+NC_003112.2     43307   &gt;1650&gt;1653      GAG     TTC     60      .       AC=1;AF=0.25;AN=4;AT=&gt;1650&gt;1652&gt;1653,&gt;1650&gt;1651&gt;1653;NS=4;LV=0  GT      0       1       0       0
+NC_003112.2     45378   &gt;1733&gt;1738      GGCCCGCTTCAGGGGC        GGCGCGCTTCAGGGGC,G      60      .       AC=2,2;AF=0.5,0.5;AN=4;AT=&gt;1733&gt;1734&gt;1736&gt;1737&gt;1738,&gt;1733&gt;1734&gt;1735&gt;1737&gt;1738,&gt;1733&gt;1738;NS=4;LV=0      GT      2
+NC_003112.2     47380   &gt;1813&gt;1815      TCG     T       60      .       AC=4;AF=1;AN=4;AT=&gt;1813&gt;1814&gt;1815,&gt;1813&gt;1815;NS=4;LV=0  GT      1       1       1       1
+NC_003112.2     47406   &gt;1837&gt;1839      AACGGAAT        A       60      .       AC=4;AF=1;AN=4;AT=&gt;1837&gt;1838&gt;1839,&gt;1837&gt;1839;NS=4;LV=0  GT      1       1       1       1
+NC_003112.2     47431   &gt;1851&gt;1854      AAA     CTT     60      .       AC=4;AF=1;AN=4;AT=&gt;1851&gt;1852&gt;1854,&gt;1851&gt;1853&gt;1854;NS=4;LV=0     GT      1       1       1       1
+NC_003112.2     47447   &gt;1861&gt;1863      ACG     A       60      .       AC=4;AF=1;AN=4;AT=&gt;1861&gt;1862&gt;1863,&gt;1861&gt;1863;NS=4;LV=0  GT      1       1       1       1
+NC_003112.2     47451   &gt;1863&gt;1866      TCCG    TT      60      .       AC=4;AF=1;AN=4;AT=&gt;1863&gt;1865&gt;1866,&gt;1863&gt;1864&gt;1866;NS=4;LV=0     GT      1       1       1       1
+NC_003112.2     47457   &gt;1866&gt;1869      GAA     TCC     60      .       AC=4;AF=1;AN=4;AT=&gt;1866&gt;1868&gt;1869,&gt;1866&gt;1867&gt;1869;NS=4;LV=0     GT      1       1       1       1
+NC_003112.2     47464   &gt;1872&gt;1874      TCCATTGCCGCATTGTCCAAGCAGTTTCCCTTGCGGGACATACTCTGAACCAGACCGTTGCCTTTCAACTGCTTTTG   T       60      .       AC=4;AF=1;AN=4;AT=&gt;1872&gt;1873&gt;1874,&gt;1872&gt;1874;NS=4;LV=0  GT      1       1
+NC_003112.2     48557   &gt;1944&gt;1949      TCG     CGG,CGA 60      .       AC=2,1;AF=0.5,0.25;AN=4;AT=&gt;1944&gt;1946&gt;1947&gt;1949,&gt;1944&gt;1945&gt;1947&gt;1949,&gt;1944&gt;1945&gt;1948&gt;1949;NS=4;LV=0     GT      0       2       1       1
+NC_003112.2     48645   &gt;1982&gt;1985      CAC     AGA     60      .       AC=1;AF=0.25;AN=4;AT=&gt;1982&gt;1984&gt;1985,&gt;1982&gt;1983&gt;1985;NS=4;LV=0  GT      0       0       0       1
+NC_003112.2     48936   &gt;2036&gt;2040      TAT     TGT,TG  60      .       AC=2,1;AF=0.5,0.25;AN=4;AT=&gt;2036&gt;2037&gt;2039&gt;2040,&gt;2036&gt;2038&gt;2039&gt;2040,&gt;2036&gt;2038&gt;2040;NS=4;LV=0  GT      0       1       2       1
+NC_003112.2     48942   &gt;2040&gt;2042      CCT     C       60      .       AC=1;AF=0.25;AN=4;AT=&gt;2040&gt;2041&gt;2042,&gt;2040&gt;2042;NS=4;LV=0       GT      0       0       1       0
+NC_003112.2     49330   &gt;2124&gt;2129      TGT     TGG,ATT 60      .       AC=3,1;AF=0.75,0.25;AN=4;AT=&gt;2124&gt;2126&gt;2127&gt;2129,&gt;2124&gt;2126&gt;2128&gt;2129,&gt;2124&gt;2125&gt;2127&gt;2129;NS=4;LV=0    GT      1       2       1       1
+NC_003112.2     49436   &gt;2170&gt;2268      ACTTGTCTGACATGGAAAAATCCCTGTATTGAATTAAAAATCAATACAGGGATTGTAGGAAAGGCCGTCTGACTAAGCCTTTAATACGGGTTAAAACTTAATCAGTAGAGAGAGATGTGAGGATGATTTTTTTAGGCTTACGAGAGCCATTTTGCTTTAAGTCAAACTCAACTGTTA
+NC_003112.2     49437   &gt;2173&gt;2175      CTT     C       60      .       AC=3;AF=1;AN=3;AT=&gt;2173&gt;2174&gt;2175,&gt;2173&gt;2175;NS=3;LV=1;PS=&gt;2170&gt;2268    GT      .       1       1       1
+NC_003112.2     50804   &gt;2203&gt;2205      AGAT    A       60      .       AC=1;AF=1;AN=1;AT=&gt;2203&gt;2204&gt;2205,&gt;2203&gt;2205;NS=1;LV=1;PS=&gt;2170&gt;2268    GT      1       .       .       .
+NC_003112.2     50904   &gt;2220&gt;2223      ATTC    GGCA    60      .       AC=1;AF=1;AN=1;AT=&gt;2220&gt;2222&gt;2223,&gt;2220&gt;2221&gt;2223;NS=1;LV=1;PS=&gt;2170&gt;2268       GT      1       .       .       .
+NC_003112.2     53387   &gt;2342&gt;2345      CAA     ATG     60      .       AC=1;AF=0.25;AN=4;AT=&gt;2342&gt;2344&gt;2345,&gt;2342&gt;2343&gt;2345;NS=4;LV=0  GT      1       0       0       0
+NC_003112.2     53393   &gt;2348&gt;2351      ACAA    TTTC    60      .       AC=1;AF=0.25;AN=4;AT=&gt;2348&gt;2350&gt;2351,&gt;2348&gt;2349&gt;2351;NS=4;LV=0  GT      1       0       0       0
+NC_003112.2     53414   &gt;2368&gt;2370      CGAT    C       60      .       AC=1;AF=0.25;AN=4;AT=&gt;2368&gt;2369&gt;2370,&gt;2368&gt;2370;NS=4;LV=0       GT      1       0       0       0
+NC_003112.2     53471   &gt;2391&gt;2394      AGCG    CCAC    60      .       AC=1;AF=0.25;AN=4;AT=&gt;2391&gt;2392&gt;2394,&gt;2391&gt;2393&gt;2394;NS=4;LV=0  GT      1       0       0       0
+NC_003112.2     53493   &gt;2403&gt;2406      TCAA    CTTG    60      .       AC=1;AF=0.25;AN=4;AT=&gt;2403&gt;2404&gt;2406,&gt;2403&gt;2405&gt;2406;NS=4;LV=0  GT      1       0       0       0
+NC_003112.2     53604   &gt;2454&gt;2456      TGGGCTG T       60      .       AC=1;AF=0.25;AN=4;AT=&gt;2454&gt;2455&gt;2456,&gt;2454&gt;2456;NS=4;LV=0       GT      1       0       0       0
+NC_003112.2     53746   &gt;2505&gt;2508      CTGGTGGGTTTGGCCGAAGGG   TTGGTGGGACTTGCCGAAGGA   60      .       AC=3;AF=0.75;AN=4;AT=&gt;2505&gt;2507&gt;2508,&gt;2505&gt;2506&gt;2508;NS=4;LV=0  GT      1       1       1       0
+NC_003112.2     55432   &gt;2590&gt;2597      CACG    CTC,CCCGAACAACCCG       60      .       AC=2,2;AF=0.5,0.5;AN=4;AT=&gt;2590&gt;2592&gt;2593&gt;2596&gt;2597,&gt;2590&gt;2591&gt;2594&gt;2597,&gt;2590&gt;2593&gt;2594&gt;2595&gt;2596&gt;2597;NS=4;LV=0       GT      2
+NC_003112.2     55984   &gt;2637&gt;2639      AAAACCACAACC    A       60      .       AC=3;AF=0.75;AN=4;AT=&gt;2637&gt;2638&gt;2639,&gt;2637&gt;2639;NS=4;LV=0       GT      1       0       1       1
+
+```
+</code></pre></div>
+</details>
+</div>
+<details class="terminal-2">
+<summary>bcftools <code>isec</code> to check the difference for 5NM based on two settings, -S 2000 -p 94 -k 19 and -S 2000 -p 94 -k 35</summary>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>bcftools<span class="w"> </span>view<span class="w"> </span>5NM_2Kb94aep1.vcf<span class="w">  </span>-Oz<span class="w"> </span>-o<span class="w"> </span>5NM_2Kb94aep1.vcf.gz
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>bcftools view 5NM_2Kb94_k35aep1.vcf -Oz -o 5NM_2Kb94_k35aep1.vcf.gz
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>bcftools index 5NM_2Kb94aep1.vcf.gz
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>bcftools index 5NM_2Kb94_k35aep1.vcf.gz
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>bcftools isec 5NM_2Kb94aep1.vcf.gz 5NM_2Kb94_k35aep1.vcf.gz -p isec_5NM_2Kb94diff_k
+</code></pre></div></p>
+</details>
+<h2 id="extract-distance-among-paths">Extract distance among paths<a class="headerlink" href="#extract-distance-among-paths" title="Permanent link">&para;</a></h2>
+<div class="admonition terminal">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>odgi<span class="w"> </span>paths<span class="w"> </span>-i<span class="w"> </span>5NM_2Kb94.gfa<span class="w"> </span>-d<span class="w"> </span>-D<span class="w"> </span><span class="s1">&#39;AAAA&#39;</span><span class="w"> </span>&gt;5NM_2Kb94.gfa_similarity
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>cut<span class="w"> </span>-f<span class="w"> </span><span class="m">1</span>,2,6<span class="w"> </span>5NM_2Kb94.gfa_similarity&gt;5NM_2Kb94.gfa_similarity_cut
+</code></pre></div>
+</div>
+<div class="admonition terminal">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1">#Using R for distanc clustering</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>module<span class="w"> </span>purge
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>module<span class="w"> </span>load<span class="w"> </span>R/4.0.1-gimkl-2020a
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>R
+</code></pre></div>
+</div>
+<div class="admonition r-project">
+<p class="admonition-title">code</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-28-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-28-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-28-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-28-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-28-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-28-10">10</a></span>
+<span class="normal"><a href="#__codelineno-28-11">11</a></span>
+<span class="normal"><a href="#__codelineno-28-12">12</a></span>
+<span class="normal"><a href="#__codelineno-28-13">13</a></span>
+<span class="normal"><a href="#__codelineno-28-14">14</a></span>
+<span class="normal"><a href="#__codelineno-28-15">15</a></span>
+<span class="normal"><a href="#__codelineno-28-16">16</a></span>
+<span class="normal"><a href="#__codelineno-28-17">17</a></span>
+<span class="normal"><a href="#__codelineno-28-18">18</a></span>
+<span class="normal"><a href="#__codelineno-28-19">19</a></span>
+<span class="normal"><a href="#__codelineno-28-20">20</a></span>
+<span class="normal"><a href="#__codelineno-28-21">21</a></span>
+<span class="normal"><a href="#__codelineno-28-22">22</a></span>
+<span class="normal"><a href="#__codelineno-28-23">23</a></span>
+<span class="normal"><a href="#__codelineno-28-24">24</a></span>
+<span class="normal"><a href="#__codelineno-28-25">25</a></span>
+<span class="normal"><a href="#__codelineno-28-26">26</a></span>
+<span class="normal"><a href="#__codelineno-28-27">27</a></span>
+<span class="normal"><a href="#__codelineno-28-28">28</a></span>
+<span class="normal"><a href="#__codelineno-28-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="nf">library</span><span class="p">(</span><span class="n">reshape</span><span class="p">)</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="nf">library</span><span class="p">(</span><span class="n">ape</span><span class="p">)</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3"></a>
+<a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="c1"># read in the data</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="n">dat</span><span class="o">=</span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;./5NM_2Kb94.gfa_similarity_cut&quot;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">)</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="n">dat</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7"></a><span class="c1"># use reshape&#39;s cast function to change to matrix</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cast</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span><span class="w"> </span><span class="n">group.a</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">group.b</span><span class="p">)</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9"></a><span class="n">m</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10"></a><span class="c1"># set the row names</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11"></a><span class="nf">rownames</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">m</span><span class="p">[,</span><span class="m">1</span><span class="p">]</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12"></a><span class="nf">rownames</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<a id="__codelineno-28-13" name="__codelineno-28-13"></a>
+<a id="__codelineno-28-14" name="__codelineno-28-14"></a>
+<a id="__codelineno-28-15" name="__codelineno-28-15"></a><span class="c1"># change the matrix to a distance matrix</span>
+<a id="__codelineno-28-16" name="__codelineno-28-16"></a><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dist</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<a id="__codelineno-28-17" name="__codelineno-28-17"></a><span class="n">d</span>
+<a id="__codelineno-28-18" name="__codelineno-28-18"></a>
+<a id="__codelineno-28-19" name="__codelineno-28-19"></a><span class="c1"># do hierarchical clustering</span>
+<a id="__codelineno-28-20" name="__codelineno-28-20"></a><span class="n">h</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">hclust</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<a id="__codelineno-28-21" name="__codelineno-28-21"></a>
+<a id="__codelineno-28-22" name="__codelineno-28-22"></a><span class="n">h</span>
+<a id="__codelineno-28-23" name="__codelineno-28-23"></a><span class="c1"># plot the dendrogram</span>
+<a id="__codelineno-28-24" name="__codelineno-28-24"></a><span class="c1">#plot(h)</span>
+<a id="__codelineno-28-25" name="__codelineno-28-25"></a>
+<a id="__codelineno-28-26" name="__codelineno-28-26"></a><span class="c1"># use ape&#39;s as phylo function</span>
+<a id="__codelineno-28-27" name="__codelineno-28-27"></a><span class="n">tree</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.phylo</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+<a id="__codelineno-28-28" name="__codelineno-28-28"></a><span class="c1"># export as newick for viewing in figtree</span>
+<a id="__codelineno-28-29" name="__codelineno-28-29"></a><span class="nf">write.tree</span><span class="p">(</span><span class="n">phy</span><span class="o">=</span><span class="n">tree</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;5NM_2Kb94_distance.tree&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../5_Evaluating_pggb_output/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5. Evaluating output" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                5. Evaluating output
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Supplementary/supplementary_1/" class="md-footer__link md-footer__link--next" aria-label="Next: NeSI HPC Auth.Factors Setup &amp; Jupyter Login" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                NeSI HPC Auth.Factors Setup & Jupyter Login
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Pangenome Graphs workshop material is licensed under a <a rel="noopener" target="_blank" href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html">GNU General Public License v2.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../javascripts/mathjax.js"></script>
+        
+      
+        
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        
+      
+        
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>

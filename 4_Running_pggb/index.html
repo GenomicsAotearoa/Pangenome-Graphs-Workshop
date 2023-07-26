@@ -1,0 +1,971 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Pangenome-Graphs-Workshop/4_Running_pggb/">
+      
+      
+        <link rel="prev" href="../3_Introduction_to_pggb/">
+      
+      
+        <link rel="next" href="../5_Evaluating_pggb_output/">
+      
+      <link rel="icon" href="../theme_figures/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+    
+    
+      
+        <title>4. Running PGGB - Pangenome Graphs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4-running-pggb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+<!-- Custom Banner -->
+<div class="banner">
+    <p style="color:rgb(250, 246, 246); display:inline;font-size: 160%;">This repository is in the early stages of development (Beta Version)</p>
+</div>
+
+<!-- Original Header -->
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Pangenome Graphs" class="md-header__button md-logo" aria-label="Pangenome Graphs" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pangenome Graphs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. Running PGGB
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_3" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_3">
+            
+              <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Pangenome-Graphs-Workshop
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Pangenome Graphs" class="md-nav__button md-logo" aria-label="Pangenome Graphs" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    Pangenome Graphs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Pangenome-Graphs-Workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Pangenome-Graphs-Workshop
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_Introduction_to_pangenome_graphs/" class="md-nav__link">
+        1. Introduction to pangenome graphs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_Tools_and_setup/" class="md-nav__link">
+        2. Tools & setup
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_Introduction_to_pggb/" class="md-nav__link">
+        3. Introduction to PGGB
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          4. Running PGGB
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        4. Running PGGB
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    Learning objectives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    Getting started
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construct-pangenome-graph-for-the-five-neisseria-meningitidis-genomes" class="md-nav__link">
+    Construct pangenome graph for the five Neisseria meningitidis genomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-pggb" class="md-nav__link">
+    Running PGGB
+  </a>
+  
+    <nav class="md-nav" aria-label="Running PGGB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p" class="md-nav__link">
+    Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#executing-pggb" class="md-nav__link">
+    Executing pggb
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#construct-pangenome-graph-for-5nm-genomes-with-s-2000-p-94-k-19-or-k-35" class="md-nav__link">
+    Construct pangenome graph for 5NM genomes with -s 2000, -p 94, -k 19  or -k 35
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extened-learning-running-pggb-as-a-slurm-job" class="md-nav__link">
+    Extened learning: Running pggb as a Slurm Job
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_Evaluating_pggb_output/" class="md-nav__link">
+        5. Evaluating output
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_Variant_calling/" class="md-nav__link">
+        6. Variant calling
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          Supplementary
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Supplementary
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/supplementary_1/" class="md-nav__link">
+        NeSI HPC Auth.Factors Setup & Jupyter Login
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/supplementary_2/" class="md-nav__link">
+        Jupyter Virtual Desktop
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supplementary/supplementary_3_Short_reads/" class="md-nav__link">
+        Short reads
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    Learning objectives
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    Getting started
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construct-pangenome-graph-for-the-five-neisseria-meningitidis-genomes" class="md-nav__link">
+    Construct pangenome graph for the five Neisseria meningitidis genomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-pggb" class="md-nav__link">
+    Running PGGB
+  </a>
+  
+    <nav class="md-nav" aria-label="Running PGGB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p" class="md-nav__link">
+    Use mash triangle to check the pairwise identity of the input genomes, which will give us some idea how to set -p
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#executing-pggb" class="md-nav__link">
+    Executing pggb
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#construct-pangenome-graph-for-5nm-genomes-with-s-2000-p-94-k-19-or-k-35" class="md-nav__link">
+    Construct pangenome graph for 5NM genomes with -s 2000, -p 94, -k 19  or -k 35
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extened-learning-running-pggb-as-a-slurm-job" class="md-nav__link">
+    Extened learning: Running pggb as a Slurm Job
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="4-running-pggb">4. Running PGGB<a class="headerlink" href="#4-running-pggb" title="Permanent link">&para;</a></h1>
+<h3 id="learning-objectives">Learning objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">&para;</a></h3>
+<div class="admonition quote">
+<p>Build pangenome graphs using PGGB</p>
+</div>
+<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<p>NeSI HPC environment is used for the analysis. Please make sure you have a NeSI account and you are able to login.</p>
+<h2 id="construct-pangenome-graph-for-the-five-neisseria-meningitidis-genomes">Construct pangenome graph for the five <em>Neisseria meningitidis</em> genomes<a class="headerlink" href="#construct-pangenome-graph-for-the-five-neisseria-meningitidis-genomes" title="Permanent link">&para;</a></h2>
+<p>Create an index for the sequence using SAMtools and check.</p>
+<div class="admonition terminal">
+<p class="admonition-title">code</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>module<span class="w"> </span>purge
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>module<span class="w"> </span>load<span class="w"> </span>SAMtools/1.16.1-GCC-11.3.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>samtools<span class="w"> </span>faidx<span class="w"> </span>5NM.fa
+</code></pre></div></p>
+</div>
+<p>Inspect the index.</p>
+<div class="admonition terminal">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>more<span class="w"> </span>5NM.fa.fai
+</code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">Output</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>NC_003112.2     2272360 60      60  61
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>NC_017518.1     2248966 2310357 60  61
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>NZ_CP007668.1   2324822 4596878 60  61
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>NZ_CP016880.1   2207174 6960511 60  61
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>NZ_CP020423.2   2244886 9204558 60  61
+</code></pre></div>
+</div>
+</div>
+<h2 id="running-pggb">Running PGGB<a class="headerlink" href="#running-pggb" title="Permanent link">&para;</a></h2>
+<h3 id="use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p">Use <code>mash triangle</code> to check the pairwise identity of the input genomes, which will give us some idea how to set <code>-p</code><a class="headerlink" href="#use-mash-triangle-to-check-the-pairwise-identity-of-the-input-genomes-which-will-give-us-some-idea-how-to-set-p" title="Permanent link">&para;</a></h3>
+<div class="admonition terminal">
+<p class="admonition-title">code</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>module<span class="w"> </span>purge
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>module<span class="w"> </span>load<span class="w"> </span>Mash/2.3-GCC-11.3.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mash<span class="w"> </span>triangle<span class="w"> </span>5NM.fa<span class="w"> </span>&gt;<span class="w"> </span>5NM.fa_mash
+</code></pre></div></p>
+<ul>
+<li>Inspect the output
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>more<span class="w"> </span>5NM.fa_mash
+</code></pre></div></li>
+</ul>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>        5
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>NC_003112.2
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>NC_017518.1     0.0152404
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>NZ_CP007668.1   0.0149234       0.00635099
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>NZ_CP016880.1   0.0178909       0.0171265       0.0170111
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>NZ_CP020423.2   0.0190552       0.0194352       0.0185579       0.0106974
+</code></pre></div>
+</details>
+</div>
+<p><b>The lower triangle represents the pairwise distances between the 5NM genomes. We can observe that the largest paired distance is 0.0190552, which is approximately 0.02. Considering that lower values indicate better alignment, we are going to use an alignment threshold of <code>-p 94</code> for constructing the pangenome graph. </b> </p>
+<p><strong>Please keep in mind that for each dataset, we may need to test different settings to find a relatively good setting.</strong></p>
+<h3 id="executing-pggb">Executing <code>pggb</code><a class="headerlink" href="#executing-pggb" title="Permanent link">&para;</a></h3>
+<div class="admonition terminal">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>module<span class="w"> </span>purge
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>module<span class="w"> </span>load<span class="w"> </span>pggb/0.5.3-Miniconda3
+</code></pre></div>
+<ul>
+<li>Execute <code>pggb --help</code> to check the command list of PGGB.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>pggb --help
+</code></pre></div></li>
+</ul>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>ERROR:<span class="w"> </span>mandatory<span class="w"> </span>arguments<span class="w"> </span>-i<span class="w"> </span>and<span class="w"> </span>-n
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>ERROR:<span class="w"> </span>-n<span class="w"> </span>must<span class="w"> </span>be<span class="w"> </span>greater<span class="w"> </span>than<span class="w"> </span>or<span class="w"> </span>equal<span class="w"> </span>to<span class="w"> </span><span class="m">2</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>usage:<span class="w"> </span>/usr/local/bin/pggb<span class="w"> </span>-i<span class="w"> </span>&lt;input-fasta&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;n-haplotypes&gt;<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>options:
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">   </span><span class="o">[</span>wfmash<span class="o">]</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span>-i,<span class="w"> </span>--input-fasta<span class="w"> </span>FILE<span class="w">      </span>input<span class="w"> </span>FASTA/FASTQ<span class="w"> </span>file
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span>-s,<span class="w"> </span>--segment-length<span class="w"> </span>N<span class="w">      </span>segment<span class="w"> </span>length<span class="w"> </span><span class="k">for</span><span class="w"> </span>mapping<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">5000</span><span class="o">]</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span>-l,<span class="w"> </span>--block-length<span class="w"> </span>N<span class="w">        </span>minimum<span class="w"> </span>block<span class="w"> </span>length<span class="w"> </span>filter<span class="w"> </span><span class="k">for</span><span class="w"> </span>mapping<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">5</span>*segment-length<span class="o">]</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span>-p,<span class="w"> </span>--map-pct-id<span class="w"> </span>PCT<span class="w">        </span>percent<span class="w"> </span>identity<span class="w"> </span><span class="k">for</span><span class="w"> </span>mapping/alignment<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">90</span><span class="o">]</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span>-n,<span class="w"> </span>--n-haplotypes<span class="w"> </span>N<span class="w">        </span>number<span class="w"> </span>of<span class="w"> </span>haplotypes
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span>-N,<span class="w"> </span>--no-split<span class="w">              </span>disable<span class="w"> </span>splitting<span class="w"> </span>of<span class="w"> </span>input<span class="w"> </span>sequences<span class="w"> </span>during<span class="w"> </span>mapping<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>enabled<span class="o">]</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">    </span>-x,<span class="w"> </span>--sparse-map<span class="w"> </span>N<span class="w">          </span>keep<span class="w"> </span>this<span class="w"> </span>fraction<span class="w"> </span>of<span class="w"> </span>mappings<span class="w"> </span><span class="o">(</span><span class="s1">&#39;auto&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>giant<span class="w"> </span>component<span class="w"> </span>heuristic<span class="o">)</span><span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">1</span>.0<span class="o">]</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">    </span>-K,<span class="w"> </span>--mash-kmer<span class="w"> </span>N<span class="w">           </span>kmer<span class="w"> </span>size<span class="w"> </span><span class="k">for</span><span class="w"> </span>mapping<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">19</span><span class="o">]</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">    </span>-F,<span class="w"> </span>--mash-kmer-thres<span class="w"> </span>N<span class="w">     </span>ignore<span class="w"> </span>the<span class="w"> </span>top<span class="w"> </span>%<span class="w"> </span>most-frequent<span class="w"> </span>kmers<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">0</span>.001<span class="o">]</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">    </span>-Y,<span class="w"> </span>--exclude-delim<span class="w"> </span>C<span class="w">       </span>skip<span class="w"> </span>mappings<span class="w"> </span>between<span class="w"> </span>sequences<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>same<span class="w"> </span>name<span class="w"> </span>prefix<span class="w"> </span>before
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">                                </span>the<span class="w"> </span>given<span class="w"> </span>delimiter<span class="w"> </span>character<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>all-vs-all<span class="w"> </span>and<span class="w"> </span>!self<span class="o">]</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="w">   </span><span class="o">[</span>seqwish<span class="o">]</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="w">    </span>-k,<span class="w"> </span>--min-match-len<span class="w"> </span>N<span class="w">       </span>filter<span class="w"> </span>exact<span class="w"> </span>matches<span class="w"> </span>below<span class="w"> </span>this<span class="w"> </span>length<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">19</span><span class="o">]</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="w">    </span>-f,<span class="w"> </span>--sparse-factor<span class="w"> </span>N<span class="w">       </span>keep<span class="w"> </span>this<span class="w"> </span>randomly<span class="w"> </span>selected<span class="w"> </span>fraction<span class="w"> </span>of<span class="w"> </span>input<span class="w"> </span>matches<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>no<span class="w"> </span>sparsification<span class="o">]</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="w">    </span>-B,<span class="w"> </span>--transclose-batch<span class="w">      </span>number<span class="w"> </span>of<span class="w"> </span>bp<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span><span class="k">for</span><span class="w"> </span>transitive<span class="w"> </span>closure<span class="w"> </span>batch<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">10000000</span><span class="o">]</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="w">   </span><span class="o">[</span>smoothxg<span class="o">]</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="w">    </span>-X,<span class="w"> </span>--skip-normalization<span class="w">    </span><span class="k">do</span><span class="w"> </span>not<span class="w"> </span>normalize<span class="w"> </span>the<span class="w"> </span>final<span class="w"> </span>graph<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>normalize<span class="w"> </span>the<span class="w"> </span>graph<span class="o">]</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="w">    </span>-H,<span class="w"> </span>--n-haplotypes-smooth<span class="w"> </span>N<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>haplotypes,<span class="w"> </span><span class="k">if</span><span class="w"> </span>different<span class="w"> </span>than<span class="w"> </span>that<span class="w"> </span><span class="nb">set</span><span class="w"> </span>with<span class="w"> </span>-n<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>-n<span class="o">]</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="w">    </span>-j,<span class="w"> </span>--path-jump-max<span class="w">         </span>maximum<span class="w"> </span>path<span class="w"> </span>jump<span class="w"> </span>to<span class="w"> </span>include<span class="w"> </span><span class="k">in</span><span class="w"> </span>block<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">0</span><span class="o">]</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="w">    </span>-e,<span class="w"> </span>--edge-jump-max<span class="w"> </span>N<span class="w">       </span>maximum<span class="w"> </span>edge<span class="w"> </span>jump<span class="w"> </span>before<span class="w"> </span>breaking<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">0</span><span class="o">]</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="w">    </span>-G,<span class="w"> </span>--poa-length-target<span class="w"> </span>N,M<span class="w"> </span>target<span class="w"> </span>sequence<span class="w"> </span>length<span class="w"> </span><span class="k">for</span><span class="w"> </span>POA,<span class="w"> </span>one<span class="w"> </span>per<span class="w"> </span>pass<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">700</span>,900,1100<span class="o">]</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a><span class="w">    </span>-P,<span class="w"> </span>--poa-params<span class="w"> </span>PARAMS<span class="w">     </span>score<span class="w"> </span>parameters<span class="w"> </span><span class="k">for</span><span class="w"> </span>POA<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>form<span class="w"> </span>of<span class="w"> </span>match,mismatch,gap1,ext1,gap2,ext2
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a><span class="w">                                </span>may<span class="w"> </span>also<span class="w"> </span>be<span class="w"> </span>given<span class="w"> </span>as<span class="w"> </span>presets:<span class="w"> </span>asm5,<span class="w"> </span>asm10,<span class="w"> </span>asm15,<span class="w"> </span>asm20
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a><span class="w">                                </span><span class="o">[</span>default:<span class="w"> </span><span class="m">1</span>,19,39,3,81,1<span class="w"> </span><span class="o">=</span><span class="w"> </span>asm5<span class="o">]</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a><span class="w">    </span>-O,<span class="w"> </span>--poa-padding<span class="w"> </span>N<span class="w">         </span>pad<span class="w"> </span>each<span class="w"> </span>end<span class="w"> </span>of<span class="w"> </span>each<span class="w"> </span>sequence<span class="w"> </span><span class="k">in</span><span class="w"> </span>POA<span class="w"> </span>with<span class="w"> </span>N*<span class="o">(</span>mean_seq_len<span class="o">)</span><span class="w"> </span>bp<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">0</span>.001<span class="o">]</span>
+<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a><span class="w">    </span>-d,<span class="w"> </span>--pad-max-depth<span class="w"> </span>N<span class="w">       </span>depth/haplotype<span class="w"> </span>at<span class="w"> </span>which<span class="w"> </span>we<span class="w"> </span>don<span class="s1">&#39;t pad the POA problem [default: 100]</span>
+<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a><span class="s1">    -b, --run-abpoa             run abPOA [default: SPOA]</span>
+<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a><span class="s1">    -z, --global-poa            run the POA in global mode [default: local mode]</span>
+<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a><span class="s1">    -M, --write-maf             write MAF output representing merged POA blocks [default: off]</span>
+<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a><span class="s1">    -Q, --consensus-prefix P    use this prefix for consensus path names [default: Consensus_]</span>
+<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a><span class="s1">   [odgi]</span>
+<a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a><span class="s1">    -v, --skip-viz              don&#39;</span>t<span class="w"> </span>render<span class="w"> </span>visualizations<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>graph<span class="w"> </span><span class="k">in</span><span class="w"> </span>1D<span class="w"> </span>and<span class="w"> </span>2D<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>make<span class="w"> </span>them<span class="o">]</span>
+<a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a><span class="w">    </span>-S,<span class="w"> </span>--stats<span class="w">                 </span>generate<span class="w"> </span>statistics<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>seqwish<span class="w"> </span>and<span class="w"> </span>smoothxg<span class="w"> </span>graph<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>off<span class="o">]</span>
+<a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a><span class="w">   </span><span class="o">[</span>vg<span class="o">]</span>
+<a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a><span class="w">    </span>-V,<span class="w"> </span>--vcf-spec<span class="w"> </span>SPEC<span class="w">         </span>specify<span class="w"> </span>a<span class="w"> </span><span class="nb">set</span><span class="w"> </span>of<span class="w"> </span>VCFs<span class="w"> </span>to<span class="w"> </span>produce<span class="w"> </span>with<span class="w"> </span><span class="nv">SPEC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>REF:DELIM<span class="o">[</span>:LEN<span class="o">][</span>,REF:DELIM:<span class="o">[</span>LEN<span class="o">]]</span>*
+<a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a><span class="w">                                </span>the<span class="w"> </span>paths<span class="w"> </span>matching<span class="w"> </span>^REF<span class="w"> </span>are<span class="w"> </span>used<span class="w"> </span>as<span class="w"> </span>a<span class="w"> </span>reference,<span class="w"> </span><span class="k">while</span><span class="w"> </span>the<span class="w"> </span>sample<span class="w"> </span>haplotypes
+<a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a><span class="w">                                </span>are<span class="w"> </span>derived<span class="w"> </span>from<span class="w"> </span>path<span class="w"> </span>names,<span class="w"> </span>e.g.<span class="w"> </span>when<span class="w"> </span><span class="nv">DELIM</span><span class="o">=</span><span class="c1"># and with &#39;-V chm13:#&#39;,</span>
+<a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a><span class="w">                                </span>a<span class="w"> </span>path<span class="w"> </span>named<span class="w"> </span>HG002#1#ctg<span class="w"> </span>would<span class="w"> </span>be<span class="w"> </span>assigned<span class="w"> </span>to<span class="w"> </span>sample<span class="w"> </span>HG002<span class="w"> </span>phase<span class="w"> </span><span class="m">1</span>.
+<a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a><span class="w">                                </span>If<span class="w"> </span>LEN<span class="w"> </span>is<span class="w"> </span>specified<span class="w"> </span>and<span class="w"> </span>greater<span class="w"> </span>than<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>the<span class="w"> </span>VCFs<span class="w"> </span>are<span class="w"> </span>decomposed,<span class="w"> </span>filtering
+<a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a><span class="w">                                </span>sites<span class="w"> </span>whose<span class="w"> </span>max<span class="w"> </span>allele<span class="w"> </span>length<span class="w"> </span>is<span class="w"> </span>greater<span class="w"> </span>than<span class="w"> </span>LEN.<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>off<span class="o">]</span>
+<a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a><span class="w">   </span><span class="o">[</span>multiqc<span class="o">]</span>
+<a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a><span class="w">    </span>-m,<span class="w"> </span>--multiqc<span class="w">               </span>generate<span class="w"> </span>MultiQC<span class="w"> </span>report<span class="w"> </span>of<span class="w"> </span>graphs<span class="err">&#39;</span><span class="w"> </span>statistics<span class="w"> </span>and<span class="w"> </span>visualizations,
+<a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a><span class="w">                                </span>automatically<span class="w"> </span>runs<span class="w"> </span>odgi<span class="w"> </span>stats<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span>off<span class="o">]</span>
+<a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a><span class="w">   </span><span class="o">[</span>general<span class="o">]</span>
+<a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a><span class="w">    </span>-o,<span class="w"> </span>--output-dir<span class="w"> </span>PATH<span class="w">       </span>output<span class="w"> </span>directory
+<a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a><span class="w">    </span>-D,<span class="w"> </span>--temp-dir<span class="w"> </span>PATH<span class="w">         </span>directory<span class="w"> </span><span class="k">for</span><span class="w"> </span>temporary<span class="w"> </span>files
+<a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a><span class="w">    </span>-a,<span class="w"> </span>--input-paf<span class="w"> </span>FILE<span class="w">        </span>input<span class="w"> </span>PAF<span class="w"> </span>file<span class="p">;</span><span class="w"> </span>the<span class="w"> </span>wfmash<span class="w"> </span>alignment<span class="w"> </span>step<span class="w"> </span>is<span class="w"> </span>skipped
+<a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a><span class="w">    </span>-r,<span class="w"> </span>--resume<span class="w">                </span><span class="k">do</span><span class="w"> </span>not<span class="w"> </span>overwrite<span class="w"> </span>existing<span class="w"> </span>outputs<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>given<span class="w"> </span>directory
+<a id="__codelineno-10-54" name="__codelineno-10-54" href="#__codelineno-10-54"></a><span class="w">                                </span><span class="o">[</span>default:<span class="w"> </span>start<span class="w"> </span>pipeline<span class="w"> </span>from<span class="w"> </span>scratch<span class="o">]</span>
+<a id="__codelineno-10-55" name="__codelineno-10-55" href="#__codelineno-10-55"></a><span class="w">    </span>-t,<span class="w"> </span>--threads<span class="w"> </span>N<span class="w">             </span>number<span class="w"> </span>of<span class="w"> </span>compute<span class="w"> </span>threads<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span><span class="k">in</span><span class="w"> </span>parallel<span class="w"> </span>steps<span class="w"> </span><span class="o">[</span>default:<span class="w"> </span><span class="m">72</span><span class="o">]</span>
+<a id="__codelineno-10-56" name="__codelineno-10-56" href="#__codelineno-10-56"></a><span class="w">    </span>-T,<span class="w"> </span>--poa-threads<span class="w"> </span>N<span class="w">         </span>number<span class="w"> </span>of<span class="w"> </span>compute<span class="w"> </span>threads<span class="w"> </span>to<span class="w"> </span>use<span class="w"> </span>during<span class="w"> </span>POA<span class="w"> </span><span class="o">(</span><span class="nb">set</span><span class="w"> </span>lower<span class="w"> </span><span class="k">if</span><span class="w"> </span>you<span class="w"> </span>OOM<span class="w"> </span>during<span class="w"> </span>smoothing<span class="o">)</span>
+<a id="__codelineno-10-57" name="__codelineno-10-57" href="#__codelineno-10-57"></a><span class="w">    </span>-A,<span class="w"> </span>--keep-temp-files<span class="w">       </span>keep<span class="w"> </span>intermediate<span class="w"> </span>graphs
+<a id="__codelineno-10-58" name="__codelineno-10-58" href="#__codelineno-10-58"></a><span class="w">    </span>-Z,<span class="w"> </span>--compress<span class="w">              </span>compress<span class="w"> </span>alignment<span class="w"> </span><span class="o">(</span>.paf<span class="o">)</span>,<span class="w"> </span>graph<span class="w"> </span><span class="o">(</span>.gfa,<span class="w"> </span>.og<span class="o">)</span>,<span class="w"> </span>and<span class="w"> </span>MSA<span class="w"> </span><span class="o">(</span>.maf<span class="o">)</span><span class="w"> </span>outputs<span class="w"> </span>with<span class="w"> </span>pigz,
+<a id="__codelineno-10-59" name="__codelineno-10-59" href="#__codelineno-10-59"></a><span class="w">                                </span>and<span class="w"> </span>variant<span class="w"> </span><span class="o">(</span>.vcf<span class="o">)</span><span class="w"> </span>outputs<span class="w"> </span>with<span class="w"> </span>bgzip
+<a id="__codelineno-10-60" name="__codelineno-10-60" href="#__codelineno-10-60"></a><span class="w">    </span>--version<span class="w">                   </span>display<span class="w"> </span>the<span class="w"> </span>version<span class="w"> </span>of<span class="w"> </span>pggb
+<a id="__codelineno-10-61" name="__codelineno-10-61" href="#__codelineno-10-61"></a><span class="w">    </span>-h,<span class="w"> </span>--help<span class="w">                  </span>this<span class="w"> </span>text
+<a id="__codelineno-10-62" name="__codelineno-10-62" href="#__codelineno-10-62"></a>
+<a id="__codelineno-10-63" name="__codelineno-10-63" href="#__codelineno-10-63"></a>Use<span class="w"> </span>wfmash,<span class="w"> </span>seqwish,<span class="w"> </span>smoothxg,<span class="w"> </span>odgi,<span class="w"> </span>gfaffix,<span class="w"> </span>and<span class="w"> </span>vg<span class="w"> </span>to<span class="w"> </span>build,<span class="w"> </span>project<span class="w"> </span>and<span class="w"> </span>display<span class="w"> </span>a<span class="w"> </span>pangenome<span class="w"> </span>graph.
+</code></pre></div>
+</details>
+</div>
+<h3 id="construct-pangenome-graph-for-5nm-genomes-with-s-2000-p-94-k-19-or-k-35">Construct pangenome graph for 5NM genomes with <code>-s 2000</code>, <code>-p 94</code>, <code>-k 19  or -k 35</code><a class="headerlink" href="#construct-pangenome-graph-for-5nm-genomes-with-s-2000-p-94-k-19-or-k-35" title="Permanent link">&para;</a></h3>
+<div class="admonition terminal">
+<p class="admonition-title">code</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>module<span class="w"> </span>purge
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>module<span class="w"> </span>load<span class="w"> </span>pggb/0.5.3-Miniconda3
+</code></pre></div>
+<ul>
+<li>
+<p>Execute <code>pggb</code>, set <code>-s 2000</code> and <code>-p 94</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>pggb -i 5NM.fa -s 2000 -p 94 -n 5 -t 16 -S -m -o 5NM_2Kb94 -V &#39;NC_017518.1:#&#39;
+</code></pre></div></p>
+</li>
+<li>
+<p>let's Execute pggb again, using the same setting <code>-s 2000</code> and <code>-p 94</code>, but increase <code>-k</code> to <code>35</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>pggb<span class="w"> </span>-i<span class="w"> </span>5NM.fa<span class="w"> </span>-s<span class="w"> </span><span class="m">2000</span><span class="w"> </span>-p<span class="w"> </span><span class="m">94</span><span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>-t<span class="w"> </span><span class="m">16</span><span class="w"> </span>-S<span class="w"> </span>-m<span class="w"> </span>-k<span class="w"> </span><span class="m">35</span><span class="w"> </span>-o<span class="w"> </span>5NM_2Kb94_k35<span class="w"> </span>-V<span class="w"> </span><span class="s1">&#39;NC_017518.1:#&#39;</span>
+</code></pre></div></p>
+</li>
+</ul>
+</div>
+<hr>
+<h3 id="extened-learning-running-pggb-as-a-slurm-job">Extened learning: Running <code>pggb</code> as a <a href="https://github.com/SchedMD/slurm">Slurm</a> Job<a class="headerlink" href="#extened-learning-running-pggb-as-a-slurm-job" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Please do NOT run the code below, this is an example for power users</p>
+</div>
+<p>Executing shell scripts in a HPC  might not be the best way to handle larger files which will require large memory, CPU power and time. 
+We can modify the previously explained script as below to run as Slurm job. Note the additional parameters specified by <code>#SBATCH</code> which will indicate maximum resource limitations. </p>
+<div class="admonition terminal-2">
+<p class="admonition-title">The following is a SLURM script (<code>pggb_5NM_2k94.sl</code>) for PGGB with <code>-s 2000</code> and <code>-p 94</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-14-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-14-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-14-10">10</a></span>
+<span class="normal"><a href="#__codelineno-14-11">11</a></span>
+<span class="normal"><a href="#__codelineno-14-12">12</a></span>
+<span class="normal"><a href="#__codelineno-14-13">13</a></span>
+<span class="normal"><a href="#__codelineno-14-14">14</a></span>
+<span class="normal"><a href="#__codelineno-14-15">15</a></span>
+<span class="normal"><a href="#__codelineno-14-16">16</a></span>
+<span class="normal"><a href="#__codelineno-14-17">17</a></span>
+<span class="normal"><a href="#__codelineno-14-18">18</a></span>
+<span class="normal"><a href="#__codelineno-14-19">19</a></span>
+<span class="normal"><a href="#__codelineno-14-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="ch">#!/bin/bash -e     </span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="c1">#SBATCH --account       nesi02659</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="c1">#SBATCH --job-name      pggb_5NM</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="c1">#SBATCH --cpus-per-task 16</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="c1">#SBATCH --mem           16G</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="c1">#SBATCH --time          1:00:00</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="c1">#SBATCH --error         %x_%j.err</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="c1">#SBATCH --output        %x_%j.out</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9"></a>
+<a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="c1"># Modules</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11"></a>module<span class="w"> </span>purge
+<a id="__codelineno-14-12" name="__codelineno-14-12"></a>module<span class="w"> </span>load<span class="w"> </span>pggb/0.5.3-Miniconda3<span class="w">    </span>
+<a id="__codelineno-14-13" name="__codelineno-14-13"></a>
+<a id="__codelineno-14-14" name="__codelineno-14-14"></a><span class="c1"># Variables</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="nv">WD</span><span class="o">=</span>~/pg_workshop<span class="w"> </span><span class="c1">#Working Directory</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16"></a><span class="nv">data</span><span class="o">=</span><span class="si">${</span><span class="nv">WD</span><span class="si">}</span>/5NM.fa<span class="w">  </span>
+<a id="__codelineno-14-17" name="__codelineno-14-17"></a>
+<a id="__codelineno-14-18" name="__codelineno-14-18"></a><span class="c1"># Run PGGB</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19"></a><span class="c1"># 2K94</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20"></a>pggb<span class="w"> </span>-i<span class="w"> </span><span class="nv">$data</span><span class="w"> </span>-s<span class="w"> </span><span class="m">2000</span><span class="w"> </span>-p<span class="w"> </span><span class="m">94</span><span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>-t<span class="w"> </span><span class="nv">$SLURM_CPUS_PER_TASK</span><span class="w"> </span>-S<span class="w"> </span>-m<span class="w"> </span>-o<span class="w"> </span><span class="nv">$WD</span>/5NM_2Kb94<span class="w"> </span>-V<span class="w"> </span><span class="s1">&#39;NC_017518.1:#&#39;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="admonition terminal-2">
+<p class="admonition-title">The job can be submitted using the <code>sbatch</code> command as follows. Take a note of the job ID for tracking the run.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sbatch<span class="w"> </span>pggb_5NM_2k94.sl
+</code></pre></div>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../3_Introduction_to_pggb/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3. Introduction to PGGB" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                3. Introduction to PGGB
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../5_Evaluating_pggb_output/" class="md-footer__link md-footer__link--next" aria-label="Next: 5. Evaluating output" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                5. Evaluating output
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Pangenome Graphs workshop material is licensed under a <a rel="noopener" target="_blank" href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html">GNU General Public License v2.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../javascripts/mathjax.js"></script>
+        
+      
+        
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        
+      
+        
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
