@@ -281,11 +281,17 @@ An example run to obtain VCF files from GFA.
     
     ```bash
     bcftools view 5NM_2Kb94aep1.vcf  -Oz -o 5NM_2Kb94aep1.vcf.gz
+    ```
+    ```
     bcftools view 5NM_2Kb94_k35aep1.vcf -Oz -o 5NM_2Kb94_k35aep1.vcf.gz
-
-    bcftools index 5NM_2Kb94aep1.vcf.gz 
+    ```
+    ```
+    bcftools index 5NM_2Kb94aep1.vcf.gz
+    ```
+    ``` 
     bcftools index 5NM_2Kb94_k35aep1.vcf.gz
-
+    ```
+    ```
     bcftools isec 5NM_2Kb94aep1.vcf.gz 5NM_2Kb94_k35aep1.vcf.gz -p isec_5NM_2Kb94diff_k
     ```
 
