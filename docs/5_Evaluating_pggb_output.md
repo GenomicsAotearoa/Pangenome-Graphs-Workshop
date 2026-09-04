@@ -98,7 +98,7 @@
 		P       NZ_CP020423.2#1#1 1+,2+,4+,6+,7+,9+,10+,12+,13+,14+,16+,18+,19+,21+,22+,24+,25+,27+,28+,30+,31+>      
 		```
     ??? clipboard-question "what does S, L, P mean"
-        `S` means DNA segments, `L` means links between notes, and `P` means paths
+        `S` means DNA segments, `L` means links between nodes, and `P` means paths
 
 ## Pangenome graph visualization using ODGI 
 
